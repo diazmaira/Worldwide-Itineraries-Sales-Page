@@ -1,0 +1,495 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Fuerteventura Itineraries | Worldwide Itineraries</title>
+<meta name="description" content="Ready-to-follow self-guided road trips in Fuerteventura: the best beaches, volcanoes, viewpoints and local food in the north of the island. Instant digital download.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --atlantic: #0A5C66;
+    --atlantic-deep: #07454D;
+    --ochre: #F2B344;
+    --basalt: #1F2427;
+    --whitewash: #FFFFFF;
+    --mist: #EDF3F2;
+    --line: #B9C6C5;
+    --ink-soft: #4A5457;
+    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
+    --body: "Figtree", "Segoe UI", system-ui, sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    font-family: var(--body);
+    font-size: 1.0625rem;
+    line-height: 1.6;
+    color: var(--basalt);
+    background: var(--whitewash);
+    -webkit-font-smoothing: antialiased;
+  }
+  img { max-width: 100%; display: block; }
+  a { color: inherit; }
+  h1, h2, h3 { font-family: var(--display); line-height: 1.08; letter-spacing: -0.02em; margin: 0; }
+  p { margin: 0; }
+
+  .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+
+  :focus-visible { outline: 3px solid var(--ochre); outline-offset: 3px; }
+
+  /* Buttons */
+  .btn {
+    display: inline-block;
+    background: var(--ochre);
+    color: var(--basalt);
+    font-family: var(--body);
+    font-weight: 600;
+    font-size: 1.0625rem;
+    text-decoration: none;
+    padding: 16px 30px;
+    border: 0;
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background-color .15s ease;
+  }
+  .btn:hover { background: #F7C361; }
+  .btn:disabled { opacity: .6; cursor: default; }
+  .btn-dark { background: var(--basalt); color: var(--whitewash); }
+  .btn-dark:hover { background: #343B3F; }
+
+  /* Hero */
+  /* The photo is public/images/hero.jpg. Until it exists the hero stays plain Atlantic blue.
+     The gradient keeps the text readable: dark on the left where the words sit. */
+  .hero {
+    background-color: var(--atlantic);
+    background-image:
+      linear-gradient(90deg, rgba(7,69,77,.94) 0%, rgba(10,92,102,.80) 45%, rgba(10,92,102,.40) 100%),
+      url("images/hero.jpg");
+    background-size: cover;
+    background-position: center;
+    color: var(--whitewash);
+  }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 22px 0;
+  }
+  .brand { font-family: var(--display); font-weight: 800; font-size: 1.15rem; letter-spacing: -0.01em; text-decoration: none; }
+  .nav { display: flex; gap: 22px; font-weight: 500; font-size: .98rem; }
+  .nav a { text-decoration: none; opacity: .9; }
+  .nav a:hover { opacity: 1; text-decoration: underline; text-underline-offset: 4px; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1.15fr .85fr;
+    gap: 40px;
+    align-items: center;
+    padding: clamp(32px, 6vw, 72px) 0 clamp(56px, 8vw, 104px);
+  }
+  .hero h1 { font-size: clamp(2.7rem, 7vw, 5rem); font-weight: 800; }
+  .hero .lead {
+    font-size: clamp(1.2rem, 2.3vw, 1.55rem);
+    font-weight: 500;
+    line-height: 1.35;
+    margin-top: 22px;
+    max-width: 30ch;
+  }
+  .hero .sub { margin-top: 18px; max-width: 52ch; opacity: .92; }
+  .hero .cta-row { margin-top: 34px; }
+  .hero .micro { margin-top: 16px; font-size: .95rem; opacity: .85; }
+
+  .route { width: 100%; height: auto; max-width: 480px; justify-self: end; }
+  .route .road {
+    fill: none; stroke: var(--ochre); stroke-width: 6; stroke-linecap: round;
+    stroke-dasharray: 1; stroke-dashoffset: 1;
+    animation: draw 2.6s .3s ease-out forwards;
+  }
+  .route .pin { fill: var(--whitewash); stroke: var(--ochre); stroke-width: 4; }
+  .route text {
+    fill: var(--whitewash); font-family: var(--body); font-size: 17px; font-weight: 600;
+    /* dark outline so the labels stay readable on top of a bright photo */
+    paint-order: stroke; stroke: rgba(7,69,77,.9); stroke-width: 5px; stroke-linejoin: round;
+  }
+  @keyframes draw { to { stroke-dashoffset: 0; } }
+
+  /* Sections */
+  .band { padding: clamp(64px, 9vw, 112px) 0; }
+  .band-mist { background: var(--mist); }
+  .section-title { font-size: clamp(2rem, 4.4vw, 3.1rem); font-weight: 700; max-width: 18ch; }
+  .section-intro { margin-top: 16px; max-width: 56ch; color: var(--ink-soft); font-size: 1.125rem; }
+
+  /* What you get */
+  .gets { list-style: none; margin: 44px 0 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 28px 56px; }
+  .gets li { display: grid; grid-template-columns: 34px 1fr; gap: 14px; align-items: start; }
+  .gets svg { width: 34px; height: 34px; }
+  .gets strong { display: block; font-family: var(--display); font-size: 1.3rem; font-weight: 700; letter-spacing: -0.01em; }
+  .gets span { color: var(--ink-soft); }
+  .section-cta { margin-top: 48px; }
+
+  /* Gallery */
+  .gallery { display: grid; grid-template-columns: repeat(12, 1fr); gap: 16px; margin-top: 40px; }
+  .shot {
+    position: relative; margin: 0; overflow: hidden; border-radius: 10px;
+    min-height: 320px; background: var(--basalt);
+  }
+  .shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+  .shot figcaption {
+    position: absolute; left: 0; right: 0; bottom: 0; padding: 40px 18px 16px;
+    color: var(--whitewash); font-weight: 600;
+    background: linear-gradient(to top, rgba(0,0,0,.62), rgba(0,0,0,0));
+  }
+  .shot-dunes { grid-column: span 7; background: linear-gradient(160deg, #E9CE98, #C99A52); }
+  .shot-volcano { grid-column: span 5; background: linear-gradient(160deg, #6B3B2A, #231A18); }
+  .shot-tapas { grid-column: span 5; background: linear-gradient(160deg, #D9772F, #8E3B1C); }
+  .shot-village { grid-column: span 7; background: linear-gradient(160deg, #F4F6F5, #8FB4C4); }
+
+  /* About */
+  .about { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
+  .about .text p + p { margin-top: 18px; }
+  .about .text { max-width: 58ch; font-size: 1.125rem; }
+
+  /* Final CTA */
+  .final { background: var(--atlantic); color: var(--whitewash); }
+  .final .section-title { max-width: 16ch; }
+  .final p.lead { margin-top: 16px; font-size: 1.2rem; max-width: 44ch; opacity: .94; }
+  .final .cta-row { margin-top: 32px; }
+  .access {
+    margin-top: 56px; padding-top: 28px; border-top: 1px solid rgba(255,255,255,.28);
+    display: flex; flex-wrap: wrap; gap: 6px 28px; align-items: baseline;
+  }
+  .access strong { font-family: var(--display); font-size: 1.25rem; font-weight: 700; }
+  .access span { opacity: .9; }
+
+  /* FAQ */
+  .faq-list { margin-top: 36px; max-width: 780px; }
+  details { border-bottom: 1px solid var(--line); }
+  details:first-child { border-top: 1px solid var(--line); }
+  summary {
+    list-style: none; cursor: pointer; padding: 22px 44px 22px 0; position: relative;
+    font-family: var(--display); font-size: 1.25rem; font-weight: 700; letter-spacing: -0.01em;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary::after {
+    content: "+"; position: absolute; right: 4px; top: 50%; transform: translateY(-50%);
+    font-family: var(--body); font-size: 1.7rem; font-weight: 400; color: var(--atlantic);
+  }
+  details[open] summary::after { content: "\2212"; }
+  details p { padding: 0 44px 24px 0; color: var(--ink-soft); max-width: 62ch; }
+
+  /* Contact */
+  .contact { display: grid; grid-template-columns: 5fr 7fr; gap: 56px; align-items: start; }
+  form { display: grid; gap: 20px; }
+  .field { display: grid; gap: 7px; }
+  label { font-weight: 600; }
+  .hint { font-weight: 400; color: var(--ink-soft); font-size: .92rem; }
+  input, select, textarea {
+    width: 100%; font: inherit; color: var(--basalt); background: var(--whitewash);
+    border: 1.5px solid var(--line); border-radius: 10px; padding: 13px 14px;
+  }
+  textarea { min-height: 150px; resize: vertical; }
+  input:focus, select:focus, textarea:focus { outline: 3px solid var(--atlantic); outline-offset: 1px; border-color: var(--atlantic); }
+  .row { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+  .trap { position: absolute; left: -9999px; height: 0; overflow: hidden; }
+  .status { min-height: 1.5em; font-weight: 500; }
+  .status.ok { color: #0B6B3A; }
+  .status.err { color: #A3261D; }
+
+  footer { background: var(--basalt); color: rgba(255,255,255,.8); padding: 34px 0; font-size: .95rem; }
+  footer .wrap { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 8px 24px; }
+
+  /* Mobile */
+  @media (max-width: 860px) {
+    .hero-grid { grid-template-columns: 1fr; }
+    .hero {
+      background-image:
+        linear-gradient(180deg, rgba(7,69,77,.92) 0%, rgba(7,69,77,.78) 100%),
+        url("images/hero.jpg");
+    }
+    .route { justify-self: start; max-width: 380px; }
+    .gets { grid-template-columns: 1fr; gap: 24px; }
+    .about, .contact { grid-template-columns: 1fr; gap: 28px; }
+    .gallery { grid-template-columns: 1fr; }
+    .shot-dunes, .shot-volcano, .shot-tapas, .shot-village { grid-column: auto; min-height: 240px; }
+    .row { grid-template-columns: 1fr; }
+    .nav { gap: 16px; }
+    .nav .hide-sm { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    .route .road { animation: none; stroke-dashoffset: 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="hero">
+  <div class="wrap">
+    <div class="topbar">
+      <a class="brand" href="#top">Worldwide Itineraries</a>
+      <nav class="nav" aria-label="Main">
+        <a class="hide-sm" href="#what-you-get">What you get</a>
+        <a class="hide-sm" href="#about">About us</a>
+        <a href="#faq">FAQ</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+
+    <div class="hero-grid" id="top">
+      <div>
+        <h1>Fuerteventura itineraries</h1>
+        <p class="lead">Just rent a car, follow the route and enjoy the island.</p>
+        <p class="sub">A ready-to-follow self-guided road trip with the best places, beaches, volcanoes, viewpoints and local food in the north of the island.</p>
+        <div class="cta-row"><a class="btn" href="checkout.html">Get your itineraries →</a></div>
+        <p class="micro">Instant digital download · Plan your perfect day</p>
+      </div>
+
+      <svg class="route" viewBox="0 0 520 560" role="img" aria-label="A winding road linking five stops: beach, volcano, viewpoint, village and lunch">
+        <path class="road" pathLength="1" d="M40 60 C 200 40, 120 200, 280 190 S 460 230, 400 330 S 160 380, 220 470 S 420 520, 470 500"/>
+        <circle class="pin" cx="40" cy="60" r="10"/>
+        <circle class="pin" cx="280" cy="190" r="10"/>
+        <circle class="pin" cx="400" cy="330" r="10"/>
+        <circle class="pin" cx="220" cy="470" r="10"/>
+        <circle class="pin" cx="470" cy="500" r="10"/>
+        <text x="62" y="54">Beach</text>
+        <text x="302" y="184">Volcano</text>
+        <text x="422" y="324">Viewpoint</text>
+        <text x="198" y="476" text-anchor="end">Village</text>
+        <text x="448" y="506" text-anchor="end">Lunch</text>
+      </svg>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="band" id="what-you-get">
+    <div class="wrap">
+      <h2 class="section-title">Everything planned. Nothing wasted.</h2>
+      <p class="section-intro">We've done the research, driven the roads and worked out the details. You just follow the route and enjoy your day.</p>
+
+      <ul class="gets">
+        <li>
+          <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#F2B344"/><path d="M9.5 17.5l5 5 10-11" fill="none" stroke="#1F2427" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Where to go</strong><span>A carefully planned route</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#F2B344"/><path d="M9.5 17.5l5 5 10-11" fill="none" stroke="#1F2427" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>What to do</strong><span>Clear recommendations at every stop</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#F2B344"/><path d="M9.5 17.5l5 5 10-11" fill="none" stroke="#1F2427" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>When to go</strong><span>Suggested timing so your day flows naturally</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#F2B344"/><path d="M9.5 17.5l5 5 10-11" fill="none" stroke="#1F2427" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Where to eat</strong><span>Local food worth stopping for</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#F2B344"/><path d="M9.5 17.5l5 5 10-11" fill="none" stroke="#1F2427" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>How to get there</strong><span>Direct Google Maps links</span></div>
+        </li>
+        <li>
+          <svg viewBox="0 0 34 34" aria-hidden="true"><circle cx="17" cy="17" r="17" fill="#F2B344"/><path d="M9.5 17.5l5 5 10-11" fill="none" stroke="#1F2427" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <div><strong>Local knowledge</strong><span>Tips and details you won't find in a generic itinerary</span></div>
+        </li>
+      </ul>
+
+      <div class="section-cta"><a class="btn btn-dark" href="checkout.html">Get your itineraries →</a></div>
+    </div>
+  </section>
+
+  <section class="band band-mist" aria-labelledby="taste">
+    <div class="wrap">
+      <h2 class="section-title" id="taste">A taste of the journey.</h2>
+      <!-- Replace the src files below with your own photos (put them in an "images" folder). -->
+      <div class="gallery">
+        <figure class="shot shot-dunes">
+          <img src="images/sand-dunes.jpg" alt="Golden sand dunes in the north of Fuerteventura" loading="lazy" onerror="this.remove()">
+          <figcaption>Sand dunes</figcaption>
+        </figure>
+        <figure class="shot shot-volcano">
+          <img src="images/volcano.jpg" alt="A volcano crater on Fuerteventura" loading="lazy" onerror="this.remove()">
+          <figcaption>Volcano</figcaption>
+        </figure>
+        <figure class="shot shot-tapas">
+          <img src="images/tapas.jpg" alt="Traditional Canarian tapas on a table" loading="lazy" onerror="this.remove()">
+          <figcaption>Traditional tapas</figcaption>
+        </figure>
+        <figure class="shot shot-village">
+          <img src="images/village.jpg" alt="A whitewashed village in Fuerteventura" loading="lazy" onerror="this.remove()">
+          <figcaption>A village in Fuerteventura</figcaption>
+        </figure>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="about">
+    <div class="wrap about">
+      <div>
+        <p class="hint" style="margin-bottom:10px">About us</p>
+        <h2 class="section-title">Meet the people behind the routes</h2>
+      </div>
+      <div class="text">
+        <p>We’re a small independent team based in Fuerteventura, creating self-guided itineraries from years of exploring the island — finding the beaches, viewpoints, walks, food spots and little places that are actually worth your time.</p>
+        <p>We created these routes for people who want to discover Fuerteventura without spending hours planning. We’ve done the research, tested the routes and put everything together so you can simply get in the car and enjoy the island.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="band final" aria-labelledby="ready">
+    <div class="wrap">
+      <h2 class="section-title" id="ready">Ready to explore Fuerteventura?</h2>
+      <p class="lead">Skip the endless Google searches. Follow a route created by people who know the island.</p>
+      <div class="cta-row"><a class="btn" href="checkout.html">Get your itineraries →</a></div>
+      <div class="access">
+        <strong>Instant digital access</strong>
+        <span>Your itineraries reach your inbox right after payment and open on any phone.</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="band" id="faq">
+    <div class="wrap">
+      <h2 class="section-title">Frequently asked questions</h2>
+      <div class="faq-list">
+        <details>
+          <summary>What exactly do I get?</summary>
+          <p>Self-guided itineraries for the north of Fuerteventura: the route, what to do at each stop, suggested timings, places to eat, direct Google Maps links and local tips.</p>
+        </details>
+        <details>
+          <summary>How do I receive my itineraries?</summary>
+          <p>Right after your payment you get an email with a button that opens your itineraries in the browser. It works on your phone, tablet or computer, and there is nothing to install.</p>
+        </details>
+        <details>
+          <summary>Do I need a car?</summary>
+          <p>Yes. The routes are designed as road trips, so you'll need a rental car or your own vehicle to follow them.</p>
+        </details>
+        <details>
+          <summary>Do I need internet while I drive?</summary>
+          <p>Your itinerary and the Google Maps links need a data connection. Before you set off, you can also save the area for offline use in Google Maps so navigation keeps working in places with weak signal.</p>
+        </details>
+        <details>
+          <summary>Can I share my itineraries with others?</summary>
+          <p>Your access link is personal, so please don't share it. Anyone travelling with you can of course follow the route with you.</p>
+        </details>
+        <details>
+          <summary>I didn't receive my email. What do I do?</summary>
+          <p>Check your spam or promotions folder first. If it isn't there, send us a message with the form below and include your order ID if you have it, and we'll sort it out.</p>
+        </details>
+        <details>
+          <summary>Do you offer refunds?</summary>
+          <p>Because the itineraries are digital and delivered instantly, we don't offer refunds. If a place on your route is closed or no longer available, contact us and we'll send you an updated itinerary or another recommendation.</p>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <section class="band band-mist" id="contact">
+    <div class="wrap contact">
+      <div>
+        <h2 class="section-title">Need a hand?</h2>
+        <p class="section-intro">Tell us what happened and we'll reply by email.</p>
+      </div>
+
+      <form id="contact-form" novalidate>
+        <div class="row">
+          <div class="field">
+            <label for="name">Name</label>
+            <input id="name" name="name" type="text" autocomplete="name" required>
+          </div>
+          <div class="field">
+            <label for="email">Email</label>
+            <input id="email" name="email" type="email" autocomplete="email" required>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="order">Order ID <span class="hint">(optional)</span></label>
+          <input id="order" name="orderId" type="text" autocomplete="off">
+        </div>
+
+        <div class="field">
+          <label for="topic">What is the problem?</label>
+          <select id="topic" name="topic" required>
+            <option value="" disabled selected>Select an option</option>
+            <option>I didn't receive my email</option>
+            <option>My link doesn't open or has expired</option>
+            <option>A place on my route is closed or has changed</option>
+            <option>Problem with my payment</option>
+            <option>Question before buying</option>
+            <option>Something else</option>
+          </select>
+        </div>
+
+        <div class="field">
+          <label for="message">Description</label>
+          <textarea id="message" name="message" required></textarea>
+        </div>
+
+        <div class="trap" aria-hidden="true">
+          <label for="website">Leave this field empty</label>
+          <input id="website" name="website" type="text" tabindex="-1" autocomplete="off">
+        </div>
+
+        <div>
+          <button class="btn btn-dark" type="submit" id="send">Send message</button>
+        </div>
+        <p class="status" id="status" role="status" aria-live="polite"></p>
+      </form>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <span>© <span id="year">2026</span> Worldwide Itineraries</span>
+    <span>Made in Fuerteventura</span>
+  </div>
+</footer>
+
+<script>
+  document.getElementById('year').textContent = new Date().getFullYear();
+
+  const form = document.getElementById('contact-form');
+  const status = document.getElementById('status');
+  const send = document.getElementById('send');
+
+  form.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    status.className = 'status';
+
+    if (form.website.value) return; // spam trap
+
+    if (!form.reportValidity()) {
+      status.textContent = 'Please fill in the required fields.';
+      status.classList.add('err');
+      return;
+    }
+
+    send.disabled = true;
+    status.textContent = 'Sending…';
+
+    try {
+      const res = await fetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(Object.fromEntries(new FormData(form)))
+      });
+      if (!res.ok) throw new Error('Request failed');
+      form.reset();
+      status.textContent = 'Message sent. We will reply to your email.';
+      status.classList.add('ok');
+    } catch (err) {
+      status.textContent = 'The message was not sent. Please try again in a moment.';
+      status.classList.add('err');
+    } finally {
+      send.disabled = false;
+    }
+  });
+</script>
+</body>
+</html>
