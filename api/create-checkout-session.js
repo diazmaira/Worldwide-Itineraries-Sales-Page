@@ -1,12 +1,22 @@
 import Stripe from 'stripe';
 import { PRODUCTS, CURRENCY } from './_products.js';
+import { makeLimiter, clientIp } from './_mail.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
+
+// Stops scripts from creating thousands of Stripe sessions. A real customer never
+// gets near this. It lives only while the function is warm, so it slows abuse down
+// but is not a hard guarantee (Vercel Firewall is the stronger option).
+const allow = makeLimiter({ max: 15, windowMs: 60 * 60 * 1000 });
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     res.setHeader('Allow', 'POST');
     return res.status(405).json({ error: 'Method not allowed' });
+  }
+
+  if (!allow(clientIp(req))) {
+    return res.status(429).json({ error: 'Too many requests' });
   }
 
   try {
