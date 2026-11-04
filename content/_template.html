@@ -4,9 +4,12 @@
 
   How to use it:
   1. Copy this file and name the copy north.html, rural.html or windmills.html.
-  2. Replace the texts, and change "north" in the media paths to the itinerary you are making.
+  2. Replace the texts. Photos and audio are written with the file name only
+     (src="stop-01.jpg"): the page finds them in public/media/<itinerary>/ by itself,
+     where <itinerary> is north, rural or windmills, whichever file you are in.
   3. Copy one whole <article class="stop"> block for every stop. Number the files
-     stop-01, stop-02 ... in public/media/<itinerary>/ (see public/media/README.txt).
+     stop-01, stop-02 ... (see public/media/README.txt).
+  The only exception is the cover photo in the header below: it keeps its full address.
   4. If a photo or audio file is not uploaded yet, that part simply hides itself.
 -->
 <html lang="en">
@@ -84,13 +87,13 @@
     </header>
 
     <figure class="photo">
-      <img src="/media/north/stop-01.jpg" alt="Short description of the photo" loading="lazy"
+      <img src="stop-01.jpg" alt="Short description of the photo" loading="lazy"
            onerror="this.closest('figure').hidden=true">
     </figure>
 
     <div class="listen">
       <p>Audio guide</p>
-      <audio controls preload="none" src="/media/north/stop-01-en.mp3"
+      <audio controls preload="none" src="stop-01-en.mp3"
              onerror="this.closest('.listen').hidden=true"></audio>
     </div>
 
@@ -115,13 +118,13 @@
     </header>
 
     <figure class="photo">
-      <img src="/media/north/stop-02.jpg" alt="Short description of the photo" loading="lazy"
+      <img src="stop-02.jpg" alt="Short description of the photo" loading="lazy"
            onerror="this.closest('figure').hidden=true">
     </figure>
 
     <div class="listen">
       <p>Audio guide</p>
-      <audio controls preload="none" src="/media/north/stop-02-en.mp3"
+      <audio controls preload="none" src="stop-02-en.mp3"
              onerror="this.closest('.listen').hidden=true"></audio>
     </div>
 

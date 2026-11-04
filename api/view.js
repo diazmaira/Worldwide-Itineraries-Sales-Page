@@ -2,6 +2,7 @@ import { readFile } from 'node:fs/promises';
 import path from 'node:path';
 import { PRODUCTS } from './_products.js';
 import { verifyToken, ACCESS_DAYS } from './_token.js';
+import { withMediaPaths } from './_media.js';
 
 // The token is in the address, so never let the browser pass it on to other
 // sites (for example when someone taps a Google Maps link).
@@ -97,7 +98,7 @@ export default async function handler(req, res) {
   try {
     const file = path.join(process.cwd(), 'content', `${id}.html`);
     const html = await readFile(file, 'utf8');
-    return send(res, 200, html);
+    return send(res, 200, withMediaPaths(html, id));
   } catch (err) {
     console.error('Could not read itinerary file:', id, err.message);
     return send(res, 500, shell('Something went wrong', '<p>We could not load this itinerary. Please contact us.</p>'));
