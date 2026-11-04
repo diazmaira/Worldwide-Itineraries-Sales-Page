@@ -1,13 +1,892 @@
-<!doctype html>
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1"><style>:root{color-scheme:light}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<!DOCTYPE html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="robots" content="noindex">
-<title>The rural heart of Fuerteventura</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Rural Heart of Fuerteventura — Worldwide Itineraries</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300..700;1,9..40,300..700&display=swap" rel="stylesheet">
+<style>
+:root{
+  color-scheme:light;
+  --bg:#F5F8FC;--surface:#FFFFFF;--ink:#172B4D;--muted:#607089;
+  --blue:#2458D3;--blue-dark:#1C46A8;--blue-soft:#E8EEFC;
+  --coral:#FF694A;--coral-soft:#FFE9E3;
+  --sand:#F6CB66;--sand-soft:#FEF4DE;--aqua:#DFF4F1;
+  --line:#E3E9F2;--line-strong:#CBD6E6;
+  --gold:#E5A500;--gold-soft:#FFF6D5;
+  --green:#1A8A54;--green-soft:#E2F5EB;
+  --orange:#F27A12;--orange-soft:#FEE9D0;
+  --r-lg:20px;--r-md:14px;--r-sm:10px;--r-pill:999px;
+  --sh-sm:0 1px 2px rgba(23,43,77,.06);
+  --sh-md:0 2px 6px rgba(23,43,77,.07),0 10px 24px rgba(23,43,77,.06);
+  --sh-lg:0 4px 10px rgba(23,43,77,.08),0 18px 40px rgba(23,43,77,.10);
+  --f:"DM Sans",system-ui,-apple-system,sans-serif;
+  --gutter:clamp(16px,5vw,28px);
+  --id-fill:var(--blue);--id-ink:#fff;--id-soft:var(--blue-soft);--id-line:var(--blue);
+}
+*,*::before,*::after{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth;scroll-padding-bottom:72px}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}*{transition:none!important;animation:none!important}}
+body{font-family:var(--f);font-size:16px;line-height:1.6;color:var(--ink);background:var(--bg);-webkit-font-smoothing:antialiased;padding-bottom:68px}
+img,svg{display:block;max-width:100%}
+a{color:var(--blue)}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+p{margin:0}
+
+/* ---- layout ---- */
+.wrap{max-width:520px;margin:0 auto;padding:0 var(--gutter)}
+
+/* ---- buttons ---- */
+.btn{display:inline-flex;align-items:center;gap:8px;font:600 .94rem/1.3 var(--f);color:#fff;background:var(--blue);border:none;border-radius:var(--r-pill);padding:11px 22px;cursor:pointer;text-decoration:none;box-shadow:var(--sh-sm);transition:background .15s,box-shadow .15s}
+.btn:hover{background:var(--blue-dark);box-shadow:var(--sh-md)}
+.btn svg{width:18px;height:18px;flex-shrink:0}
+.btn.dl{background:var(--surface);color:var(--ink);border:1.5px solid var(--line-strong)}
+.btn.dl:hover{border-color:var(--blue);color:var(--blue)}
+
+/* ---- cover / hero ---- */
+.cover{text-align:center;padding-top:clamp(28px,6vw,48px)}
+.hero{background:var(--aqua);border-radius:var(--r-lg);box-shadow:var(--sh-md);overflow:hidden;margin-bottom:24px}
+.hero svg{display:block;width:100%}
+h1{font-size:clamp(1.7rem,5.5vw,2.4rem);font-weight:700;line-height:1.15;letter-spacing:-.02em;margin-bottom:6px}
+.heart-word{position:relative;display:inline-block}
+.heart-line{position:absolute;left:-4%;bottom:-6px;width:108%;height:22px}
+.sub{font-size:1.1rem;color:var(--muted);margin-bottom:20px}
+
+/* ---- trip stats ---- */
+.trip-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:20px}
+.trip-stats>div{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);padding:12px 6px;text-align:center}
+.trip-stats b{display:block;font-size:1.5rem;font-weight:700;letter-spacing:-.03em}
+.trip-stats small{font-size:.7em;font-weight:400}
+.trip-stats span{display:block;font-size:.78rem;color:var(--muted)}
+
+/* ---- best days ---- */
+.bestdays{display:block;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:14px 16px;text-decoration:none;color:var(--ink);box-shadow:var(--sh-sm);margin-bottom:20px;text-align:left}
+.bestdays .label{font-weight:600;font-size:.88rem;display:block;margin-bottom:2px}
+.bestdays .days{font-size:.88rem;display:block;color:var(--muted);margin-bottom:8px}
+.bestdays .days b{color:var(--ink)}
+.bestdays .week{display:flex;gap:6px}
+.bestdays .week span{flex:1;text-align:center;font-size:.72rem;font-weight:600;padding:4px 0;border-radius:var(--r-sm);background:var(--green-soft);color:var(--green)}
+.bestdays .week .no{background:var(--coral-soft);color:var(--coral);position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;padding:3px 0 2px}
+.bestdays .week .no .x-mark{display:block;width:12px;height:12px;opacity:.55}
+.bestdays .week .yes{display:flex;flex-direction:column;align-items:center;gap:1px;padding:3px 0 2px}
+.bestdays .week .yes .ck-mark{display:block;width:12px;height:12px;opacity:.5}
+.bestdays .why-link{display:block;text-align:right;font-size:.75rem;color:var(--blue);margin-top:4px}
+
+/* ---- download row ---- */
+.dl-row{margin-top:18px;text-align:center}
+.dl-line{display:inline-flex;align-items:center;gap:8px}
+.dl-info{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line-strong);background:var(--surface);font:600 .82rem var(--f);color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
+.dl-tip{font-size:.82rem;color:var(--muted);margin-top:8px;background:var(--sand-soft);border-radius:var(--r-sm);padding:10px 14px;position:relative}
+.dl-tip::before{content:'';position:absolute;top:-6px;left:var(--ax,50%);border:6px solid transparent;border-bottom-color:var(--sand-soft);border-top:0}
+.dl-status{display:block;font-size:.82rem;color:var(--muted);margin-top:8px}
+
+/* ---- map section ---- */
+.map-title{text-align:center;margin:32px 0 12px}
+.map-title .mono{font-size:.72rem;color:var(--muted);letter-spacing:.04em;text-transform:uppercase;font-variant-numeric:tabular-nums}
+.map-title h2{font-size:1.5rem;font-weight:700;display:flex;align-items:center;justify-content:center;gap:8px}
+.map-title h2 span{letter-spacing:-.02em}
+.map-title .note{font-size:.88rem;color:var(--muted);display:block;margin-top:2px}
+.flag{width:30px;height:20px;border-radius:3px;flex-shrink:0}
+.mapcard{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-md);overflow:hidden;margin-bottom:28px}
+.map{padding:0}
+.map svg{width:100%;display:block}
+.map .water{fill:var(--aqua)}
+.map .coast{fill:var(--surface);stroke:var(--line-strong);stroke-width:1.6}
+.map .wave{fill:none;stroke:var(--line-strong);stroke-width:1.2;stroke-linecap:round}
+.map .route{fill:none;stroke:var(--coral);stroke-width:3;stroke-linecap:round;stroke-dasharray:8 6}
+.map .pin circle{stroke:#fff;stroke-width:2}
+.map .pin text{fill:#fff;font:700 13px/1 var(--f);text-anchor:middle;dominant-baseline:auto}
+.map .pin.start circle{fill:var(--muted)}
+.map .pin.start text{fill:#fff}
+.map .pin[data-pin="1"] circle{fill:var(--blue)}
+.map .pin[data-pin="2"] circle{fill:var(--gold)}
+.map .pin[data-pin="3"] circle{fill:var(--coral)}
+.map .pin[data-pin="4"] circle{fill:var(--green)}
+.map .pin[data-pin="5"] circle{fill:var(--orange)}
+.map .lbl{font:600 13px/1 var(--f);fill:var(--ink)}
+.map .dist{font:500 11px/1 var(--f);fill:var(--muted)}
+.map .sea-t{font:italic 500 14px/1 var(--f);fill:var(--muted);opacity:.7}
+.map .doodle{fill:none;stroke:var(--muted);stroke-width:1.2;stroke-linecap:round}
+.map .palm{fill:none;stroke:var(--muted);stroke-width:1.4;stroke-linecap:round}
+.map a{text-decoration:none}
+.mapnote{padding:14px 16px;text-align:center;border-top:1px solid var(--line)}
+.mapnote .note{display:block;font-size:.85rem;color:var(--muted);margin-bottom:10px}
+.mapnote .btn{font-size:.85rem;padding:10px 18px}
+.mapnote .btn svg{width:16px;height:16px}
+
+/* ---- overview / budget ---- */
+.overview{margin-bottom:28px}
+.ov-budget{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm);padding:clamp(16px,4vw,24px)}
+.ov-budget h3{font-size:1rem;font-weight:700;margin-bottom:12px}
+.ov-budget table{width:100%;border-collapse:collapse;font-size:.92rem}
+.ov-budget td{padding:7px 0;border-bottom:1px solid var(--line)}
+.ov-budget td:last-child{text-align:right;font-weight:600}
+.ov-budget .tot td{border-bottom:none;font-weight:700;padding-top:10px}
+.ov-note{font-size:.82rem;color:var(--muted);margin-top:10px}
+
+/* ---- day at a glance / timeline ---- */
+#glance{margin-bottom:32px}
+.sec-h{font-size:1.25rem;font-weight:700;margin-bottom:8px}
+.tl-hint{font-size:.85rem;color:var(--muted);margin-bottom:14px}
+.tl{list-style:none;padding:16px 14px 16px 0;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-sm);position:relative}
+.tl-stop{display:grid;grid-template-columns:56px 26px 1fr;align-items:start;position:relative;padding:0 0 0 0;min-height:44px}
+.tl-stop:last-child .tl-rail::after{display:none}
+.tl-time{font-size:.78rem;font-weight:600;color:var(--muted);text-align:center;padding-top:3px}
+.tl-node{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.78rem;font-weight:700;color:#fff;position:relative;z-index:2}
+.tl-rail{position:relative}
+.tl-rail::after{content:'';position:absolute;left:50%;top:26px;bottom:-26px;width:2px;background:var(--line);transform:translateX(-50%);z-index:1}
+.tl-start .tl-node{background:var(--muted)}
+.tl-stop[data-i="1"] .tl-node{background:var(--blue)}
+.tl-stop[data-i="2"] .tl-node{background:var(--gold)}
+.tl-stop[data-i="3"] .tl-node{background:var(--coral)}
+.tl-stop[data-i="4"] .tl-node{background:var(--green)}
+.tl-stop[data-i="5"] .tl-node{background:var(--orange)}
+.tl-body{padding-left:10px}
+.tl-name{font-weight:600;font-size:.92rem;cursor:pointer}
+.tl-stay{font-size:.78rem;color:var(--muted);margin-left:6px}
+.tl-body summary{display:flex;align-items:baseline;flex-wrap:wrap;gap:2px 0;list-style:none;position:relative;padding-right:22px}
+.tl-body summary::-webkit-details-marker{display:none}
+.tl-body summary::after{content:'';position:absolute;right:0;top:50%;width:16px;height:16px;transform:translateY(-50%);background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath d='M6 4l4 4-4 4' fill='none' stroke='%238993A4' stroke-width='1.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") center/contain no-repeat;transition:transform .2s}
+.tl-body[open] summary::after{transform:translateY(-50%) rotate(90deg)}
+.tl-body summary:active{opacity:.7}
+.tl-why{font-size:.85rem;color:var(--muted);margin-top:4px}
+.tl-go{font-size:.82rem;font-weight:600;display:inline-flex;align-items:center;gap:4px;margin-top:8px;padding:5px 14px;border-radius:var(--r-pill);background:var(--blue-soft);color:var(--blue);text-decoration:none;transition:opacity .15s}
+.tl-go:active{opacity:.7}
+.tl-stop[data-i="2"] .tl-go{background:var(--gold-soft);color:var(--gold)}
+.tl-stop[data-i="3"] .tl-go{background:var(--coral-soft);color:var(--coral)}
+.tl-stop[data-i="4"] .tl-go{background:var(--green-soft);color:var(--green)}
+.tl-stop[data-i="5"] .tl-go{background:var(--orange-soft);color:var(--orange)}
+.tl-drive{display:grid;grid-template-columns:56px 26px 1fr;padding:0}
+.tl-drive .tl-rail{position:relative}
+.tl-drive .tl-rail::after{content:'';position:absolute;left:50%;top:0;bottom:0;width:2px;background:var(--line);transform:translateX(-50%)}
+.tl-dur{display:inline-flex;align-items:center;gap:4px;font-size:.72rem;color:var(--muted);padding:6px 0 6px 10px}
+.tl-dur svg{width:14px;height:14px}
+
+/* ---- note / notice cards ---- */
+.note-card{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--sand);border-radius:var(--r-md);padding:14px 16px;margin:16px 0;font-size:.88rem;color:var(--muted);box-shadow:var(--sh-sm)}
+.note-card .label{font-weight:700;color:var(--ink);display:block;margin-bottom:4px;font-size:.9rem}
+.notice{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(14px,3vw,20px);box-shadow:var(--sh-sm);margin:16px 0}
+.notice h3{font-size:.95rem;font-weight:700;margin-bottom:10px}
+.pack{padding-left:0;list-style:none}
+.pack li{position:relative;padding-left:18px;font-size:.88rem;color:var(--muted);margin-bottom:4px}
+.pack li::before{content:'';position:absolute;left:0;top:8px;width:7px;height:7px;border-radius:50%;background:var(--sand)}
+
+/* ---- per-stop identity colors ---- */
+.stop[data-stop="1"]{--id-fill:var(--blue);--id-soft:var(--blue-soft);--id-line:var(--blue)}
+.stop[data-stop="2"]{--id-fill:var(--gold);--id-soft:var(--gold-soft);--id-line:var(--gold)}
+.stop[data-stop="3"]{--id-fill:var(--coral);--id-soft:var(--coral-soft);--id-line:var(--coral)}
+.stop[data-stop="4"]{--id-fill:var(--green);--id-soft:var(--green-soft);--id-line:var(--green)}
+.stop[data-stop="5"]{--id-fill:var(--orange);--id-soft:var(--orange-soft);--id-line:var(--orange)}
+
+/* ---- stop cards ---- */
+.stop{background:var(--surface);border:1px solid var(--line);border-radius:var(--r-lg);box-shadow:var(--sh-md);padding:clamp(18px,4.5vw,28px);margin-bottom:24px;position:relative;overflow:hidden}
+.stop::before{content:'';position:absolute;top:0;left:0;right:0;height:5px;background:var(--id-fill)}
+.stop-head{display:flex;flex-wrap:wrap;align-items:center;gap:4px 12px;margin-bottom:8px;padding-top:4px}
+.bignum{width:44px;height:44px;border-radius:50%;background:var(--id-fill);color:#fff;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;flex-shrink:0}
+.eyebrow{width:100%;order:-1;font-size:.72rem;font-weight:400;color:var(--muted);letter-spacing:.02em;opacity:.7}
+.stop h2{font-size:clamp(1.3rem,4vw,1.6rem);font-weight:700;flex:1;min-width:0}
+.tagline{font-size:1rem;color:var(--muted);margin-bottom:14px}
+.since{white-space:nowrap}
+
+/* ---- photo placeholder ---- */
+.shot{margin-bottom:18px;border-radius:var(--r-md);overflow:hidden;border:1px solid var(--line)}
+.shot-frame{aspect-ratio:16/10;display:flex;align-items:center;justify-content:center;background:var(--bg);flex-direction:column;gap:6px}
+.shot-frame svg{width:60%;opacity:.35}
+.shot-note{font-size:.78rem;color:var(--muted)}
+.shot figcaption{font-size:.78rem;color:var(--muted);padding:6px 12px;border-top:1px solid var(--line);background:var(--surface)}
+.ph-sky{fill:var(--aqua)}.ph-ground{fill:var(--line)}.ph-fill{fill:var(--surface);stroke:var(--muted);stroke-width:1.5}
+.ph-ink{fill:none;stroke:var(--muted);stroke-width:1.5;stroke-linecap:round}.ph-olive{fill:var(--green-soft);stroke:var(--green);stroke-width:1}
+.ph-sun{fill:var(--sand)}.ph-sea{fill:var(--aqua);opacity:.6}
+
+/* ---- navigate button ---- */
+.nav-pin{display:flex;align-items:center;gap:8px;width:100%;padding:11px 18px;border-radius:var(--r-pill);background:var(--id-fill);color:#fff;text-decoration:none;font-weight:600;font-size:.88rem;margin-bottom:16px;box-shadow:var(--sh-sm);transition:opacity .15s}
+.nav-pin:hover{opacity:.9;color:#fff}
+.np-ic{display:flex;align-items:center;justify-content:center;width:24px;height:24px;flex-shrink:0}
+.np-ic svg{width:20px;height:20px}
+
+/* ---- listen section (pre-recorded audio) ---- */
+.listen{display:flex;align-items:center;gap:10px;background:var(--id-soft);border:1px solid var(--id-line);border-radius:var(--r-pill);padding:6px 16px 6px 6px;margin-bottom:16px}
+.listen-btn{width:36px;height:36px;border-radius:50%;border:none;background:var(--id-fill);color:#fff;cursor:pointer;display:flex;align-items:center;justify-content:center;flex-shrink:0;transition:opacity .15s}
+.listen-btn:hover{opacity:.85}
+.listen-btn svg{width:16px;height:16px}
+.listen-btn[aria-pressed="true"]{background:var(--ink)}
+.listen-txt{flex:1;min-width:0}
+.listen-txt .label{font-weight:600;font-size:.85rem;display:block}
+.listen-txt .mono{font-size:.72rem;color:var(--muted);display:block;font-variant-numeric:tabular-nums}
+.listen-prog{display:block;height:4px;background:var(--line);border-radius:2px;margin-top:4px;cursor:pointer;overflow:hidden}
+.listen-prog i{display:block;height:100%;width:0;background:var(--id-fill);border-radius:2px;transition:width .15s linear}
+.listen-stop{border:none;background:none;font:600 .78rem var(--f);color:var(--muted);cursor:pointer;padding:4px 0}
+.reading{background:var(--id-soft);border-radius:var(--r-sm);transition:background .2s}
+
+/* ---- what-to-do tabs ---- */
+.todo{margin-top:24px;margin-bottom:28px}
+.todo h3{font-size:.95rem;font-weight:700;margin-bottom:14px;display:flex;align-items:baseline;gap:8px}
+.td-count{font-size:.78rem;font-weight:500;color:var(--muted)}
+.td-tabs[role="tablist"]{display:flex;gap:0;margin-bottom:16px;align-items:center;position:relative}
+.td-tab{width:34px;height:34px;border-radius:50%;border:2px solid var(--line-strong);background:var(--surface);font:700 .88rem var(--f);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .15s;position:relative;z-index:1}
+.td-tab[aria-selected="true"]{background:var(--id-fill);border-color:var(--id-fill);color:#fff}
+.td-arrow{width:20px;height:1.5px;background:var(--line);position:relative;flex-shrink:0}
+.td-arrow::after{content:'';position:absolute;right:-1px;top:50%;width:5px;height:5px;border-right:1.5px solid var(--line);border-top:1.5px solid var(--line);transform:translateY(-50%) rotate(45deg)}
+.td-tab:focus-visible{outline:2px solid var(--blue);outline-offset:2px}
+.td-panel h4{font-size:.92rem;font-weight:700;margin-bottom:6px}
+.td-photo{aspect-ratio:16/9;border-radius:var(--r-sm);border:1.5px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;flex-direction:column;gap:4px;color:var(--muted);font-size:.75rem;background:var(--bg);margin:10px 0 14px;overflow:hidden}
+.td-photo svg{width:28px;height:28px;opacity:.4}
+.td-photo img{width:100%;height:100%;object-fit:cover}
+.td-panel p{font-size:.88rem;color:var(--muted);margin-bottom:10px}
+.td-meta{display:block;font-size:.78rem;color:var(--muted);margin-bottom:4px}
+.td-link{display:inline-block;font-size:.82rem;font-weight:600;color:var(--blue);margin-right:12px;margin-bottom:2px}
+
+/* ---- story ---- */
+.story{margin-bottom:16px}
+.story p{font-size:.92rem;color:var(--muted);margin-bottom:10px;line-height:1.65}
+.story p:last-child{margin-bottom:0}
+
+/* ---- eat section ---- */
+.eat{margin-bottom:16px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r-md);overflow:hidden}
+.eat>summary{padding:14px 16px;font-weight:600;font-size:.92rem;cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:8px}
+.eat>summary::-webkit-details-marker{display:none}
+.eat-t{flex:1}
+.eat-c{font-size:.78rem;font-weight:500;color:var(--muted)}
+.eat .intro{font-size:.88rem;color:var(--muted);padding:0 16px 12px;line-height:1.55}
+.places{padding:0 16px 16px}
+.place{border:1px solid var(--line);border-radius:var(--r-sm);margin-bottom:8px;overflow:hidden}
+.place>summary{padding:10px 14px;cursor:pointer;list-style:none;display:flex;align-items:baseline;gap:6px}
+.place>summary::-webkit-details-marker{display:none}
+.pn{font-weight:600;font-size:.88rem}
+.ps{font-size:.78rem;color:var(--muted)}
+.place-body{padding:0 14px 14px}
+.place-body p{font-size:.85rem;color:var(--muted);margin-bottom:6px}
+.hrs{display:block;font-size:.78rem;color:var(--muted);margin-bottom:6px}
+.linkrow{display:flex;gap:12px;flex-wrap:wrap}
+.linkrow a{font-size:.82rem;font-weight:600}
+.slot{aspect-ratio:16/10;border-radius:var(--r-sm);border:1px dashed var(--line-strong);display:flex;align-items:center;justify-content:center;color:var(--muted);font-size:.78rem;margin-bottom:8px}
+
+/* ---- visit button ---- */
+.visit-row{text-align:center;margin:18px 0 8px}
+.visit-btn{display:inline-flex;align-items:center;gap:8px;font:600 .88rem var(--f);color:var(--muted);background:var(--surface);border:1.5px solid var(--line-strong);border-radius:var(--r-pill);padding:10px 20px;cursor:pointer;transition:all .15s}
+.visit-btn[aria-pressed="true"]{background:var(--blue);border-color:var(--blue);color:#fff}
+.visit-btn[aria-pressed="true"] .vb-tick{stroke:#fff}
+.vb-ic{width:22px;height:22px;flex-shrink:0}
+
+/* ---- next drive ---- */
+.next-drive{text-align:center;font-size:.85rem;color:var(--muted);padding:8px 0}
+.next-drive svg{display:inline-block;width:44px;height:22px;vertical-align:middle;margin-right:4px;stroke:var(--muted)}
+.next-drive a{font-weight:600}
+
+/* ---- planning / footer ---- */
+#plan{margin-bottom:24px}
+#plan .sec-h{margin-bottom:14px}
+footer{text-align:center;padding:20px 0 32px;color:var(--muted);font-size:.82rem}
+footer .brand-line{font-size:1rem;font-weight:600;color:var(--ink);line-height:1.5;margin-bottom:8px}
+.footer-brand{font-size:.72rem;color:var(--muted);letter-spacing:.02em}
+.footer-scene{max-width:380px;margin:0 auto 14px}
+
+/* ---- navbar ---- */
+.navbar{position:fixed;bottom:0;left:0;right:0;z-index:100;display:flex;justify-content:space-around;background:rgba(255,255,255,.88);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-top:1px solid var(--line);padding:6px 0 env(safe-area-inset-bottom,0);box-shadow:0 -2px 10px rgba(23,43,77,.06)}
+.nb-item{display:flex;flex-direction:column;align-items:center;gap:1px;text-decoration:none;color:var(--muted);font-size:.62rem;font-weight:600;padding:4px 6px;position:relative;transition:color .15s}
+.nb-ic{width:26px;height:26px;display:flex;align-items:center;justify-content:center}
+.nb-ic svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:1.4;stroke-linecap:round;stroke-linejoin:round}
+.nb-tick{display:none;position:absolute;top:0;right:2px;width:14px;height:14px;border-radius:50%;background:var(--coral);color:#fff;font-size:.6rem;line-height:14px;text-align:center}
+.nb-item.cur{color:var(--blue)}
+.nb-item.cur .nb-ic svg{stroke:var(--blue);fill:var(--blue-soft)}
+.nb-item.done{color:var(--blue);opacity:.6}
+.nb-item.visited .nb-tick{display:block}
+.nb-progress{position:absolute;top:50%;left:10%;right:10%;height:0;transform:translateY(-6px);pointer-events:none;z-index:0}
+.nb-progress::before{content:'';position:absolute;top:0;left:0;right:0;height:1.5px;background:var(--line);border-radius:1px}
+.nb-dot{position:absolute;top:50%;width:7px;height:7px;border-radius:50%;border:1.5px solid var(--line);background:#fff;transform:translate(-50%,-50%)}
+.nb-item{z-index:1}
+
+/* ---- wider screens ---- */
+@media(min-width:600px){
+  body{font-size:17px}
+  .stop{padding:clamp(24px,4vw,36px)}
+}
+</style>
 </head>
-<body style="font-family: system-ui, sans-serif; max-width: 640px; margin: 0 auto; padding: 32px 20px; line-height: 1.6;">
-  <h1>The rural heart of Fuerteventura</h1>
-  <p>Placeholder. Replace the contents of this file (content/rural.html) with your real itinerary HTML.</p>
+<body>
+<svg style="display:none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <symbol id="i-palm" viewBox="0 0 60 90"><g fill="none" stroke="#172B4D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M30 90V30"/><path d="M30 30C15 18 6 28 2 18"/><path d="M30 30C20 14 10 18 6 8"/><path d="M30 30C28 12 22 8 20 0"/><path d="M30 30C36 12 42 8 44 2"/><path d="M30 30C42 16 50 20 56 12"/><path d="M30 30C46 22 54 28 58 22"/></g></symbol>
+    <symbol id="i-fish" viewBox="0 0 60 30"><g fill="#fff" stroke="#172B4D" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"><path d="M10 15L0 4q4 11 0 22z"/><path d="M28 6q4-6 10-1"/><path d="M8 15C18 1 42 1 54 15 42 29 18 29 8 15z"/><path d="M22 9q-3 6 0 12M30 7q-3 8 0 16M38 8q-2 7 0 14" fill="none" stroke-width=".9"/><circle cx="45" cy="13" r="2.6"/></g><circle cx="45.6" cy="13" r="1.2" fill="#172B4D"/></symbol>
+    <symbol id="i-volcano" viewBox="0 0 130 64"><g fill="#fff" stroke="#172B4D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M66 64l26-28q10-4 20 0l18 28z"/><path d="M0 64l40-42q22-8 44 0l40 42z"/><ellipse cx="62" cy="21" rx="21" ry="4.5"/><path d="M84 30l-6 10M90 36l-7 12M96 42l-7 14M102 48l-6 12M108 54l-4 8" fill="none" stroke-width=".9"/><path d="M46 28L36 56M60 28l-2 30" fill="none" stroke-width=".9"/></g></symbol>
+    <symbol id="i-donkey" viewBox="0 0 100 80"><g fill="#fff" stroke="#172B4D" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"><path d="M22 38c-8 4-9 14-7 22" fill="none"/><path d="M13 58l2 7 3-6z" fill="#172B4D"/><rect x="27" y="48" width="6" height="26" rx="2"/><rect x="36" y="50" width="6" height="24" rx="2"/><rect x="56" y="50" width="6" height="24" rx="2"/><rect x="64" y="48" width="6" height="26" rx="2"/><ellipse cx="47" cy="42" rx="27" ry="14"/><path d="M30 49q17 9 34 0" fill="none" stroke-width=".9"/><path d="M36 29q11-3 22 0l-1 13q-10 2-20 0z"/><path d="M39 33h17M39 37h17" fill="none" stroke-width=".9"/><path d="M64 40l8-18c2-6 8-9 13-6l10 12c3 5-1 10-6 8l-8-4-7 14z"/><path d="M76 17L71 2l9 11zM81 15l1-15 4 14z"/><path d="M67 37l3-6M70 31l3-6M73 25l3-6" fill="none" stroke-width="1.6"/><ellipse cx="92" cy="33" rx="5" ry="4"/></g><g fill="#172B4D"><rect x="27" y="71" width="6" height="3"/><rect x="36" y="71" width="6" height="3"/><rect x="56" y="71" width="6" height="3"/><rect x="64" y="71" width="6" height="3"/><circle cx="83" cy="23" r="1.5"/><circle cx="94" cy="33" r=".9"/></g></symbol>
+    <symbol id="i-house" viewBox="0 0 100 70"><g fill="#fff" stroke="#172B4D" stroke-width="1.5" stroke-linejoin="round" stroke-linecap="round"><path d="M2 66h96" fill="none"/><path d="M4 66q1-13 10-13t10 13z"/><path d="M11 66v-5a3 3 0 016 0v5" fill="none" stroke-width="1"/><path d="M70 66V42h22v24z"/><path d="M68 43l13-11 13 11z"/><path d="M73 40l3-3M79 37l3-3M85 38l3-2" fill="none" stroke-width=".9"/><path d="M24 66V30h48v36z"/><path d="M22 30h52v-4H22z"/><path d="M42 66V50q6-6 12 0v16"/><rect x="29" y="38" width="8" height="8"/><rect x="59" y="38" width="8" height="8"/><path d="M33 38v8M63 38v8M77 50h8v7h-8z" stroke-width=".9"/><path d="M28 56h5M61 58h6M48 34h6M30 50h3M66 50h3" fill="none" stroke-width=".8"/></g></symbol>
+    <symbol id="i-windmill" viewBox="0 0 60 70"><g fill="#fff" stroke="#172B4D" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M4 67h52" fill="none"/><path d="M22 67l4-36h8l4 36z"/><path d="M24.5 31q5.5-7 11 0z"/><path d="M27 67v-7a3 3 0 016 0v7" fill="none" stroke-width="1.2"/><path d="M30 27L9 7l3-3 21 20zM30 27L51 7l-3-3-21 20zM30 27L12 46l3 3 18-19zM30 27l18 19-3 3-18-19z"/><circle cx="30" cy="27" r="2.6"/></g></symbol>
+    <symbol id="i-church" viewBox="0 0 70 70"><g fill="#fff" stroke="#172B4D" stroke-width="1.6" stroke-linejoin="round" stroke-linecap="round"><path d="M3 67h64" fill="none"/><path d="M8 67V36h54v31z"/><path d="M6 36h58" fill="none"/><path d="M24 36V18h22v18"/><path d="M22 18h26" fill="none"/><path d="M31 30v-5a4 4 0 018 0v5z"/><path d="M35 18v-9M31.5 12h7" fill="none"/><path d="M29 67V54a6 6 0 0112 0v13"/><circle cx="35" cy="45" r="2.8"/><path d="M14 46h5v7h-5zM51 46h5v7h-5z" stroke-width="1.2"/></g></symbol>
+  </defs>
+</svg>
+
+<div class="wrap">
+
+<header class="cover" id="top">
+  <figure class="hero" aria-label="Sketch of Fuerteventura">
+    <svg viewBox="0 0 400 270" role="img" aria-labelledby="herot">
+      <title id="herot">Greetings from Fuerteventura: ink sketch of Calderón Hondo, the sea, dunes, palm trees, a majorero donkey and a jumping fish</title>
+      <rect width="400" height="270" fill="#fff"/>
+      <g fill="none" stroke="#172B4D" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="292" cy="140" r="22" fill="#fff"/>
+        <path d="M292 108v-8M268 118l-6-6M316 118l6-6M258 140h-8M326 140h8"/>
+        <path d="M186 44q3-11 15-8q6-10 18-3q12-1 10 11z" fill="#fff"/>
+        <path d="M120 70q5-5 10 0q5-5 10 0M150 58q4-4 8 0q4-4 8 0" stroke-width="1.2"/>
+      </g>
+      <text x="20" y="42" font-family="'DM Sans',sans-serif" font-size="22" font-weight="500" fill="#172B4D">Greetings from</text>
+      <text x="16" y="86" font-family="'DM Sans',sans-serif" font-weight="700" font-size="44" fill="#172B4D">Fuerteventura!</text>
+      <path d="M22 96q120-10 262-2" fill="none" stroke="#FF694A" stroke-width="2.2" stroke-linecap="round"/>
+      <g fill="#fff" stroke="#172B4D" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M-10 158l66-48q34-10 68 0l72 48z"/>
+        <ellipse cx="90" cy="110" rx="34" ry="6"/>
+        <path d="M128 120l-8 12M138 128l-9 14M148 136l-8 14M158 144l-6 10M168 150l-4 6M72 116l-10 30M92 117v34" fill="none" stroke-width=".9"/>
+        <rect x="0" y="152" width="400" height="118" stroke="none"/>
+        <path d="M0 152h400" stroke-width="1.2"/>
+        <path d="M268 160h48M278 167h28M286 174h12" stroke-width="1"/>
+        <path d="M20 182q10-6 20 0t20 0M110 194q10-6 20 0t20 0M222 190q10-6 20 0t20 0M330 194q10-6 20 0t20 0M60 200q8-5 16 0" fill="none" stroke-width="1.1"/>
+        <path d="M352 160h30l-5 6h-20z"/><path d="M364 158v-28l14 28zM362 158v-22l-10 22z"/>
+        <path d="M194 176q4-6 8 0M240 174q4-6 8 0" fill="none"/>
+        <path d="M0 214q70-18 150-4t150-4 100 4v60H0z"/>
+        <path d="M0 238q100-14 200 0t200-4" fill="none" stroke-width="1.1"/>
+        <path d="M30 252q20-6 40 0M240 256q20-6 40 0M150 262q16-5 32 0" fill="none" stroke-width=".9"/>
+        <path d="M76 252V198" fill="none"/>
+        <path d="M44 202q32-36 64 0z"/><path d="M66 202q4-22 10-24 6 2 10 24" fill="none" stroke-width="1"/>
+        <path d="M88 246h40l-6 12H82z"/><path d="M98 246l-6 12M110 246l-6 12" fill="none" stroke-width="1"/>
+      </g>
+      <text x="40" y="146" font-family="'DM Sans',sans-serif" font-size="13" font-weight="500" fill="#172B4D">Calderón Hondo</text>
+      <use href="#i-fish" x="196" y="146" width="46" height="23" transform="rotate(-22 219 157)"/>
+      <use href="#i-donkey" x="146" y="190" width="74" height="60"/>
+      <use href="#i-palm" x="296" y="150" width="62" height="90"/>
+      <use href="#i-palm" x="344" y="170" width="46" height="68"/>
+      <text x="226" y="242" font-family="'DM Sans',sans-serif" font-size="13" font-weight="500" fill="#FF694A">burro majorero &#x2196;</text>
+      <g transform="translate(336 10)" fill="none" stroke="#172B4D" stroke-width="1.2"><rect width="54" height="66" fill="#fff" stroke-dasharray="3 2"/><rect x="5" y="5" width="44" height="44"/><use href="#i-palm" x="10" y="7" width="34" height="42"/><text x="27" y="60" text-anchor="middle" font-family="'DM Sans',sans-serif" font-size="7" fill="#172B4D" stroke="none">CANARIAS</text></g>
+      <g fill="none" stroke="#172B4D" stroke-width="1.1" opacity=".55"><circle cx="330" cy="70" r="18"/><path d="M300 64q8-4 16 0t16 0t16 0M300 72q8-4 16 0t16 0t16 0"/></g>
+    </svg>
+  </figure>
+  <h1>The Rural <span class="heart-word">Heart<svg class="heart-line" viewBox="0 0 200 22" preserveAspectRatio="none" aria-hidden="true"><path d="M4 12C40 9 70 10 88 11" fill="none" stroke="#FF694A" stroke-width="2.2" stroke-linecap="round"/><path d="M100 19c-4-3.2-8-5.8-8-9.4 0-2.3 1.8-4 3.9-4 1.7 0 3.1 1 4.1 2.5 1-1.5 2.4-2.5 4.1-2.5 2.1 0 3.9 1.7 3.9 4 0 3.6-4 6.2-8 9.4z" fill="#FF694A"/><path d="M112 11c20 1 50 0 84-3" fill="none" stroke="#FF694A" stroke-width="2.2" stroke-linecap="round"/></svg></span> of Fuerteventura</h1>
+  <p class="sub">Small villages, big stories.</p>
+  <div class="trip-stats" role="list">
+    <div role="listitem"><b>5</b><span>stops</span></div>
+    <div role="listitem"><b>60<small>km</small></b><span>by car</span></div>
+    <div role="listitem"><b>1</b><span>full day</span></div>
+  </div>
+  <a class="bestdays" href="#why">
+    <span class="label">Best days to go</span>
+    <span class="days">Any day from <b>Tuesday</b> to <b>Saturday</b></span>
+    <span class="week" aria-label="Good days: Tuesday through Saturday. Not Sunday or Monday.">
+      <span class="no">Mon<svg class="x-mark" viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></span><span class="yes">Tue<svg class="ck-mark" viewBox="0 0 12 12"><path d="M2.5 6.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span><span class="yes">Wed<svg class="ck-mark" viewBox="0 0 12 12"><path d="M2.5 6.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span><span class="yes">Thu<svg class="ck-mark" viewBox="0 0 12 12"><path d="M2.5 6.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span><span class="yes">Fri<svg class="ck-mark" viewBox="0 0 12 12"><path d="M2.5 6.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span><span class="yes">Sat<svg class="ck-mark" viewBox="0 0 12 12"><path d="M2.5 6.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg></span><span class="no">Sun<svg class="x-mark" viewBox="0 0 12 12"><path d="M3 3l6 6M9 3l-6 6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></span>
+    </span>
+    <span class="why-link">Why? &#x2193;</span>
+  </a>
+  <div class="dl-row js-dl-row" hidden>
+    <div class="dl-line"><button class="btn dl js-dl" type="button" id="dl-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF for offline</button><button class="dl-info" type="button" id="dl-info" aria-expanded="false" aria-controls="dl-tip" aria-label="About the PDF">i</button></div>
+    <p class="dl-tip" id="dl-tip" hidden>Save it before you set off. The PDF works without signal.</p>
+    <span class="dl-status js-dl-status"></span>
+  </div>
+
+  <div class="map-title">
+    <span class="mono">Canary Islands &middot; Spain &middot; 28&deg;N 14&deg;W</span>
+    <h2><span>Fuerteventura</span><svg class="flag" viewBox="0 0 30 20" role="img" aria-label="Flag of the Canary Islands"><rect width="10" height="20" fill="#ffffff"/><rect x="10" width="10" height="20" fill="#0768a9"/><rect x="20" width="10" height="20" fill="#fdc82f"/><rect width="30" height="20" fill="none" stroke="#172B4D" stroke-opacity=".35"/></svg></h2>
+    <span class="note">your route for the day &#x2193;</span>
+  </div>
+  <figure class="mapcard" aria-label="Route map from Corralejo to Puertito de los Molinos">
+    <div class="map">
+      <svg viewBox="0 0 360 430" role="img" aria-labelledby="mapt">
+        <title id="mapt">Hand-drawn route: Corralejo, Villaverde, La Oliva, Tef&iacute;a, Ecomuseo de La Alcogida, Puertito de los Molinos</title>
+        <rect class="water" width="360" height="430"/>
+        <path class="wave" d="M20 300q8-6 16 0t16 0M30 330q8-6 16 0t16 0M290 200q8-6 16 0t16 0M300 240q8-6 16 0t16 0M24 60q8-6 16 0t16 0"/>
+        <path class="coast" d="M206 18c18 4 34 14 40 30 4 13-2 22 6 34 9 12 22 16 26 32 5 20-4 38 0 58 4 18 16 30 18 50 3 26-8 48-6 74 2 22 12 40 6 62-5 18-18 30-22 48l-6 24H118c-2-22 6-40 2-62-4-20-18-34-20-56-2-24 8-44 6-68-2-22-14-40-12-62 2-24 18-38 24-60 5-18 0-34 10-48 12-16 34-18 52-26 10-4 16-12 26-10z"/>
+        <text class="sea-t" x="22" y="230">Atlantic</text>
+        <text class="sea-t" x="292" y="390" text-anchor="end">&#x2193; south</text>
+        <g class="doodle" transform="translate(316 40)"><circle r="16"/><path d="M0-22v44M-22 0h44"/><path d="M0-16l4 10-4-3-4 3z" fill="currentColor"/></g>
+        <text class="lbl" x="310" y="74" style="font-size:14px">N</text>
+        <g class="doodle" transform="translate(56 120)"><path d="M0 34V8M-6 34h12M0 8l14-10M0 8l-14-10M0 8l10 14M0 8l-10 14"/></g>
+        <use href="#i-volcano" x="120" y="66" width="52" height="26"/>
+        <text class="dist" x="118" y="102" style="font-size:9px">Calder&oacute;n Hondo</text>
+        <use href="#i-fish" x="26" y="372" width="34" height="17"/>
+        <use href="#i-fish" x="300" y="130" width="26" height="13"/>
+        <g class="palm" transform="translate(150 360)"><path d="M0 30q4-16 0-30M0 0q-12-6-20 2M0 0q12-6 20 2M0 0q-6-10-14-12M0 0q6-10 14-12"/></g>
+        <g transform="translate(300 330)"><circle r="13" style="fill:#fff;stroke:var(--ink)" stroke-width="1.5"/><path d="M0-20v-6M0 20v6M-20 0h-6M20 0h6M-14-14l-4-4M14 14l4 4M14-14l4-4M-14 14l-4 4" style="stroke:var(--ink)" stroke-width="1.5" stroke-linecap="round"/></g>
+        <!-- route -->
+        <path class="route" d="M214 46 C220 70 214 90 206 112 C200 126 196 140 190 152 C180 190 186 230 182 262 C181 272 184 280 186 290 C170 300 150 296 128 288"/>
+        <text class="dist" x="222" y="84">15 min</text>
+        <text class="dist" x="200" y="136">5 min</text>
+        <text class="dist" x="192" y="214">25 min</text>
+        <text class="dist" x="194" y="284">5 min</text>
+        <text class="dist" x="140" y="310">15 min</text>
+        <!-- pins -->
+        <g class="pin start"><circle cx="214" cy="46" r="11"/><text x="214" y="50">S</text></g>
+        <text class="lbl" x="230" y="44">Corralejo</text>
+        <a href="#stop-1" aria-label="Stop 1, Villaverde"><g class="pin" data-pin="1"><circle cx="206" cy="112" r="12"/><text x="206" y="116">1</text></g></a>
+        <text class="lbl" x="224" y="117">Villaverde</text>
+        <a href="#stop-2" aria-label="Stop 2, La Oliva"><g class="pin" data-pin="2"><circle cx="190" cy="152" r="12"/><text x="190" y="156">2</text></g></a>
+        <text class="lbl" x="118" y="162">La Oliva</text>
+        <a href="#stop-3" aria-label="Stop 3, Tef&iacute;a"><g class="pin" data-pin="3"><circle cx="182" cy="262" r="12"/><text x="182" y="266">3</text></g></a>
+        <text class="lbl" x="200" y="262">Tef&iacute;a</text>
+        <a href="#stop-4" aria-label="Stop 4, Ecomuseo de La Alcogida"><g class="pin" data-pin="4"><circle cx="186" cy="292" r="12"/><text x="186" y="296">4</text></g></a>
+        <text class="lbl" x="204" y="304">Ecomuseo</text>
+        <a href="#stop-5" aria-label="Stop 5, Puertito de los Molinos"><g class="pin" data-pin="5"><circle cx="128" cy="288" r="12"/><text x="128" y="292">5</text></g></a>
+        <text class="lbl" x="46" y="268">Los Molinos</text>
+        <text class="lbl" x="58" y="285" style="font-size:14px;fill:var(--orange)">sunset &#x2600;</text>
+      </svg>
+    </div>
+    <div class="mapnote">
+      <span class="note">Tap a number to jump to that stop</span>
+      <a class="btn" target="_blank" rel="noopener" href="https://www.google.com/maps/dir/Corralejo,+Fuerteventura/Villaverde,+Fuerteventura/La+Oliva,+Fuerteventura/Tef%C3%ADa,+Fuerteventura/Ecomuseo+de+La+Alcogida,+Fuerteventura/Puertito+de+los+Molinos,+Fuerteventura">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 11l18-8-8 18-2-8z"/></svg>Full route in Maps</a>
+    </div>
+  </figure>
+</header>
+
+<section class="overview" id="route-overview">
+  <div class="ov-budget">
+    <h3>Budget for 2 people</h3>
+    <table>
+      <tr><td>Car rental, 1 day</td><td>&euro;40</td></tr>
+      <tr><td>Fuel, estimated</td><td>&euro;20</td></tr>
+      <tr><td>Ecomuseo tickets, &euro;5 &times; 2</td><td>&euro;10</td></tr>
+      <tr class="tot"><td>Total for two</td><td>&euro;70</td></tr>
+    </table>
+    <p class="ov-note">Not included: food and drinks.</p>
+  </div>
+</section>
+
+<section id="glance">
+  <h2 class="sec-h">The day at a glance</h2>
+  <p class="tl-hint">Tap a town to see why it is on the route.</p>
+  <ol class="tl" id="trail">
+    <li class="tl-stop tl-start"><span class="tl-time">10:00</span><span class="tl-rail"><span class="tl-node">S</span></span><div class="tl-body"><span class="tl-name">Corralejo</span><span class="tl-stay">start</span></div></li>
+    <li class="tl-drive" aria-label="15 min drive"><span></span><span class="tl-rail"></span><span class="tl-dur"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v2H3zM7 18v1.5M17 18v1.5M5 11h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/></svg>15 min</span></li>
+    <li class="tl-stop" data-i="1"><span class="tl-time">10:20</span><span class="tl-rail"><span class="tl-node">1</span></span><details class="tl-body"><summary><span class="tl-name">Villaverde</span><span class="tl-stay">1 h</span></summary><p class="tl-why">Windmills, gofio and majorero goat cheese, plus the best coffee stop of the day.</p><a class="tl-go" href="#stop-1">Go to stop &rarr;</a></details></li>
+    <li class="tl-drive" aria-label="5 min drive"><span></span><span class="tl-rail"></span><span class="tl-dur"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v2H3zM7 18v1.5M17 18v1.5M5 11h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/></svg>5 min</span></li>
+    <li class="tl-stop" data-i="2"><span class="tl-time">11:25</span><span class="tl-rail"><span class="tl-node">2</span></span><details class="tl-body"><summary><span class="tl-name">La Oliva</span><span class="tl-stay">45 min</span></summary><p class="tl-why">The Casa de los Coroneles, from where the island was ruled for two centuries.</p><a class="tl-go" href="#stop-2">Go to stop &rarr;</a></details></li>
+    <li class="tl-drive" aria-label="25 min drive"><span></span><span class="tl-rail"></span><span class="tl-dur"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v2H3zM7 18v1.5M17 18v1.5M5 11h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/></svg>25 min</span></li>
+    <li class="tl-stop" data-i="3"><span class="tl-time">12:35</span><span class="tl-rail"><span class="tl-node">3</span></span><details class="tl-body"><summary><span class="tl-name">Tef&iacute;a</span><span class="tl-stay">45 min</span></summary><p class="tl-why">A silent village among volcanic hills, with a windmill and a story worth knowing.</p><a class="tl-go" href="#stop-3">Go to stop &rarr;</a></details></li>
+    <li class="tl-drive" aria-label="5 min drive"><span></span><span class="tl-rail"></span><span class="tl-dur"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v2H3zM7 18v1.5M17 18v1.5M5 11h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/></svg>5 min</span></li>
+    <li class="tl-stop" data-i="4"><span class="tl-time">13:25</span><span class="tl-rail"><span class="tl-node">4</span></span><details class="tl-body"><summary><span class="tl-name">Ecomuseo de La Alcogida</span><span class="tl-stay">1 h 30</span></summary><p class="tl-why">Seven traditional houses that show how islanders lived. The must-see of the day.</p><a class="tl-go" href="#stop-4">Go to stop &rarr;</a></details></li>
+    <li class="tl-drive" aria-label="15 min drive"><span></span><span class="tl-rail"></span><span class="tl-dur"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16V11l2-5h10l2 5v5M3 16h18v2H3zM7 18v1.5M17 18v1.5M5 11h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/><circle cx="8" cy="14" r="1" fill="currentColor"/><circle cx="16" cy="14" r="1" fill="currentColor"/></svg>15 min</span></li>
+    <li class="tl-stop" data-i="5"><span class="tl-time">15:15</span><span class="tl-rail"><span class="tl-node">5</span></span><details class="tl-body"><summary><span class="tl-name">Puertito de los Molinos</span><span class="tl-stay">until sunset</span></summary><p class="tl-why">A tiny fishing village for a late lunch by the sea and the sunset.</p><a class="tl-go" href="#stop-5">Go to stop &rarr;</a></details></li>
+  </ol>
+  <div class="note-card" id="why" role="note">
+    <span class="label">Why Tuesday to Saturday?</span>
+    <p>The <b>Ecomuseo de La Alcogida</b> is open <b>Tuesday, Wednesday, Thursday, Friday and Saturday, 10:00&ndash;16:00</b>.</p>
+  </div>
+</section>
+
+<!-- ============ STOP 1 ============ -->
+<article class="stop" id="stop-1" data-stop="1" data-name="Villaverde">
+  <div class="stop-head">
+    <span class="bignum">1</span>
+    <span class="eyebrow">Stop 1 of 5 &middot; 1 hour</span>
+    <h2>Villaverde</h2>
+  </div>
+  <p class="tagline">Where the wind once ground the grain.</p>
+  <figure class="shot" data-photo="stop-1"><div class="shot-frame"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="ph-sky" width="100" height="100"/><path class="ph-ground" d="M0 72q25-6 50 0t50-2V100H0z"/><path class="ph-fill" d="M42 74l3-34h10l3 34z"/><path class="ph-ink" d="M50 40l18-14M50 40l-18-14M50 40l14 18M50 40l-14 18"/><circle class="ph-fill" cx="50" cy="40" r="3"/></svg><span class="shot-note">Photo coming soon</span></div><figcaption>the old molinos</figcaption></figure>
+  <div class="listen" hidden data-audio="audio/villaverde.mp3" data-marks='[{"sel":"h2","i":0,"t":0.0},{"sel":".tagline","i":0,"t":2.94},{"sel":".todo h3","i":0,"t":5.64},{"sel":".td-panel h4","i":0,"t":7.4},{"sel":".td-panel h4","i":1,"t":14.69},{"sel":".td-panel h4","i":2,"t":22.94},{"sel":".story p","i":0,"t":34.15},{"sel":".story p","i":1,"t":46.6}]'>
+    <button class="listen-btn" type="button" aria-pressed="false" aria-label="Listen to this stop" id="listen-1"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <div class="listen-txt"><span class="label">Listen to this stop</span><span class="mono js-listen-meta">0:56 &middot; narrated</span><span class="listen-prog" aria-hidden="true"><i></i></span></div>
+    <button class="listen-stop" type="button" hidden>Stop</button>
+  </div>
+  <a class="nav-pin" href="https://www.google.com/maps/dir/?api=1&amp;destination=Villaverde%2C+Fuerteventura" target="_blank" rel="noopener" aria-label="Navigate to Villaverde in Google Maps"><span class="np-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7-7.1-7-12.2A7 7 0 0112 3a7 7 0 017 6.8C19 14.9 12 22 12 22z" fill="currentColor"/><circle cx="12" cy="9.8" r="2.6" fill="#fff"/></svg></span><span>Navigate here</span></a>
+  <div class="todo">
+    <h3>What to do here <span class="td-count">3 things &middot; tap a number</span></h3>
+    <div class="td-tabs" role="tablist" aria-label="What to do at Villaverde"><button class="td-tab" type="button" role="tab" id="t1-1" aria-controls="p1-1" aria-selected="true" tabindex="0">1</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t1-2" aria-controls="p1-2" aria-selected="false" tabindex="-1">2</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t1-3" aria-controls="p1-3" aria-selected="false" tabindex="-1">3</button></div>
+    <div class="td-panels">
+      <div class="td-panel" role="tabpanel" id="p1-1" aria-labelledby="t1-1"><h4>Find the two windmills</h4><figure class="td-photo" data-photo="p1-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Villaverde keeps one of the best-preserved groups of mills on the island.</p><span class="td-meta">Free &middot; 20 min</span><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Molinos+de+Villaverde+Fuerteventura" target="_blank" rel="noopener">Molinos de Villaverde &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p1-2" aria-labelledby="t1-2" hidden><h4>Stop for coffee at Mi Dulce Hogar</h4><figure class="td-photo" data-photo="p1-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Great coffee and homemade cakes at local prices, in the middle of the village.</p><span class="td-meta">Mon&ndash;Fri 7:00&ndash;21:00 &middot; Sat&ndash;Sun 7:00&ndash;15:00</span><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Mi+Dulce+Hogar+Villaverde+Fuerteventura" target="_blank" rel="noopener">Mi Dulce Hogar &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p1-3" aria-labelledby="t1-3" hidden><h4>Take the scenic drive</h4><figure class="td-photo" data-photo="p1-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Follow Rinc&oacute;n de Cubas, a quieter side of Fuerteventura with traditional and modern houses, gardens and open rural landscape.</p><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Rinc%C3%B3n+de+Cubas+Villaverde+Fuerteventura" target="_blank" rel="noopener">Rinc&oacute;n de Cubas &#8599;</a></div>
+    </div>
+  </div>
+  <div class="story">
+    <p>Windmills arrived on Fuerteventura in the 18th century to grind the cereal that once grew across these plains. The flour became gofio, the toasted grain that kept island families fed through hard years, back when Fuerteventura was known as the granary of the Canaries.</p>
+    <p>Villaverde kept one of the best-preserved groups of mills on the island. It is also a cheese village: in the 1960s a group of local goat farmers began selling their majorero cheese together as a cooperative.</p>
+  </div>
+  <details class="eat">
+    <summary><span class="eat-t">Where to eat in Villaverde</span><span class="eat-c">3 places &middot; tap to discover</span></summary>
+    <p class="intro">It is too early for lunch now, but all three are on your way back to Corralejo after the sunset, so they are perfect for dinner.</p>
+    <div class="places">
+      <details class="place"><summary><span class="pn">Manduca</span><span class="ps">Homestyle local cooking</span></summary><div class="place-body"><figure class="slot" data-photo="manduca"><span>Photo of Manduca</span></figure><p>Homestyle local cooking with km-zero produce and traditional calderos (stews).</p><span class="hrs">Tue&ndash;Sun 12:00&ndash;23:00 &middot; closed Mon &middot; C. Francisco Bord&oacute;n M&eacute;ndez 57</span><span class="linkrow"><a href="https://www.google.com/maps/search/?api=1&amp;query=Restaurante+Manduca+Villaverde+Fuerteventura" target="_blank" rel="noopener">Open in Maps &#8599;</a></span></div></details>
+      <details class="place"><summary><span class="pn">El Horno</span><span class="ps">Wood-oven Canarian cooking</span></summary><div class="place-body"><figure class="slot" data-photo="el-horno"><span>Photo of El Horno</span></figure><p>Canarian cooking, known for goat roasted in a wood oven.</p><span class="hrs">Fri&ndash;Tue 12:30&ndash;23:00 &middot; closed Wed &amp; Thu &middot; Carretera General 44</span><span class="linkrow"><a href="https://www.google.com/maps/search/?api=1&amp;query=Restaurante+El+Horno+Villaverde+Fuerteventura" target="_blank" rel="noopener">Open in Maps &#8599;</a><a href="https://elhornofuerteventura.es/" target="_blank" rel="noopener">Website &#8599;</a></span></div></details>
+      <details class="place"><summary><span class="pn">Mahoh</span><span class="ps">Rural house, majorero recipes</span></summary><div class="place-body"><figure class="slot" data-photo="mahoh"><span>Photo of Mahoh</span></figure><p>Traditional majorero recipes in a 19th-century rural house with gardens. Book ahead, especially at weekends.</p><span class="hrs">Wed&ndash;Sat 13:00&ndash;16:00 &amp; 19:00&ndash;23:00 &middot; Sun 13:00&ndash;22:00 &middot; closed Mon &amp; Tue &middot; +34 661 38 80 66</span><span class="linkrow"><a href="https://www.google.com/maps/search/?api=1&amp;query=Restaurante+Mahoh+Villaverde+Fuerteventura" target="_blank" rel="noopener">Open in Maps &#8599;</a><a href="https://mahoh.com/restaurante-tradicional-canario-fuerteventura/" target="_blank" rel="noopener">Website &#8599;</a></span></div></details>
+    </div>
+  </details>
+  <div class="visit-row"><button class="visit-btn" type="button" data-visit="1" aria-pressed="false"><svg class="vb-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path class="vb-tick" d="M7.6 12.4l3 3 5.8-6.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="vb-l">Mark as visited</span></button></div>
+  <p class="next-drive"><svg viewBox="0 0 44 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 14c10-10 22 6 38-4"/><path d="M34 6l6 4-6 3"/></svg>5 minutes to <a href="#stop-2">La Oliva</a></p>
+</article>
+
+<!-- ============ STOP 2 ============ -->
+<article class="stop" id="stop-2" data-stop="2" data-name="La Oliva">
+  <div class="stop-head">
+    <span class="bignum">2</span>
+    <span class="eyebrow">Stop 2 of 5 &middot; 45 minutes</span>
+    <h2>La Oliva</h2>
+  </div>
+  <p class="tagline">The house of the colonels.</p>
+  <figure class="shot" data-photo="stop-2"><div class="shot-frame"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="ph-sky" width="100" height="100"/><path class="ph-ground" d="M0 78h100v22H0z"/><path class="ph-fill" d="M14 78V44h12v-6h4v4h4v-4h4v6h24v-6h4v4h4v-4h4v6h12v34z"/><path class="ph-ink" d="M22 56h8M38 56h8M54 56h8M70 56h8M46 78V66h8v12"/></svg><span class="shot-note">Photo coming soon</span></div><figcaption>Casa de los Coroneles</figcaption></figure>
+  <div class="listen" hidden data-audio="audio/la-oliva.mp3" data-marks='[{"sel":"h2","i":0,"t":0.0},{"sel":".tagline","i":0,"t":2.94},{"sel":".todo h3","i":0,"t":5.09},{"sel":".td-panel h4","i":0,"t":6.85},{"sel":".td-panel h4","i":1,"t":17.35},{"sel":".td-panel h4","i":2,"t":30.69},{"sel":".td-panel h4","i":3,"t":39.9},{"sel":".story p","i":0,"t":49.31},{"sel":".story p","i":1,"t":59.16}]'>
+    <button class="listen-btn" type="button" aria-pressed="false" aria-label="Listen to this stop" id="listen-2"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <div class="listen-txt"><span class="label">Listen to this stop</span><span class="mono js-listen-meta">1:06 &middot; narrated</span><span class="listen-prog" aria-hidden="true"><i></i></span></div>
+    <button class="listen-stop" type="button" hidden>Stop</button>
+  </div>
+  <a class="nav-pin" href="https://www.google.com/maps/dir/?api=1&amp;destination=Casa+de+los+Coroneles%2C+La+Oliva%2C+Fuerteventura" target="_blank" rel="noopener" aria-label="Navigate to La Oliva in Google Maps"><span class="np-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7-7.1-7-12.2A7 7 0 0112 3a7 7 0 017 6.8C19 14.9 12 22 12 22z" fill="currentColor"/><circle cx="12" cy="9.8" r="2.6" fill="#fff"/></svg></span><span>Navigate here</span></a>
+  <div class="todo">
+    <h3>What to do here <span class="td-count">4 things &middot; tap a number</span></h3>
+    <div class="td-tabs" role="tablist" aria-label="What to do at La Oliva"><button class="td-tab" type="button" role="tab" id="t2-1" aria-controls="p2-1" aria-selected="true" tabindex="0">1</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t2-2" aria-controls="p2-2" aria-selected="false" tabindex="-1">2</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t2-3" aria-controls="p2-3" aria-selected="false" tabindex="-1">3</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t2-4" aria-controls="p2-4" aria-selected="false" tabindex="-1">4</button></div>
+    <div class="td-panels">
+      <div class="td-panel" role="tabpanel" id="p2-1" aria-labelledby="t2-1"><h4>Start at the church</h4><figure class="td-photo" data-photo="p2-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Iglesia de Nuestra Se&ntilde;ora de la Candelaria. Look closely at its white walls and volcanic stone details.</p><span class="td-meta">Free &middot; daily 9:00&ndash;20:00</span><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Iglesia+de+Nuestra+Se%C3%B1ora+de+la+Candelaria+La+Oliva" target="_blank" rel="noopener">Iglesia de la Candelaria &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p2-2" aria-labelledby="t2-2" hidden><h4>Visit the Casa de los Coroneles</h4><figure class="td-photo" data-photo="p2-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>The colonels' mansion: two crenellated towers, eight carved wooden balconies, and the Cabrera coat of arms above the main door. Go up for the view over the volcanic mountains.</p><span class="td-meta">Tue&ndash;Sat 10:00&ndash;18:00 &middot; small entry fee</span><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+de+los+Coroneles+La+Oliva" target="_blank" rel="noopener">Casa de los Coroneles &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p2-3" aria-labelledby="t2-3" hidden><h4>If it is Tuesday or Friday</h4><figure class="td-photo" data-photo="p2-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>A small craft market runs outside the Casa, with local produce, mojos, jams and handmade things.</p><span class="td-meta">10:00&ndash;14:00</span></div>
+      <div class="td-panel" role="tabpanel" id="p2-4" aria-labelledby="t2-4" hidden><h4>If you have more time</h4><figure class="td-photo" data-photo="p2-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Casa Man&eacute;, the Canarian art centre with a cactus and sculpture garden, and Casa de la Cilla, the old grain barn that ties back to the windmills of stop 1.</p><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Centro+de+Arte+Canario+Casa+Man%C3%A9+La+Oliva" target="_blank" rel="noopener">Casa Man&eacute; &#8599;</a><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+de+la+Cilla+La+Oliva" target="_blank" rel="noopener">Casa de la Cilla &#8599;</a></div>
+    </div>
+  </div>
+  <div class="story">
+    <p>For two centuries the island was run from this village by the Coroneles de Milicias, military colonels of the Cabrera family who held both the land and the power. Their 18th-century mansion has two crenellated towers and a row of eight carved wooden balconies across its front.</p>
+    <p>After years as a barracks and a long restoration, the house was reopened by the King and Queen of Spain in 2006. A short walk away stands the church of Nuestra Se&ntilde;ora de la Candelaria, built after the parish was founded in 1708 and one of the largest on the island.</p>
+  </div>
+  <div class="visit-row"><button class="visit-btn" type="button" data-visit="2" aria-pressed="false"><svg class="vb-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path class="vb-tick" d="M7.6 12.4l3 3 5.8-6.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="vb-l">Mark as visited</span></button></div>
+  <p class="next-drive"><svg viewBox="0 0 44 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 14c10-10 22 6 38-4"/><path d="M34 6l6 4-6 3"/></svg>25 minutes south to <a href="#stop-3">Tef&iacute;a</a></p>
+</article>
+
+<!-- ============ STOP 3 ============ -->
+<article class="stop" id="stop-3" data-stop="3" data-name="Tef&iacute;a">
+  <div class="stop-head">
+    <span class="bignum">3</span>
+    <span class="eyebrow">Stop 3 of 5 &middot; 45 minutes</span>
+    <h2>Tef&iacute;a</h2>
+  </div>
+  <p class="tagline">A quiet village with a long memory.</p>
+  <figure class="shot" data-photo="stop-3"><div class="shot-frame"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="ph-sky" width="100" height="100"/><path class="ph-ground" d="M0 68l18-10 16 6 22-16 20 12 24-6v46H0z"/><path class="ph-fill" d="M44 80l2-26h8l2 26z"/><path class="ph-ink" d="M50 54l12-12M50 54l-12-12M50 54l12 12M50 54l-12 12"/></svg><span class="shot-note">Photo coming soon</span></div><figcaption>Molino de Tef&iacute;a</figcaption></figure>
+  <div class="listen" hidden data-audio="audio/tefia.mp3" data-marks='[{"sel":"h2","i":0,"t":0.0},{"sel":".tagline","i":0,"t":2.79},{"sel":".todo h3","i":0,"t":5.47},{"sel":".td-panel h4","i":0,"t":7.23},{"sel":".td-panel h4","i":1,"t":15.37},{"sel":".td-panel h4","i":2,"t":22.6},{"sel":".td-panel h4","i":3,"t":33.46},{"sel":".story p","i":0,"t":47.39},{"sel":".story p","i":1,"t":57.64}]'>
+    <button class="listen-btn" type="button" aria-pressed="false" aria-label="Listen to this stop" id="listen-3"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <div class="listen-txt"><span class="label">Listen to this stop</span><span class="mono js-listen-meta">1:06 &middot; narrated</span><span class="listen-prog" aria-hidden="true"><i></i></span></div>
+    <button class="listen-stop" type="button" hidden>Stop</button>
+  </div>
+  <a class="nav-pin" href="https://www.google.com/maps/dir/?api=1&amp;destination=Molino+de+Tef%C3%ADa%2C+Fuerteventura" target="_blank" rel="noopener" aria-label="Navigate to Tef&iacute;a in Google Maps"><span class="np-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7-7.1-7-12.2A7 7 0 0112 3a7 7 0 017 6.8C19 14.9 12 22 12 22z" fill="currentColor"/><circle cx="12" cy="9.8" r="2.6" fill="#fff"/></svg></span><span>Navigate here</span></a>
+  <div class="todo">
+    <h3>What to do here <span class="td-count">4 things &middot; tap a number</span></h3>
+    <div class="td-tabs" role="tablist" aria-label="What to do at Tef&iacute;a"><button class="td-tab" type="button" role="tab" id="t3-1" aria-controls="p3-1" aria-selected="true" tabindex="0">1</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t3-2" aria-controls="p3-2" aria-selected="false" tabindex="-1">2</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t3-3" aria-controls="p3-3" aria-selected="false" tabindex="-1">3</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t3-4" aria-controls="p3-4" aria-selected="false" tabindex="-1">4</button></div>
+    <div class="td-panels">
+      <div class="td-panel" role="tabpanel" id="p3-1" aria-labelledby="t3-1"><h4>See the restored windmill</h4><figure class="td-photo" data-photo="p3-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>It stands alone against the volcanic hills and is at its best in warm afternoon light.</p><span class="td-meta">Free</span><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Molino+de+Tef%C3%ADa+Fuerteventura" target="_blank" rel="noopener">Molino de Tef&iacute;a &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p3-2" aria-labelledby="t3-2" hidden><h4>Look into the chapel of San Agust&iacute;n</h4><figure class="td-photo" data-photo="p3-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>An 18th-century ermita and the heart of the village. At the end of August the whole place gathers here for the fiesta.</p><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Iglesia+de+San+Agust%C3%ADn+Tef%C3%ADa+Fuerteventura" target="_blank" rel="noopener">Iglesia de San Agust&iacute;n &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p3-3" aria-labelledby="t3-3" hidden><h4>Stop the car and listen</h4><figure class="td-photo" data-photo="p3-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>This is one of the emptiest parts of the island. Look at the single-storey majorero houses with flat roofs, built to catch the rain.</p></div>
+      <div class="td-panel" role="tabpanel" id="p3-4" aria-labelledby="t3-4" hidden><h4>From the road, the old colony</h4><figure class="td-photo" data-photo="p3-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>The buildings of the island's old airfield held a penal labour colony from the 1950s until 1966. It is a hostel now and private property, so view it from the road.</p></div>
+    </div>
+  </div>
+  <div class="story">
+    <p>Tef&iacute;a sits in the open middle of the island, surrounded by bare volcanic hills. Its small 18th-century chapel of San Agust&iacute;n and its restored windmill are the heart of the village, and every year at the end of August the whole place gathers for the saint's fiesta.</p>
+    <p>The village also carries a harder story. From the 1950s until 1966, the buildings of the island's old airfield here held a penal labour colony under Franco's dictatorship. Many of the men sent there were imprisoned for being gay. The site is now a hostel, and the story was told in the 2023 Spanish series <em>Las noches de Tef&iacute;a</em>.</p>
+  </div>
+  <div class="visit-row"><button class="visit-btn" type="button" data-visit="3" aria-pressed="false"><svg class="vb-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path class="vb-tick" d="M7.6 12.4l3 3 5.8-6.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="vb-l">Mark as visited</span></button></div>
+  <p class="next-drive"><svg viewBox="0 0 44 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 14c10-10 22 6 38-4"/><path d="M34 6l6 4-6 3"/></svg>3 minutes to the <a href="#stop-4">Ecomuseo</a></p>
+</article>
+
+<!-- ============ STOP 4 ============ -->
+<article class="stop" id="stop-4" data-stop="4" data-name="Ecomuseo">
+  <div class="stop-head">
+    <span class="bignum">4</span>
+    <span class="eyebrow">Stop 4 of 5 &middot; 1.5 hours</span>
+    <h2>Ecomuseo de La Alcogida</h2>
+  </div>
+  <p class="tagline">Seven houses, one way of life, <span class="since">from the 1800s</span>.</p>
+  <figure class="shot" data-photo="stop-4"><div class="shot-frame"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="ph-sky" width="100" height="100"/><path class="ph-ground" d="M0 74h100v26H0z"/><path class="ph-fill" d="M14 74V52h34v22zM52 74V44h34v30z"/><path class="ph-ink" d="M52 44l17-10 17 10M26 74V64h8v10M64 74V62h8v12M58 54h6M74 54h6"/><path class="ph-olive" d="M90 74q2-14 0-20q-3 8-6 4q2 8 6 16z"/></svg><span class="shot-note">Photo coming soon</span></div><figcaption>a majorero farmhouse</figcaption></figure>
+  <div class="listen" hidden data-audio="audio/ecomuseo.mp3" data-marks='[{"sel":"h2","i":0,"t":0.0},{"sel":".tagline","i":0,"t":4.36},{"sel":".todo h3","i":0,"t":8.67},{"sel":".td-panel h4","i":0,"t":10.43},{"sel":".td-panel h4","i":1,"t":19.42},{"sel":".td-panel h4","i":2,"t":27.19},{"sel":".td-panel h4","i":3,"t":36.5},{"sel":".story p","i":0,"t":44.68},{"sel":".story p","i":1,"t":52.6}]'>
+    <button class="listen-btn" type="button" aria-pressed="false" aria-label="Listen to this stop" id="listen-4"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <div class="listen-txt"><span class="label">Listen to this stop</span><span class="mono js-listen-meta">1:00 &middot; narrated</span><span class="listen-prog" aria-hidden="true"><i></i></span></div>
+    <button class="listen-stop" type="button" hidden>Stop</button>
+  </div>
+  <a class="nav-pin" href="https://www.google.com/maps/dir/?api=1&amp;destination=Ecomuseo+de+La+Alcogida%2C+Tef%C3%ADa%2C+Fuerteventura" target="_blank" rel="noopener" aria-label="Navigate to Ecomuseo de La Alcogida in Google Maps"><span class="np-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7-7.1-7-12.2A7 7 0 0112 3a7 7 0 017 6.8C19 14.9 12 22 12 22z" fill="currentColor"/><circle cx="12" cy="9.8" r="2.6" fill="#fff"/></svg></span><span>Navigate here</span></a>
+  <div class="todo">
+    <h3>What to do here <span class="td-count">4 things &middot; tap a number</span></h3>
+    <div class="td-tabs" role="tablist" aria-label="What to do at Ecomuseo"><button class="td-tab" type="button" role="tab" id="t4-1" aria-controls="p4-1" aria-selected="true" tabindex="0">1</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t4-2" aria-controls="p4-2" aria-selected="false" tabindex="-1">2</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t4-3" aria-controls="p4-3" aria-selected="false" tabindex="-1">3</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t4-4" aria-controls="p4-4" aria-selected="false" tabindex="-1">4</button></div>
+    <div class="td-panels">
+      <div class="td-panel" role="tabpanel" id="p4-1" aria-labelledby="t4-1"><h4>Walk through the seven houses</h4><figure class="td-photo" data-photo="p4-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>They run from a simple farmworker's home to a two-storey house with a wooden balcony and a tiled roof, and show how islanders lived until a few decades ago.</p><span class="td-meta">Tue&ndash;Sat 10:00&ndash;16:00 &middot; &euro;5 adults, children free</span><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Ecomuseo+de+La+Alcogida+Tef%C3%ADa" target="_blank" rel="noopener">Ecomuseo de La Alcogida &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p4-2" aria-labelledby="t4-2" hidden><h4>Watch the artisans at work</h4><figure class="td-photo" data-photo="p4-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Local craftspeople weave and make baskets and lace in some of the houses, and you can talk to them while they work.</p></div>
+      <div class="td-panel" role="tabpanel" id="p4-3" aria-labelledby="t4-3" hidden><h4>Find the bread ovens and hand mills</h4><figure class="td-photo" data-photo="p4-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Together with the threshing floor, they are the last link in the gofio story that began at stop 1.</p></div>
+      <div class="td-panel" role="tabpanel" id="p4-4" aria-labelledby="t4-4" hidden><h4>Ask about the guided walk</h4><figure class="td-photo" data-photo="p4-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Visitors report free tours of about an hour and a half, in Spanish, English and German.</p></div>
+    </div>
+  </div>
+  <div class="story">
+    <p>The museum takes its name from the alcogidas, the slopes islanders shaped to gather every drop of rain into their fields and cisterns. Seven restored houses show how people lived here from the 19th century until just a few decades ago, from a simple farmworker's home to a two-storey house with a balcony and tiled roof.</p>
+    <p>It is a living museum. Local artisans work in some of the houses, weaving, making baskets and lace, and you will meet goats, donkeys and camels among the palms, prickly pears and tabaibas.</p>
+  </div>
+  <div class="visit-row"><button class="visit-btn" type="button" data-visit="4" aria-pressed="false"><svg class="vb-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path class="vb-tick" d="M7.6 12.4l3 3 5.8-6.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="vb-l">Mark as visited</span></button></div>
+  <p class="next-drive"><svg viewBox="0 0 44 22" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><path d="M2 14c10-10 22 6 38-4"/><path d="M34 6l6 4-6 3"/></svg>15 minutes west to <a href="#stop-5">the sea</a></p>
+</article>
+
+<!-- ============ STOP 5 ============ -->
+<article class="stop" id="stop-5" data-stop="5" data-name="Los Molinos">
+  <div class="stop-head">
+    <span class="bignum">5</span>
+    <span class="eyebrow">Stop 5 of 5 &middot; until sunset</span>
+    <h2>Puertito de los Molinos</h2>
+  </div>
+  <p class="tagline">Small fishing village and magical sunsets.</p>
+  <figure class="shot" data-photo="stop-5"><div class="shot-frame"><svg viewBox="0 0 100 100" aria-hidden="true"><rect class="ph-sky" width="100" height="100"/><circle class="ph-sun" cx="50" cy="60" r="14"/><path class="ph-sea" d="M0 62h100v38H0z"/><path class="ph-ink" d="M20 72h14M58 78h18M36 86h20"/><path class="ph-ground" d="M0 40l14 4 8 20H0zM100 36l-16 8-6 20h22z"/></svg><span class="shot-note">Photo coming soon</span></div><figcaption>sunset from the cliffs</figcaption></figure>
+  <div class="listen" hidden data-audio="audio/los-molinos.mp3" data-marks='[{"sel":"h2","i":0,"t":0.0},{"sel":".tagline","i":0,"t":4.01},{"sel":".todo h3","i":0,"t":7.41},{"sel":".td-panel h4","i":0,"t":9.16},{"sel":".td-panel h4","i":1,"t":16.71},{"sel":".td-panel h4","i":2,"t":24.93},{"sel":".td-panel h4","i":3,"t":36.45},{"sel":".story p","i":0,"t":43.55},{"sel":".story p","i":1,"t":53.0}]'>
+    <button class="listen-btn" type="button" aria-pressed="false" aria-label="Listen to this stop" id="listen-5"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg></button>
+    <div class="listen-txt"><span class="label">Listen to this stop</span><span class="mono js-listen-meta">1:01 &middot; narrated</span><span class="listen-prog" aria-hidden="true"><i></i></span></div>
+    <button class="listen-stop" type="button" hidden>Stop</button>
+  </div>
+  <a class="nav-pin" href="https://www.google.com/maps/dir/?api=1&amp;destination=Puertito+de+los+Molinos%2C+Fuerteventura" target="_blank" rel="noopener" aria-label="Navigate to Puertito de los Molinos in Google Maps"><span class="np-ic"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 22s-7-7.1-7-12.2A7 7 0 0112 3a7 7 0 017 6.8C19 14.9 12 22 12 22z" fill="currentColor"/><circle cx="12" cy="9.8" r="2.6" fill="#fff"/></svg></span><span>Navigate here</span></a>
+  <div class="todo">
+    <h3>What to do here <span class="td-count">4 things &middot; tap a number</span></h3>
+    <div class="td-tabs" role="tablist" aria-label="What to do at Los Molinos"><button class="td-tab" type="button" role="tab" id="t5-1" aria-controls="p5-1" aria-selected="true" tabindex="0">1</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t5-2" aria-controls="p5-2" aria-selected="false" tabindex="-1">2</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t5-3" aria-controls="p5-3" aria-selected="false" tabindex="-1">3</button><span class="td-arrow" aria-hidden="true"></span><button class="td-tab" type="button" role="tab" id="t5-4" aria-controls="p5-4" aria-selected="false" tabindex="-1">4</button></div>
+    <div class="td-panels">
+      <div class="td-panel" role="tabpanel" id="p5-1" aria-labelledby="t5-1"><h4>Climb the steps on the left of the village</h4><figure class="td-photo" data-photo="p5-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>They lead up to the cliff edge and the best view over the ocean and the waves.</p><span class="td-meta">Free &middot; 20 min</span><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Puertito+de+los+Molinos+Fuerteventura" target="_blank" rel="noopener">Puertito de los Molinos &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p5-2" aria-labelledby="t5-2" hidden><h4>Have a late lunch by the water</h4><figure class="td-photo" data-photo="p5-2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Casa Pon is known for its seafood, and the bar El Puertito serves tapas.</p><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Casa+Pon+Puertito+de+los+Molinos" target="_blank" rel="noopener">Casa Pon &#8599;</a><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Bar+Restaurante+El+Puertito+Los+Molinos+Fuerteventura" target="_blank" rel="noopener">El Puertito &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p5-3" aria-labelledby="t5-3" hidden><h4>Walk down to the beach</h4><figure class="td-photo" data-photo="p5-3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Black stones in winter, covered in sand in the calmer summer months, with a small duck pond behind it. The sea is rough here, so swimming is not advised.</p><a class="td-link" href="https://www.google.com/maps/search/?api=1&amp;query=Playa+de+los+Molinos+Fuerteventura" target="_blank" rel="noopener">Playa de los Molinos &#8599;</a></div>
+      <div class="td-panel" role="tabpanel" id="p5-4" aria-labelledby="t5-4" hidden><h4>Stay for the sunset</h4><figure class="td-photo" data-photo="p5-4"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="18" rx="2"/><circle cx="8.5" cy="10" r="2.5"/><path d="M22 16l-5-5L5 21"/></svg><span>Your photo</span></figure><p>Arrive about an hour before and check today's sunset time on your phone. In September and October the big Mareas del Pino tides can reveal a sea cave at low tide, so check the tide table and never get cut off.</p></div>
+    </div>
+  </div>
+  <div class="story">
+    <p>Fewer than twenty people live in this fishing hamlet at the mouth of the Barranco de los Molinos. The ravine was carved by a river that is now only a stream, and it opens onto a small beach of black stones, covered in sand in the calmer summer months, with high cliffs on both sides.</p>
+    <p>It is a place to slow down after a full day: a drink by the water, a walk up to the cliffs, and the sun going down over the Atlantic.</p>
+  </div>
+  <div class="visit-row"><button class="visit-btn" type="button" data-visit="5" aria-pressed="false"><svg class="vb-ic" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9.2" fill="none" stroke="currentColor" stroke-width="1.8"/><path class="vb-tick" d="M7.6 12.4l3 3 5.8-6.2" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg><span class="vb-l">Mark as visited</span></button></div>
+</article>
+
+<div id="end">
+<section id="plan">
+  <h2 class="sec-h">Planning notes</h2>
+  <div class="notice" style="margin-top:24px">
+    <h3>In the bag</h3>
+    <ul class="pack">
+      <li>Water &amp; snacks</li><li>Sun hat &amp; sunscreen</li><li>A light jacket for the wind</li><li>Cash for small shops</li><li>Phone charger for the car</li><li>Walking shoes for the cliffs</li>
+    </ul>
+  </div>
+  <div class="note-card">
+    <span class="label">A note on timings</span>
+    Opening hours and prices were checked for this guide but can change, especially on public holidays. Tap Navigate on each stop to open turn-by-turn directions in your maps app.
+  </div>
+  <div class="dl-row js-dl-row" hidden style="padding-top:18px">
+    <button class="btn dl js-dl" type="button" id="dl-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF for offline</button>
+    <span class="dl-status js-dl-status"></span>
+  </div>
+</section>
+
+<footer>
+  <svg class="footer-scene" viewBox="0 0 400 110" aria-hidden="true">
+    <g fill="none" stroke="#172B4D" stroke-width="1.3" stroke-linecap="round">
+      <path d="M0 74h400"/>
+      <path d="M10 86q10-6 20 0t20 0M160 96q10-6 20 0t20 0M300 88q10-6 20 0t20 0"/>
+      <circle cx="370" cy="34" r="14"/><path d="M370 12v-6M348 34h-6M352 18l-4-4M388 18l4-4"/>
+    </g>
+    <use href="#i-volcano" x="0" y="22" width="110" height="54"/>
+    <use href="#i-palm" x="250" y="2" width="52" height="76"/>
+    <use href="#i-palm" x="290" y="18" width="40" height="60"/>
+    <use href="#i-donkey" x="130" y="22" width="66" height="54"/>
+    <use href="#i-fish" x="60" y="88" width="34" height="17"/>
+    <use href="#i-fish" x="232" y="90" width="28" height="14"/>
+  </svg>
+  <p class="brand-line">Take the scenic route.<br>Discover the stories along the way.</p>
+  <p class="footer-brand">&copy; 2026 Worldwide Itineraries &middot; Fuerteventura</p>
+</footer>
+</div>
+</div>
+
+<nav class="navbar" id="navbar" aria-label="The five stops">
+  <div class="nb-progress" aria-hidden="true"><span class="nb-dot" style="left:0%"></span><span class="nb-dot" style="left:25%"></span><span class="nb-dot" style="left:50%"></span><span class="nb-dot" style="left:75%"></span><span class="nb-dot" style="left:100%"></span></div>
+  <a class="nb-item" href="#stop-1" data-n="1" aria-label="Stop 1, Villaverde"><span class="nb-ic"><svg viewBox="0 0 60 70" aria-hidden="true"><use href="#i-windmill"/></svg></span><span class="nb-tick" aria-hidden="true">&#10003;</span><span class="nb-l">Villaverde</span></a>
+  <a class="nb-item" href="#stop-2" data-n="2" aria-label="Stop 2, La Oliva"><span class="nb-ic"><svg viewBox="0 0 70 70" aria-hidden="true"><use href="#i-church"/></svg></span><span class="nb-tick" aria-hidden="true">&#10003;</span><span class="nb-l">La Oliva</span></a>
+  <a class="nb-item" href="#stop-3" data-n="3" aria-label="Stop 3, Tef&iacute;a"><span class="nb-ic"><svg viewBox="0 0 130 64" aria-hidden="true"><use href="#i-volcano"/></svg></span><span class="nb-tick" aria-hidden="true">&#10003;</span><span class="nb-l">Tef&iacute;a</span></a>
+  <a class="nb-item" href="#stop-4" data-n="4" aria-label="Stop 4, Ecomuseo"><span class="nb-ic"><svg viewBox="0 0 100 70" aria-hidden="true"><use href="#i-house"/></svg></span><span class="nb-tick" aria-hidden="true">&#10003;</span><span class="nb-l">Ecomuseo</span></a>
+  <a class="nb-item" href="#stop-5" data-n="5" aria-label="Stop 5, Los Molinos"><span class="nb-ic"><svg viewBox="0 0 60 30" aria-hidden="true"><use href="#i-fish"/></svg></span><span class="nb-tick" aria-hidden="true">&#10003;</span><span class="nb-l">Los Molinos</span></a>
+</nav>
+
+<script>
+/* ---------- PDF info tip ---------- */
+(function(){var b=document.getElementById('dl-info'),t=document.getElementById('dl-tip');if(!b||!t)return;
+  b.addEventListener('click',function(){var o=t.hidden;t.hidden=!o;b.setAttribute('aria-expanded',o);if(o){var br=b.getBoundingClientRect(),tr=t.getBoundingClientRect();t.style.setProperty('--ax',Math.max(10,Math.min(tr.width-22,br.left+br.width/2-tr.left-6))+'px');}});})();
+
+/* ---------- what-to-do tabs ---------- */
+(function(){
+  [].slice.call(document.querySelectorAll('.td-tabs')).forEach(function(bar){
+    var tabs=[].slice.call(bar.querySelectorAll('.td-tab'));
+    function show(i){
+      tabs.forEach(function(t,k){
+        var on=k===i;
+        t.setAttribute('aria-selected',on?'true':'false');
+        t.tabIndex=on?0:-1;
+        var panel=document.getElementById(t.getAttribute('aria-controls'));
+        if(panel)panel.hidden=!on;
+      });
+    }
+    tabs.forEach(function(t,i){
+      t.addEventListener('click',function(){show(i);});
+      t.addEventListener('keydown',function(e){
+        var d=e.key==='ArrowRight'?1:e.key==='ArrowLeft'?-1:0;
+        if(!d)return;e.preventDefault();
+        var n=(i+d+tabs.length)%tabs.length;show(n);tabs[n].focus();
+      });
+    });
+  });
+})();
+
+/* ---------- visited stops, kept on this phone ---------- */
+(function(){
+  var KEY='wi-fuerte-visited',v={};
+  try{v=JSON.parse(localStorage.getItem(KEY)||'{}')||{};}catch(e){v={};}
+  var btns=[].slice.call(document.querySelectorAll('.visit-btn'));
+  function paint(){
+    btns.forEach(function(b){
+      var on=!!v[b.dataset.visit];
+      b.setAttribute('aria-pressed',on);
+      b.querySelector('.vb-l').textContent=on?'Visited':'Mark as visited';
+      var it=document.querySelector('.nb-item[data-n="'+b.dataset.visit+'"]');
+      if(it)it.classList.toggle('visited',on);
+    });
+  }
+  btns.forEach(function(b){b.addEventListener('click',function(){
+    v[b.dataset.visit]=!v[b.dataset.visit];
+    try{localStorage.setItem(KEY,JSON.stringify(v));}catch(e){}
+    paint();
+  });});
+  paint();
+})();
+
+/* ---------- Bottom route bar: where you are, what is left ---------- */
+(function(){
+  var bar=document.getElementById('navbar');if(!bar)return;
+  var items=[].slice.call(bar.querySelectorAll('.nb-item'));
+  var stops=items.map(function(a){return document.getElementById('stop-'+a.dataset.n);});
+  var end=document.getElementById('end'),ticking=false;
+  function update(){
+    ticking=false;
+    var mid=window.innerHeight*0.45,cur=0;
+    stops.forEach(function(s,i){if(s&&s.getBoundingClientRect().top<=mid)cur=i+1;});
+    var past=end&&end.getBoundingClientRect().top<=mid;
+    items.forEach(function(a,i){
+      var n=i+1;
+      a.classList.toggle('done',past?true:n<cur);
+      a.classList.toggle('cur',!past&&n===cur);
+      if(!past&&n===cur)a.setAttribute('aria-current','step');else a.removeAttribute('aria-current');
+    });
+  }
+  window.addEventListener('scroll',function(){if(!ticking){ticking=true;requestAnimationFrame(update);}},{passive:true});
+  window.addEventListener('resize',update);
+  update();
+})();
+
+/* ---------- Listen: narrated audio per stop, highlighted as it plays ---------- */
+(function(){
+  var PLAY='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  var PAUSE='<svg viewBox="0 0 24 24" fill="currentColor"><path d="M7 5h4v14H7zM13 5h4v14h-4z"/></svg>';
+  var current=null;
+  function fmt(s){s=Math.max(0,Math.round(s));return Math.floor(s/60)+':'+('0'+s%60).slice(-2);}
+  [].slice.call(document.querySelectorAll('.listen[data-audio]')).forEach(function(box){
+    var stop=box.closest('.stop'),marks=[];
+    try{marks=JSON.parse(box.dataset.marks||'[]');}catch(e){}
+    marks.forEach(function(m){m.el=stop.querySelectorAll(m.sel)[m.i]||null;});
+    var audio=new Audio();audio.preload='metadata';audio.src=box.dataset.audio;
+    var btn=box.querySelector('.listen-btn'),stopBtn=box.querySelector('.listen-stop'),
+        lab=box.querySelector('.label'),meta=box.querySelector('.js-listen-meta'),bar=box.querySelector('.listen-prog i');
+    var lit=null;
+    function mark(el){if(lit===el)return;if(lit)lit.classList.remove('reading');lit=el;if(el)el.classList.add('reading');}
+    function ui(){
+      var playing=!audio.paused&&!audio.ended;
+      btn.innerHTML=playing?PAUSE:PLAY;btn.setAttribute('aria-pressed',playing);
+      btn.setAttribute('aria-label',playing?'Pause':'Listen to this stop');
+      var started=audio.currentTime>0&&!audio.ended;
+      lab.textContent=playing?'Listening…':started?'Paused':'Listen to this stop';
+      stopBtn.hidden=!started;
+    }
+    audio.addEventListener('loadedmetadata',function(){meta.textContent=fmt(audio.duration)+' · narrated';});
+    audio.addEventListener('timeupdate',function(){
+      var t=audio.currentTime,m=null;
+      for(var k=0;k<marks.length;k++){if(marks[k].t<=t+0.05)m=marks[k];}
+      mark(m&&m.el);
+      if(audio.duration)bar.style.width=(100*t/audio.duration)+'%';
+      meta.textContent=fmt(t)+' / '+fmt(audio.duration||0)+' · narrated';
+    });
+    audio.addEventListener('play',ui);audio.addEventListener('pause',ui);
+    audio.addEventListener('ended',function(){mark(null);audio.currentTime=0;bar.style.width='0%';ui();meta.textContent=fmt(audio.duration)+' · narrated';});
+    audio.addEventListener('error',function(){meta.textContent='Audio could not load. Check your connection.';});
+    btn.addEventListener('click',function(){
+      if(audio.paused){if(current&&current!==audio)current.pause();current=audio;
+        var p=audio.play();if(p&&p.catch)p.catch(function(){meta.textContent='Tap play again to start the audio.';});}
+      else audio.pause();
+    });
+    stopBtn.addEventListener('click',function(){audio.pause();audio.currentTime=0;mark(null);bar.style.width='0%';ui();});
+    box.querySelector('.listen-prog').addEventListener('click',function(e){
+      if(!audio.duration)return;var r=this.getBoundingClientRect();audio.currentTime=audio.duration*(e.clientX-r.left)/r.width;
+    });
+    box.hidden=false;
+  });
+})();
+
+/* ---------- Offline PDF: one page per chapter, built in the viewer's browser ---------- */
+(function(){
+  var SVGNS='http://www.w3.org/2000/svg';
+  var rows=[].slice.call(document.querySelectorAll('.js-dl-row'));
+  var btns=[].slice.call(document.querySelectorAll('.js-dl'));
+  var stats=[].slice.call(document.querySelectorAll('.js-dl-status'));
+  var downloads=null,busy=false;
+  if(window.claude&&typeof claude.use==='function'){
+    claude.use('downloads').then(function(d){downloads=d;if(d)rows.forEach(function(r){r.hidden=false;});}).catch(function(){});
+  }
+  function say(t){stats.forEach(function(s){s.textContent=t;});}
+  function load(src){return new Promise(function(res,rej){var s=document.createElement('script');s.src=src;s.onload=res;s.onerror=rej;document.head.appendChild(s);});}
+  var PROPS=['fill','fill-opacity','stroke','stroke-width','stroke-dasharray','stroke-linecap','stroke-linejoin','opacity','font-family','font-size','font-weight','text-anchor'];
+
+  function prepClone(doc,el){
+    if(el){var bcs=doc.defaultView.getComputedStyle(doc.body);['backgroundImage','backgroundSize','backgroundRepeat','backgroundPosition','backgroundColor'].forEach(function(k){el.style[k]=bcs[k];});el.style.paddingInline='16px';}
+    [].slice.call(doc.querySelectorAll('use')).forEach(function(u){
+      var id=(u.getAttribute('href')||u.getAttribute('xlink:href')||'').replace('#','');
+      var sym=doc.getElementById(id);if(!sym)return;
+      var s=doc.createElementNS(SVGNS,'svg');
+      s.setAttribute('viewBox',sym.getAttribute('viewBox'));
+      ['x','y','width','height'].forEach(function(a){if(u.hasAttribute(a))s.setAttribute(a,u.getAttribute(a));});
+      s.innerHTML=sym.innerHTML;
+      var node=s;
+      if(u.hasAttribute('transform')){var g=doc.createElementNS(SVGNS,'g');g.setAttribute('transform',u.getAttribute('transform'));g.appendChild(s);node=g;}
+      u.parentNode.replaceChild(node,u);
+    });
+    var win=doc.defaultView;
+    [].slice.call(doc.querySelectorAll('svg *')).forEach(function(el){
+      var cs=win.getComputedStyle(el);
+      el.setAttribute('style',PROPS.map(function(p){return p+':'+cs.getPropertyValue(p);}).join(';'));
+    });
+    [].slice.call(doc.querySelectorAll('details')).forEach(function(d){d.open=true;});
+    [].slice.call(doc.querySelectorAll('.td-panel')).forEach(function(p){p.hidden=false;});
+    [].slice.call(doc.querySelectorAll('.td-tabs')).forEach(function(b){b.style.display='none';});
+    [].slice.call(doc.querySelectorAll('.navbar,.js-dl-row,.listen,.visit-row')).forEach(function(e){e.style.display='none';});
+  }
+
+  async function build(){
+    if(busy||!downloads)return;busy=true;btns.forEach(function(b){b.disabled=true;});
+    try{
+      say('Preparing your PDF…');
+      if(!window.html2canvas)await load('https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js');
+      if(!window.jspdf)await load('https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js');
+      var parts=[document.getElementById('top'),document.getElementById('glance')].concat([].slice.call(document.querySelectorAll('.stop')),[document.getElementById('end')]);
+      var W=136,M=6,pdf=null;
+      for(var i=0;i<parts.length;i++){
+        say('Preparing your PDF… page '+(i+1)+' of '+parts.length);
+        var el=parts[i];
+        var canvas=await html2canvas(el,{scale:2,backgroundColor:'#F5F8FC',logging:false,onclone:prepClone});
+        var h=W*canvas.height/canvas.width,pw=W+2*M,ph=h+2*M,orient=pw>ph?'l':'p';
+        if(!pdf)pdf=new window.jspdf.jsPDF({unit:'mm',format:[pw,ph],orientation:orient});else pdf.addPage([pw,ph],orient);
+        pdf.setFillColor(245,248,252);pdf.rect(0,0,pw,ph,'F');
+        pdf.addImage(canvas.toDataURL('image/jpeg',0.88),'JPEG',M,M,W,h);
+        var er=el.getBoundingClientRect(),k=W/er.width;
+        [].slice.call(el.querySelectorAll('a[href^="http"]')).forEach(function(a){
+          var r=a.getBoundingClientRect();if(!r.width)return;
+          pdf.link(M+(r.left-er.left)*k,M+(r.top-er.top)*k,r.width*k,r.height*k,{url:a.href});
+        });
+      }
+      say('Almost done…');
+      await downloads.save({filename:'The-Rural-Heart-of-Fuerteventura.pdf',data:pdf.output('blob')});
+      say('Saved. You can open it any time, even without signal.');
+    }catch(e){
+      var c=e&&e.code;
+      if(c==='declined')say('Download cancelled.');
+      else if(c==='rate_limited')say('A save prompt is already open. Try again in a moment.');
+      else if(c==='unavailable'||c==='not_granted'){say('Downloads are not available in this view.');}
+      else say('The PDF could not be created here. Check your connection and try again.');
+    }finally{busy=false;btns.forEach(function(b){b.disabled=false;});}
+  }
+  btns.forEach(function(b){b.addEventListener('click',build);});
+})();
+</script>
 </body>
 </html>
+
+</body></html>
