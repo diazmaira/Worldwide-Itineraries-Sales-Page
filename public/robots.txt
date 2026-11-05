@@ -1,0 +1,8 @@
+# Pages that should not appear in search results (checkout, success, resend-access)
+# carry their own "noindex" tag, which search engines can only read if they may visit them.
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /media/
+
+Sitemap: https://worldwide-itineraries.vercel.app/sitemap.xml
