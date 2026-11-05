@@ -14,9 +14,12 @@ beforeEach(() => {
   globalThis.__stripe = { create: async (p) => { calls.push(p); return { url: 'https://checkout.stripe.test/s1' }; } };
 });
 
-async function post(body, { method = 'POST', headers = { host: 'fallback.example.com' } } = {}) {
+let visitor = 0;
+async function post(body, { method = 'POST', ip, headers = { host: 'fallback.example.com' } } = {}) {
   const { res, out } = makeRes();
-  await handler({ method, body, headers }, res);
+  // A different visitor per call, so the rate limit does not affect other tests.
+  const h = { ...headers, 'x-forwarded-for': ip || `10.0.0.${++visitor}` };
+  await handler({ method, body, headers: h, socket: {} }, res);
   return out;
 }
 
@@ -100,4 +103,20 @@ test('a Stripe error gives a generic 500 without internal details', async () => 
   const out = await post({ items: ['north'] });
   assert.equal(out.status, 500);
   assert.ok(!JSON.stringify(out.body).includes('secret'));
+});
+
+test('rate limit: the 16th request in an hour from one visitor gets 429', async () => {
+  let last;
+  for (let i = 0; i < 15; i++) {
+    last = await post({ items: ['north'] }, { ip: '203.0.113.9' });
+    assert.equal(last.status, 200);
+  }
+  last = await post({ items: ['north'] }, { ip: '203.0.113.9' });
+  assert.equal(last.status, 429);
+  assert.equal(calls.length, 15);
+});
+
+test('rate limit: another visitor is not affected', async () => {
+  const out = await post({ items: ['north'] }, { ip: '198.51.100.7' });
+  assert.equal(out.status, 200);
 });
