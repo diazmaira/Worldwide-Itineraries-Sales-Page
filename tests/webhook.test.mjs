@@ -131,3 +131,34 @@ test('a hostile customer name cannot inject HTML into the email', async () => {
   await post(event('checkout.session.completed', session({ customer_details: { email: 'a@b.com', name: '<img src=x onerror=alert(1)>' } })));
   assert.ok(!sent[0].body.html.includes('<img src=x'));
 });
+
+test('delayed payment: unpaid at checkout delivers nothing, then paid later delivers once', async () => {
+  const first = await post(event('checkout.session.completed', session({ payment_status: 'unpaid' })));
+  assert.equal(first.status, 200);
+  assert.equal(sent.length, 0);
+
+  const later = await post(event('checkout.session.async_payment_succeeded', session()));
+  assert.equal(later.status, 200);
+  assert.deepEqual(sent[0].body.to, ['ana@example.com']);
+  assert.equal(sent[0].headers['Idempotency-Key'], 'access-cs_test_1');
+  assert.equal(sent.length, 2); // welcome + scheduled review
+});
+
+test('delayed payment succeeded but not actually paid: nothing is delivered', async () => {
+  const out = await post(event('checkout.session.async_payment_succeeded', session({ payment_status: 'unpaid' })));
+  assert.equal(out.status, 200);
+  assert.equal(sent.length, 0);
+});
+
+test('delayed payment failed: acknowledged, logged, nothing delivered', async () => {
+  const out = await post(event('checkout.session.async_payment_failed', session({ payment_status: 'unpaid' })));
+  assert.equal(out.status, 200);
+  assert.equal(sent.length, 0);
+  assert.ok(logs.some((l) => l.includes('Delayed payment failed')));
+});
+
+test('delayed payment: a failed email still returns 500 so Stripe retries', async () => {
+  sent = stubResend({ fail: true });
+  const out = await post(event('checkout.session.async_payment_succeeded', session()));
+  assert.equal(out.status, 500);
+});
