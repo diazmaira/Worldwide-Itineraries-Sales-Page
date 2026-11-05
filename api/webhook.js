@@ -4,6 +4,8 @@ import { sendAccessEmail, scheduleReviewEmail } from './_email.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
+const DELIVER_ON = new Set(['checkout.session.completed', 'checkout.session.async_payment_succeeded']);
+
 // Stripe signs the raw request body, so the body must not be parsed.
 export const config = { api: { bodyParser: false } };
 
@@ -53,7 +55,16 @@ export default async function handler(req, res) {
     return res.status(400).send('Invalid signature');
   }
 
-  if (event.type === 'checkout.session.completed') {
+  // Card payments are confirmed in checkout.session.completed. Delayed methods
+  // (for example bank transfers) arrive unpaid there and are confirmed later in
+  // checkout.session.async_payment_succeeded. The payment_status check below makes
+  // sure only paid orders are delivered, and the email idempotency key means a
+  // repeated event never sends a second email.
+  if (event.type === 'checkout.session.async_payment_failed') {
+    console.error('Delayed payment failed', { sessionId: event.data.object.id });
+  }
+
+  if (DELIVER_ON.has(event.type)) {
     const session = event.data.object;
 
     if (session.payment_status === 'paid') {
