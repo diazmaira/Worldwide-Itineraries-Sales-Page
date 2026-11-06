@@ -37,21 +37,29 @@
   </details>
 </header>
 
+<div class="logo-bar"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Worldwide Itineraries, home">
+    <svg viewBox="0 0 52 44" width="52" height="44" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="33" cy="13" r="8"/><path d="M2 30c8-10 14-10 20-4s14 6 28-6"/><path d="M2 40c8-10 14-10 20-4s14 6 28-6"/></svg>
+    <span>Worldwide<br>Itineraries</span>
+  </a>
+</div></div>
+
 <main>
 
 <!-- Hero -->
-<section class="hero">
+<section class="hero" data-cta-ref>
   <div class="wrap">
     <div>
       <span class="tag">Self-guided itineraries</span>
       <h1>Discover places <span class="mark">beyond</span> the usual tourist routes.</h1>
-      <p class="sub">Carefully planned self-guided itineraries to explore beautiful landscapes, discover interesting places and travel at your own pace.</p>
+      <p class="sub sub-desktop">Carefully planned self-guided itineraries to explore beautiful landscapes, discover interesting places and travel at your own pace.</p>
+      <p class="sub sub-mobile">Self-guided itineraries to explore stunning landscapes, hidden gems and travel at your own pace.</p>
       <div class="actions">
         <a class="btn btn-lime" href="#destinations">Explore Destinations</a>
         <a class="btn" href="#itineraries">Discover Itineraries</a>
       </div>
     </div>
-    <div class="photo"><img src="images/hero.jpg" alt="Fuerteventura landscape" width="960" height="1200" onerror="this.remove()"></div>
+    <div class="hero-collage"><img src="/images/worldwide-itineraries-hero-collage.png" alt="Travel collage: windmill, turquoise coastline, volcanic landscape, compass and a map with a dotted route" onerror="this.parentNode.remove()"></div>
   </div>
 </section>
 
@@ -79,11 +87,12 @@
         </div>
       </article>
     </div>
+    <div class="section-cta" data-hide-cta><a class="btn" href="#itineraries">Discover Itineraries</a></div>
   </div>
 </section>
 
 <!-- Featured itineraries (price shown here is display only; the server decides the real price) -->
-<section class="section itineraries" id="itineraries">
+<section class="section itineraries" id="itineraries" data-hide-cta>
   <div class="wrap">
     <h2 class="section-title">Find Your Perfect Itinerary</h2>
     <p class="lead">Explore our itineraries and discover more of every destination, one stop at a time.</p>
@@ -347,5 +356,6 @@
     }
   });
 </script>
+<script src="cta-bar.js" defer></script>
 </body>
 </html>

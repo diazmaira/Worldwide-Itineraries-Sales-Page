@@ -33,3 +33,6 @@ Put these in public/images/ with exactly these names:
   inspiration-hidden-places.jpg, inspiration-landscapes.jpg, inspiration-villages.jpg,
   inspiration-scenic-routes.jpg, inspiration-culture.jpg, inspiration-tips.jpg (4:3),
   about.jpg (portrait 4:5; destination photo, no people needed)
+
+HERO COLLAGE (upload manually): public/images/worldwide-itineraries-hero-collage.png
+Referenced as /images/worldwide-itineraries-hero-collage.png. Keep the exact filename.
