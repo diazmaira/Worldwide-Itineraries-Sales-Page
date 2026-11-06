@@ -25,3 +25,11 @@ favicon.svg     The small icon of the browser tab (public/favicon.svg). A simple
                 placeholder is there now: replace the file with another SVG of the
                 same name. apple-touch-icon.png (180 x 180) is the phone home-screen
                 version and favicon.ico the old-browser version.
+
+HOMEPAGE PHOTOS (optional; the page shows coloured blocks until a file exists)
+Put these in public/images/ with exactly these names:
+  hero.jpg (portrait 4:5), fuerteventura.jpg, gran-canaria.jpg (4:3),
+  cover-north.jpg, cover-rural.jpg, cover-windmills.jpg (3:2),
+  inspiration-hidden-places.jpg, inspiration-landscapes.jpg, inspiration-villages.jpg,
+  inspiration-scenic-routes.jpg, inspiration-culture.jpg, inspiration-tips.jpg (4:3),
+  about.jpg (portrait 4:5; destination photo, no people needed)
