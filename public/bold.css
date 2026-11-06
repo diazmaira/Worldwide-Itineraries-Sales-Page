@@ -181,3 +181,21 @@
   }
   .page-head { background: var(--blue); color: var(--white); padding-block: clamp(48px, 7vw, 88px); }
   .page-head h1 { font-size: clamp(2.6rem, 7vw, 5rem); margin-top: 18px; }
+
+  /* ===== Hamburger menu: transparent, top corner ===== */
+  .site-header { position: fixed; top: 0; left: 0; right: 0; background: transparent; border: 0; z-index: 30; pointer-events: none; }
+  .site-header .wrap, .site-header .menu { pointer-events: auto; }
+  .menu { display: block; position: absolute; top: 14px; right: 16px; }
+  .menu summary { width: 52px; height: 52px; padding: 0; border: 0; background: transparent; display: grid; place-items: center; }
+  .bars, .bars::before, .bars::after { display: block; width: 28px; height: 4px; background: var(--white); border-radius: 2px; box-shadow: 0 0 0 2px var(--forest); }
+  .bars { position: relative; }
+  .bars::before, .bars::after { content: ""; position: absolute; left: 0; }
+  .bars::before { top: -9px; } .bars::after { top: 9px; }
+  .menu-panel { position: fixed; top: 74px; right: 16px; left: auto; width: min(320px, 100% - 32px); margin: 0; }
+  .menu-panel .panel-brand { font-family: var(--display); font-weight: 800; font-size: 1.3rem; color: var(--blue); }
+  .menu-panel .panel-cta { margin-top: 8px; background: var(--tangerine); border: var(--border); border-radius: 999px; text-align: center; }
+  .hero .wrap, .page-head .wrap { padding-top: 72px; }
+  .page-head { padding-top: 0; }
+  @media (min-width: 861px) {
+    .cta-bar { display: block; position: fixed; right: 24px; bottom: 24px; z-index: 20; }
+  }
