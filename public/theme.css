@@ -77,14 +77,14 @@
   .section-cta { margin-top: 48px; text-align: center; }
 
   /* ===== Hero ===== */
-  .hero { background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); overflow-x: clip; }
-  .hero .wrap { display: grid; grid-template-columns: 5fr 6fr; gap: 40px; align-items: center; padding-block: clamp(48px, 7vw, 88px); padding-top: 96px; }
-  .hero h1 { font-size: clamp(2.6rem, 6.4vw, 5rem); margin-top: 22px; }
+  .hero { background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); overflow-x: clip; min-height: 100vh; min-height: 100svh; display: flex; justify-content: center; }
+  .hero .wrap { width: min(1200px, 100% - 40px); margin-inline: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; padding-block: 0 40px; padding-top: 96px; }
+  .hero h1 { font-size: clamp(2.6rem, 5vw, 4.4rem); margin-top: 22px; }
   .mark { background: linear-gradient(transparent 58%, rgba(169, 201, 185, .75) 58%); font-style: italic; padding: 0 .08em; box-shadow: inset 0 -0.02em 0 transparent; }
   .hero p.sub { margin-top: 24px; max-width: 560px; font-size: 1.2rem; }
   .hero .actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 34px; }
   .sub-mobile { display: none; }
-  .hero-collage img { width: 100%; height: auto; }
+  .hero-collage img { width: 100%; height: auto; max-height: calc(100svh - 140px); object-fit: contain; }
   /* ===== Logo (scrolls away with the page; the hamburger stays fixed) ===== */
   .logo-bar { position: absolute; top: 0; left: 0; right: 0; z-index: 10; }
   .logo { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; color: var(--forest); text-decoration: none; font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1; letter-spacing: -0.02em; }
@@ -179,7 +179,16 @@
   }
   @media (max-width: 860px) {
     .hero .wrap, .why-head, .about .wrap, .contact .wrap { grid-template-columns: 1fr; gap: 32px; }
-    .hero-collage { margin-inline: -8px; }
+    /* One-screen hero: logo, text, buttons and collage all fit in the first viewport */
+    .hero .wrap { display: flex; flex-direction: column; align-items: stretch; gap: 14px; padding-top: 68px; padding-bottom: 16px; }
+    .hero h1 { font-size: clamp(1.9rem, 8.4vw, 2.6rem); margin-top: 12px; }
+    .hero p.sub { margin-top: 10px; font-size: 1rem; line-height: 1.5; }
+    .hero .actions { margin-top: 16px; gap: 10px; flex-wrap: nowrap; }
+    .hero .actions .btn { flex: 1; min-height: 46px; padding: 8px 10px; font-size: .95rem; text-align: center; }
+    .hero-collage { flex: 1; position: relative; min-height: 200px; margin-inline: -8px; }
+    .hero-collage { pointer-events: none; }
+    .hero .wrap > div:first-child { position: relative; z-index: 1; }
+    .hero-collage img { position: absolute; inset: 0; height: 100%; max-height: none; object-fit: contain; transform: scale(1.25); }
     .grid-2, .grid-3, .grid-4, .inspo { grid-template-columns: 1fr; }
     .steps { grid-template-columns: 1fr; }
     .arrow { transform: rotate(90deg); padding: 0; text-align: center; }
