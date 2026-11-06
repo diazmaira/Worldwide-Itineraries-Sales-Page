@@ -13,13 +13,13 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
 <style>
   :root {
-    --atlantic: #0A5C66;
-    --ochre: #F2B344;
-    --basalt: #1F2427;
+    --atlantic: #173F3A;
+    --ochre: #D96F55;
+    --basalt: #173F3A;
     --whitewash: #FFFFFF;
-    --mist: #EDF3F2;
-    --line: #B9C6C5;
-    --ink-soft: #4A5457;
+    --mist: #F7F1E7;
+    --line: #DCCFB8;
+    --ink-soft: #4A625D;
     --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
     --body: "Figtree", "Segoe UI", system-ui, sans-serif;
   }
@@ -27,7 +27,7 @@
   *, *::before, *::after { box-sizing: border-box; }
   body {
     margin: 0; font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
-    color: var(--basalt); background: var(--whitewash); -webkit-font-smoothing: antialiased;
+    color: var(--basalt); background: #F7F1E7; -webkit-font-smoothing: antialiased;
   }
   img { max-width: 100%; display: block; }
   h1, h2, h3 { font-family: var(--display); line-height: 1.1; letter-spacing: -0.02em; margin: 0; }
@@ -71,14 +71,14 @@
     display: grid; gap: 14px; background: var(--whitewash);
     transition: border-color .15s ease, background-color .15s ease;
   }
-  .card.added { border-color: var(--atlantic); background: #F4F9F9; box-shadow: inset 0 0 0 1px var(--atlantic); }
+  .card.added { border-color: var(--atlantic); background: #FBF8F2; box-shadow: inset 0 0 0 1px var(--atlantic); }
   .card .kicker { font-weight: 600; color: var(--ink-soft); font-size: .98rem; }
   .card h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); font-weight: 700; }
   .card .desc { color: var(--ink-soft); max-width: 60ch; }
   .suit .hint { font-weight: 600; font-size: .95rem; margin-bottom: 8px; }
   .chips { display: flex; flex-wrap: wrap; gap: 8px; }
   .chips li { background: var(--mist); border-radius: 999px; padding: 4px 14px; font-size: .95rem; font-weight: 500; }
-  .card.added .chips li { background: #DDECEC; }
+  .card.added .chips li { background: #E9D8C2; }
 
   .card-foot {
     display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
@@ -97,7 +97,7 @@
   .toggle:hover { background: var(--mist); }
   .toggle svg { width: 18px; height: 18px; display: none; }
   .toggle[aria-pressed="true"] { background: var(--atlantic); border-color: var(--atlantic); color: var(--whitewash); }
-  .toggle[aria-pressed="true"]:hover { background: #084B53; }
+  .toggle[aria-pressed="true"]:hover { background: #0F2F2B; }
   .toggle[aria-pressed="true"] svg { display: block; }
 
   /* Order summary */
@@ -116,11 +116,11 @@
   }
   .total strong { font-family: var(--display); font-size: 1.8rem; font-weight: 800; }
   .pay {
-    width: 100%; margin-top: 18px; background: var(--ochre); color: var(--basalt); border: 0;
-    border-radius: 999px; padding: 16px 24px; font-weight: 600; font-size: 1.0625rem;
+    width: 100%; margin-top: 18px; background: var(--ochre); color: #fff; border: 0;
+    border-radius: 999px; padding: 16px 24px; font-weight: 700; font-size: 1.125rem;
     transition: background-color .15s ease;
   }
-  .pay:hover:not(:disabled) { background: #F7C361; }
+  .pay:hover:not(:disabled) { background: #C45F46; }
   .pay:disabled { opacity: .55; cursor: default; }
   .note { margin-top: 14px; font-size: .92rem; color: var(--ink-soft); }
   .note + .note { margin-top: 8px; }
@@ -131,7 +131,7 @@
     border: 0; border-radius: 14px; padding: 24px; width: min(720px, 100% - 24px);
     max-height: 92vh; overflow: auto; color: var(--basalt);
   }
-  dialog::backdrop { background: rgba(31, 36, 39, .65); }
+  dialog::backdrop { background: rgba(23, 63, 58, .65); }
   .dlg-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
   .dlg-head h3 { font-size: 1.35rem; font-weight: 700; }
   .dlg-head p { color: var(--ink-soft); font-size: .95rem; margin-top: 4px; }
@@ -177,7 +177,7 @@
       <h1>Explore Fuerteventura, Your Way — Self-Guided Itineraries</h1>
       <p class="text">Designed by local tour guides and delivered instantly to your phone. Pick one itinerary or combine several — each one is a full self-guided day with exact stops, parking, map links and local tips.</p>
       <p class="car">
-        <svg viewBox="0 0 26 26" aria-hidden="true"><path d="M4 15l2-6a2 2 0 0 1 1.9-1.4h10.2A2 2 0 0 1 20 9l2 6v5h-3v-2H7v2H4z" fill="#0A5C66"/><circle cx="8" cy="15.5" r="1.5" fill="#fff"/><circle cx="18" cy="15.5" r="1.5" fill="#fff"/></svg>
+        <svg viewBox="0 0 26 26" aria-hidden="true"><path d="M4 15l2-6a2 2 0 0 1 1.9-1.4h10.2A2 2 0 0 1 20 9l2 6v5h-3v-2H7v2H4z" fill="#173F3A"/><circle cx="8" cy="15.5" r="1.5" fill="#fff"/><circle cx="18" cy="15.5" r="1.5" fill="#fff"/></svg>
         All itineraries require a rental car
       </p>
     </div>
