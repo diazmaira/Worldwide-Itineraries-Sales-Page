@@ -217,11 +217,7 @@
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .cta-bar { transition: none; } }
 
 /* ---- Destination page (fuerteventura.html) ---- */
-.dest-hero { padding-bottom: clamp(32px, 5vw, 64px); }
-.dest-hero .lead { margin-top: 14px; }
-.dest-hero .actions { margin-top: 26px; }
-.labels { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; padding: 0; }
-.labels li { background: var(--sage); color: var(--forest); font-weight: 600; font-size: 1rem; padding: 9px 18px; border-radius: 999px; }
+.dest-hero { padding-bottom: clamp(16px, 3vw, 32px); }
 .trips { display: grid; gap: 32px; margin-top: 48px; }
 .trip { flex-direction: row; }
 .trip .photo.cover { flex: 0 0 42%; aspect-ratio: auto; min-height: 260px; }
