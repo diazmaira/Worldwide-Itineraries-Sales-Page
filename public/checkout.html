@@ -3,369 +3,337 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your order | Worldwide Itineraries</title>
+<title>Your itinerary | Worldwide Itineraries</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Figtree:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="theme.css">
 <style>
-  :root {
-    --atlantic: #173F3A;
-    --ochre: #D96F55;
-    --basalt: #173F3A;
-    --whitewash: #FFFFFF;
-    --mist: #F7F1E7;
-    --line: #DCCFB8;
-    --ink-soft: #4A625D;
-    --display: "Bricolage Grotesque", "Segoe UI", system-ui, sans-serif;
-    --body: "Figtree", "Segoe UI", system-ui, sans-serif;
-  }
+  /* Checkout page: built on the shared tokens in theme.css */
+  .co-hero { padding: 104px 0 clamp(40px, 6vw, 72px); background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
+  .co-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
+  .co-photo { border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; aspect-ratio: 4 / 3; background: var(--sand); }
+  .co-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .co-hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); margin-top: 16px; }
+  .co-hero .desc { margin-top: 18px; font-size: 1.125rem; color: var(--muted); max-width: 52ch; }
+  .co-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
+  .co-facts li { background: var(--white); border-radius: 999px; padding: 6px 16px; font-size: .95rem; font-weight: 600; box-shadow: var(--shadow-sm); }
+  .co-buy { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; margin-top: 28px; }
+  .co-price { font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; }
+  .co-buy .btn { text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
 
-  *, *::before, *::after { box-sizing: border-box; }
-  body {
-    margin: 0; font-family: var(--body); font-size: 1.0625rem; line-height: 1.6;
-    color: var(--basalt); background: #F7F1E7; -webkit-font-smoothing: antialiased;
-  }
-  img { max-width: 100%; display: block; }
-  h1, h2, h3 { font-family: var(--display); line-height: 1.1; letter-spacing: -0.02em; margin: 0; }
-  p { margin: 0; }
-  ul { margin: 0; padding: 0; list-style: none; }
-  button { font: inherit; cursor: pointer; }
-  :focus-visible { outline: 3px solid var(--atlantic); outline-offset: 3px; }
+  .co-video-wrap { padding-block: clamp(40px, 6vw, 80px) 0; }
+  .co-video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--forest); box-shadow: var(--shadow); }
+  .co-video img.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
+  .co-video iframe, .co-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .co-play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; display: grid; place-items: center; cursor: pointer; }
+  .co-play[disabled] { cursor: default; }
+  .co-play-icon { position: relative; width: clamp(64px, 10vw, 92px); aspect-ratio: 1; border-radius: 50%; background: var(--terracotta); box-shadow: 0 10px 28px rgba(23, 63, 58, .35); transition: transform .2s; }
+  .co-play:not([disabled]):hover .co-play-icon { transform: scale(1.06); }
+  .co-play-icon::after { content: ""; position: absolute; left: 38%; top: 30%; border-left: clamp(18px, 3vw, 28px) solid #fff; border-top: clamp(12px, 2vw, 19px) solid transparent; border-bottom: clamp(12px, 2vw, 19px) solid transparent; }
+  .co-soon { position: absolute; left: 16px; bottom: 16px; background: var(--white); color: var(--forest); font-weight: 600; font-size: .85rem; padding: 6px 14px; border-radius: 999px; }
 
-  .wrap { width: min(1120px, 100% - 32px); margin-inline: auto; }
+  .co-more { padding-block: var(--section-y) 0; }
+  .co-more .lead { margin-top: 12px; }
+  .co-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; margin-top: 36px; }
+  .co-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s; }
+  .co-card.added { box-shadow: 0 0 0 2px var(--forest), var(--shadow); }
+  .co-card .photo { aspect-ratio: 3 / 2; background: var(--sage); overflow: hidden; }
+  .co-card .photo img { width: 100%; height: 100%; object-fit: cover; }
+  .co-card-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  .co-card h3 { font-size: 1.3rem; }
+  .co-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
+  .co-card .price { font-family: var(--display); font-weight: 800; font-size: 1.7rem; }
+  .co-toggle { min-height: 44px; padding: 8px 20px; border-radius: 999px; border: 2px solid var(--forest); background: var(--white); color: var(--forest); font: inherit; font-weight: 600; cursor: pointer; }
+  .co-toggle:hover { background: var(--cream); }
+  .co-card.added .co-toggle { background: var(--forest); color: var(--white); }
 
-  /* Top bar */
-  .topbar { background: var(--atlantic); color: var(--whitewash); }
-  .topbar .wrap { display: flex; align-items: center; justify-content: space-between; gap: 16px; padding: 20px 0; }
-  .topbar a { color: inherit; text-decoration: none; }
-  .back { font-weight: 600; }
-  .back:hover { text-decoration: underline; text-underline-offset: 4px; }
-  .brand { font-family: var(--display); font-weight: 800; font-size: 1.1rem; letter-spacing: -0.01em; }
-  .topbar :focus-visible { outline-color: var(--ochre); }
+  .co-order { padding-block: var(--section-y) clamp(72px, 9vw, 120px); scroll-margin-top: 20px; }
+  .co-order-card { max-width: 640px; margin-inline: auto; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(24px, 4vw, 40px); }
+  .co-order h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); }
+  .co-lines { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; }
+  .co-lines li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
+  .co-lines .name { flex: 1; font-weight: 500; }
+  .co-lines .amt { font-weight: 600; }
+  .co-remove { border: 0; background: none; padding: 6px 4px; color: var(--muted); font: inherit; font-size: .9rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+  .co-remove:hover { color: var(--terracotta); }
+  .co-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); font-weight: 600; }
+  .co-total strong { font-family: var(--display); font-size: 2.2rem; font-weight: 800; }
+  .co-pay { width: 100%; margin-top: 22px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .04em; }
+  .co-error { margin-top: 12px; min-height: 1.4em; color: #A3261D; font-weight: 500; font-size: .95rem; }
+  .co-note { margin-top: 12px; font-size: .92rem; color: var(--muted); }
 
-  /* Intro */
-  .intro { padding: clamp(36px, 6vw, 64px) 0 8px; }
-  .intro .label { font-weight: 600; color: var(--atlantic); margin-bottom: 10px; }
-  .intro h1 { font-size: clamp(2rem, 4.6vw, 3.2rem); font-weight: 800; max-width: 22ch; }
-  .intro .text { margin-top: 18px; max-width: 62ch; color: var(--ink-soft); font-size: 1.125rem; }
-  .car {
-    margin-top: 22px; display: inline-flex; align-items: center; gap: 12px;
-    background: var(--mist); border-radius: 10px; padding: 12px 16px; font-weight: 600;
-  }
-  .car svg { width: 26px; height: 26px; flex: none; }
-
-  /* Layout */
-  .checkout {
-    display: grid; grid-template-columns: minmax(0, 1fr) 340px; gap: 48px; align-items: start;
-    padding: 36px 0 clamp(64px, 9vw, 112px);
-  }
-  .cards { display: grid; gap: 20px; }
-
-  /* Itinerary cards */
-  .card {
-    border: 1.5px solid var(--line); border-radius: 12px; padding: 26px;
-    display: grid; gap: 14px; background: var(--whitewash);
-    transition: border-color .15s ease, background-color .15s ease;
-  }
-  .card.added { border-color: var(--atlantic); background: #FBF8F2; box-shadow: inset 0 0 0 1px var(--atlantic); }
-  .card .kicker { font-weight: 600; color: var(--ink-soft); font-size: .98rem; }
-  .card h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); font-weight: 700; }
-  .card .desc { color: var(--ink-soft); max-width: 60ch; }
-  .suit .hint { font-weight: 600; font-size: .95rem; margin-bottom: 8px; }
-  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
-  .chips li { background: var(--mist); border-radius: 999px; padding: 4px 14px; font-size: .95rem; font-weight: 500; }
-  .card.added .chips li { background: #E9D8C2; }
-
-  .card-foot {
-    display: flex; flex-wrap: wrap; align-items: center; gap: 12px 20px;
-    margin-top: 6px; padding-top: 18px; border-top: 1px solid var(--line);
-  }
-  .preview-btn {
-    background: none; border: 0; padding: 6px 2px; font-weight: 600; color: var(--atlantic);
-    text-decoration: underline; text-underline-offset: 4px;
-  }
-  .price { margin-left: auto; font-family: var(--display); font-size: 1.6rem; font-weight: 800; }
-  .toggle {
-    display: inline-flex; align-items: center; gap: 8px;
-    border: 2px solid var(--basalt); background: var(--whitewash); color: var(--basalt);
-    border-radius: 999px; padding: 10px 22px; font-weight: 600;
-  }
-  .toggle:hover { background: var(--mist); }
-  .toggle svg { width: 18px; height: 18px; display: none; }
-  .toggle[aria-pressed="true"] { background: var(--atlantic); border-color: var(--atlantic); color: var(--whitewash); }
-  .toggle[aria-pressed="true"]:hover { background: #0F2F2B; }
-  .toggle[aria-pressed="true"] svg { display: block; }
-
-  /* Order summary */
-  .summary {
-    position: sticky; top: 20px; border: 1.5px solid var(--basalt); border-radius: 12px; padding: 24px;
-    background: var(--whitewash);
-  }
-  .summary h2 { font-size: 1.4rem; font-weight: 700; }
-  .lines { margin-top: 16px; display: grid; gap: 10px; min-height: 28px; }
-  .lines li { display: flex; justify-content: space-between; gap: 16px; }
-  .lines .empty { color: var(--ink-soft); }
-  .total {
-    display: flex; justify-content: space-between; align-items: baseline;
-    margin-top: 18px; padding-top: 16px; border-top: 1px solid var(--line);
-    font-weight: 600;
-  }
-  .total strong { font-family: var(--display); font-size: 1.8rem; font-weight: 800; }
-  .pay {
-    width: 100%; margin-top: 18px; background: var(--ochre); color: #fff; border: 0;
-    border-radius: 999px; padding: 16px 24px; font-weight: 700; font-size: 1.125rem;
-    transition: background-color .15s ease;
-  }
-  .pay:hover:not(:disabled) { background: #C45F46; }
-  .pay:disabled { opacity: .55; cursor: default; }
-  .note { margin-top: 14px; font-size: .92rem; color: var(--ink-soft); }
-  .note + .note { margin-top: 8px; }
-  .error { margin-top: 12px; min-height: 1.4em; color: #A3261D; font-weight: 500; font-size: .95rem; }
-
-  /* Preview dialog */
-  dialog {
-    border: 0; border-radius: 14px; padding: 24px; width: min(720px, 100% - 24px);
-    max-height: 92vh; overflow: auto; color: var(--basalt);
-  }
-  dialog::backdrop { background: rgba(23, 63, 58, .65); }
-  .dlg-head { display: flex; justify-content: space-between; align-items: start; gap: 16px; }
-  .dlg-head h3 { font-size: 1.35rem; font-weight: 700; }
-  .dlg-head p { color: var(--ink-soft); font-size: .95rem; margin-top: 4px; }
-  .close {
-    flex: none; border: 2px solid var(--basalt); background: var(--whitewash); border-radius: 999px;
-    padding: 6px 16px; font-weight: 600;
-  }
-  .close:hover { background: var(--mist); }
-  .pages { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 20px; }
-  .page {
-    margin: 0; position: relative; aspect-ratio: 9 / 16; background: var(--mist);
-    border-radius: 10px; overflow: hidden; display: grid; place-items: center;
-  }
-  .page img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
-  .page .missing { padding: 12px; text-align: center; color: var(--ink-soft); font-size: .92rem; }
-  .page figcaption {
-    position: absolute; left: 0; right: 0; bottom: 0; padding: 26px 12px 10px; color: var(--whitewash);
-    font-weight: 600; font-size: .92rem; background: linear-gradient(to top, rgba(0,0,0,.6), rgba(0,0,0,0));
-  }
-
+  .co-bar { display: none; }
   @media (max-width: 860px) {
-    .checkout { grid-template-columns: 1fr; gap: 28px; }
-    .summary { position: static; }
-    .card { padding: 20px; }
-    .price { margin-left: 0; }
-    .card-foot { gap: 10px 16px; }
+    .co-hero-grid { grid-template-columns: 1fr; }
+    .co-hero { padding-top: 76px; }
   }
+  @media (max-width: 767px) {
+    .co-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--cream); box-shadow: 0 -6px 18px rgba(23, 63, 58, .10); opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .3s, transform .3s, visibility .3s; }
+    .co-bar.show { opacity: 1; visibility: visible; transform: none; }
+    .co-bar .t { font-weight: 600; line-height: 1.2; }
+    .co-bar .t strong { display: block; font-family: var(--display); font-size: 1.4rem; }
+    .co-bar .btn { flex: 1; max-width: 220px; text-transform: uppercase; letter-spacing: .03em; font-weight: 700; font-size: .95rem; padding-inline: 16px; }
+    body { padding-bottom: 0; }
+  }
+  @media (prefers-reduced-motion: reduce) { .co-bar, .co-play-icon { transition: none; } }
 </style>
 </head>
 <body>
 
-<header class="topbar">
-  <div class="wrap">
-    <a class="back" href="index.html">← Back</a>
-    <a class="brand" href="index.html">Worldwide Itineraries</a>
-  </div>
+<header class="site-header">
+  <details class="menu">
+    <summary aria-label="Menu"><span class="bars" aria-hidden="true"></span></summary>
+    <nav class="menu-panel" aria-label="Main">
+      <a class="panel-brand" href="index.html">Worldwide Itineraries</a>
+      <a href="index.html">Home</a><a href="index.html#destinations">Destinations</a><a href="index.html#itineraries">Itineraries</a><a href="index.html#about">About Us</a><a href="inspiration.html">Travel Inspiration</a><a href="index.html#contact">Contact Us</a>
+      <a class="panel-cta" href="index.html#itineraries">Discover Itineraries</a>
+    </nav>
+  </details>
 </header>
 
+<div class="logo-bar"><div class="wrap">
+  <a class="logo" href="index.html" aria-label="Worldwide Itineraries, home">
+    <svg viewBox="0 0 52 44" width="52" height="44" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="33" cy="13" r="8"/><path d="M2 30c8-10 14-10 20-4s14 6 28-6"/><path d="M2 40c8-10 14-10 20-4s14 6 28-6"/></svg>
+    <span>Worldwide<br>Itineraries</span>
+  </a>
+</div></div>
+
 <main>
-  <section class="intro">
-    <div class="wrap">
-      <p class="label">Your order</p>
-      <h1>Explore Fuerteventura, Your Way — Self-Guided Itineraries</h1>
-      <p class="text">Designed by local tour guides and delivered instantly to your phone. Pick one itinerary or combine several — each one is a full self-guided day with exact stops, parking, map links and local tips.</p>
-      <p class="car">
-        <svg viewBox="0 0 26 26" aria-hidden="true"><path d="M4 15l2-6a2 2 0 0 1 1.9-1.4h10.2A2 2 0 0 1 20 9l2 6v5h-3v-2H7v2H4z" fill="#173F3A"/><circle cx="8" cy="15.5" r="1.5" fill="#fff"/><circle cx="18" cy="15.5" r="1.5" fill="#fff"/></svg>
-        All itineraries require a rental car
-      </p>
+
+<!-- 1. Selected itinerary -->
+<section class="co-hero" id="top">
+  <div class="wrap co-hero-grid">
+    <div class="co-photo" id="hero-photo"><img id="hero-img" alt="" width="1200" height="900"></div>
+    <div>
+      <span class="tag">Self-guided itinerary</span>
+      <h1 id="hero-title"></h1>
+      <p class="desc" id="hero-desc"></p>
+      <ul class="co-facts">
+        <li>Instant digital access</li>
+        <li>Rental car required</li>
+        <li>Delivered by email</li>
+      </ul>
+      <div class="co-buy" id="hero-buy">
+        <span class="co-price" id="hero-price"></span>
+        <a class="btn" href="#order" id="hero-cta">Get this itinerary</a>
+      </div>
     </div>
-  </section>
-
-  <div class="wrap checkout">
-    <div class="cards" id="cards">
-
-      <article class="card added" data-id="north" data-price="8" data-name="Explore the north of Fuerteventura">
-        <p class="kicker">Itinerary 1</p>
-        <h2>Explore the north of Fuerteventura</h2>
-        <p class="desc">A full day through the north of the island, from golden dunes and volcanic landscapes to coastal viewpoints and a local lunch stop. Every stop comes with timing, parking and a Google Maps link.</p>
-        <div class="suit">
-          <p class="hint">Suitable for</p>
-          <ul class="chips"><li>Families</li><li>Couples</li><li>Seniors</li><li>Active</li><li>Solo</li></ul>
-        </div>
-        <div class="card-foot">
-          <button type="button" class="preview-btn" data-preview="north">Preview</button>
-          <span class="price">€8</span>
-          <button type="button" class="toggle" aria-pressed="true">
-            <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9.5l4 4 7-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="toggle-text">Added to your order</span>
-          </button>
-        </div>
-      </article>
-
-      <article class="card" data-id="rural" data-price="8" data-name="The rural heart of Fuerteventura">
-        <p class="kicker">Itinerary 2</p>
-        <h2>The rural heart of Fuerteventura</h2>
-        <p class="desc">Leave the coast behind and drive through the villages, valleys and hills of the island's interior. Expect quiet viewpoints, traditional food and the slower side of Fuerteventura, away from the crowds.</p>
-        <div class="suit">
-          <p class="hint">Suitable for</p>
-          <ul class="chips"><li>Families</li><li>Couples</li><li>Seniors</li><li>Active</li><li>Solo</li></ul>
-        </div>
-        <div class="card-foot">
-          <button type="button" class="preview-btn" data-preview="rural">Preview</button>
-          <span class="price">€8</span>
-          <button type="button" class="toggle" aria-pressed="false">
-            <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9.5l4 4 7-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="toggle-text">Add to order</span>
-          </button>
-        </div>
-      </article>
-
-      <article class="card" data-id="windmills" data-price="8" data-name="Fuerteventura windmills">
-        <p class="kicker">Itinerary 3</p>
-        <h2>Fuerteventura windmills</h2>
-        <p class="desc">Follow the traditional windmills that mark the island's landscape and learn the story behind them. A relaxed driving day that mixes photo stops, small villages and local flavours.</p>
-        <div class="suit">
-          <p class="hint">Suitable for</p>
-          <ul class="chips"><li>Families</li><li>Couples</li><li>Seniors</li><li>Active</li><li>Solo</li></ul>
-        </div>
-        <div class="card-foot">
-          <button type="button" class="preview-btn" data-preview="windmills">Preview</button>
-          <span class="price">€8</span>
-          <button type="button" class="toggle" aria-pressed="false">
-            <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M3.5 9.5l4 4 7-8" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span class="toggle-text">Add to order</span>
-          </button>
-        </div>
-      </article>
-
-    </div>
-
-    <aside class="summary" aria-labelledby="summary-title">
-      <h2 id="summary-title">Order summary</h2>
-      <ul class="lines" id="lines" aria-live="polite"></ul>
-      <p class="total"><span>Total</span><strong id="total">€0</strong></p>
-      <button type="button" class="pay" id="pay">Pay securely</button>
-      <p class="error" id="error" role="alert"></p>
-      <p class="note">Payment is processed by Stripe. Your itineraries arrive by email right after payment.</p>
-      <p class="note">Your access link is valid for 30 days.</p>
-      <p class="note">By paying you accept our <a href="terms.html">Terms and Conditions</a> and have read our <a href="privacy.html">Privacy Policy</a>.</p>
-      <p class="note">Digital products delivered instantly are not refundable. If a place on your route is no longer available, contact us and we'll send you an updated itinerary or another recommendation.</p>
-    </aside>
   </div>
+</section>
+
+<!-- 2. Presentation video -->
+<section class="co-video-wrap">
+  <div class="wrap">
+    <div class="co-video" id="video"></div>
+  </div>
+</section>
+
+<!-- 3. Add more itineraries -->
+<section class="co-more" id="more" hidden>
+  <div class="wrap">
+    <h2 class="section-title">Make it a bigger adventure</h2>
+    <p class="lead">Want to discover more? Add another itinerary to your order.</p>
+    <div class="co-grid" id="more-grid"></div>
+  </div>
+</section>
+
+<!-- 4. Order and payment -->
+<section class="co-order" id="order">
+  <div class="wrap">
+    <div class="co-order-card">
+      <h2>Your order</h2>
+      <ul class="co-lines" id="lines" aria-live="polite"></ul>
+      <p class="co-total"><span>Total</span><strong id="total">€0</strong></p>
+      <button type="button" class="btn co-pay" id="pay">Continue to secure payment</button>
+      <p class="co-error" id="error" role="alert"></p>
+      <p class="co-note">Payment is processed by Stripe. Your itineraries arrive by email right after payment.</p>
+      <p class="co-note">Your access link is valid for 30 days.</p>
+      <p class="co-note">By paying you accept our <a href="terms.html">Terms and Conditions</a> and have read our <a href="privacy.html">Privacy Policy</a>.</p>
+      <p class="co-note">Digital products delivered instantly are not refundable. If a place on your route is no longer available, contact us and we'll send you an updated itinerary or another recommendation.</p>
+    </div>
+  </div>
+</section>
+
 </main>
 
-<dialog id="preview" aria-labelledby="preview-title">
-  <div class="dlg-head">
-    <div>
-      <h3 id="preview-title">Preview</h3>
-      <p>The first two pages of your itinerary, as they look on your phone.</p>
-    </div>
-    <form method="dialog"><button class="close" autofocus>Close</button></form>
-  </div>
-  <div class="pages">
-    <figure class="page">
-      <img id="pg1" alt="First page of the itinerary" loading="lazy">
-      <span class="missing" hidden>Preview image coming soon</span>
-      <figcaption>Page 1</figcaption>
-    </figure>
-    <figure class="page">
-      <img id="pg2" alt="Second page of the itinerary" loading="lazy">
-      <span class="missing" hidden>Preview image coming soon</span>
-      <figcaption>Page 2</figcaption>
-    </figure>
-  </div>
-</dialog>
+<div class="co-bar" id="bar">
+  <span class="t">Total<strong id="bar-total">€8</strong></span>
+  <a class="btn" href="#order">Get this itinerary</a>
+</div>
 
 <script>
-  const cards = [...document.querySelectorAll('.card')];
-  const lines = document.getElementById('lines');
-  const totalEl = document.getElementById('total');
-  const pay = document.getElementById('pay');
-  const errorEl = document.getElementById('error');
+  /* Products. Prices here are for display only: the server looks up the real
+     price from the item ids (api/_products.js), so they cannot be changed from the browser.
+     To add a product or another destination later, add an entry here and in api/_products.js.
+     video: paste a YouTube, Vimeo or .mp4 link to show the promo video; leave '' for the placeholder. */
+  const ITEMS = [
+    { id: 'north', destination: 'Fuerteventura', name: 'Explore the north of Fuerteventura', price: 8,
+      cover: 'images/cover-north.jpg', video: '',
+      desc: 'A full day through the north of the island, from golden dunes and volcanic landscapes to coastal viewpoints and a local lunch stop. Every stop comes with timing, parking and a Google Maps link.' },
+    { id: 'rural', destination: 'Fuerteventura', name: 'The rural heart of Fuerteventura', price: 8,
+      cover: 'images/cover-rural.jpg', video: '',
+      desc: "Leave the coast behind and drive through the villages, valleys and hills of the island's interior. Expect quiet viewpoints, traditional food and the slower side of Fuerteventura, away from the crowds." },
+    { id: 'windmills', destination: 'Fuerteventura', name: 'Fuerteventura windmills', price: 8,
+      cover: 'images/cover-windmills.jpg', video: '',
+      desc: "Follow the traditional windmills that mark the island's landscape and learn the story behind them. A relaxed driving day that mixes photo stops, small villages and local flavours." }
+  ];
 
+  const $ = (id) => document.getElementById(id);
   const euro = (n) => '€' + n;
 
-  function selected() {
-    return cards.filter((c) => c.classList.contains('added'));
+  /* Which itinerary the visitor came for (checkout.html?item=rural). Unknown or missing: the first one. */
+  const wanted = new URLSearchParams(location.search).get('item');
+  const main = ITEMS.find((i) => i.id === wanted) || ITEMS[0];
+  const others = ITEMS.filter((i) => i.id !== main.id);
+  const extra = new Set(); // ids of additional itineraries in the order
+
+  /* ---- 1. Hero ---- */
+  document.title = main.name + ' | Worldwide Itineraries';
+  $('hero-title').textContent = main.name;
+  $('hero-desc').textContent = main.desc;
+  $('hero-price').textContent = euro(main.price);
+  const heroImg = $('hero-img');
+  heroImg.alt = main.name;
+  heroImg.addEventListener('error', () => heroImg.remove());
+  heroImg.src = main.cover;
+
+  /* ---- 2. Video ---- */
+  function embedUrl(u) {
+    let m;
+    if ((m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/))) return 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0';
+    if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/))) return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1&dnt=1';
+    return null;
   }
+  (function buildVideo() {
+    const box = $('video');
+    const url = (main.video || '').trim();
+    const poster = document.createElement('img');
+    poster.className = 'poster';
+    poster.alt = '';
+    poster.addEventListener('error', () => poster.remove());
+    poster.src = main.cover;
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'co-play';
+    btn.setAttribute('aria-label', 'Play video: ' + main.name);
+    btn.innerHTML = '<span class="co-play-icon" aria-hidden="true"></span>';
+    box.append(poster, btn);
+    if (!url) {
+      btn.disabled = true;
+      btn.setAttribute('aria-label', 'Video coming soon');
+      const soon = document.createElement('span');
+      soon.className = 'co-soon';
+      soon.textContent = 'Video coming soon';
+      box.append(soon);
+      return;
+    }
+    btn.addEventListener('click', () => {
+      if (/\.mp4(\?|$)/i.test(url)) {
+        const v = document.createElement('video');
+        v.controls = true; v.autoplay = true; v.playsInline = true; v.src = url;
+        v.setAttribute('aria-label', main.name);
+        box.replaceChildren(v);
+        return;
+      }
+      const src = embedUrl(url);
+      if (!src) return;
+      const f = document.createElement('iframe');
+      f.src = src; f.title = main.name;
+      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+      f.allowFullscreen = true;
+      box.replaceChildren(f);
+    });
+  })();
+
+  /* ---- 3. More itineraries (title, photo and price only: nothing about the route) ---- */
+  const grid = $('more-grid');
+  if (others.length) $('more').hidden = false;
+  others.forEach((it) => {
+    const card = document.createElement('article');
+    card.className = 'co-card';
+    card.dataset.id = it.id;
+    const photo = document.createElement('div');
+    photo.className = 'photo';
+    const img = document.createElement('img');
+    img.alt = it.name; img.loading = 'lazy'; img.width = 1200; img.height = 800;
+    img.addEventListener('error', () => img.remove());
+    img.src = it.cover;
+    photo.append(img);
+    const body = document.createElement('div');
+    body.className = 'co-card-body';
+    const h3 = document.createElement('h3');
+    h3.textContent = it.name;
+    const foot = document.createElement('div');
+    foot.className = 'co-card-foot';
+    const price = document.createElement('span');
+    price.className = 'price';
+    price.textContent = euro(it.price);
+    const btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'co-toggle';
+    btn.setAttribute('aria-pressed', 'false');
+    btn.textContent = 'Add to order';
+    btn.addEventListener('click', () => {
+      if (extra.has(it.id)) extra.delete(it.id); else extra.add(it.id);
+      $('error').textContent = '';
+      render();
+    });
+    foot.append(price, btn);
+    body.append(h3, foot);
+    card.append(photo, body);
+    grid.append(card);
+  });
+
+  /* ---- 4. Order summary ---- */
+  const lines = $('lines');
+  const pay = $('pay');
+  const selected = () => [main, ...others.filter((i) => extra.has(i.id))];
 
   function render() {
     const sel = selected();
-    lines.innerHTML = '';
-    if (!sel.length) {
-      const li = document.createElement('li');
-      li.className = 'empty';
-      li.textContent = 'Add at least one itinerary to continue.';
-      lines.appendChild(li);
-    }
+    lines.replaceChildren();
     let total = 0;
-    sel.forEach((c) => {
-      const price = Number(c.dataset.price);
-      total += price;
+    sel.forEach((it, idx) => {
+      total += it.price;
       const li = document.createElement('li');
       const name = document.createElement('span');
-      name.textContent = c.dataset.name;
-      const amount = document.createElement('span');
-      amount.textContent = euro(price);
-      li.append(name, amount);
-      lines.appendChild(li);
+      name.className = 'name';
+      name.textContent = it.name;
+      const amt = document.createElement('span');
+      amt.className = 'amt';
+      amt.textContent = euro(it.price);
+      li.append(name, amt);
+      if (idx > 0) {
+        const rm = document.createElement('button');
+        rm.type = 'button';
+        rm.className = 'co-remove';
+        rm.textContent = 'Remove';
+        rm.setAttribute('aria-label', 'Remove ' + it.name + ' from your order');
+        rm.addEventListener('click', () => { extra.delete(it.id); render(); });
+        li.append(rm);
+      }
+      lines.append(li);
     });
-    totalEl.textContent = euro(total);
-    pay.disabled = sel.length === 0;
+    $('total').textContent = euro(total);
+    $('bar-total').textContent = euro(total);
+    grid.querySelectorAll('.co-card').forEach((card) => {
+      const on = extra.has(card.dataset.id);
+      card.classList.toggle('added', on);
+      const b = card.querySelector('.co-toggle');
+      b.setAttribute('aria-pressed', String(on));
+      b.textContent = on ? 'Added · Remove' : 'Add to order';
+    });
   }
 
-  cards.forEach((card) => {
-    const btn = card.querySelector('.toggle');
-    const text = card.querySelector('.toggle-text');
-    btn.addEventListener('click', () => {
-      const on = !card.classList.contains('added');
-      card.classList.toggle('added', on);
-      btn.setAttribute('aria-pressed', String(on));
-      text.textContent = on ? 'Added to your order' : 'Add to order';
-      errorEl.textContent = '';
-      render();
-    });
-  });
-
-  /* Preview dialog: expects preview/<id>-1.jpg and preview/<id>-2.jpg */
-  const dlg = document.getElementById('preview');
-  const dlgTitle = document.getElementById('preview-title');
-  const imgs = [document.getElementById('pg1'), document.getElementById('pg2')];
-
-  imgs.forEach((img) => {
-    img.addEventListener('error', () => {
-      img.hidden = true;
-      img.nextElementSibling.hidden = false;
-    });
-    img.addEventListener('load', () => {
-      img.hidden = false;
-      img.nextElementSibling.hidden = true;
-    });
-  });
-
-  document.querySelectorAll('.preview-btn').forEach((b) => {
-    b.addEventListener('click', () => {
-      const id = b.dataset.preview;
-      const card = b.closest('.card');
-      dlgTitle.textContent = 'Preview: ' + card.dataset.name;
-      imgs.forEach((img, i) => {
-        img.hidden = false;
-        img.nextElementSibling.hidden = true;
-        img.src = 'preview/' + id + '-' + (i + 1) + '.jpg';
-      });
-      dlg.showModal();
-    });
-  });
-
-  dlg.addEventListener('click', (e) => {
-    if (e.target === dlg) dlg.close();
-  });
-
-  /* Payment: the server decides prices from the item ids and returns a Stripe Checkout URL */
+  /* Payment: unchanged. The server decides prices from the item ids and returns a Stripe Checkout URL. */
+  const errorEl = $('error');
   pay.addEventListener('click', async () => {
-    const ids = selected().map((c) => c.dataset.id);
+    const ids = selected().map((i) => i.id);
     if (!ids.length) return;
     errorEl.textContent = '';
     pay.disabled = true;
@@ -381,10 +349,30 @@
       window.location.href = data.url;
     } catch (err) {
       errorEl.textContent = 'We could not start the payment. Please try again in a moment.';
-      pay.textContent = 'Pay securely';
+      pay.textContent = 'Continue to secure payment';
       pay.disabled = false;
     }
   });
+  // Coming back from Stripe with the browser's back button: make the button usable again.
+  window.addEventListener('pageshow', (e) => {
+    if (e.persisted) { pay.disabled = false; pay.textContent = 'Continue to secure payment'; }
+  });
+
+  /* Sticky purchase bar (phones): shown once the top button is out of view, hidden near the order itself. */
+  (function stickyBar() {
+    const bar = $('bar');
+    if (!('IntersectionObserver' in window)) return;
+    let past = false, atOrder = false;
+    const update = () => bar.classList.toggle('show', past && !atOrder);
+    new IntersectionObserver((es) => {
+      es.forEach((e) => { past = !e.isIntersecting && e.boundingClientRect.bottom <= 0; });
+      update();
+    }).observe($('hero-buy'));
+    new IntersectionObserver((es) => {
+      es.forEach((e) => { atOrder = e.isIntersecting; });
+      update();
+    }).observe($('order'));
+  })();
 
   render();
 </script>
