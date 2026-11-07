@@ -51,14 +51,14 @@
 
   /* ===== Hamburger menu: transparent, top corner, always reachable ===== */
   .site-header { position: fixed; top: 0; left: 0; right: 0; z-index: 30; pointer-events: none; }
-  .menu { display: block; position: absolute; top: 14px; right: 16px; pointer-events: auto; }
-  .menu summary { list-style: none; cursor: pointer; width: 52px; height: 52px; display: grid; place-items: center; }
+  .menu { display: block; position: absolute; top: 12px; right: 16px; pointer-events: auto; }
+  .menu summary { list-style: none; cursor: pointer; width: 36px; height: 36px; display: grid; place-items: center; }
   .menu summary::-webkit-details-marker { display: none; }
-  .bars, .bars::before, .bars::after { display: block; width: 28px; height: 3px; background: var(--forest); border-radius: 2px; box-shadow: 0 0 0 2px rgba(247, 241, 231, .85); }
+  .bars, .bars::before, .bars::after { display: block; width: 20px; height: 2px; background: var(--forest); border-radius: 2px; box-shadow: 0 0 0 2px rgba(247, 241, 231, .85); }
   .bars { position: relative; }
   .bars::before, .bars::after { content: ""; position: absolute; left: 0; }
-  .bars::before { top: -9px; } .bars::after { top: 9px; }
-  .menu-panel { position: fixed; top: 74px; right: 16px; width: min(320px, 100% - 32px); background: var(--white); border-radius: var(--radius-sm); box-shadow: var(--shadow); padding: 12px; display: grid; }
+  .bars::before { top: -6px; } .bars::after { top: 6px; }
+  .menu-panel { position: fixed; top: 56px; right: 16px; width: min(320px, 100% - 32px); background: var(--white); border-radius: var(--radius-sm); box-shadow: var(--shadow); padding: 12px; display: grid; }
   .menu-panel a { padding: 14px 12px; text-decoration: none; font-weight: 600; border-bottom: 1px solid var(--line); }
   .menu-panel a:hover { color: var(--terracotta); }
   .menu-panel .panel-brand { font-family: var(--display); font-weight: 700; font-size: 1.3rem; }
@@ -78,18 +78,18 @@
 
   /* ===== Hero ===== */
   .hero { background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); overflow-x: clip; min-height: 100vh; min-height: 100svh; display: flex; justify-content: center; }
-  .hero .wrap { width: min(1200px, 100% - 40px); margin-inline: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; padding-block: 0 40px; padding-top: 96px; }
-  .hero h1 { font-size: clamp(2.6rem, 5vw, 4.4rem); margin-top: 22px; }
+  .hero .wrap { width: min(1200px, 100% - 40px); margin-inline: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 32px; align-items: center; padding-block: 0 24px; padding-top: 72px; }
+  .hero h1 { font-size: clamp(2.4rem, 4.6vw, 4rem); margin-top: 18px; }
   .mark { background: linear-gradient(transparent 58%, rgba(169, 201, 185, .75) 58%); font-style: italic; padding: 0 .08em; box-shadow: inset 0 -0.02em 0 transparent; }
-  .hero p.sub { margin-top: 24px; max-width: 560px; font-size: 1.2rem; }
-  .hero .actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 34px; }
+  .hero p.sub { margin-top: 18px; max-width: 560px; font-size: 1.1rem; }
+  .hero .actions { display: flex; gap: 16px; flex-wrap: wrap; margin-top: 26px; }
   .sub-mobile { display: none; }
   .deco { display: none; }
-  .hero-collage img { width: 100%; height: auto; max-height: calc(100svh - 140px); object-fit: contain; }
+  .hero-collage img { width: 100%; height: auto; max-height: calc(100svh - 110px); object-fit: contain; }
   /* ===== Logo (scrolls away with the page; the hamburger stays fixed) ===== */
   .logo-bar { position: absolute; top: 0; left: 0; right: 0; z-index: 10; }
-  .logo { display: inline-flex; align-items: center; gap: 10px; margin-top: 14px; color: var(--forest); text-decoration: none; font-family: var(--display); font-weight: 700; font-size: 1.3rem; line-height: 1; letter-spacing: -0.02em; }
-  .logo svg { width: 52px; height: 44px; flex: none; }
+  .logo { display: inline-flex; align-items: center; gap: 7px; margin-top: 14px; color: var(--forest); text-decoration: none; font-family: var(--display); font-weight: 700; font-size: 0.91rem; line-height: 1; letter-spacing: -0.02em; }
+  .logo svg { width: 36px; height: 31px; flex: none; }
 
   /* ===== Destinations ===== */
   .grid-2 { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 36px; margin-top: 56px; }
@@ -199,20 +199,19 @@
   @media (max-width: 767px) {
     .sub-desktop { display: none; }
     .sub-mobile { display: block; }
-    .logo { font-size: 1.05rem; gap: 8px; } .logo svg { width: 42px; height: 36px; }
+    .logo { font-size: 0.74rem; gap: 6px; } .logo svg { width: 29px; height: 25px; }
 
     /* ===== Mobile hero: centred text, notebook illustrations entering from the corners (behind the text) ===== */
     .hero { position: relative; overflow: clip; }
     .hero-collage { display: none; }
-    .hero .wrap { align-items: center; justify-content: center; text-align: center; gap: 0; padding: 84px 0 150px; position: relative; z-index: 1; }
+    .hero .wrap { align-items: center; justify-content: center; text-align: center; gap: 0; padding: 60px 0 124px; position: relative; z-index: 1; }
     .hero .wrap > div:first-child { display: flex; flex-direction: column; align-items: center; }
     .hero h1 { font-size: clamp(2.5rem, 11.5vw, 3.6rem); line-height: 1; margin-top: 18px; text-wrap: balance; }
     .hero p.sub { margin: 18px auto 0; font-size: .98rem; max-width: 330px; text-align: center; }
     .hero .actions { flex-direction: column; flex-wrap: nowrap; width: min(320px, 100%); gap: 12px; margin-top: 28px; }
     .hero .actions .btn { flex: none; width: 100%; min-height: 58px; padding: 14px 20px; font-size: 1.1rem; white-space: nowrap; }
     .deco { display: block; position: absolute; z-index: 0; pointer-events: none; user-select: none; height: auto; }
-    .deco-map { top: 50px; right: -18vw; width: 46vw; transform: rotate(3deg); }
-    .deco-windmill { left: -10vw; bottom: -4vw; width: 42vw; }
-    .deco-lighthouse { right: -10vw; bottom: -4vw; width: 48vw; }
+    .deco-windmill { left: 4vw; bottom: 12px; width: 28vw; }
+    .deco-lighthouse { right: 4vw; bottom: 12px; width: 34vw; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .cta-bar { transition: none; } }
