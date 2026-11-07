@@ -215,3 +215,25 @@
     .deco-lighthouse { right: 4vw; bottom: 12px; width: 34vw; }
   }
   @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } .btn, .cta-bar { transition: none; } }
+
+/* ---- Destination page (fuerteventura.html) ---- */
+.dest-hero { padding-bottom: clamp(32px, 5vw, 64px); }
+.dest-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
+.dest-hero .lead { margin-top: 14px; }
+.dest-hero .actions { margin-top: 26px; }
+.dest-photo { border-radius: var(--radius); box-shadow: var(--shadow); aspect-ratio: 4 / 3; }
+.trips { display: grid; gap: 32px; margin-top: 48px; }
+.trip { flex-direction: row; }
+.trip .photo.cover { flex: 0 0 42%; aspect-ratio: auto; min-height: 260px; }
+.trip .card-body { padding: 28px 30px; }
+.video { margin-top: 10px; border-radius: 14px; overflow: hidden; background: var(--forest); aspect-ratio: 16 / 9; position: relative; }
+.video iframe, .video video, .video .play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+.video .play { padding: 0; cursor: pointer; background: var(--forest); display: grid; place-items: center; }
+.video .play img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .85; }
+.video .play-icon { position: relative; width: 64px; height: 64px; border-radius: 50%; background: var(--terracotta); box-shadow: 0 6px 18px rgba(23,63,58,.35); }
+.video .play-icon::after { content: ""; position: absolute; left: 25px; top: 19px; border-left: 20px solid #fff; border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
+@media (max-width: 860px) {
+  .dest-grid { grid-template-columns: 1fr; }
+  .trip { flex-direction: column; }
+  .trip .photo.cover { flex: none; aspect-ratio: 3 / 2; min-height: 0; }
+}
