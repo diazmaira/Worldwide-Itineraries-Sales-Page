@@ -45,5 +45,19 @@
   </div>
   <a class="btn" href="index.html">Back to the homepage</a>
 </main>
+<script src="itineraries-data.js"></script>
+<script src="selection.js"></script>
+<script>
+  /* Clear the saved selection only when the server confirms (with Stripe) that this session is paid. */
+  (async function () {
+    const id = new URLSearchParams(location.search).get('session_id');
+    if (!id) return;
+    try {
+      const res = await fetch('/api/session-status?session_id=' + encodeURIComponent(id));
+      const data = await res.json();
+      if (data && data.paid === true) WWI.clear();
+    } catch (e) { /* keep the selection if we could not confirm */ }
+  })();
+</script>
 </body>
 </html>
