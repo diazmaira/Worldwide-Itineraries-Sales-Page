@@ -218,10 +218,10 @@
 
 /* ---- Destination page (fuerteventura.html) ---- */
 .dest-hero { padding-bottom: clamp(32px, 5vw, 64px); }
-.dest-grid { display: grid; grid-template-columns: 1.1fr .9fr; gap: 40px; align-items: center; }
 .dest-hero .lead { margin-top: 14px; }
 .dest-hero .actions { margin-top: 26px; }
-.dest-photo { border-radius: var(--radius); box-shadow: var(--shadow); aspect-ratio: 4 / 3; }
+.labels { list-style: none; display: flex; flex-wrap: wrap; gap: 10px; margin-top: 22px; padding: 0; }
+.labels li { background: var(--sage); color: var(--forest); font-weight: 600; font-size: 1rem; padding: 9px 18px; border-radius: 999px; }
 .trips { display: grid; gap: 32px; margin-top: 48px; }
 .trip { flex-direction: row; }
 .trip .photo.cover { flex: 0 0 42%; aspect-ratio: auto; min-height: 260px; }
@@ -233,7 +233,6 @@
 .video .play-icon { position: relative; width: 64px; height: 64px; border-radius: 50%; background: var(--terracotta); box-shadow: 0 6px 18px rgba(23,63,58,.35); }
 .video .play-icon::after { content: ""; position: absolute; left: 25px; top: 19px; border-left: 20px solid #fff; border-top: 13px solid transparent; border-bottom: 13px solid transparent; }
 @media (max-width: 860px) {
-  .dest-grid { grid-template-columns: 1fr; }
   .trip { flex-direction: column; }
   .trip .photo.cover { flex: none; aspect-ratio: 3 / 2; min-height: 0; }
 }
