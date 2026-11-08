@@ -15,17 +15,18 @@
 <style>
   /* Checkout page: built on the shared tokens in theme.css */
   .co-hero { padding: 104px 0 28px; background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
-  .co-place { margin: 0; font-size: .75rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
-  .co-hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.6rem); line-height: 1.02; letter-spacing: -.02em; margin-top: 14px; }
+  .co-place { margin: 0; font-size: clamp(.6rem, 2.6vw, .75rem); font-weight: 600; letter-spacing: .2em; white-space: nowrap; text-transform: uppercase; color: var(--muted); }
+  .co-hero h1 { font-size: clamp(1.7rem, 9.2vw, 4.6rem); line-height: 1.04; letter-spacing: -.02em; margin-top: 12px; white-space: nowrap; overflow-x: clip; }
   .co-tagline { margin: 16px 0 0; max-width: 46ch; font-size: 1.15rem; line-height: 1.55; color: var(--muted); }
-  .co-facts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 26px; margin: 22px 0 0; padding: 0; list-style: none; font-size: .95rem; font-weight: 500; color: var(--forest); }
-  .co-facts li { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
-  .co-facts svg { width: 18px; height: 18px; flex: none; opacity: .75; }
+  .co-facts { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px clamp(10px, 3.4vw, 24px); margin: 18px 0 0; padding: 0; list-style: none; font-size: clamp(.72rem, 3.4vw, .9rem); font-weight: 500; color: var(--forest); }
+  .co-facts li { display: inline-flex; align-items: center; gap: .4em; white-space: nowrap; }
+  .co-facts svg { width: 1.2em; height: 1.2em; flex: none; opacity: .75; }
   .co-facts:empty, .co-tagline:empty { display: none; }
-  .co-labels { display: flex; flex-wrap: wrap; gap: 5px; margin: 20px 0 0; padding: 0; list-style: none; }
-  .co-labels li { border-radius: 999px; padding: 3px 10px; font-size: .75rem; font-weight: 600; color: var(--forest); }
-  .co-labels .who { background: var(--sage); }
-  .co-labels .what { background: var(--ocean); }
+  .co-labels { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
+  .co-labels li { border: 1px solid var(--sage); border-radius: 999px; padding: 3px 11px; font-size: .75rem; font-weight: 600; color: var(--forest); background: transparent; white-space: nowrap; }
+  .co-who { flex-wrap: nowrap; gap: clamp(4px, 1.6vw, 8px); margin-top: 22px; }
+  .co-who li { padding-inline: clamp(8px, 3vw, 14px); font-size: clamp(.68rem, 3.2vw, .8rem); }
+  .co-labels:empty { display: none; }
   .co-buy { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; margin-top: 28px; }
   .co-price { font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; }
   .co-buy .btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
@@ -61,11 +62,11 @@
   .co-pay { width: 100%; margin-top: 22px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1.05rem; }
     .co-note { margin-top: 12px; font-size: .92rem; color: var(--muted); }
 
-  /* Floating promo video: appears while the visitor explores, small and unobtrusive; can be expanded or closed. */
-  .fv { position: fixed; right: 20px; bottom: 20px; z-index: 40; width: 200px; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; background: var(--forest); box-shadow: 0 18px 44px rgba(23, 63, 58, .35); opacity: 0; transform: translateY(28px) scale(.96); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1); }
-  .fv.in { opacity: 1; transform: none; }
+  /* Promo video: a vertical 9:16 card right after the trip facts; plays muted when scrolled into view. */
+  .co-video-slot { margin-top: 22px; }
+  .co-video-slot:empty { display: none; }
+  .fv { position: relative; width: min(300px, 78vw); aspect-ratio: 9 / 16; margin-inline: auto; border-radius: 20px; overflow: hidden; background: var(--forest); box-shadow: 0 22px 54px rgba(23, 63, 58, .32); }
   .fv iframe, .fv video, .fv img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; pointer-events: none; }
-  .fv.away { opacity: 0; pointer-events: none; transform: translateY(20px); }
   .fv-hit { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; z-index: 1; }
   .fv-x, .fv-big { position: absolute; top: 8px; z-index: 2; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(23, 63, 58, .62); color: #fff; font-size: 1.15rem; line-height: 1; cursor: pointer; display: grid; place-items: center; }
   .fv-x { right: 8px; } .fv-big { left: 8px; }
@@ -76,7 +77,6 @@
   .fv-lb.in .fv-stage { transform: none; }
   .fv-stage iframe, .fv-stage video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
   .fv-lb .fv-x { top: 14px; right: 14px; width: 40px; height: 40px; }
-  @media (max-width: 767px) { .fv { width: 108px; right: 12px; bottom: 92px; border-radius: 14px; } .fv-x, .fv-big { width: 26px; height: 26px; top: 6px; font-size: .95rem; } .fv-x { right: 6px; } .fv-big { left: 6px; } }
   .co-bar { display: none; }
   @media (max-width: 860px) {
       .co-hero { padding-top: 76px; }
@@ -121,11 +121,13 @@
     <h1 id="hero-title"></h1>
     <p class="co-tagline" id="hero-tagline"></p>
     <ul class="co-facts" id="facts"></ul>
-    <ul class="co-labels" id="labels"></ul>
+    <div class="co-video-slot" id="video-slot"></div>
+    <ul class="co-labels co-who" id="labels-who" aria-label="Who it is for"></ul>
+    <ul class="co-labels co-what" id="labels-what"></ul>
   </div>
 </section>
 
-<!-- 2. Presentation video -->
+<!-- 2. Price and purchase -->
 <section class="co-video-wrap">
   <div class="wrap">
     <div class="co-buy" id="hero-buy">
@@ -193,31 +195,41 @@
     $('facts').append(li);
   });
   $('hero-price').textContent = euro(main.price);
-  const labels = $('labels');
-  const addLabel = (text, cls) => { const li = document.createElement('li'); li.className = cls; li.textContent = text; labels.append(li); };
-  (main.audience || []).forEach((a) => addLabel(a, 'who'));
-  ['Instant digital access', 'Rental car required', 'Delivered by email'].forEach((f) => addLabel(f, 'what'));
+  const addLabel = (listId, text) => { const li = document.createElement('li'); li.textContent = text; $(listId).append(li); };
+  (main.audience || []).forEach((a) => addLabel('labels-who', a));
+  ['Instant digital access', 'Rental car required', 'Delivered by email'].forEach((f) => addLabel('labels-what', f));
+
+  /* The title always stays on one line: the CSS size is fluid, and if a longer title still does not fit
+     the width it is reduced a little at a time until it does. */
+  const h1 = $('hero-title');
+  function fitTitle() {
+    h1.style.fontSize = '';
+    let size = parseFloat(getComputedStyle(h1).fontSize);
+    while (h1.scrollWidth > h1.clientWidth && size > 16) { size -= 1; h1.style.fontSize = size + 'px'; }
+  }
+  fitTitle();
+  window.addEventListener('resize', fitTitle);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitle);
 
   /* ---- 2. Video ---- */
-  /* Promo video: a floating vertical player that appears once the visitor has scrolled into the itinerary
-     (past the first screen, at the "Make it a bigger adventure" section). Muted and looping; tap or the expand button opens a large
-     version with sound; X closes it. Once closed or watched it does not come back during this visit. */
+  /* Promo video: a vertical 9:16 card right after the trip facts. It plays muted, in a loop, while it is on
+     screen and pauses when it leaves. Tap it (or the expand button) for a large view with sound. */
   function embed(u, muted, controls) {
     let m;
     if ((m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/)))
-      return 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0&playsinline=1&loop=1&playlist=' + m[1] + '&controls=' + (controls ? 1 : 0) + (muted ? '&mute=1' : '');
+      return 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0&playsinline=1&enablejsapi=1&loop=1&playlist=' + m[1] + '&controls=' + (controls ? 1 : 0) + (muted ? '&mute=1' : '');
     if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
       return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1&dnt=1&loop=1&controls=' + (controls ? 1 : 0) + (muted ? '&muted=1' : '');
     return null;
   }
-  (function floatingVideo() {
+  (function promoVideo() {
     const url = (main.video || '').trim();
-    if (!url) return;                                    // no video for this itinerary yet: nothing floats
+    if (!url) return;                                    // no video for this itinerary yet: nothing is shown
     const isMp4 = /\.mp4(\?|$)/i.test(url);
     if (!isMp4 && !embed(url, true, false)) return;
     const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    let done = false;                                    // dismissed or watched: never show again on this visit
-    let mini = null, lightbox = null, lastFocus = null;
+    const isYt = /youtu/i.test(url);
+    let card = null, player = null, lightbox = null, lastFocus = null, visible = false;
 
     const btn = (cls, label, text) => {
       const b = document.createElement('button');
@@ -237,13 +249,16 @@
       }
       return m;
     }
+    function command(play) {                              // play or pause the small card
+      if (!player) return;
+      if (isMp4) { if (play) player.play().catch(() => {}); else player.pause(); return; }
+      const msg = isYt ? { event: 'command', func: play ? 'playVideo' : 'pauseVideo', args: [] } : { method: play ? 'play' : 'pause' };
+      try { player.contentWindow.postMessage(JSON.stringify(msg), '*'); } catch (e) { /* ignore */ }
+    }
 
-    let awayObs = null;
-    function closeMini() { if (awayObs) { awayObs.disconnect(); awayObs = null; } if (mini) { mini.remove(); mini = null; } }
     function openLightbox() {
       if (lightbox) return;
-      done = true;
-      closeMini();
+      command(false);
       lastFocus = document.activeElement;
       lightbox = document.createElement('div');
       lightbox.className = 'fv-lb';
@@ -266,48 +281,37 @@
       if (!lightbox) return;
       lightbox.remove(); lightbox = null;
       document.body.classList.remove('wwi-lock');
+      if (visible) command(true);
       if (lastFocus && lastFocus.focus) lastFocus.focus();
     }
     document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
 
-    function showMini() {
-      if (done || mini) return;
-      mini = document.createElement('aside');
-      mini.className = 'fv';
-      mini.setAttribute('aria-label', 'Promotional video');
-      if (calm) {                                        // reduced motion: still picture, no autoplay
-        const img = document.createElement('img');
-        img.alt = ''; img.src = main.cover;
-        img.addEventListener('error', () => img.remove());
-        mini.append(img);
-      } else {
-        mini.append(media(true, false));
-      }
-      const hit = btn('fv-hit', 'Play the video larger', '');
-      hit.addEventListener('click', openLightbox);
-      const big = btn('fv-big', 'Expand video', '⤢');
-      big.addEventListener('click', openLightbox);
-      const x = btn('fv-x', 'Close video', '×');
-      x.addEventListener('click', () => { done = true; closeMini(); });
-      mini.append(hit, big, x);
-      document.body.append(mini);
-      requestAnimationFrame(() => requestAnimationFrame(() => mini && mini.classList.add('in')));
-      /* On phones, step aside while the order box is on screen so it never covers the price or the pay button. */
-      if ('IntersectionObserver' in window) {
-        awayObs = new IntersectionObserver((es) => { es.forEach((en) => { if (mini) mini.classList.toggle('away', en.isIntersecting && matchMedia('(max-width: 767px)').matches); }); });
-        awayObs.observe($('order'));
-      }
+    card = document.createElement('div');
+    card.className = 'fv';
+    if (calm) {                                          // reduced motion: still picture, no autoplay
+      const img = document.createElement('img');
+      img.alt = ''; img.src = main.cover;
+      img.addEventListener('error', () => img.remove());
+      card.append(img);
     }
+    const hit = btn('fv-hit', 'Play the video larger', '');
+    hit.addEventListener('click', openLightbox);
+    const big = btn('fv-big', 'Expand video', '⤢');
+    big.addEventListener('click', openLightbox);
+    card.append(hit, big);
+    $('video-slot').append(card);
 
-    /* Trigger: the visitor has started exploring (scrolled down) and reached the "more itineraries" section. */
-    const check = () => {
-      if (window.scrollY < 240) return;
-      const more = $('more');
-      if (more.hidden || more.getBoundingClientRect().top > window.innerHeight * 0.85) return;
-      window.removeEventListener('scroll', check);
-      showMini();
-    };
-    window.addEventListener('scroll', check, { passive: true });
+    if (!calm && 'IntersectionObserver' in window) {
+      new IntersectionObserver((es) => {
+        es.forEach((en) => {
+          visible = en.isIntersecting;
+          if (visible) {
+            if (!player) { player = media(true, false); card.prepend(player); }   // loaded when first seen
+            else if (!lightbox) command(true);
+          } else command(false);
+        });
+      }, { threshold: 0.5 }).observe(card);
+    }
   })();
 
   /* ---- Add itinerary: shared selection, the visitor stays on this page ---- */
