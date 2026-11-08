@@ -8,7 +8,7 @@
 (function (w) {
   w.WWI_ITEMS = [
     { id: 'north', destination: 'Fuerteventura', name: 'Explore the north of Fuerteventura', price: 8,
-      cover: 'images/cover-north.jpg', video: 'https://youtube.com/shorts/iV2MGGzLsSI', audience: ['Families', 'Couples', 'Solo'],
+      cover: 'images/cover-north.jpg', video: 'https://youtube.com/shorts/iV2MGGzLsSI', audience: ['Families', 'Couples', 'Solo travellers'],
       place: 'Fuerteventura · Canary Islands', headline: 'Explore the North',
       tagline: 'A day of dunes, volcanoes, fishing villages and ocean views.',
       facts: [{ icon: 'clock', text: '1 full day' }, { icon: 'pin', text: '5 stops' }, { icon: 'car', text: 'Self-guided' }],
