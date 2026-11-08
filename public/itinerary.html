@@ -26,6 +26,7 @@
   .btn.is-added { background: var(--forest); cursor: default; }
 
   .co-video-wrap { padding-block: 0; background: var(--sand); padding-bottom: clamp(32px, 5vw, 56px); }
+  .co-video.short { aspect-ratio: 9 / 16; max-height: 78vh; width: auto; max-width: 100%; margin-inline: auto; }
   .co-video-wrap .co-buy { margin-top: 24px; }
   .co-video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--forest); box-shadow: var(--shadow); }
   .co-video img.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
@@ -172,10 +173,14 @@
   ['Instant digital access', 'Rental car required', 'Delivered by email'].forEach((f) => addLabel(f, 'what'));
 
   /* ---- 2. Video ---- */
-  function embedUrl(u) {
+  /* Video player. It starts by itself, muted, when the visitor scrolls to it (like a social feed),
+     pauses when it leaves the screen and resumes when it comes back. Tapping play starts it with sound. */
+  function embed(u, muted) {
     let m;
-    if ((m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/))) return 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0';
-    if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/))) return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1&dnt=1';
+    if ((m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/)))
+      return { kind: 'yt', src: 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0&playsinline=1&enablejsapi=1&loop=1&playlist=' + m[1] + (muted ? '&mute=1' : '') };
+    if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
+      return { kind: 'vimeo', src: 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1&dnt=1&loop=1' + (muted ? '&muted=1' : '') };
     return null;
   }
   (function buildVideo() {
@@ -201,22 +206,44 @@
       box.append(soon);
       return;
     }
-    btn.addEventListener('click', () => {
-      if (/\.mp4(\?|$)/i.test(url)) {
-        const v = document.createElement('video');
-        v.controls = true; v.autoplay = true; v.playsInline = true; v.src = url;
-        v.setAttribute('aria-label', main.name);
-        box.replaceChildren(v);
-        return;
+    if (/youtube\.com\/shorts\//i.test(url)) box.classList.add('short');   // YouTube Shorts are vertical (9:16)
+    const isMp4 = /\.mp4(\?|$)/i.test(url);
+    const info = isMp4 ? { kind: 'mp4' } : embed(url, true);
+    if (!info) { box.remove(); return; }
+    let player = null;
+    function mount(muted) {
+      if (player) return;
+      if (isMp4) {
+        player = document.createElement('video');
+        player.controls = true; player.autoplay = true; player.loop = true; player.playsInline = true;
+        player.muted = muted; player.src = url;
+        player.setAttribute('aria-label', main.name);
+      } else {
+        player = document.createElement('iframe');
+        player.src = embed(url, muted).src; player.title = main.name;
+        player.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        player.allowFullscreen = true;
       }
-      const src = embedUrl(url);
-      if (!src) return;
-      const f = document.createElement('iframe');
-      f.src = src; f.title = main.name;
-      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-      f.allowFullscreen = true;
-      box.replaceChildren(f);
-    });
+      box.replaceChildren(player);
+    }
+    function command(play) {
+      if (!player) return;
+      if (isMp4) { if (play) player.play().catch(() => {}); else player.pause(); return; }
+      const msg = info.kind === 'yt'
+        ? { event: 'command', func: play ? 'playVideo' : 'pauseVideo', args: [] }
+        : { method: play ? 'play' : 'pause' };
+      try { player.contentWindow.postMessage(JSON.stringify(msg), '*'); } catch (e) { /* ignore */ }
+    }
+    btn.addEventListener('click', () => mount(false));          // a tap always plays, with sound
+    const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+    if (!calm && 'IntersectionObserver' in window) {
+      new IntersectionObserver((es) => {
+        es.forEach((en) => {
+          if (en.isIntersecting) { if (player) command(true); else mount(true); }
+          else command(false);
+        });
+      }, { threshold: 0.6 }).observe(box);
+    }
   })();
 
   /* ---- Add itinerary: shared selection, the visitor stays on this page ---- */
