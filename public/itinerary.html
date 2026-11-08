@@ -25,18 +25,8 @@
   .co-buy .btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
   .btn.is-added { background: var(--forest); cursor: default; }
 
-  .co-video-wrap { padding-block: 0; background: var(--sand); padding-bottom: clamp(32px, 5vw, 56px); }
-  .co-video.short { aspect-ratio: 9 / 16; max-height: 78vh; width: auto; max-width: 100%; margin-inline: auto; }
-  .co-video-wrap .co-buy { margin-top: 24px; }
-  .co-video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--forest); box-shadow: var(--shadow); }
-  .co-video img.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
-  .co-video iframe, .co-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .co-play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; display: grid; place-items: center; cursor: pointer; }
-  .co-play[disabled] { cursor: default; }
-  .co-play-icon { position: relative; width: clamp(64px, 10vw, 92px); aspect-ratio: 1; border-radius: 50%; background: var(--terracotta); box-shadow: 0 10px 28px rgba(23, 63, 58, .35); transition: transform .2s; }
-  .co-play:not([disabled]):hover .co-play-icon { transform: scale(1.06); }
-  .co-play-icon::after { content: ""; position: absolute; left: 38%; top: 30%; border-left: clamp(18px, 3vw, 28px) solid #fff; border-top: clamp(12px, 2vw, 19px) solid transparent; border-bottom: clamp(12px, 2vw, 19px) solid transparent; }
-  .co-soon { position: absolute; left: 16px; bottom: 16px; background: var(--white); color: var(--forest); font-weight: 600; font-size: .85rem; padding: 6px 14px; border-radius: 999px; }
+  .co-video-wrap { padding-block: 0 clamp(32px, 5vw, 56px); background: var(--sand); }
+  .co-video-wrap .co-buy { margin-top: 0; }
 
   .co-more { padding-block: var(--section-y) 0; }
   .co-more .lead { margin-top: 12px; }
@@ -65,6 +55,22 @@
   .co-pay { width: 100%; margin-top: 22px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1.05rem; }
     .co-note { margin-top: 12px; font-size: .92rem; color: var(--muted); }
 
+  /* Floating promo video: appears while the visitor explores, small and unobtrusive; can be expanded or closed. */
+  .fv { position: fixed; right: 20px; bottom: 20px; z-index: 40; width: 200px; aspect-ratio: 9 / 16; border-radius: 18px; overflow: hidden; background: var(--forest); box-shadow: 0 18px 44px rgba(23, 63, 58, .35); opacity: 0; transform: translateY(28px) scale(.96); transition: opacity .6s ease, transform .6s cubic-bezier(.2, .8, .2, 1); }
+  .fv.in { opacity: 1; transform: none; }
+  .fv iframe, .fv video, .fv img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; pointer-events: none; }
+  .fv.away { opacity: 0; pointer-events: none; transform: translateY(20px); }
+  .fv-hit { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; z-index: 1; }
+  .fv-x, .fv-big { position: absolute; top: 8px; z-index: 2; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(23, 63, 58, .62); color: #fff; font-size: 1.15rem; line-height: 1; cursor: pointer; display: grid; place-items: center; }
+  .fv-x { right: 8px; } .fv-big { left: 8px; }
+  .fv-x:hover, .fv-big:hover { background: rgba(23, 63, 58, .85); }
+  .fv-lb { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: rgba(14, 36, 33, .84); opacity: 0; transition: opacity .35s ease; }
+  .fv-lb.in { opacity: 1; }
+  .fv-stage { position: relative; height: min(86vh, 780px); aspect-ratio: 9 / 16; max-width: 94vw; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 24px 64px rgba(0, 0, 0, .5); transform: scale(.94); transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
+  .fv-lb.in .fv-stage { transform: none; }
+  .fv-stage iframe, .fv-stage video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
+  .fv-lb .fv-x { top: 14px; right: 14px; width: 40px; height: 40px; }
+  @media (max-width: 767px) { .fv { width: 108px; right: 12px; bottom: 92px; border-radius: 14px; } .fv-x, .fv-big { width: 26px; height: 26px; top: 6px; font-size: .95rem; } .fv-x { right: 6px; } .fv-big { left: 6px; } }
   .co-bar { display: none; }
   @media (max-width: 860px) {
       .co-hero { padding-top: 76px; }
@@ -77,7 +83,7 @@
     .co-bar .btn { flex: 1; max-width: 220px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1rem; padding-inline: 16px; }
     body { padding-bottom: 0; }
   }
-  @media (prefers-reduced-motion: reduce) { .co-bar, .co-play-icon { transition: none; } }
+  @media (prefers-reduced-motion: reduce) { .co-bar, .fv, .fv-lb, .fv-stage { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -114,7 +120,6 @@
 <!-- 2. Presentation video -->
 <section class="co-video-wrap">
   <div class="wrap">
-    <div class="co-video" id="video"></div>
     <div class="co-buy" id="hero-buy">
       <span class="co-price" id="hero-price"></span>
       <button type="button" class="btn" id="add-main">Add itinerary</button>
@@ -173,77 +178,115 @@
   ['Instant digital access', 'Rental car required', 'Delivered by email'].forEach((f) => addLabel(f, 'what'));
 
   /* ---- 2. Video ---- */
-  /* Video player. It starts by itself, muted, when the visitor scrolls to it (like a social feed),
-     pauses when it leaves the screen and resumes when it comes back. Tapping play starts it with sound. */
-  function embed(u, muted) {
+  /* Promo video: a floating vertical player that appears once the visitor has scrolled into the itinerary
+     (past the first screen, at the "Make it a bigger adventure" section). Muted and looping; tap or the expand button opens a large
+     version with sound; X closes it. Once closed or watched it does not come back during this visit. */
+  function embed(u, muted, controls) {
     let m;
     if ((m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/)))
-      return { kind: 'yt', src: 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0&playsinline=1&enablejsapi=1&loop=1&playlist=' + m[1] + (muted ? '&mute=1' : '') };
+      return 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0&playsinline=1&loop=1&playlist=' + m[1] + '&controls=' + (controls ? 1 : 0) + (muted ? '&mute=1' : '');
     if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
-      return { kind: 'vimeo', src: 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1&dnt=1&loop=1' + (muted ? '&muted=1' : '') };
+      return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1&dnt=1&loop=1&controls=' + (controls ? 1 : 0) + (muted ? '&muted=1' : '');
     return null;
   }
-  (function buildVideo() {
-    const box = $('video');
+  (function floatingVideo() {
     const url = (main.video || '').trim();
-    const poster = document.createElement('img');
-    poster.className = 'poster';
-    poster.alt = '';
-    poster.addEventListener('error', () => poster.remove());
-    poster.src = main.cover;
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'co-play';
-    btn.setAttribute('aria-label', 'Play video: ' + main.name);
-    btn.innerHTML = '<span class="co-play-icon" aria-hidden="true"></span>';
-    box.append(poster, btn);
-    if (!url) {
-      btn.disabled = true;
-      btn.setAttribute('aria-label', 'Video coming soon');
-      const soon = document.createElement('span');
-      soon.className = 'co-soon';
-      soon.textContent = 'Video coming soon';
-      box.append(soon);
-      return;
-    }
-    if (/youtube\.com\/shorts\//i.test(url)) box.classList.add('short');   // YouTube Shorts are vertical (9:16)
+    if (!url) return;                                    // no video for this itinerary yet: nothing floats
     const isMp4 = /\.mp4(\?|$)/i.test(url);
-    const info = isMp4 ? { kind: 'mp4' } : embed(url, true);
-    if (!info) { box.remove(); return; }
-    let player = null;
-    function mount(muted) {
-      if (player) return;
-      if (isMp4) {
-        player = document.createElement('video');
-        player.controls = true; player.autoplay = true; player.loop = true; player.playsInline = true;
-        player.muted = muted; player.src = url;
-        player.setAttribute('aria-label', main.name);
-      } else {
-        player = document.createElement('iframe');
-        player.src = embed(url, muted).src; player.title = main.name;
-        player.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-        player.allowFullscreen = true;
-      }
-      box.replaceChildren(player);
-    }
-    function command(play) {
-      if (!player) return;
-      if (isMp4) { if (play) player.play().catch(() => {}); else player.pause(); return; }
-      const msg = info.kind === 'yt'
-        ? { event: 'command', func: play ? 'playVideo' : 'pauseVideo', args: [] }
-        : { method: play ? 'play' : 'pause' };
-      try { player.contentWindow.postMessage(JSON.stringify(msg), '*'); } catch (e) { /* ignore */ }
-    }
-    btn.addEventListener('click', () => mount(false));          // a tap always plays, with sound
+    if (!isMp4 && !embed(url, true, false)) return;
     const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    if (!calm && 'IntersectionObserver' in window) {
-      new IntersectionObserver((es) => {
-        es.forEach((en) => {
-          if (en.isIntersecting) { if (player) command(true); else mount(true); }
-          else command(false);
-        });
-      }, { threshold: 0.6 }).observe(box);
+    let done = false;                                    // dismissed or watched: never show again on this visit
+    let mini = null, lightbox = null, lastFocus = null;
+
+    const btn = (cls, label, text) => {
+      const b = document.createElement('button');
+      b.type = 'button'; b.className = cls; b.textContent = text; b.setAttribute('aria-label', label);
+      return b;
+    };
+    function media(muted, controls) {
+      let m;
+      if (isMp4) {
+        m = document.createElement('video');
+        m.src = url; m.muted = muted; m.loop = true; m.playsInline = true; m.autoplay = true; m.controls = controls;
+      } else {
+        m = document.createElement('iframe');
+        m.src = embed(url, muted, controls); m.title = main.name + ' video';
+        m.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
+        m.allowFullscreen = true;
+      }
+      return m;
     }
+
+    let awayObs = null;
+    function closeMini() { if (awayObs) { awayObs.disconnect(); awayObs = null; } if (mini) { mini.remove(); mini = null; } }
+    function openLightbox() {
+      if (lightbox) return;
+      done = true;
+      closeMini();
+      lastFocus = document.activeElement;
+      lightbox = document.createElement('div');
+      lightbox.className = 'fv-lb';
+      lightbox.setAttribute('role', 'dialog');
+      lightbox.setAttribute('aria-modal', 'true');
+      lightbox.setAttribute('aria-label', main.name + ' video');
+      const stage = document.createElement('div');
+      stage.className = 'fv-stage';
+      stage.append(media(false, true));                  // opened by a tap: plays with sound
+      const x = btn('fv-x', 'Close video', '×');
+      x.addEventListener('click', closeLightbox);
+      lightbox.append(stage, x);
+      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
+      document.body.append(lightbox);
+      document.body.classList.add('wwi-lock');
+      requestAnimationFrame(() => lightbox && lightbox.classList.add('in'));
+      x.focus();
+    }
+    function closeLightbox() {
+      if (!lightbox) return;
+      lightbox.remove(); lightbox = null;
+      document.body.classList.remove('wwi-lock');
+      if (lastFocus && lastFocus.focus) lastFocus.focus();
+    }
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
+
+    function showMini() {
+      if (done || mini) return;
+      mini = document.createElement('aside');
+      mini.className = 'fv';
+      mini.setAttribute('aria-label', 'Promotional video');
+      if (calm) {                                        // reduced motion: still picture, no autoplay
+        const img = document.createElement('img');
+        img.alt = ''; img.src = main.cover;
+        img.addEventListener('error', () => img.remove());
+        mini.append(img);
+      } else {
+        mini.append(media(true, false));
+      }
+      const hit = btn('fv-hit', 'Play the video larger', '');
+      hit.addEventListener('click', openLightbox);
+      const big = btn('fv-big', 'Expand video', '⤢');
+      big.addEventListener('click', openLightbox);
+      const x = btn('fv-x', 'Close video', '×');
+      x.addEventListener('click', () => { done = true; closeMini(); });
+      mini.append(hit, big, x);
+      document.body.append(mini);
+      requestAnimationFrame(() => requestAnimationFrame(() => mini && mini.classList.add('in')));
+      /* On phones, step aside while the order box is on screen so it never covers the price or the pay button. */
+      if ('IntersectionObserver' in window) {
+        awayObs = new IntersectionObserver((es) => { es.forEach((en) => { if (mini) mini.classList.toggle('away', en.isIntersecting && matchMedia('(max-width: 767px)').matches); }); });
+        awayObs.observe($('order'));
+      }
+    }
+
+    /* Trigger: the visitor has started exploring (scrolled down) and reached the "more itineraries" section. */
+    const check = () => {
+      if (window.scrollY < 240) return;
+      const more = $('more');
+      if (more.hidden || more.getBoundingClientRect().top > window.innerHeight * 0.85) return;
+      window.removeEventListener('scroll', check);
+      showMini();
+    };
+    window.addEventListener('scroll', check, { passive: true });
   })();
 
   /* ---- Add itinerary: shared selection, the visitor stays on this page ---- */
