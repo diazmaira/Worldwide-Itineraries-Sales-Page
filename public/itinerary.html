@@ -26,6 +26,7 @@
   .btn.is-added { background: var(--forest); cursor: default; }
 
   .co-video-wrap { padding-block: 0; background: var(--sand); padding-bottom: clamp(32px, 5vw, 56px); }
+  .co-video.short { aspect-ratio: 9 / 16; max-height: 78vh; width: auto; max-width: 100%; margin-inline: auto; }
   .co-video-wrap .co-buy { margin-top: 24px; }
   .co-video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--forest); box-shadow: var(--shadow); }
   .co-video img.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
@@ -181,6 +182,7 @@
   (function buildVideo() {
     const box = $('video');
     const url = (main.video || '').trim();
+    if (/youtube\.com\/shorts\//i.test(url)) box.classList.add('short');   // YouTube Shorts are vertical (9:16)
     const poster = document.createElement('img');
     poster.className = 'poster';
     poster.alt = '';

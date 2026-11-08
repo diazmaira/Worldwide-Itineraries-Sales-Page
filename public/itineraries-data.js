@@ -6,7 +6,7 @@
 (function (w) {
   w.WWI_ITEMS = [
     { id: 'north', destination: 'Fuerteventura', name: 'Explore the north of Fuerteventura', price: 8,
-      cover: 'images/cover-north.jpg', video: '', audience: ['Families', 'Couples', 'Solo'],
+      cover: 'images/cover-north.jpg', video: 'https://youtube.com/shorts/iV2MGGzLsSI', audience: ['Families', 'Couples', 'Solo'],
       desc: 'A full day through the north of the island, from golden dunes and volcanic landscapes to coastal viewpoints and a local lunch stop. Every stop comes with timing, parking and a Google Maps link.' },
     { id: 'rural', destination: 'Fuerteventura', name: 'The rural heart of Fuerteventura', price: 8,
       cover: 'images/cover-rural.jpg', video: '',
