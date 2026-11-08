@@ -14,20 +14,19 @@
 <link rel="stylesheet" href="theme.css">
 <style>
   /* Checkout page: built on the shared tokens in theme.css */
-  .co-hero { padding: 104px 0 clamp(40px, 6vw, 72px); background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
-  .co-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-  .co-photo { border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; aspect-ratio: 4 / 3; background: var(--sand); }
-  .co-photo img { width: 100%; height: 100%; object-fit: cover; }
+  .co-hero { padding: 104px 0 28px; background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
   .co-hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); margin-top: 16px; }
-  .co-hero .desc { margin-top: 18px; font-size: 1.125rem; color: var(--muted); max-width: 52ch; }
-  .co-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
-  .co-facts li { background: var(--white); border-radius: 999px; padding: 6px 16px; font-size: .95rem; font-weight: 600; box-shadow: var(--shadow-sm); }
+  .co-labels { display: flex; flex-wrap: wrap; gap: 5px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .co-labels li { border-radius: 999px; padding: 3px 10px; font-size: .75rem; font-weight: 600; color: var(--forest); }
+  .co-labels .who { background: var(--sage); }
+  .co-labels .what { background: var(--ocean); }
   .co-buy { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; margin-top: 28px; }
   .co-price { font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; }
   .co-buy .btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
   .btn.is-added { background: var(--forest); cursor: default; }
 
-  .co-video-wrap { padding-block: clamp(40px, 6vw, 80px) 0; }
+  .co-video-wrap { padding-block: 0; background: var(--sand); padding-bottom: clamp(32px, 5vw, 56px); }
+  .co-video-wrap .co-buy { margin-top: 24px; }
   .co-video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--forest); box-shadow: var(--shadow); }
   .co-video img.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
   .co-video iframe, .co-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
@@ -67,8 +66,7 @@
 
   .co-bar { display: none; }
   @media (max-width: 860px) {
-    .co-hero-grid { grid-template-columns: 1fr; }
-    .co-hero { padding-top: 76px; }
+      .co-hero { padding-top: 76px; }
   }
   @media (max-width: 767px) {
     .co-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--cream); box-shadow: 0 -6px 18px rgba(23, 63, 58, .10); opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .3s, transform .3s, visibility .3s; }
@@ -105,22 +103,10 @@
 
 <!-- 1. Selected itinerary -->
 <section class="co-hero" id="top">
-  <div class="wrap co-hero-grid">
-    <div class="co-photo" id="hero-photo"><img id="hero-img" alt="" width="1200" height="900"></div>
-    <div>
-      <span class="tag">Self-guided itinerary</span>
-      <h1 id="hero-title"></h1>
-      <p class="desc" id="hero-desc"></p>
-      <ul class="co-facts">
-        <li>Instant digital access</li>
-        <li>Rental car required</li>
-        <li>Delivered by email</li>
-      </ul>
-      <div class="co-buy" id="hero-buy">
-        <span class="co-price" id="hero-price"></span>
-        <button type="button" class="btn" id="add-main">Add itinerary</button>
-      </div>
-    </div>
+  <div class="wrap">
+    <span class="tag">Self-guided itinerary</span>
+    <h1 id="hero-title"></h1>
+    <ul class="co-labels" id="labels"></ul>
   </div>
 </section>
 
@@ -128,6 +114,10 @@
 <section class="co-video-wrap">
   <div class="wrap">
     <div class="co-video" id="video"></div>
+    <div class="co-buy" id="hero-buy">
+      <span class="co-price" id="hero-price"></span>
+      <button type="button" class="btn" id="add-main">Add itinerary</button>
+    </div>
   </div>
 </section>
 
@@ -175,12 +165,11 @@
   /* ---- 1. Hero ---- */
   document.title = main.name + ' | Worldwide Itineraries';
   $('hero-title').textContent = main.name;
-  $('hero-desc').textContent = main.desc;
   $('hero-price').textContent = euro(main.price);
-  const heroImg = $('hero-img');
-  heroImg.alt = main.name;
-  heroImg.addEventListener('error', () => heroImg.remove());
-  heroImg.src = main.cover;
+  const labels = $('labels');
+  const addLabel = (text, cls) => { const li = document.createElement('li'); li.className = cls; li.textContent = text; labels.append(li); };
+  (main.audience || []).forEach((a) => addLabel(a, 'who'));
+  ['Instant digital access', 'Rental car required', 'Delivered by email'].forEach((f) => addLabel(f, 'what'));
 
   /* ---- 2. Video ---- */
   function embedUrl(u) {
