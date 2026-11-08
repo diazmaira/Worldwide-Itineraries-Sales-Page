@@ -15,8 +15,14 @@
 <style>
   /* Checkout page: built on the shared tokens in theme.css */
   .co-hero { padding: 104px 0 28px; background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
-  .co-hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); margin-top: 16px; }
-  .co-labels { display: flex; flex-wrap: wrap; gap: 5px; margin: 14px 0 0; padding: 0; list-style: none; }
+  .co-place { margin: 0; font-size: .75rem; font-weight: 600; letter-spacing: .22em; text-transform: uppercase; color: var(--muted); }
+  .co-hero h1 { font-size: clamp(2.6rem, 6.4vw, 4.6rem); line-height: 1.02; letter-spacing: -.02em; margin-top: 14px; }
+  .co-tagline { margin: 16px 0 0; max-width: 46ch; font-size: 1.15rem; line-height: 1.55; color: var(--muted); }
+  .co-facts { display: flex; flex-wrap: wrap; align-items: center; gap: 8px 26px; margin: 22px 0 0; padding: 0; list-style: none; font-size: .95rem; font-weight: 500; color: var(--forest); }
+  .co-facts li { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; }
+  .co-facts svg { width: 18px; height: 18px; flex: none; opacity: .75; }
+  .co-facts:empty, .co-tagline:empty { display: none; }
+  .co-labels { display: flex; flex-wrap: wrap; gap: 5px; margin: 20px 0 0; padding: 0; list-style: none; }
   .co-labels li { border-radius: 999px; padding: 3px 10px; font-size: .75rem; font-weight: 600; color: var(--forest); }
   .co-labels .who { background: var(--sage); }
   .co-labels .what { background: var(--ocean); }
@@ -111,8 +117,10 @@
 <!-- 1. Selected itinerary -->
 <section class="co-hero" id="top">
   <div class="wrap">
-    <span class="tag">Self-guided itinerary</span>
+    <p class="co-place" id="hero-place"></p>
     <h1 id="hero-title"></h1>
+    <p class="co-tagline" id="hero-tagline"></p>
+    <ul class="co-facts" id="facts"></ul>
     <ul class="co-labels" id="labels"></ul>
   </div>
 </section>
@@ -170,7 +178,20 @@
 
   /* ---- 1. Hero ---- */
   document.title = main.name + ' | Worldwide Itineraries';
-  $('hero-title').textContent = main.name;
+  $('hero-title').textContent = main.headline || main.name;
+  $('hero-place').textContent = main.place || main.destination;
+  $('hero-tagline').textContent = main.tagline || '';
+  const ICONS = {
+    clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+    pin: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
+    car: '<path d="M5 16V12l1.7-4.4A2 2 0 0 1 8.6 6.3h6.8a2 2 0 0 1 1.9 1.3L19 12v4"/><path d="M3.5 12h17v4a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="14.5" r=".6"/><circle cx="16.5" cy="14.5" r=".6"/><path d="M6 17v2M18 17v2"/>'
+  };
+  (main.facts || []).forEach((f) => {
+    const li = document.createElement('li');
+    li.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[f.icon] || '') + '</svg>';
+    li.append(document.createTextNode(f.text));
+    $('facts').append(li);
+  });
   $('hero-price').textContent = euro(main.price);
   const labels = $('labels');
   const addLabel = (text, cls) => { const li = document.createElement('li'); li.className = cls; li.textContent = text; labels.append(li); };
