@@ -18,18 +18,24 @@
   .co-place { margin: 0; font-size: clamp(.6rem, 2.6vw, .75rem); font-weight: 600; letter-spacing: .2em; white-space: nowrap; text-transform: uppercase; color: var(--muted); }
   .co-hero h1 { font-size: clamp(1.7rem, 9.2vw, 4.6rem); line-height: 1.04; letter-spacing: -.02em; margin-top: 12px; white-space: nowrap; overflow-x: clip; }
   .co-tagline { margin: 16px 0 0; max-width: 46ch; font-size: 1.15rem; line-height: 1.55; color: var(--muted); }
-  .co-facts { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px clamp(10px, 3.4vw, 24px); margin: 18px 0 0; padding: 0; list-style: none; font-size: clamp(.72rem, 3.4vw, .9rem); font-weight: 500; color: var(--forest); }
-  .co-facts li { display: inline-flex; align-items: center; gap: .4em; white-space: nowrap; }
+  .co-facts { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px 0; margin: 18px 0 0; padding: 0; list-style: none; font-size: clamp(.72rem, 3.4vw, .9rem); font-weight: 500; color: var(--forest); }
+  .co-facts li { display: inline-flex; align-items: center; gap: .4em; white-space: nowrap; padding-inline: clamp(8px, 3vw, 18px); }
+  .co-facts li:first-child { padding-left: 0; }
+  .co-facts li + li { border-left: 1px solid rgba(23, 63, 58, .28); }
   .co-facts svg { width: 1.2em; height: 1.2em; flex: none; opacity: .75; }
   .co-facts:empty, .co-tagline:empty { display: none; }
   .co-labels { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
   .co-labels li { border: 1px solid var(--sage); border-radius: 999px; padding: 3px 11px; font-size: .75rem; font-weight: 600; color: var(--forest); background: transparent; white-space: nowrap; }
-  .co-who { flex-wrap: nowrap; gap: clamp(4px, 1.6vw, 8px); margin-top: 22px; }
+  .co-who { flex-wrap: nowrap; gap: clamp(4px, 1.6vw, 8px); }
   .co-who li { padding-inline: clamp(8px, 3vw, 14px); font-size: clamp(.68rem, 3.2vw, .8rem); }
   .co-labels:empty { display: none; }
-  .co-buy { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; margin-top: 28px; }
-  .co-price { font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; }
-  .co-buy .btn { border: 0; cursor: pointer; font: inherit; font-weight: 700; }
+  .co-buy { display: grid; gap: 14px; max-width: 420px; margin-top: 28px; }
+  .co-buy-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
+  .co-price { font-family: var(--display); font-weight: 800; font-size: 2.08rem; line-height: 1; }
+  .co-buy-note { font-size: .78rem; font-weight: 500; color: var(--muted); text-align: right; }
+  .co-buy .btn { width: 100%; border: 0; border-radius: 10px; cursor: pointer; font: inherit; font-weight: 700; }
+  .co-who-title { margin-top: 30px; font-size: .8rem; font-family: var(--body, inherit); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--forest); }
+  .co-who-title + .co-who { margin-top: 10px; }
   .btn.is-added { background: var(--forest); cursor: default; }
 
   .co-video-wrap { padding-block: 0 clamp(32px, 5vw, 56px); background: var(--sand); }
@@ -122,7 +128,8 @@
     <p class="co-tagline" id="hero-tagline"></p>
     <ul class="co-facts" id="facts"></ul>
     <div class="co-video-slot" id="video-slot"></div>
-    <ul class="co-labels co-who" id="labels-who" aria-label="Who it is for"></ul>
+    <h2 class="co-who-title" id="who-title" hidden>Who is it for?</h2>
+    <ul class="co-labels co-who" id="labels-who" aria-labelledby="who-title"></ul>
     <ul class="co-labels co-what" id="labels-what"></ul>
   </div>
 </section>
@@ -131,8 +138,11 @@
 <section class="co-video-wrap">
   <div class="wrap">
     <div class="co-buy" id="hero-buy">
-      <span class="co-price" id="hero-price"></span>
-      <button type="button" class="btn" id="add-main">Add itinerary</button>
+      <div class="co-buy-row">
+        <span class="co-price" id="hero-price"></span>
+        <span class="co-buy-note">Instant digital access</span>
+      </div>
+      <button type="button" class="btn" id="add-main">Add to my itineraries</button>
     </div>
   </div>
 </section>
@@ -197,7 +207,8 @@
   $('hero-price').textContent = euro(main.price);
   const addLabel = (listId, text) => { const li = document.createElement('li'); li.textContent = text; $(listId).append(li); };
   (main.audience || []).forEach((a) => addLabel('labels-who', a));
-  ['Instant digital access', 'Rental car required', 'Delivered by email'].forEach((f) => addLabel('labels-what', f));
+  $('who-title').hidden = !(main.audience || []).length;   // the question only shows when there are answers
+  ['Rental car required', 'Delivered by email'].forEach((f) => addLabel('labels-what', f));
 
   /* The title always stays on one line: the CSS size is fluid, and if a longer title still does not fit
      the width it is reduced a little at a time until it does. */
@@ -377,7 +388,7 @@
     $('bar-total').textContent = euro(WWI.total(ids));
     const mainAdded = sel.includes(main.id);
     const a = $('add-main');
-    a.textContent = mainAdded ? 'Added to my itineraries' : 'Add itinerary';
+    a.textContent = mainAdded ? 'Added to my itineraries' : 'Add to my itineraries';
     a.classList.toggle('is-added', mainAdded);
     a.setAttribute('aria-disabled', String(mainAdded));
     grid.querySelectorAll('.co-card').forEach((card) => {
