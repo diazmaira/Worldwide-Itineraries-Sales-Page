@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Your itinerary | Worldwide Itineraries</title>
+<title>Your order | Worldwide Itineraries</title>
 <meta name="robots" content="noindex">
 <link rel="icon" href="favicon.svg" type="image/svg+xml">
 <link rel="icon" href="favicon.ico" sizes="32x32">
@@ -13,74 +13,32 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 <style>
-  /* Checkout page: built on the shared tokens in theme.css */
-  .co-hero { padding: 104px 0 clamp(40px, 6vw, 72px); background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
-  .co-hero-grid { display: grid; grid-template-columns: 1.05fr .95fr; gap: clamp(28px, 5vw, 64px); align-items: center; }
-  .co-photo { border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; aspect-ratio: 4 / 3; background: var(--sand); }
-  .co-photo img { width: 100%; height: 100%; object-fit: cover; }
-  .co-hero h1 { font-size: clamp(2.2rem, 4.6vw, 3.6rem); margin-top: 16px; }
-  .co-hero .desc { margin-top: 18px; font-size: 1.125rem; color: var(--muted); max-width: 52ch; }
-  .co-facts { display: flex; flex-wrap: wrap; gap: 8px; margin: 22px 0 0; padding: 0; list-style: none; }
-  .co-facts li { background: var(--white); border-radius: 999px; padding: 6px 16px; font-size: .95rem; font-weight: 600; box-shadow: var(--shadow-sm); }
-  .co-buy { display: flex; align-items: center; flex-wrap: wrap; gap: 14px 28px; margin-top: 28px; }
-  .co-price { font-family: var(--display); font-weight: 800; font-size: 2.6rem; line-height: 1; }
-  .co-buy .btn { text-transform: uppercase; letter-spacing: .04em; font-weight: 700; }
-
-  .co-video-wrap { padding-block: clamp(40px, 6vw, 80px) 0; }
-  .co-video { position: relative; aspect-ratio: 16 / 9; border-radius: var(--radius); overflow: hidden; background: var(--forest); box-shadow: var(--shadow); }
-  .co-video img.poster { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; }
-  .co-video iframe, .co-video video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .co-play { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; display: grid; place-items: center; cursor: pointer; }
-  .co-play[disabled] { cursor: default; }
-  .co-play-icon { position: relative; width: clamp(64px, 10vw, 92px); aspect-ratio: 1; border-radius: 50%; background: var(--terracotta); box-shadow: 0 10px 28px rgba(23, 63, 58, .35); transition: transform .2s; }
-  .co-play:not([disabled]):hover .co-play-icon { transform: scale(1.06); }
-  .co-play-icon::after { content: ""; position: absolute; left: 38%; top: 30%; border-left: clamp(18px, 3vw, 28px) solid #fff; border-top: clamp(12px, 2vw, 19px) solid transparent; border-bottom: clamp(12px, 2vw, 19px) solid transparent; }
-  .co-soon { position: absolute; left: 16px; bottom: 16px; background: var(--white); color: var(--forest); font-weight: 600; font-size: .85rem; padding: 6px 14px; border-radius: 999px; }
-
-  .co-more { padding-block: var(--section-y) 0; }
-  .co-more .lead { margin-top: 12px; }
-  .co-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 24px; margin-top: 36px; }
-  .co-card { background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s; }
-  .co-card.added { box-shadow: 0 0 0 2px var(--forest), var(--shadow); }
-  .co-card .photo { aspect-ratio: 3 / 2; background: var(--sage); overflow: hidden; }
-  .co-card .photo img { width: 100%; height: 100%; object-fit: cover; }
-  .co-card-body { padding: 18px 20px 22px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
-  .co-card h3 { font-size: 1.3rem; }
-  .co-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: auto; padding-top: 6px; flex-wrap: wrap; }
-  .co-card .price { font-family: var(--display); font-weight: 800; font-size: 1.7rem; }
-  .co-toggle { min-height: 44px; padding: 8px 20px; border-radius: 999px; border: 2px solid var(--forest); background: var(--white); color: var(--forest); font: inherit; font-weight: 600; cursor: pointer; }
-  .co-toggle:hover { background: var(--cream); }
-  .co-card.added .co-toggle { background: var(--forest); color: var(--white); }
-
-  .co-order { padding-block: var(--section-y) clamp(72px, 9vw, 120px); scroll-margin-top: 20px; }
-  .co-order-card { max-width: 640px; margin-inline: auto; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(24px, 4vw, 40px); }
-  .co-order h2 { font-size: clamp(1.7rem, 3.4vw, 2.3rem); }
-  .co-lines { list-style: none; margin: 22px 0 0; padding: 0; display: grid; gap: 12px; }
-  .co-lines li { display: flex; align-items: center; justify-content: space-between; gap: 12px; }
-  .co-lines .name { flex: 1; font-weight: 500; }
-  .co-lines .amt { font-weight: 600; }
+  .co-page { padding: 110px 0 clamp(64px, 9vw, 112px); min-height: 100vh; background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
+  .co-card { max-width: 680px; margin-inline: auto; background: var(--white); border-radius: var(--radius); box-shadow: var(--shadow); padding: clamp(24px, 4vw, 40px); }
+  .co-card h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); }
+  .co-count { margin-top: 6px; color: var(--muted); font-weight: 600; }
+  .co-notice { margin-top: 16px; background: var(--sand); border-radius: var(--radius-sm); padding: 12px 16px; font-weight: 500; }
+  .co-items { list-style: none; margin: 24px 0 0; padding: 0; display: grid; gap: 14px; }
+  .co-items li { display: flex; align-items: center; gap: 16px; }
+  .co-thumb { flex: none; width: 88px; height: 66px; border-radius: 12px; overflow: hidden; background: var(--sage); }
+  .co-thumb img { width: 100%; height: 100%; object-fit: cover; }
+  .co-name { flex: 1; font-family: var(--display); font-weight: 700; font-size: 1.15rem; line-height: 1.2; }
+  .co-amt { font-weight: 700; }
   .co-remove { border: 0; background: none; padding: 6px 4px; color: var(--muted); font: inherit; font-size: .9rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
   .co-remove:hover { color: var(--terracotta); }
-  .co-total { display: flex; justify-content: space-between; align-items: baseline; margin-top: 20px; padding-top: 18px; border-top: 1px solid var(--line); font-weight: 600; }
-  .co-total strong { font-family: var(--display); font-size: 2.2rem; font-weight: 800; }
-  .co-pay { width: 100%; margin-top: 22px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1.05rem; text-transform: uppercase; letter-spacing: .04em; }
+  .co-sums { margin-top: 22px; padding-top: 16px; border-top: 1px solid var(--line); display: grid; gap: 8px; }
+  .co-sums p { display: flex; justify-content: space-between; align-items: baseline; margin: 0; }
+  .co-sums .sub { color: var(--muted); font-weight: 500; }
+  .co-sums .tot { font-weight: 600; }
+  .co-sums .tot strong { font-family: var(--display); font-size: 2.2rem; font-weight: 800; }
+  .co-pay { width: 100%; margin-top: 22px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1.05rem; }
+  .co-pay:disabled { opacity: .55; cursor: default; }
+  .co-explore { display: block; text-align: center; margin-top: 16px; font-weight: 600; color: var(--forest); }
   .co-error { margin-top: 12px; min-height: 1.4em; color: #A3261D; font-weight: 500; font-size: .95rem; }
   .co-note { margin-top: 12px; font-size: .92rem; color: var(--muted); }
-
-  .co-bar { display: none; }
-  @media (max-width: 860px) {
-    .co-hero-grid { grid-template-columns: 1fr; }
-    .co-hero { padding-top: 76px; }
-  }
-  @media (max-width: 767px) {
-    .co-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--cream); box-shadow: 0 -6px 18px rgba(23, 63, 58, .10); opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .3s, transform .3s, visibility .3s; }
-    .co-bar.show { opacity: 1; visibility: visible; transform: none; }
-    .co-bar .t { font-weight: 600; line-height: 1.2; }
-    .co-bar .t strong { display: block; font-family: var(--display); font-size: 1.4rem; }
-    .co-bar .btn { flex: 1; max-width: 220px; text-transform: uppercase; letter-spacing: .03em; font-weight: 700; font-size: .95rem; padding-inline: 16px; }
-    body { padding-bottom: 0; }
-  }
-  @media (prefers-reduced-motion: reduce) { .co-bar, .co-play-icon { transition: none; } }
+  .co-empty p { color: var(--muted); margin-top: 10px; }
+  .co-empty .btn { margin-top: 22px; }
+  @media (max-width: 767px) { .co-page { padding-top: 84px; } .co-thumb { width: 72px; height: 56px; } }
 </style>
 </head>
 <body>
@@ -103,237 +61,107 @@
   </a>
 </div></div>
 
-<main>
+<main class="co-page">
+  <div class="wrap">
 
-<!-- 1. Selected itinerary -->
-<section class="co-hero" id="top">
-  <div class="wrap co-hero-grid">
-    <div class="co-photo" id="hero-photo"><img id="hero-img" alt="" width="1200" height="900"></div>
-    <div>
-      <span class="tag">Self-guided itinerary</span>
-      <h1 id="hero-title"></h1>
-      <p class="desc" id="hero-desc"></p>
-      <ul class="co-facts">
-        <li>Instant digital access</li>
-        <li>Rental car required</li>
-        <li>Delivered by email</li>
-      </ul>
-      <div class="co-buy" id="hero-buy">
-        <span class="co-price" id="hero-price"></span>
-        <a class="btn" href="#order" id="hero-cta">Get this itinerary</a>
+    <!-- Order with itineraries -->
+    <div class="co-card" id="order" hidden>
+      <h1>Your order</h1>
+      <p class="co-count" id="count"></p>
+      <p class="co-notice" id="notice" role="status" hidden></p>
+      <ul class="co-items" id="items" aria-live="polite"></ul>
+      <div class="co-sums">
+        <p class="sub"><span>Subtotal</span><span id="subtotal"></span></p>
+        <p class="tot"><span>Total</span><strong id="total"></strong></p>
       </div>
-    </div>
-  </div>
-</section>
-
-<!-- 2. Presentation video -->
-<section class="co-video-wrap">
-  <div class="wrap">
-    <div class="co-video" id="video"></div>
-  </div>
-</section>
-
-<!-- 3. Add more itineraries -->
-<section class="co-more" id="more" hidden>
-  <div class="wrap">
-    <h2 class="section-title">Make it a bigger adventure</h2>
-    <p class="lead">Want to discover more? Add another itinerary to your order.</p>
-    <div class="co-grid" id="more-grid"></div>
-  </div>
-</section>
-
-<!-- 4. Order and payment -->
-<section class="co-order" id="order">
-  <div class="wrap">
-    <div class="co-order-card">
-      <h2>Your order</h2>
-      <ul class="co-lines" id="lines" aria-live="polite"></ul>
-      <p class="co-total"><span>Total</span><strong id="total">€0</strong></p>
-      <button type="button" class="btn co-pay" id="pay">Continue to secure payment</button>
+      <button type="button" class="btn co-pay" id="pay">Pay securely</button>
       <p class="co-error" id="error" role="alert"></p>
+      <a class="co-explore" href="fuerteventura.html">Continue exploring</a>
       <p class="co-note">Payment is processed by Stripe. Your itineraries arrive by email right after payment.</p>
       <p class="co-note">Your access link is valid for 30 days.</p>
       <p class="co-note">By paying you accept our <a href="terms.html">Terms and Conditions</a> and have read our <a href="privacy.html">Privacy Policy</a>.</p>
       <p class="co-note">Digital products delivered instantly are not refundable. If a place on your route is no longer available, contact us and we'll send you an updated itinerary or another recommendation.</p>
     </div>
-  </div>
-</section>
 
+    <!-- Nothing selected -->
+    <div class="co-card co-empty" id="empty" hidden>
+      <h1>Your order is empty</h1>
+      <p>You haven't selected any itineraries yet.</p>
+      <p class="co-notice" id="notice-empty" role="status" hidden></p>
+      <a class="btn" href="fuerteventura.html">Browse Fuerteventura itineraries</a>
+    </div>
+
+  </div>
 </main>
 
-<div class="co-bar" id="bar">
-  <span class="t">Total<strong id="bar-total">€8</strong></span>
-  <a class="btn" href="#order">Get this itinerary</a>
-</div>
-
+<script src="itineraries-data.js"></script>
+<script src="selection.js"></script>
 <script>
-  /* Products. Prices here are for display only: the server looks up the real
-     price from the item ids (api/_products.js), so they cannot be changed from the browser.
-     To add a product or another destination later, add an entry here and in api/_products.js.
-     video: paste a YouTube, Vimeo or .mp4 link to show the promo video; leave '' for the placeholder. */
-  const ITEMS = [
-    { id: 'north', destination: 'Fuerteventura', name: 'Explore the north of Fuerteventura', price: 8,
-      cover: 'images/cover-north.jpg', video: '',
-      desc: 'A full day through the north of the island, from golden dunes and volcanic landscapes to coastal viewpoints and a local lunch stop. Every stop comes with timing, parking and a Google Maps link.' },
-    { id: 'rural', destination: 'Fuerteventura', name: 'The rural heart of Fuerteventura', price: 8,
-      cover: 'images/cover-rural.jpg', video: '',
-      desc: "Leave the coast behind and drive through the villages, valleys and hills of the island's interior. Expect quiet viewpoints, traditional food and the slower side of Fuerteventura, away from the crowds." },
-    { id: 'windmills', destination: 'Fuerteventura', name: 'Fuerteventura windmills', price: 8,
-      cover: 'images/cover-windmills.jpg', video: '',
-      desc: "Follow the traditional windmills that mark the island's landscape and learn the story behind them. A relaxed driving day that mixes photo stops, small villages and local flavours." }
-  ];
-
   const $ = (id) => document.getElementById(id);
-  const euro = (n) => '€' + n;
+  const euro = WWI.euro;
+  const NOTICE = 'One of the itineraries in your selection is no longer available. It was removed and will not be charged.';
 
-  /* Which itinerary the visitor came for (checkout.html?item=rural). Unknown or missing: the first one. */
-  const wanted = new URLSearchParams(location.search).get('item');
-  const main = ITEMS.find((i) => i.id === wanted) || ITEMS[0];
-  const others = ITEMS.filter((i) => i.id !== main.id);
-  const extra = new Set(); // ids of additional itineraries in the order
-
-  /* ---- 1. Hero ---- */
-  document.title = main.name + ' | Worldwide Itineraries';
-  $('hero-title').textContent = main.name;
-  $('hero-desc').textContent = main.desc;
-  $('hero-price').textContent = euro(main.price);
-  const heroImg = $('hero-img');
-  heroImg.alt = main.name;
-  heroImg.addEventListener('error', () => heroImg.remove());
-  heroImg.src = main.cover;
-
-  /* ---- 2. Video ---- */
-  function embedUrl(u) {
-    let m;
-    if ((m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/))) return 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0';
-    if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/))) return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1&dnt=1';
-    return null;
+  /* Older direct links (checkout.html?item=north) add that itinerary to the saved selection.
+     They never replace what the visitor already selected. Then the address is cleaned so a reload
+     cannot bring a removed itinerary back. */
+  const params = new URLSearchParams(location.search);
+  const fromUrl = params.get('item');
+  let invalidNotice = false;
+  if (fromUrl) {
+    if (!WWI.add(fromUrl) && !WWI.item(fromUrl)) invalidNotice = true;
+    params.delete('item');
+    const qs = params.toString();
+    history.replaceState(null, '', location.pathname + (qs ? '?' + qs : '') + location.hash);
   }
-  (function buildVideo() {
-    const box = $('video');
-    const url = (main.video || '').trim();
-    const poster = document.createElement('img');
-    poster.className = 'poster';
-    poster.alt = '';
-    poster.addEventListener('error', () => poster.remove());
-    poster.src = main.cover;
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'co-play';
-    btn.setAttribute('aria-label', 'Play video: ' + main.name);
-    btn.innerHTML = '<span class="co-play-icon" aria-hidden="true"></span>';
-    box.append(poster, btn);
-    if (!url) {
-      btn.disabled = true;
-      btn.setAttribute('aria-label', 'Video coming soon');
-      const soon = document.createElement('span');
-      soon.className = 'co-soon';
-      soon.textContent = 'Video coming soon';
-      box.append(soon);
-      return;
-    }
-    btn.addEventListener('click', () => {
-      if (/\.mp4(\?|$)/i.test(url)) {
-        const v = document.createElement('video');
-        v.controls = true; v.autoplay = true; v.playsInline = true; v.src = url;
-        v.setAttribute('aria-label', main.name);
-        box.replaceChildren(v);
-        return;
-      }
-      const src = embedUrl(url);
-      if (!src) return;
-      const f = document.createElement('iframe');
-      f.src = src; f.title = main.name;
-      f.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-      f.allowFullscreen = true;
-      box.replaceChildren(f);
-    });
-  })();
-
-  /* ---- 3. More itineraries (title, photo and price only: nothing about the route) ---- */
-  const grid = $('more-grid');
-  if (others.length) $('more').hidden = false;
-  others.forEach((it) => {
-    const card = document.createElement('article');
-    card.className = 'co-card';
-    card.dataset.id = it.id;
-    const photo = document.createElement('div');
-    photo.className = 'photo';
-    const img = document.createElement('img');
-    img.alt = it.name; img.loading = 'lazy'; img.width = 1200; img.height = 800;
-    img.addEventListener('error', () => img.remove());
-    img.src = it.cover;
-    photo.append(img);
-    const body = document.createElement('div');
-    body.className = 'co-card-body';
-    const h3 = document.createElement('h3');
-    h3.textContent = it.name;
-    const foot = document.createElement('div');
-    foot.className = 'co-card-foot';
-    const price = document.createElement('span');
-    price.className = 'price';
-    price.textContent = euro(it.price);
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'co-toggle';
-    btn.setAttribute('aria-pressed', 'false');
-    btn.textContent = 'Add to order';
-    btn.addEventListener('click', () => {
-      if (extra.has(it.id)) extra.delete(it.id); else extra.add(it.id);
-      $('error').textContent = '';
-      render();
-    });
-    foot.append(price, btn);
-    body.append(h3, foot);
-    card.append(photo, body);
-    grid.append(card);
-  });
-
-  /* ---- 4. Order summary ---- */
-  const lines = $('lines');
-  const pay = $('pay');
-  const selected = () => [main, ...others.filter((i) => extra.has(i.id))];
+  if (WWI.sanitize().length) invalidNotice = true;   // unknown ids in storage are dropped, never charged
 
   function render() {
-    const sel = selected();
-    lines.replaceChildren();
-    let total = 0;
-    sel.forEach((it, idx) => {
-      total += it.price;
+    const ids = WWI.get();
+    const has = ids.length > 0;
+    $('order').hidden = !has;
+    $('empty').hidden = has;
+    ['notice', 'notice-empty'].forEach((n) => { $(n).textContent = invalidNotice ? NOTICE : ''; $(n).hidden = !invalidNotice; });
+    if (!has) return;
+    $('count').textContent = ids.length + (ids.length === 1 ? ' itinerary' : ' itineraries');
+    const list = $('items');
+    list.replaceChildren();
+    ids.forEach((id) => {
+      const it = WWI.item(id);
       const li = document.createElement('li');
+      const th = document.createElement('div');
+      th.className = 'co-thumb';
+      const img = document.createElement('img');
+      img.alt = ''; img.loading = 'lazy';
+      img.addEventListener('error', () => img.remove());
+      img.src = it.cover;
+      th.append(img);
       const name = document.createElement('span');
-      name.className = 'name';
+      name.className = 'co-name';
       name.textContent = it.name;
       const amt = document.createElement('span');
-      amt.className = 'amt';
+      amt.className = 'co-amt';
       amt.textContent = euro(it.price);
-      li.append(name, amt);
-      if (idx > 0) {
-        const rm = document.createElement('button');
-        rm.type = 'button';
-        rm.className = 'co-remove';
-        rm.textContent = 'Remove';
-        rm.setAttribute('aria-label', 'Remove ' + it.name + ' from your order');
-        rm.addEventListener('click', () => { extra.delete(it.id); render(); });
-        li.append(rm);
-      }
-      lines.append(li);
+      const rm = document.createElement('button');
+      rm.type = 'button';
+      rm.className = 'co-remove';
+      rm.textContent = 'Remove';
+      rm.setAttribute('aria-label', 'Remove ' + it.name);
+      rm.addEventListener('click', () => { $('error').textContent = ''; WWI.remove(id); });
+      li.append(th, name, amt, rm);
+      list.append(li);
     });
-    $('total').textContent = euro(total);
-    $('bar-total').textContent = euro(total);
-    grid.querySelectorAll('.co-card').forEach((card) => {
-      const on = extra.has(card.dataset.id);
-      card.classList.toggle('added', on);
-      const b = card.querySelector('.co-toggle');
-      b.setAttribute('aria-pressed', String(on));
-      b.textContent = on ? 'Added · Remove' : 'Add to order';
-    });
+    const total = euro(WWI.total(ids));
+    $('subtotal').textContent = total;
+    $('total').textContent = total;
   }
 
-  /* Payment: unchanged. The server decides prices from the item ids and returns a Stripe Checkout URL. */
+  /* Payment: unchanged. Only the item ids are sent; the server looks up the real prices and
+     returns a Stripe Checkout URL. The selection is NOT cleared here: it is cleared on success.html
+     after the server confirms the payment. */
+  const pay = $('pay');
   const errorEl = $('error');
   pay.addEventListener('click', async () => {
-    const ids = selected().map((i) => i.id);
+    const ids = WWI.get();
     if (!ids.length) return;
     errorEl.textContent = '';
     pay.disabled = true;
@@ -349,31 +177,16 @@
       window.location.href = data.url;
     } catch (err) {
       errorEl.textContent = 'We could not start the payment. Please try again in a moment.';
-      pay.textContent = 'Continue to secure payment';
+      pay.textContent = 'Pay securely';
       pay.disabled = false;
     }
   });
-  // Coming back from Stripe with the browser's back button: make the button usable again.
+  // Back from Stripe with the browser's back button: make the button usable again.
   window.addEventListener('pageshow', (e) => {
-    if (e.persisted) { pay.disabled = false; pay.textContent = 'Continue to secure payment'; }
+    if (e.persisted) { pay.disabled = false; pay.textContent = 'Pay securely'; render(); }
   });
 
-  /* Sticky purchase bar (phones): shown once the top button is out of view, hidden near the order itself. */
-  (function stickyBar() {
-    const bar = $('bar');
-    if (!('IntersectionObserver' in window)) return;
-    let past = false, atOrder = false;
-    const update = () => bar.classList.toggle('show', past && !atOrder);
-    new IntersectionObserver((es) => {
-      es.forEach((e) => { past = !e.isIntersecting && e.boundingClientRect.bottom <= 0; });
-      update();
-    }).observe($('hero-buy'));
-    new IntersectionObserver((es) => {
-      es.forEach((e) => { atOrder = e.isIntersecting; });
-      update();
-    }).observe($('order'));
-  })();
-
+  WWI.subscribe(render);
   render();
 </script>
 </body>

@@ -12,6 +12,7 @@ export default class Stripe {
     this.checkout = {
       sessions: {
         create: async (params) => globalThis.__stripe.create(params),
+        retrieve: async (id) => globalThis.__stripe.retrieve(id),
       },
     };
   }
