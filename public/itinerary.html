@@ -68,6 +68,10 @@
   .co-line .bar { width: 5px; height: 28px; border-radius: 2px; background: var(--cat, var(--forest)); }
   .co-line .name { font-weight: 500; overflow-wrap: anywhere; }
   .co-line .amt { font-weight: 600; }
+  .co-empty { padding: 16px 0; display: grid; gap: 2px; border-bottom: 1px solid var(--line); }
+  .co-empty strong { font-size: .95rem; font-weight: 600; }
+  .co-empty span { font-size: .85rem; color: var(--muted); }
+  .co-pay:disabled, .co-bar .btn:disabled { opacity: .45; cursor: default; box-shadow: none; }
   .co-x { width: 28px; height: 28px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--muted); cursor: pointer; }
   .co-x svg { width: 14px; height: 14px; }
   .co-x:hover { color: var(--forest); background: rgba(23, 63, 58, .08); }
@@ -394,13 +398,12 @@
     grid.append(card);
   });
 
-  /* ---- 4. Order preview: everything selected plus this itinerary ---- */
+  /* ---- 4. Order summary: exactly the shared selection (WWI.get()), nothing added by default ---- */
   const lines = $('lines');
-  const orderIds = () => { const ids = WWI.get(); return ids.includes(main.id) ? ids : [...ids, main.id]; };
 
   function render() {
     const sel = WWI.get();
-    const ids = orderIds();
+    const ids = sel;
     lines.replaceChildren();
     ids.forEach((id) => {
       const it = WWI.item(id);
@@ -416,7 +419,7 @@
       amt.className = 'amt';
       amt.textContent = euro(it.price);
       li.append(bar, name, amt);
-      if (sel.includes(id)) {
+      {
         const x = document.createElement('button');
         x.type = 'button';
         x.className = 'co-x';
@@ -424,9 +427,16 @@
         x.setAttribute('aria-label', 'Remove ' + it.name + ' from my itineraries');
         x.addEventListener('click', () => WWI.remove(id));
         li.append(x);
-      } else li.append(document.createElement('span'));   // this itinerary is only included when paying
+      }
       lines.append(li);
     });
+    if (!ids.length) {
+      const li = document.createElement('li');
+      li.className = 'co-empty';
+      li.innerHTML = '<strong>Your collection is empty.</strong><span>Add an itinerary to start planning your adventure.</span>';
+      lines.append(li);
+    }
+    ['pay', 'bar-pay'].forEach((k) => { $(k).disabled = !ids.length; });
     $('total').textContent = euro(WWI.total(ids));
     $('bar-total').textContent = euro(WWI.total(ids));
     const mainAdded = sel.includes(main.id);
@@ -436,10 +446,10 @@
     });
   }
 
-  /* Pay securely: make sure this itinerary is in the shared selection (kept once, others preserved),
-     save it, then open the existing checkout page. */
+  /* Pay securely: opens the existing checkout page with the shared selection (disabled when empty).
+     */
   function paySecurely() {
-    WWI.add(main.id);
+    if (!WWI.get().length) return;
     location.href = 'checkout.html';
   }
   $('pay').addEventListener('click', paySecurely);
