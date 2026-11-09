@@ -10,10 +10,10 @@
 (function (w) {
   /* Category colour system. Brand green is reserved for the Add / Added buttons; these colours only identify itineraries. */
   w.WWI_CATEGORIES = {
-    ocean:  { label: 'Ocean & Coast',        color: '#178F9B' },
-    rural:  { label: 'Rural & Heritage',     color: '#A66D48' },
-    nature: { label: 'Nature & Adventure',   color: '#758454' },
-    scenic: { label: 'Scenic & Slow Travel', color: '#D77B45' }
+    ocean:  { label: 'Ocean & Coast',        color: '#1976D2' },
+    rural:  { label: 'Rural & Heritage',     color: '#D65336' },
+    nature: { label: 'Nature & Adventure',   color: '#388548' },
+    scenic: { label: 'Scenic & Slow Travel', color: '#8954C8' }
   };
   w.WWI_ITEMS = [
     { id: 'north', destination: 'Fuerteventura', name: 'Explore the North', price: 8,
