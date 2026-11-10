@@ -234,7 +234,7 @@
 }
 
 /* ---- My itineraries: header counter, drawer, toast (selection.js) ---- */
-.wwi-count { position: absolute; top: 12px; right: 62px; pointer-events: auto; height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: rgba(247, 241, 231, .92); color: var(--forest); font: inherit; font-weight: 600; font-size: .85rem; cursor: pointer; box-shadow: var(--shadow-sm); white-space: nowrap; }
+.wwi-count { position: absolute; top: 12px; right: 16px; pointer-events: auto; height: 36px; padding: 0 14px; border: 0; border-radius: 999px; background: rgba(247, 241, 231, .92); color: var(--forest); font: inherit; font-weight: 600; font-size: .85rem; cursor: pointer; box-shadow: var(--shadow-sm); white-space: nowrap; }
 .wwi-count:hover { background: var(--white); }
 .wwi-overlay { position: fixed; inset: 0; z-index: 90; background: rgba(23, 63, 58, .45); opacity: 0; transition: opacity .25s; }
 .wwi-overlay.open { opacity: 1; }
@@ -244,13 +244,15 @@
 .wwi-head h2 { font-size: 1.5rem; }
 .wwi-close { width: 40px; height: 40px; border: 0; border-radius: 50%; background: var(--white); color: var(--forest); font-size: 1.6rem; line-height: 1; cursor: pointer; }
 .wwi-list { list-style: none; margin: 0; padding: 8px 24px; overflow-y: auto; flex: 1; display: grid; gap: 14px; align-content: start; }
-.wwi-list li { display: flex; align-items: center; gap: 14px; background: var(--white); border-radius: var(--radius-sm); padding: 10px; }
+.wwi-list li { display: flex; align-items: center; gap: 14px; background: var(--white); border-radius: var(--radius-sm); padding: 10px; border: 2px solid var(--cat, transparent); }
 .wwi-thumb { flex: none; width: 72px; height: 56px; border-radius: 10px; overflow: hidden; background: var(--sage); }
 .wwi-thumb img { width: 100%; height: 100%; object-fit: cover; }
 .wwi-txt { flex: 1; display: grid; gap: 2px; line-height: 1.25; }
 .wwi-txt span { color: var(--muted); font-weight: 600; }
-.wwi-rm { border: 0; background: none; color: var(--muted); font: inherit; font-size: .9rem; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; padding: 6px 4px; }
-.wwi-rm:hover { color: var(--terracotta); }
+.wwi-rm { flex: none; width: 30px; height: 30px; display: grid; place-items: center; border: 0; border-radius: 50%; background: transparent; color: var(--muted); font: inherit; font-size: 1.3rem; line-height: 1; cursor: pointer; }
+.wwi-rm:hover { color: var(--forest); background: rgba(23, 63, 58, .08); }
+/* Itinerary cards on listing pages: a line in the category colour around the card (colour set by selection.js from WWI_CATEGORIES). */
+.card[data-item] { border: 2px solid var(--cat, transparent); }
 .wwi-empty { padding: 24px; flex: 1; color: var(--muted); display: grid; gap: 12px; align-content: start; }
 .wwi-link { font-weight: 600; color: var(--forest); }
 .wwi-foot { padding: 16px 24px calc(22px + env(safe-area-inset-bottom)); display: grid; gap: 10px; border-top: 1px solid var(--line); }
@@ -264,7 +266,7 @@ body.wwi-lock { overflow: hidden; }
 .wwi-toast { position: fixed; left: 50%; bottom: 84px; z-index: 95; transform: translate(-50%, 12px); background: var(--forest); color: var(--white); padding: 10px 20px; border-radius: 999px; font-weight: 600; font-size: .95rem; box-shadow: var(--shadow); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s, visibility .25s; max-width: calc(100% - 32px); text-align: center; }
 .wwi-toast.show { opacity: 1; visibility: visible; transform: translate(-50%, 0); }
 @media (max-width: 767px) {
-  .wwi-count { right: 56px; padding: 0 11px; font-size: .78rem; }
+  .wwi-count { right: 16px; padding: 0 11px; font-size: .78rem; }
   .wwi-drawer { top: auto; left: 0; right: 0; width: 100%; max-height: 86vh; border-radius: var(--radius) var(--radius) 0 0; box-shadow: 0 -12px 32px rgba(23, 63, 58, .18); transform: translateY(100%); }
   .wwi-drawer.open { transform: none; }
 }

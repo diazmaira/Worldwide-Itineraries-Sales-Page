@@ -27,14 +27,6 @@
 
 <!-- Header -->
 <header class="site-header">
-  <details class="menu">
-    <summary aria-label="Menu"><span class="bars" aria-hidden="true"></span></summary>
-    <nav class="menu-panel" aria-label="Main">
-      <a class="panel-brand" href="index.html">Worldwide Itineraries</a>
-      <a href="index.html">Home</a><a href="#destinations">Destinations</a><a href="#itineraries">Itineraries</a><a href="#about">About Us</a><a href="inspiration.html">Travel Inspiration</a><a href="#contact">Contact Us</a>
-      <a class="panel-cta" href="index.html#itineraries">Discover Itineraries</a>
-    </nav>
-  </details>
 </header>
 
 <div class="logo-bar"><div class="wrap">
@@ -57,7 +49,7 @@
       <p class="sub sub-desktop">Carefully planned self-guided itineraries to explore beautiful landscapes, discover interesting places and travel at your own pace.</p>
       <p class="sub sub-mobile">Self-guided itineraries to explore stunning landscapes, hidden gems and travel at your own pace.</p>
       <div class="actions">
-        <a class="btn btn-lime" href="#destinations">Explore Destinations</a>
+        <a class="btn btn-lime" href="#itineraries">Explore Itineraries</a>
         <a class="btn" href="#itineraries">Discover Itineraries</a>
       </div>
     </div>
@@ -65,7 +57,7 @@
   </div>
 </section>
 
-<!-- Destinations -->
+<!-- HIDDEN for now (restore when more destinations exist): Destinations section (Fuerteventura / Gran Canaria)
 <section class="section" id="destinations">
   <div class="wrap">
     <span class="tag">Destinations</span>
@@ -92,6 +84,7 @@
     <div class="section-cta" data-hide-cta><a class="btn" href="#itineraries">Discover Itineraries</a></div>
   </div>
 </section>
+-->
 
 <!-- Featured itineraries (price shown here is display only; the server decides the real price) -->
 <section class="section itineraries" id="itineraries" data-hide-cta>
@@ -99,7 +92,7 @@
     <h2 class="section-title">Find Your Perfect Itinerary</h2>
     <p class="lead">Explore our itineraries and discover more of every destination, one stop at a time.</p>
     <div class="grid-3">
-      <article class="card">
+      <article class="card" data-item="north">
         <div class="photo cover"><img src="images/cover-north.jpg" alt="The north of Fuerteventura" loading="lazy" width="1200" height="800" onerror="this.remove()"></div>
         <div class="card-body">
           <h3 class="title">Explore the North of Fuerteventura</h3>
@@ -107,7 +100,7 @@
           <div class="buy"><span class="price">€8</span><a class="btn" href="itinerary.html?item=north">View Itinerary</a></div>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-item="rural">
         <div class="photo cover c-tangerine"><img src="images/cover-rural.jpg" alt="The rural heart of Fuerteventura" loading="lazy" width="1200" height="800" onerror="this.remove()"></div>
         <div class="card-body">
           <h3 class="title">The Rural Heart of Fuerteventura</h3>
@@ -115,7 +108,7 @@
           <div class="buy"><span class="price">€8</span><a class="btn" href="itinerary.html?item=rural">View Itinerary</a></div>
         </div>
       </article>
-      <article class="card">
+      <article class="card" data-item="windmills">
         <div class="photo cover c-forest"><img src="images/cover-windmills.jpg" alt="Windmills of Fuerteventura" loading="lazy" width="1200" height="800" onerror="this.remove()"></div>
         <div class="card-body">
           <h3 class="title">Fuerteventura Windmills</h3>
@@ -310,7 +303,7 @@
         <p class="foot-brand">Worldwide Itineraries</p>
         <p style="margin-top:10px">Thoughtfully planned journeys. Beautiful places. Your own adventure.</p>
       </div>
-      <div><h2>Explore</h2><ul><li><a href="#destinations">Destinations</a></li><li><a href="#itineraries">All Itineraries</a></li><li><a href="inspiration.html">Travel Inspiration</a></li></ul></div>
+      <div><h2>Explore</h2><ul><!-- <li><a href="#destinations">Destinations</a></li> --><li><a href="#itineraries">All Itineraries</a></li><li><a href="inspiration.html">Travel Inspiration</a></li></ul></div>
       <div><h2>Information</h2><ul><li><a href="#about">About Us</a></li><li><a href="#how">How It Works</a></li><li><a href="#faq">FAQ</a></li><li><a href="#contact">Contact Us</a></li></ul></div>
       <div><h2>Legal</h2><ul><li><a href="privacy.html">Privacy Policy</a></li><li><a href="terms.html">Terms &amp; Conditions</a></li><li><a href="legal-notice.html">Legal Notice</a></li></ul></div>
       <div><h2>Follow Us</h2><ul><li><a href="#contact">Email</a></li></ul></div>

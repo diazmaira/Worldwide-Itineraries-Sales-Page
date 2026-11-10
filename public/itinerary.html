@@ -50,8 +50,7 @@
   .co-more h2, .co-order h2 { font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.2; }
   .co-more .lead { margin-top: 6px; font-size: .95rem; color: var(--muted); }
   .co-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 3vw, 18px); margin-top: 18px; }
-  .co-card { background: var(--white); border-radius: 14px; box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column; position: relative; }
-  .co-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 6px; background: var(--cat, var(--line)); z-index: 1; }
+  .co-card { background: var(--white); border-radius: 14px; box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column; border: 2px solid var(--cat, var(--line)); }
   .co-card .photo { aspect-ratio: 4 / 3; background: var(--sage); overflow: hidden; }
   .co-card .photo img { width: 100%; height: 100%; object-fit: cover; }
   .co-card-body { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
@@ -113,14 +112,6 @@
 <body>
 
 <header class="site-header">
-  <details class="menu">
-    <summary aria-label="Menu"><span class="bars" aria-hidden="true"></span></summary>
-    <nav class="menu-panel" aria-label="Main">
-      <a class="panel-brand" href="index.html">Worldwide Itineraries</a>
-      <a href="index.html">Home</a><a href="index.html#destinations">Destinations</a><a href="index.html#itineraries">Itineraries</a><a href="index.html#about">About Us</a><a href="inspiration.html">Travel Inspiration</a><a href="index.html#contact">Contact Us</a>
-      <a class="panel-cta" href="index.html#itineraries">Discover Itineraries</a>
-    </nav>
-  </details>
 </header>
 
 <div class="logo-bar"><div class="wrap">
@@ -171,7 +162,7 @@
 <!-- 4. Pay securely (uses the same shared selection as the header and checkout) -->
 <section class="co-order" id="order">
   <div class="wrap">
-    <h2>Your itineraries</h2>
+    <h2>Your selected itineraries</h2>
     <ul class="co-lines" id="lines" aria-live="polite"></ul>
     <p class="co-total"><span>Total</span><strong id="total">€0</strong></p>
     <button type="button" class="btn co-pay" id="pay">Pay securely</button>
