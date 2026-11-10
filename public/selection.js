@@ -84,7 +84,10 @@
     return e;
   }
 
+  function catColor(it) { var c = (w.WWI_CATEGORIES || {})[it && it.category]; return c ? c.color : ''; }
+
   function init() {
+    document.querySelectorAll('[data-item]').forEach(function (n) { var it = byId[n.getAttribute('data-item')]; if (it) n.style.setProperty('--cat', catColor(it)); });
     var header = document.querySelector('.site-header');
     if (!header) return;
 
@@ -125,9 +128,7 @@
     totalRow.append(totalLabel, totalVal);
     var go = el('a', 'btn wwi-go', 'Continue to checkout');
     go.href = 'checkout.html';
-    var more = el('button', 'wwi-more', 'Continue exploring');
-    more.type = 'button';
-    foot.append(totalRow, go, more);
+    foot.append(totalRow, go);
 
     drawer.append(head, list, empty, foot);
     document.body.append(overlay, drawer);
@@ -141,6 +142,7 @@
       ids.forEach(function (id) {
         var it = byId[id];
         var li = el('li');
+        li.style.setProperty('--cat', catColor(it));
         var th = el('div', 'wwi-thumb');
         var img = document.createElement('img');
         img.alt = ''; img.loading = 'lazy';
@@ -149,7 +151,7 @@
         th.append(img);
         var txt = el('div', 'wwi-txt');
         txt.append(el('strong', null, it.name), el('span', null, store.euro(it.price)));
-        var rm = el('button', 'wwi-rm', 'Remove');
+        var rm = el('button', 'wwi-rm', '×');
         rm.type = 'button';
         rm.setAttribute('aria-label', 'Remove ' + it.name);
         rm.addEventListener('click', function () { store.remove(id); });
@@ -181,7 +183,6 @@
 
     counter.addEventListener('click', open);
     close.addEventListener('click', shut);
-    more.addEventListener('click', shut);
     overlay.addEventListener('click', shut);
     document.addEventListener('keydown', function (e) {
       if (drawer.hidden) return;

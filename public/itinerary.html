@@ -50,12 +50,14 @@
   .co-more h2, .co-order h2 { font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.2; }
   .co-more .lead { margin-top: 6px; font-size: .95rem; color: var(--muted); }
   .co-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 3vw, 18px); margin-top: 18px; }
-  .co-card { background: var(--white); border-radius: 14px; box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column; position: relative; }
-  .co-card::before { content: ''; position: absolute; inset: 0 0 auto 0; height: 6px; background: var(--cat, var(--line)); z-index: 1; }
+  .co-card { background: var(--white); border-radius: 14px; box-shadow: var(--shadow-sm); overflow: hidden; display: flex; flex-direction: column; border: 2px solid var(--cat, var(--line)); }
   .co-card .photo { aspect-ratio: 4 / 3; background: var(--sage); overflow: hidden; }
   .co-card .photo img { width: 100%; height: 100%; object-fit: cover; }
   .co-card-body { padding: 12px 12px 14px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
   .co-cat { align-self: flex-start; margin: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 3px 8px; border-radius: 999px; font-size: .6rem; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; line-height: 1.3; color: color-mix(in srgb, var(--cat) 70%, #000); background: color-mix(in srgb, var(--cat) 14%, #fff); }
+  .co-card a { color: inherit; text-decoration: none; }
+  .co-card h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .co-card > a { display: block; }
   .co-card h3 { font-size: 1rem; line-height: 1.2; }
   .co-blurb { margin: 0; font-size: .8rem; line-height: 1.45; color: var(--muted); display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; min-height: calc(3 * 1.45em); }
   .co-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 8px; }
@@ -113,14 +115,6 @@
 <body>
 
 <header class="site-header">
-  <details class="menu">
-    <summary aria-label="Menu"><span class="bars" aria-hidden="true"></span></summary>
-    <nav class="menu-panel" aria-label="Main">
-      <a class="panel-brand" href="index.html">Worldwide Itineraries</a>
-      <a href="index.html">Home</a><a href="index.html#destinations">Destinations</a><a href="index.html#itineraries">Itineraries</a><a href="index.html#about">About Us</a><a href="inspiration.html">Travel Inspiration</a><a href="index.html#contact">Contact Us</a>
-      <a class="panel-cta" href="index.html#itineraries">Discover Itineraries</a>
-    </nav>
-  </details>
 </header>
 
 <div class="logo-bar"><div class="wrap">
@@ -171,7 +165,7 @@
 <!-- 4. Pay securely (uses the same shared selection as the header and checkout) -->
 <section class="co-order" id="order">
   <div class="wrap">
-    <h2>Your itineraries</h2>
+    <h2>Your selected itineraries</h2>
     <ul class="co-lines" id="lines" aria-live="polite"></ul>
     <p class="co-total"><span>Total</span><strong id="total">€0</strong></p>
     <button type="button" class="btn co-pay" id="pay">Pay securely</button>
@@ -379,7 +373,13 @@
     cat.className = 'co-cat';
     cat.textContent = catOf(it).label; cat.title = cat.textContent;
     const h3 = document.createElement('h3');
-    h3.textContent = it.name;
+    const href = 'itinerary.html?item=' + encodeURIComponent(it.id);
+    const link = document.createElement('a');
+    link.href = href; link.textContent = it.name;
+    h3.append(link);
+    const photoLink = document.createElement('a');
+    photoLink.href = href; photoLink.tabIndex = -1; photoLink.setAttribute('aria-hidden', 'true');
+    photoLink.append(photo);
     const blurb = document.createElement('p');
     blurb.className = 'co-blurb';
     blurb.textContent = it.blurb || '';
@@ -394,7 +394,7 @@
     btn.addEventListener('click', () => toggleItinerary(it.id));
     foot.append(price, btn);
     body.append(cat, h3, blurb, foot);
-    card.append(photo, body);
+    card.append(photoLink, body);
     grid.append(card);
   });
 
