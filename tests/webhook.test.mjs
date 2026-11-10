@@ -162,3 +162,24 @@ test('delayed payment: a failed email still returns 500 so Stripe retries', asyn
   const out = await post(event('checkout.session.async_payment_succeeded', session()));
   assert.equal(out.status, 500);
 });
+
+test('consent: the purchase email confirms the consent and the loss of withdrawal right', async () => {
+  const metadata = { items: 'north', consent_terms: 'yes', consent_digital: 'yes', consent_at: '2026-11-10T19:00:00.000Z', terms_version: '2026-11-05', privacy_version: '2026-11-05' };
+  const out = await post(event('checkout.session.completed', session({ metadata })));
+  assert.equal(out.status, 200);
+  const mail = sent.find((s) => s.body.subject === 'Your Fuerteventura itinerary is here').body;
+  for (const body of [mail.html, mail.text]) {
+    assert.match(body, /immediate delivery of my digital itinerary/);
+    assert.match(body, /lose my 14-day right of withdrawal once delivery begins/);
+    assert.match(body, /2026-11-05/);
+    assert.match(body, /cs_test_1/);
+  }
+});
+
+test('consent: an order without a consent record is still delivered, and the gap is logged', async () => {
+  const out = await post(event('checkout.session.completed', session()));
+  assert.equal(out.status, 200);
+  const mail = sent.find((s) => s.body.subject === 'Your Fuerteventura itinerary is here').body;
+  assert.doesNotMatch(mail.text, /confirmation at checkout/);
+  assert.ok(logs.some((l) => l.includes('no consent record')));
+});

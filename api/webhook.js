@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { PRODUCTS } from './_products.js';
+import { readConsent } from './_consent.js';
 import { sendAccessEmail, scheduleReviewEmail } from './_email.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -18,12 +19,13 @@ async function readRawBody(req) {
 }
 
 // Payment confirmed: create the private link and email it to the customer.
-async function fulfill({ email, name, items, sessionId }) {
+async function fulfill({ email, name, items, sessionId, consent }) {
   if (!email) throw new Error(`No customer email on session ${sessionId}`);
   if (items.length === 0) throw new Error(`No valid items on session ${sessionId}`);
 
   // The customer gets the itinerary first. If this fails, Stripe retries the webhook.
-  await sendAccessEmail({ to: email, name, items, sessionId });
+  if (!consent) console.error('Order has no consent record (created before consent was collected?)', { sessionId });
+  await sendAccessEmail({ to: email, name, items, sessionId, consent });
   console.log('Access email sent', { sessionId, items });
 
   // The review email is a bonus. If it fails it must NOT fail the whole order,
@@ -78,6 +80,7 @@ export default async function handler(req, res) {
           name: session.customer_details?.name,
           items,
           sessionId: session.id,
+          consent: readConsent(session.metadata),
         });
       } catch (err) {
         // A non-200 makes Stripe retry the webhook later.

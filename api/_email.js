@@ -1,5 +1,6 @@
 import { PRODUCTS } from './_products.js';
 import { createToken, ACCESS_DAYS } from './_token.js';
+import { CONSENT_TERMS_TEXT, CONSENT_DIGITAL_TEXT } from './_consent.js';
 
 const escapeHtml = (s) =>
   String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
@@ -68,7 +69,7 @@ const tip = (strong, text, last = false) => `
               </tr>`;
 
 // ---------------------------------------------------------------- welcome email
-export function buildWelcomeEmail({ name, itineraryNames, link, siteUrl, contactEmail, days = ACCESS_DAYS }) {
+export function buildWelcomeEmail({ name, itineraryNames, link, siteUrl, contactEmail, days = ACCESS_DAYS, consent = null, sessionId = '' }) {
   const subject = 'Your Fuerteventura itinerary is here';
   const who = escapeHtml(firstName(name));
   const list = escapeHtml(joinNames(itineraryNames));
@@ -77,6 +78,25 @@ export function buildWelcomeEmail({ name, itineraryNames, link, siteUrl, contact
   const contactLine = contactEmail
     ? `just reply directly to this email or message us at <a href="mailto:${escapeHtml(contactEmail)}" style="color:#E8734A; text-decoration:underline;">${escapeHtml(contactEmail)}</a>.`
     : `<a href="${siteUrl}/#contact" style="color:#E8734A; text-decoration:underline;">send us a message</a> from our website.`;
+
+  // Confirmation of the consent given at checkout (durable medium, as the consumer rules require).
+  const when = consent?.at ? new Date(consent.at).toUTCString().replace(' GMT', ' UTC') : '';
+  const consentLines = consent ? [
+    `${CONSENT_TERMS_TEXT} (Terms version ${consent.termsVersion}, Privacy Policy version ${consent.privacyVersion})`,
+    CONSENT_DIGITAL_TEXT,
+  ] : [];
+  const consentRef = consent ? [when && `Recorded: ${when}`, sessionId && `Order reference: ${sessionId}`].filter(Boolean).join(' · ') : '';
+  const consentHtml = consent ? `
+            <p style="margin:0 0 8px 0; font-size:16px; line-height:1.3; color:#1F4E52;">
+              Your confirmation at checkout
+            </p>
+            <ul style="margin:0 0 8px 0; padding-left:20px; font-family:Helvetica,Arial,sans-serif; font-size:14px; line-height:1.6; color:#3C5E61;">
+              ${consentLines.map((l) => `<li>${escapeHtml(l)}</li>`).join('\n              ')}
+            </ul>
+            <p style="margin:0 0 22px 0; font-family:Helvetica,Arial,sans-serif; font-size:13px; line-height:1.5; color:#5C7A7D;">
+              ${escapeHtml(consentRef)}<br>
+              <a href="${siteUrl}/terms.html" style="color:#E8734A;">Terms &amp; Conditions</a> · <a href="${siteUrl}/privacy.html" style="color:#E8734A;">Privacy Policy</a>
+            </p>` : '';
 
   const bodyHtml = `
             <p style="margin:0 0 22px 0; font-size:22px; line-height:1.3; color:#1F4E52;">
@@ -118,6 +138,8 @@ export function buildWelcomeEmail({ name, itineraryNames, link, siteUrl, contact
             )}
             </table>
 
+            ${consentHtml}
+
             <p style="margin:0 0 18px 0; ${BODY}">
               Your link is personal and stays active for ${days} days, so please don&rsquo;t share it. Keep this email so you can come back to it on the day.
             </p>
@@ -155,6 +177,7 @@ export function buildWelcomeEmail({ name, itineraryNames, link, siteUrl, contact
     '- Use the direct links. Tap the Google Maps buttons to navigate to the exact parking spots and viewpoints.',
     '- Go at your own pace. There is no fixed schedule.',
     '',
+    ...(consent ? ['Your confirmation at checkout:', ...consentLines.map((l) => `- ${l}`), consentRef, `Terms: ${siteUrl}/terms.html  Privacy: ${siteUrl}/privacy.html`, ''] : []),
     `Your link is personal and stays active for ${days} days, so please don't share it.`,
     contactEmail ? `Questions? Reply to this email or write to ${contactEmail}.` : `Questions? ${siteUrl}/#contact`,
     '',
@@ -255,7 +278,7 @@ async function postToResend({ apiKey, body, idempotencyKey }) {
 
 const namesOf = (items) => items.map((id) => PRODUCTS[id].name);
 
-export async function sendAccessEmail({ to, name, items, sessionId }) {
+export async function sendAccessEmail({ to, name, items, sessionId, consent }) {
   const { RESEND_API_KEY, EMAIL_FROM, REPLY_TO, siteUrl } = settings();
 
   const token = createToken({ items, sessionId });
@@ -266,6 +289,8 @@ export async function sendAccessEmail({ to, name, items, sessionId }) {
     link,
     siteUrl,
     contactEmail: REPLY_TO,
+    consent,
+    sessionId,
   });
 
   const body = { from: EMAIL_FROM, to: [to], subject, html, text };

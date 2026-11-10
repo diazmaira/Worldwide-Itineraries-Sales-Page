@@ -1,5 +1,6 @@
 import Stripe from 'stripe';
 import { PRODUCTS, CURRENCY } from './_products.js';
+import { hasConsent, consentMetadata } from './_consent.js';
 import { makeLimiter, clientIp } from './_mail.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -28,6 +29,12 @@ export default async function handler(req, res) {
       return res.status(400).json({ error: 'No valid items selected' });
     }
 
+    // Both legal confirmations are required before any Stripe session exists.
+    if (!hasConsent(req.body?.consent)) {
+      return res.status(400).json({ error: 'Consent required', code: 'consent_required' });
+    }
+    const consent = consentMetadata();
+
     const siteUrl = (process.env.SITE_URL || `https://${req.headers.host}`).replace(/\/$/, '');
 
     const session = await stripe.checkout.sessions.create({
@@ -41,7 +48,9 @@ export default async function handler(req, res) {
         },
       })),
       // The webhook reads this to know which itineraries to deliver.
-      metadata: { items: ids.join(',') },
+      // It also carries the consent record (timestamp and policy versions); the Session ID is the record's key.
+      metadata: { items: ids.join(','), ...consent },
+      payment_intent_data: { metadata: consent },
       success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/checkout.html`,
     });

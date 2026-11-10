@@ -15,10 +15,13 @@ beforeEach(() => {
 });
 
 let visitor = 0;
+const CONSENT = { terms: true, digital: true };
 async function post(body, { method = 'POST', ip, headers = { host: 'fallback.example.com' } } = {}) {
   const { res, out } = makeRes();
   // A different visitor per call, so the rate limit does not affect other tests.
   const h = { ...headers, 'x-forwarded-for': ip || `10.0.0.${++visitor}` };
+  // Every order needs both confirmations; tests for missing consent pass consent explicitly.
+  if (body && typeof body === 'object' && !('consent' in body) && method === 'POST') body = { ...body, consent: CONSENT };
   await handler({ method, body, headers: h, socket: {} }, res);
   return out;
 }
@@ -119,4 +122,40 @@ test('rate limit: the 16th request in an hour from one visitor gets 429', async 
 test('rate limit: another visitor is not affected', async () => {
   const out = await post({ items: ['north'] }, { ip: '198.51.100.7' });
   assert.equal(out.status, 200);
+});
+
+test('consent: missing, partial or non-boolean consent is rejected before Stripe is called', async () => {
+  for (const consent of [undefined, null, {}, { terms: true }, { digital: true }, { terms: true, digital: false }, { terms: 'true', digital: 'true' }, { terms: 1, digital: 1 }]) {
+    const out = await post({ items: ['north'], consent });
+    assert.equal(out.status, 400, JSON.stringify(consent));
+    assert.equal(out.body.code, 'consent_required');
+  }
+  assert.equal(calls.length, 0);
+});
+
+test('consent: the record (time, policy versions) is stored on the session and the payment', async () => {
+  const before = Date.now();
+  await post({ items: ['north', 'rural'], consent: CONSENT });
+  const p = calls[0];
+  const { TERMS_VERSION, PRIVACY_VERSION } = await import('../api/_consent.js');
+  for (const m of [p.metadata, p.payment_intent_data.metadata]) {
+    assert.equal(m.consent_terms, 'yes');
+    assert.equal(m.consent_digital, 'yes');
+    assert.equal(m.terms_version, TERMS_VERSION);
+    assert.equal(m.privacy_version, PRIVACY_VERSION);
+    const at = Date.parse(m.consent_at);
+    assert.ok(at >= before - 1000 && at <= Date.now() + 1000);
+  }
+  assert.equal(p.metadata.items, 'north,rural');
+});
+
+test('consent: policy versions match the "Last updated" date of the legal texts', async () => {
+  const { readFileSync } = await import('node:fs');
+  const { TERMS_VERSION, PRIVACY_VERSION } = await import('../api/_consent.js');
+  const iso = (file) => {
+    const m = readFileSync(file, 'utf8').match(/Last updated: (\d{1,2}) (\w+) (\d{4})/);
+    return new Date(`${m[1]} ${m[2]} ${m[3]} UTC`).toISOString().slice(0, 10);
+  };
+  assert.equal(TERMS_VERSION, iso('public/legal/terms.md'));
+  assert.equal(PRIVACY_VERSION, iso('public/legal/privacy.md'));
 });

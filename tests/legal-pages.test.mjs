@@ -27,3 +27,13 @@ test('site links to the three legal pages', () => {
   for (const page of Object.values(pages)) assert.ok(home.includes(page), `index -> ${page}`);
   assert.ok(checkout.includes('terms.html') && checkout.includes('privacy.html'));
 });
+
+test('checkout: both consent boxes start unchecked, sit above Pay, and Pay starts disabled', () => {
+  const html = readFileSync('public/checkout.html', 'utf8');
+  assert.ok(!/<input[^>]*(consent-terms|consent-digital)[^>]*checked/.test(html));
+  assert.ok(html.indexOf('consent-terms') < html.indexOf('id="pay"') && html.indexOf('consent-digital') < html.indexOf('id="pay"'));
+  assert.match(html, /<button[^>]*id="pay"[^>]*disabled/);
+  assert.match(html, /href="terms\.html" target="_blank" rel="noopener"/);
+  assert.match(html, /href="privacy\.html" target="_blank" rel="noopener"/);
+  assert.match(html, /consent: \{ terms: cTerms\.checked, digital: cDigital\.checked \}/);
+});
