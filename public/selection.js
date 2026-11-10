@@ -128,9 +128,7 @@
     totalRow.append(totalLabel, totalVal);
     var go = el('a', 'btn wwi-go', 'Continue to checkout');
     go.href = 'checkout.html';
-    var more = el('button', 'wwi-more', 'Continue exploring');
-    more.type = 'button';
-    foot.append(totalRow, go, more);
+    foot.append(totalRow, go);
 
     drawer.append(head, list, empty, foot);
     document.body.append(overlay, drawer);
@@ -185,7 +183,6 @@
 
     counter.addEventListener('click', open);
     close.addEventListener('click', shut);
-    more.addEventListener('click', shut);
     overlay.addEventListener('click', shut);
     document.addEventListener('keydown', function (e) {
       if (drawer.hidden) return;

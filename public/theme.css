@@ -259,8 +259,6 @@
 .wwi-total { display: flex; justify-content: space-between; align-items: baseline; font-weight: 600; }
 .wwi-total strong { font-family: var(--display); font-size: 1.9rem; }
 .wwi-go { text-align: center; }
-.wwi-more { min-height: 46px; border: 2px solid var(--forest); border-radius: 999px; background: transparent; color: var(--forest); font: inherit; font-weight: 600; cursor: pointer; }
-.wwi-more:hover { background: var(--white); }
 .wwi-drawer[hidden], .wwi-drawer [hidden], .wwi-overlay[hidden] { display: none !important; }
 body.wwi-lock { overflow: hidden; }
 .wwi-toast { position: fixed; left: 50%; bottom: 84px; z-index: 95; transform: translate(-50%, 12px); background: var(--forest); color: var(--white); padding: 10px 20px; border-radius: 999px; font-weight: 600; font-size: .95rem; box-shadow: var(--shadow); opacity: 0; visibility: hidden; transition: opacity .25s, transform .25s, visibility .25s; max-width: calc(100% - 32px); text-align: center; }
