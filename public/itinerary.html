@@ -14,36 +14,62 @@
 <link rel="stylesheet" href="theme.css">
 <style>
   /* Checkout page: built on the shared tokens in theme.css */
-  .co-hero { padding: 92px 0 24px; background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
+  .co-hero { padding: 92px 0 clamp(20px, 4vw, 36px); background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
+  .co-hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 clamp(28px, 5vw, 64px); }
   .co-place { margin: 0; font-size: clamp(.58rem, 2.5vw, .7rem); font-weight: 600; letter-spacing: .2em; white-space: nowrap; text-transform: uppercase; color: var(--muted); }
   .co-hero h1 { font-size: clamp(1.5rem, 7.8vw, 2.9rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 12px; white-space: nowrap; overflow-x: clip; }
-  .co-tagline { margin: 12px 0 0; max-width: 46ch; font-size: 1rem; line-height: 1.55; color: var(--muted); }
-  .co-facts { display: flex; flex-wrap: nowrap; align-items: center; gap: 6px 0; margin: 18px 0 0; padding: 0; list-style: none; font-size: clamp(.7rem, 3.2vw, .85rem); font-weight: 500; color: var(--forest); }
-  .co-facts li { display: inline-flex; align-items: center; gap: .4em; white-space: nowrap; padding-inline: clamp(8px, 3vw, 18px); }
-  .co-facts li:first-child { padding-left: 0; }
-  .co-facts li + li { border-left: 1px solid rgba(23, 63, 58, .28); }
-  .co-facts svg { width: 1.2em; height: 1.2em; flex: none; opacity: .75; }
-  .co-facts:empty, .co-tagline:empty { display: none; }
-  .co-labels { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 0; padding: 0; list-style: none; }
-  .co-labels li { border: 1px solid var(--sage); border-radius: 999px; padding: 3px 11px; font-size: .75rem; font-weight: 600; color: var(--forest); background: transparent; white-space: nowrap; }
-  .co-who { flex-wrap: nowrap; gap: clamp(4px, 1.6vw, 8px); }
-  .co-who li { padding-inline: clamp(8px, 3vw, 14px); font-size: clamp(.68rem, 3.2vw, .8rem); }
-  .co-labels:empty { display: none; }
-  .co-buy { display: grid; gap: 12px; max-width: 420px; margin-top: 22px; }
-  .co-buy-row { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; }
-  .co-price { font-family: var(--display); font-weight: 800; font-size: 1.7rem; line-height: 1; }
-  .co-buy-note { font-size: .75rem; font-weight: 500; color: var(--muted); text-align: right; }
+  /* Product classification: this is a digital, self-guided itinerary, not a tour with a guide. */
+  .co-pill { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 4px 11px 4px 9px; border: 1px solid var(--forest); border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); }
+  .co-pill svg { width: 14px; height: 14px; }
+  .co-tagline { margin: 14px 0 0; max-width: 46ch; font-size: 1rem; line-height: 1.55; color: var(--muted); }
+  .co-tagline:empty { display: none; }
+  /* Key attributes with icons */
+  .co-attrs { display: flex; flex-wrap: wrap; gap: 14px clamp(20px, 4vw, 40px); margin: 22px 0 0; padding: 0; list-style: none; }
+  .co-attrs li { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .co-attrs svg, .co-det svg.ic { width: 22px; height: 22px; flex: none; color: var(--forest); }
+  .co-attrs small { display: block; font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .co-attrs span { display: block; font-size: .92rem; font-weight: 600; color: var(--forest); line-height: 1.25; }
+  .co-side { min-width: 0; }
+  .co-video-slot { margin-top: 24px; }
+  .co-video-slot:empty { display: none; }
+  .co-rec { margin-top: 26px; }
+  .co-rec:empty, .co-rec[hidden] { display: none; }
+  .co-h { margin: 0 0 10px; font-family: var(--body, inherit); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--forest); }
+  .co-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .co-tags li { border: 1px solid var(--sage); border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 600; color: var(--forest); white-space: nowrap; }
+
+  /* Content + price box */
+  .co-detail { padding-block: clamp(28px, 5vw, 52px) 0; background: var(--cream); }
+  .co-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
+  .co-sec + .co-sec { margin-top: clamp(26px, 4vw, 38px); }
+  .co-sec h2 { font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.2; margin: 0 0 10px; }
+  .co-sec p { margin: 0 0 10px; max-width: 62ch; font-size: .98rem; line-height: 1.65; color: var(--muted); }
+  .co-route { margin-top: 14px; }
+  .co-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
+  .co-list li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; font-size: .95rem; line-height: 1.45; color: var(--forest); }
+  .co-list svg { width: 18px; height: 18px; margin-top: 1px; color: var(--forest); }
+  .co-det { margin: 0; display: grid; border-top: 1px solid var(--line); }
+  .co-det > div { display: grid; grid-template-columns: 22px 9.5rem minmax(0, 1fr); gap: 12px; align-items: start; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: .93rem; }
+  .co-det dt { color: var(--muted); font-weight: 500; }
+  .co-det dd { margin: 0; font-weight: 600; color: var(--forest); }
+  .co-det dd span { display: block; }
+  .co-det dd span + span { margin-top: 2px; font-weight: 500; }
+  /* Price box */
+  .co-buy { display: grid; gap: 14px; padding: 20px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm); }
+  .co-price { font-family: var(--display); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--forest); }
+  .co-rating { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: .88rem; color: var(--muted); }
+  .co-rating svg { width: 16px; height: 16px; color: #E0A526; }
+  .co-rating strong { color: var(--forest); }
+  .co-rating[hidden] { display: none; }
+  .co-perks { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: .85rem; color: var(--forest); }
+  .co-perks li { display: flex; align-items: center; gap: 8px; }
+  .co-perks svg { width: 16px; height: 16px; flex: none; }
   /* Add / Added: a reversible control. Not selected = solid green + plus; selected = outlined green + check. */
   .co-sel { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 18px; border: 1px solid var(--forest); border-radius: 10px; background: var(--forest); color: #fff; font: inherit; font-size: .92rem; font-weight: 600; cursor: pointer; transition: background .18s, color .18s; }
   .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   .co-sel svg { width: 1.05em; height: 1.05em; flex: none; }
   .co-sel.is-on { background: transparent; color: var(--forest); }
-  .co-buy .co-sel { width: 100%; }
-  .co-who-title { margin-top: 30px; font-size: .8rem; font-family: var(--body, inherit); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--forest); }
-  .co-who-title + .co-who { margin-top: 10px; }
-
-  .co-video-wrap { padding-block: 0 clamp(32px, 5vw, 56px); background: var(--sand); }
-  .co-video-wrap .co-buy { margin-top: 0; }
+  .co-buy .co-sel { width: 100%; min-height: 48px; }
 
   .co-more, .co-order { padding-block: clamp(36px, 6vw, 56px) 0; }
   .co-more .wrap > *, .co-order .wrap > * { max-width: 720px; }
@@ -83,8 +109,6 @@
   .co-note { margin-top: 10px; font-size: .82rem; color: var(--muted); }
 
   /* Promo video: a vertical 9:16 card right after the trip facts; plays muted when scrolled into view. */
-  .co-video-slot { margin-top: 22px; }
-  .co-video-slot:empty { display: none; }
   .fv { position: relative; width: min(280px, 100%); aspect-ratio: 9 / 16; border-radius: 20px; overflow: hidden; background: var(--forest); box-shadow: 0 22px 54px rgba(23, 63, 58, .32); }
   .fv iframe, .fv video, .fv img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; pointer-events: none; }
   .fv-hit { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; z-index: 1; }
@@ -100,6 +124,22 @@
   .co-bar { display: none; }
   @media (max-width: 860px) {
       .co-hero { padding-top: 76px; }
+  }
+  @media (max-width: 599px) {
+    .co-attrs { flex-direction: column; gap: 10px; }
+    .co-det > div { grid-template-columns: 22px minmax(0, 1fr); row-gap: 1px; }
+    .co-det svg.ic { grid-row: 1 / span 2; }
+    .co-det dt { grid-column: 2; font-size: .78rem; }
+    .co-det dd { grid-column: 2; }
+  }
+  @media (min-width: 900px) {
+    .co-hero .wrap.has-video { grid-template-columns: minmax(0, 1fr) 280px; align-items: start; }
+    .co-hero .wrap.has-video .co-side { grid-column: 2; grid-row: 1 / span 20; margin-top: 12px; }
+    .co-hero .wrap.has-video .co-video-slot { margin-top: 0; }
+    .co-hero .wrap.has-video > :not(.co-side) { grid-column: 1; }
+    .co-layout { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; }
+    .co-aside { grid-column: 2; grid-row: 1; position: sticky; top: 24px; }
+    .co-main { grid-column: 1; grid-row: 1; }
   }
   @media (max-width: 767px) {
     .co-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--cream); box-shadow: 0 -6px 18px rgba(23, 63, 58, .10); opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .3s, transform .3s, visibility .3s; }
@@ -128,27 +168,37 @@
 
 <!-- 1. Selected itinerary -->
 <section class="co-hero" id="top">
-  <div class="wrap">
+  <div class="wrap" id="hero-wrap">
     <p class="co-place" id="hero-place"></p>
     <h1 id="hero-title"></h1>
+    <span class="co-pill" id="pill"></span>
     <p class="co-tagline" id="hero-tagline"></p>
-    <ul class="co-facts" id="facts"></ul>
-    <div class="co-video-slot" id="video-slot"></div>
-    <h2 class="co-who-title" id="who-title" hidden>Who is it for?</h2>
-    <ul class="co-labels co-who" id="labels-who" aria-labelledby="who-title"></ul>
-    <ul class="co-labels co-what" id="labels-what"></ul>
+    <ul class="co-attrs" id="attrs"></ul>
+    <div class="co-side"><div class="co-video-slot" id="video-slot"></div></div>
+    <div class="co-rec" id="rec" hidden>
+      <h2 class="co-h" id="rec-title">Recommended for</h2>
+      <ul class="co-tags" id="labels-who" aria-labelledby="rec-title"></ul>
+    </div>
   </div>
 </section>
 
-<!-- 2. Price and purchase -->
-<section class="co-video-wrap">
-  <div class="wrap">
-    <div class="co-buy" id="hero-buy">
-      <div class="co-buy-row">
-        <span class="co-price" id="hero-price"></span>
-        <span class="co-buy-note">Instant digital access</span>
+<!-- 2. Price box and itinerary content -->
+<section class="co-detail">
+  <div class="wrap co-layout">
+    <aside class="co-aside" aria-label="Price and purchase">
+      <div class="co-buy" id="hero-buy">
+        <div>
+          <span class="co-price" id="hero-price"></span>
+          <p class="co-rating" id="rating" hidden></p>
+        </div>
+        <ul class="co-perks" id="perks"></ul>
+        <button type="button" class="co-sel" id="add-main" aria-pressed="false"></button>
       </div>
-      <button type="button" class="co-sel" id="add-main" aria-pressed="false"></button>
+    </aside>
+    <div class="co-main">
+      <section class="co-sec" id="sec-overview" hidden><h2>Overview</h2><div id="overview"></div><div class="co-route" id="route" hidden><h3 class="co-h">On the route</h3><ul class="co-tags" id="route-list"></ul></div></section>
+      <section class="co-sec" id="sec-includes" hidden><h2>Your guide includes</h2><ul class="co-list" id="includes"></ul></section>
+      <section class="co-sec" id="sec-details" hidden><h2>Details</h2><dl class="co-det" id="details"></dl></section>
     </div>
   </div>
 </section>
@@ -200,19 +250,66 @@
   const ICONS = {
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     pin: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
-    car: '<path d="M5 16V12l1.7-4.4A2 2 0 0 1 8.6 6.3h6.8a2 2 0 0 1 1.9 1.3L19 12v4"/><path d="M3.5 12h17v4a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="14.5" r=".6"/><circle cx="16.5" cy="14.5" r=".6"/><path d="M6 17v2M18 17v2"/>'
+    car: '<path d="M5 16V12l1.7-4.4A2 2 0 0 1 8.6 6.3h6.8a2 2 0 0 1 1.9 1.3L19 12v4"/><path d="M3.5 12h17v4a1 1 0 0 1-1 1h-15a1 1 0 0 1-1-1z"/><circle cx="7.5" cy="14.5" r=".6"/><circle cx="16.5" cy="14.5" r=".6"/>',
+    compass: '<circle cx="12" cy="12" r="9"/><path d="M15.5 8.5l-2 5-5 2 2-5z"/>',
+    route: '<circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6"/>',
+    flag: '<path d="M6 21V4"/><path d="M6 5h11l-2 4 2 4H6"/>',
+    euro: '<path d="M17 7a6 6 0 1 0 0 10"/><path d="M5 10.5h9M5 13.5h9"/>',
+    calendar: '<rect x="4" y="5" width="16" height="15" rx="2"/><path d="M4 10h16M9 3v4M15 3v4"/>',
+    download: '<path d="M12 4v11M7.5 10.5L12 15l4.5-4.5M5 20h14"/>',
+    check: '<path d="M5 12.5l4.5 4.5L19 7.5"/>',
+    bolt: '<path d="M13 3L5 13h6l-1 8 8-10h-6z"/>',
+    mail: '<rect x="3.5" y="5.5" width="17" height="13" rx="2"/><path d="M4 7l8 6 8-6"/>'
   };
-  (main.facts || []).forEach((f) => {
-    const li = document.createElement('li');
-    li.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[f.icon] || '') + '</svg>';
-    li.append(document.createTextNode(f.text));
-    $('facts').append(li);
+  const icon = (name, cls) => '<svg' + (cls ? ' class="' + cls + '"' : '') + ' viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (ICONS[name] || '') + '</svg>';
+  const el = (tag, cls, html) => { const n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; };
+  const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+
+  /* Product classification pill + key attributes (only the ones this itinerary has data for). */
+  $('pill').innerHTML = icon('compass') + 'Self-guided';
+  $('pill').title = 'A digital itinerary you follow yourself. There is no tour guide.';
+  [['clock', 'Duration', main.duration], ['pin', 'Location', main.location], ['compass', 'Tour type', 'Self-guided']].forEach(([ic, label, value]) => {
+    if (!value) return;
+    $('attrs').append(el('li', '', icon(ic) + '<div><small>' + label + '</small><span>' + esc(value) + '</span></div>'));
   });
+
+  /* Recommended for: tags that belong to this itinerary. */
+  (main.audience || []).forEach((a) => $('labels-who').append(el('li', '', esc(a))));
+  $('rec').hidden = !(main.audience || []).length;
+
+  /* Price box. The rating only shows when real review data exists on the itinerary (main.reviews). */
   $('hero-price').textContent = euro(main.price);
-  const addLabel = (listId, text) => { const li = document.createElement('li'); li.textContent = text; $(listId).append(li); };
-  (main.audience || []).forEach((a) => addLabel('labels-who', a));
-  $('who-title').hidden = !(main.audience || []).length;   // the question only shows when there are answers
-  ['Rental car required', 'Delivered by email'].forEach((f) => addLabel('labels-what', f));
+  const rv = main.reviews;
+  if (rv && Number(rv.count) > 0 && Number(rv.rating) > 0) {
+    $('rating').innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2l2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 17l-5.4 3 1.1-6.1L3.2 9.6l6.1-.8z"/></svg><strong>' + Number(rv.rating).toFixed(1) + '/5</strong> (' + Number(rv.count) + (Number(rv.count) === 1 ? ' review' : ' reviews') + ')';
+    $('rating').hidden = false;
+  }
+  [['bolt', 'Instant digital access'], ['compass', 'Self-guided: no tour guide, go at your own pace']].forEach(([ic, tx]) => $('perks').append(el('li', '', icon(ic) + '<span>' + tx + '</span>')));
+
+  /* Overview, Your guide includes, Details: all from the itinerary data. */
+  if ((main.overview || []).length) {
+    main.overview.forEach((p) => $('overview').append(el('p', '', esc(p))));
+    if ((main.route || []).length) { main.route.forEach((s) => $('route-list').append(el('li', '', esc(s)))); $('route').hidden = false; }
+    $('sec-overview').hidden = false;
+  }
+  if ((main.includes || []).length) {
+    main.includes.forEach((x) => $('includes').append(el('li', '', icon('check') + '<span>' + esc(x) + '</span>')));
+    $('sec-includes').hidden = false;
+  }
+  const rows = [
+    ['clock', 'Duration', main.duration],
+    ['route', 'Total distance', main.distance],
+    ['flag', 'Stops', main.stops ? main.stops + (main.stops === 1 ? ' stop' : ' stops') : ''],
+    ['car', 'Transport', main.transport],
+    ['euro', 'Estimated additional budget', (main.budget || []).length ? main.budget : '']
+  ].concat((main.extra || []).map((x) => [x.label === 'Offline' ? 'download' : 'calendar', x.label, x.value]));
+  rows.forEach(([ic, label, value]) => {
+    if (!value || !value.length) return;
+    const lines = Array.isArray(value) ? value : [value];
+    $('details').append(el('div', '', icon(ic, 'ic') + '<dt>' + label + '</dt><dd>' + lines.map((l) => '<span>' + esc(l) + '</span>').join('') + '</dd>'));
+  });
+  if ($('details').children.length) $('sec-details').hidden = false;
+  if ((main.video || '').trim()) $('hero-wrap').classList.add('has-video');
 
   /* The title always stays on one line: the CSS size is fluid, and if a longer title still does not fit
      the width it is reduced a little at a time until it does. */
