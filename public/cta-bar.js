@@ -1,4 +1,4 @@
-// Shows the fixed "Discover Itineraries" bar only after the visitor scrolls past the
+// Shows the fixed "Get My Itineraries" bar only after the visitor scrolls past the
 // element marked [data-cta-ref] (the hero), and hides it while any [data-hide-cta]
 // element is on screen so the same call to action is never shown twice.
 (function () {
