@@ -30,7 +30,7 @@
       cover: 'images/cover-rural.jpg', video: '',
       place: 'Fuerteventura · Canary Islands', facts: [{ icon: 'car', text: 'Self-guided' }],
       desc: "Leave the coast behind and drive through the villages, valleys and hills of the island's interior. Expect quiet viewpoints, traditional food and the slower side of Fuerteventura, away from the crowds." },
-    { id: 'windmills', destination: 'Fuerteventura', name: 'Windmills', price: 8,
+    { id: 'windmills', destination: 'Fuerteventura', name: 'Spot the Windmills', price: 8,
       category: 'scenic',
       blurb: "Follow the traditional windmills that mark the island's landscape and learn the story behind them.",
       cover: 'images/cover-windmills.jpg', video: '',
