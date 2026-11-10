@@ -18,6 +18,9 @@
   .co-hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 clamp(28px, 5vw, 64px); }
   .co-place { margin: 0; font-size: clamp(.58rem, 2.5vw, .7rem); font-weight: 600; letter-spacing: .2em; white-space: nowrap; text-transform: uppercase; color: var(--muted); }
   .co-hero h1 { font-size: clamp(1.5rem, 7.8vw, 2.9rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 12px; white-space: nowrap; overflow-x: clip; }
+  /* Signature detail: a short underline in the itinerary's category accent colour. */
+  .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 12px; border-radius: 2px; background: var(--accent, var(--forest)); }
+  .co-accent + .co-pill { margin-top: 16px; }
   /* Product classification: this is a digital, self-guided itinerary, not a tour with a guide. */
   .co-pill { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 4px 11px 4px 9px; border: 1px solid var(--forest); border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); }
   .co-pill svg { width: 14px; height: 14px; }
@@ -171,6 +174,7 @@
   <div class="wrap" id="hero-wrap">
     <p class="co-place" id="hero-place"></p>
     <h1 id="hero-title"></h1>
+    <span class="co-accent" id="accent" aria-hidden="true"></span>
     <span class="co-pill" id="pill"></span>
     <p class="co-tagline" id="hero-tagline"></p>
     <ul class="co-attrs" id="attrs"></ul>
@@ -266,6 +270,7 @@
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
   /* Product classification pill + key attributes (only the ones this itinerary has data for). */
+  $('accent').style.setProperty('--accent', ((window.WWI_CATEGORIES || {})[main.category] || {}).accent || '');
   $('pill').innerHTML = icon('compass') + 'Self-guided';
   $('pill').title = 'A digital itinerary you follow yourself. There is no tour guide.';
   [['clock', 'Duration', main.duration], ['pin', 'Location', main.location], ['compass', 'Tour type', 'Self-guided']].forEach(([ic, label, value]) => {
