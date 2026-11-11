@@ -75,6 +75,8 @@ h1{font-size:clamp(1.7rem,5.5vw,2.4rem);font-weight:700;line-height:1.15;letter-
 .bestdays .why-link{display:block;text-align:right;font-size:.75rem;color:var(--blue);margin-top:4px}
 
 /* ---- download row ---- */
+.dl-h{font-weight:700;font-size:1.05rem;margin:0}
+.dl-s{font-size:.9rem;color:var(--muted);margin:0 0 4px;max-width:36ch}
 .dl-row{margin-top:18px;text-align:center}
 .dl-line{display:inline-flex;align-items:center;gap:8px}
 .dl-info{width:26px;height:26px;border-radius:50%;border:1.5px solid var(--line-strong);background:var(--surface);font:600 .82rem var(--f);color:var(--muted);cursor:pointer;display:inline-flex;align-items:center;justify-content:center}
@@ -377,7 +379,7 @@ footer .brand-line{font-size:1rem;font-weight:600;color:var(--ink);line-height:1
     <span class="why-link">Why? &#x2193;</span>
   </a>
   <div class="dl-row js-dl-row" hidden>
-    <div class="dl-line"><button class="btn dl js-dl" type="button" id="dl-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF for offline</button><button class="dl-info" type="button" id="dl-info" aria-expanded="false" aria-controls="dl-tip" aria-label="About the PDF">i</button></div>
+    <div class="dl-line"><button class="btn dl js-dl" type="button" id="dl-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF</button><button class="dl-info" type="button" id="dl-info" aria-expanded="false" aria-controls="dl-tip" aria-label="About the PDF">i</button></div>
     <p class="dl-tip" id="dl-tip" hidden>Save it before you set off. The PDF works without signal.</p>
     <span class="dl-status js-dl-status"></span>
   </div>
@@ -657,7 +659,9 @@ footer .brand-line{font-size:1rem;font-weight:600;color:var(--ink);line-height:1
     Opening hours and prices were checked for this guide but can change, especially on public holidays. Tap Navigate on each stop to open turn-by-turn directions in your maps app.
   </div>
   <div class="dl-row js-dl-row" hidden style="padding-top:18px">
-    <button class="btn dl js-dl" type="button" id="dl-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF for offline</button>
+    <p class="dl-h">Your guide, ready to go.</p>
+    <p class="dl-s">Download your PDF and access your itinerary whenever you need it.</p>
+    <button class="btn dl js-dl" type="button" id="dl-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF</button>
     <span class="dl-status js-dl-status"></span>
   </div>
 </section>

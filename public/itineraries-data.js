@@ -4,7 +4,7 @@
    Itinerary page (every field is optional: what is empty is simply not shown, nothing is invented):
    place / headline / tagline: the header. headline (short title) falls back to name.
    location, duration: the key attributes under the title. The tour type is always "Self-guided".
-   distance, stops (number), transport, budget [lines], extra [{label, value}]: the Details section.
+   distance, stops (number), transport, budget { label, amount, unit, breakdown [lines], note, total }, extra [{label, value}]: the Details section.
    overview: paragraphs for the Overview. route: tags for "On the route" (strings or { label, icon: 'dunes' | 'volcano' | 'boat' | 'sun' | 'drop' }). includes: what the customer receives ("Your guide includes").
    theme: { label, color, sand }: the visual identity of the itinerary page (category label, accents, icons, route tags). Independent per itinerary.
    gallery: { folder, count }: photos shown under the title as img1.jpg ... imgN.jpg inside that folder (missing files are skipped; none = no gallery).
@@ -31,7 +31,7 @@
       theme: { label: 'Coast & Volcano', color: '#269F9D', sand: '#E7D9BF' },
       gallery: { folder: 'images/itineraries/fuerteventura/explore-the-north/', count: 10 },
       location: 'Fuerteventura North', duration: '6 hours', distance: '≈ 50 km by car', stops: 5, transport: 'Car required',
-      budget: ['Car rental, 1 day: €40', 'Fuel for the day: ≈ €20', 'Food and drinks: ≈ €25 per person'],
+      budget: { label: 'Estimated transport budget', amount: '€60', unit: 'For 2 people · 1 day', breakdown: ['Car rental (1 day): approximately €40', 'Fuel for the day: approximately €20', 'Food and drinks: approximately €25 per person, optional, at one of our recommended places'], note: 'The estimated €60 transport budget covers car rental and fuel for two people. Food and drinks are not included.', total: 'Estimated total including food for two people: approximately €110.' },
       extra: [{ label: 'Offline', value: 'Downloadable PDF that works without signal' }],
       route: [{ label: 'Sand Dunes', icon: 'dunes' }, { label: 'Volcano', icon: 'volcano' }, { label: 'Fishing Village', icon: 'boat' }, { label: 'Sunset', icon: 'sun' }, { label: 'Natural Pools', icon: 'drop' }],
       includes: ['Your digital self-guided itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a sketch map', 'What to do at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'],
@@ -42,7 +42,7 @@
       cover: 'images/cover-rural.jpg', video: '',
       place: 'Fuerteventura · Canary Islands', theme: { label: 'Rural & Heritage', color: '#C2613F', sand: '#EAD7C0' }, audience: ['Culture lovers', 'Couples', 'Slow travellers'],
       location: 'Interior of Fuerteventura', duration: '1 full day', distance: '≈ 60 km by car', stops: 5, transport: 'Car required',
-      budget: ['Car rental, 1 day: €40', 'Fuel for the day: ≈ €20', 'Ecomuseo de La Alcogida tickets: €5 per person', 'Food and drinks are not included'],
+      budget: { label: 'Estimated budget', amount: '€70', unit: 'For 2 people · 1 day', breakdown: ['Car rental (1 day): approximately €40', 'Fuel for the day: approximately €20', 'Ecomuseo de La Alcogida tickets: €5 per person (€10)'], note: 'The estimated €70 covers car rental, fuel and tickets for two people. Food and drinks are not included.' },
       extra: [{ label: 'Best days', value: 'Tuesday to Saturday' }, { label: 'Offline', value: 'Downloadable PDF that works without signal' }],
       route: ['Villaverde', 'La Oliva', 'Tefía', 'Ecomuseo de La Alcogida', 'Puertito de los Molinos'],
       includes: ['Your digital itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a route map', 'What to see at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'],
