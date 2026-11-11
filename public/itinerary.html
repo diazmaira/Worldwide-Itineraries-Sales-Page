@@ -16,29 +16,32 @@
   /* Checkout page: built on the shared tokens in theme.css */
   .co-hero { padding: 92px 0 clamp(20px, 4vw, 36px); background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
   .co-hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 clamp(28px, 5vw, 64px); }
-  .co-place { margin: 0; font-size: clamp(.58rem, 2.5vw, .7rem); font-weight: 600; letter-spacing: .2em; white-space: nowrap; text-transform: uppercase; color: var(--muted); }
-  .co-hero h1 { font-size: clamp(1.5rem, 7.8vw, 2.9rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 12px; white-space: nowrap; overflow-x: clip; }
-  /* Signature detail: a short underline in the itinerary's category accent colour. */
-  .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 12px; border-radius: 2px; background: var(--accent, var(--forest)); }
-  .co-accent + .co-pill { margin-top: 16px; }
+  /* Itinerary identity: set from the itinerary's theme (see itineraries-data.js). Defaults keep the brand green. */
+  :root { --id: var(--forest); --id-ink: var(--forest); --id-tint: rgba(23, 63, 58, .08); --id-sand: var(--sand); }
+  .co-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
+  .co-hero h1 { font-size: clamp(1.5rem, 7.8vw, 2.9rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 14px; white-space: nowrap; overflow-x: clip; }
   /* Product classification: this is a digital, self-guided itinerary, not a tour with a guide. */
-  .co-pill { justify-self: start; display: inline-flex; align-items: center; gap: 6px; margin-top: 12px; padding: 4px 11px 4px 9px; border: 1px solid var(--forest); border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); }
+  .co-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px 4px 9px; border: 1px solid var(--forest); border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); }
   .co-pill svg { width: 14px; height: 14px; }
-  .co-tagline { margin: 14px 0 0; max-width: 46ch; font-size: 1rem; line-height: 1.55; color: var(--muted); }
-  .co-tagline:empty { display: none; }
-  /* Key attributes with icons */
+  .co-chip { padding: 5px 11px; border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--id-ink); background: var(--id-tint); }
+  .co-chip[hidden] { display: none; }
+  /* Signature detail: a short underline in the itinerary's accent colour. */
+  .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 12px; border-radius: 2px; background: var(--id); }
   .co-attrs { display: flex; flex-wrap: wrap; gap: 14px clamp(20px, 4vw, 40px); margin: 22px 0 0; padding: 0; list-style: none; }
   .co-attrs li { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .co-attrs svg, .co-det svg.ic { width: 22px; height: 22px; flex: none; color: var(--forest); }
+  .co-attrs svg, .co-det svg.ic { width: 22px; height: 22px; flex: none; color: var(--id); }
+  .co-attrs { margin-top: 18px; }
   .co-attrs small { display: block; font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
   .co-attrs span { display: block; font-size: .92rem; font-weight: 600; color: var(--forest); line-height: 1.25; }
   .co-side { min-width: 0; }
   .co-video-slot { margin-top: 24px; }
   .co-video-slot:empty { display: none; }
-  .co-rec { margin-top: 26px; }
-  .co-rec:empty, .co-rec[hidden] { display: none; }
+  .co-rec[hidden] { display: none; }
   .co-h { margin: 0 0 10px; font-family: var(--body, inherit); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--forest); }
   .co-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
+  .co-tags-route li { display: inline-flex; align-items: center; gap: 6px; border-color: transparent; background: var(--id-tint); color: var(--id-ink); }
+  .co-tags-route svg { width: 15px; height: 15px; }
+  .co-tags-rec li { border-color: transparent; background: var(--id-sand); }
   .co-tags li { border: 1px solid var(--sage); border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 600; color: var(--forest); white-space: nowrap; }
 
   /* Content + price box */
@@ -46,17 +49,30 @@
   .co-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
   .co-sec + .co-sec { margin-top: clamp(26px, 4vw, 38px); }
   .co-sec h2 { font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.2; margin: 0 0 10px; }
+  .co-sec h2.co-h { font-size: .72rem; line-height: 1.3; margin: 0 0 10px; }
   .co-sec p { margin: 0 0 10px; max-width: 62ch; font-size: .98rem; line-height: 1.65; color: var(--muted); }
   .co-route { margin-top: 14px; }
   .co-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
   .co-list li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; font-size: .95rem; line-height: 1.45; color: var(--forest); }
-  .co-list svg { width: 18px; height: 18px; margin-top: 1px; color: var(--forest); }
+  .co-list svg { width: 18px; height: 18px; margin-top: 1px; color: var(--id); }
   .co-det { margin: 0; display: grid; border-top: 1px solid var(--line); }
   .co-det > div { display: grid; grid-template-columns: 22px 9.5rem minmax(0, 1fr); gap: 12px; align-items: start; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: .93rem; }
   .co-det dt { color: var(--muted); font-weight: 500; }
   .co-det dd { margin: 0; font-weight: 600; color: var(--forest); }
   .co-det dd span { display: block; }
   .co-det dd span + span { margin-top: 2px; font-weight: 500; }
+  /* Tabs: text tabs with an underline, not buttons */
+  .co-tabs { display: flex; gap: clamp(18px, 5vw, 32px); border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .co-tab { position: relative; padding: 10px 0 11px; border: 0; background: none; font: inherit; font-size: .95rem; font-weight: 600; color: var(--muted); cursor: pointer; }
+  .co-tab::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--id); transform: scaleX(0); transition: transform .2s ease; }
+  .co-tab[aria-selected="true"] { color: var(--forest); }
+  .co-tab[aria-selected="true"]::after { transform: scaleX(1); }
+  .co-tab:hover { color: var(--forest); }
+  .co-tab:focus-visible, .co-panel:focus-visible { outline: 2px solid var(--id); outline-offset: 3px; border-radius: 4px; }
+  .co-panel { animation: co-fade .2s ease; }
+  .co-panel[hidden] { display: none; }
+  @keyframes co-fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
+  .co-lead { color: var(--forest) !important; font-weight: 500; }
   /* Price box */
   .co-buy { display: grid; gap: 14px; padding: 20px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm); }
   .co-price { font-family: var(--display); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--forest); }
@@ -66,7 +82,8 @@
   .co-rating[hidden] { display: none; }
   .co-perks { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: .85rem; color: var(--forest); }
   .co-perks li { display: flex; align-items: center; gap: 8px; }
-  .co-perks svg { width: 16px; height: 16px; flex: none; }
+  .co-perks svg { width: 16px; height: 16px; flex: none; color: var(--id); }
+  .co-demo { margin-left: 4px; padding: 1px 7px; border: 1px dashed var(--muted); border-radius: 999px; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   /* Add / Added: a reversible control. Not selected = solid green + plus; selected = outlined green + check. */
   .co-sel { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 8px 18px; border: 1px solid var(--forest); border-radius: 10px; background: var(--forest); color: #fff; font: inherit; font-size: .92rem; font-weight: 600; cursor: pointer; transition: background .18s, color .18s; }
   .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
@@ -152,7 +169,7 @@
     .co-bar .btn { flex: 1; max-width: 220px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1rem; padding-inline: 16px; }
     body { padding-bottom: 0; }
   }
-  @media (prefers-reduced-motion: reduce) { .co-bar, .fv, .fv-lb, .fv-stage { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .co-panel { animation: none; } .co-tab::after { transition: none; } .co-bar, .fv, .fv-lb, .fv-stage { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -172,17 +189,11 @@
 <!-- 1. Selected itinerary -->
 <section class="co-hero" id="top">
   <div class="wrap" id="hero-wrap">
-    <p class="co-place" id="hero-place"></p>
+    <div class="co-top"><span class="co-pill" id="pill"></span><span class="co-chip" id="cat-chip" hidden></span></div>
     <h1 id="hero-title"></h1>
     <span class="co-accent" id="accent" aria-hidden="true"></span>
-    <span class="co-pill" id="pill"></span>
-    <p class="co-tagline" id="hero-tagline"></p>
     <ul class="co-attrs" id="attrs"></ul>
     <div class="co-side"><div class="co-video-slot" id="video-slot"></div></div>
-    <div class="co-rec" id="rec" hidden>
-      <h2 class="co-h" id="rec-title">Recommended for</h2>
-      <ul class="co-tags" id="labels-who" aria-labelledby="rec-title"></ul>
-    </div>
   </div>
 </section>
 
@@ -200,8 +211,21 @@
       </div>
     </aside>
     <div class="co-main">
-      <section class="co-sec" id="sec-overview" hidden><h2>Overview</h2><div id="overview"></div><div class="co-route" id="route" hidden><h3 class="co-h">On the route</h3><ul class="co-tags" id="route-list"></ul></div></section>
-      <section class="co-sec" id="sec-includes" hidden><h2>Your guide includes</h2><ul class="co-list" id="includes"></ul></section>
+      <section class="co-sec" id="sec-tabs" hidden>
+        <div class="co-tabs" role="tablist" aria-label="About this itinerary">
+          <button type="button" role="tab" class="co-tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
+          <button type="button" role="tab" class="co-tab" id="tab-includes" aria-controls="panel-includes" aria-selected="false" tabindex="-1">Your guide includes</button>
+        </div>
+        <div class="co-panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
+          <div id="overview"></div>
+          <div class="co-route" id="route" hidden><h3 class="co-h">On the route</h3><ul class="co-tags co-tags-route" id="route-list"></ul></div>
+        </div>
+        <div class="co-panel" role="tabpanel" id="panel-includes" aria-labelledby="tab-includes" tabindex="0" hidden><ul class="co-list" id="includes"></ul></div>
+      </section>
+      <section class="co-sec co-rec" id="rec" hidden>
+        <h2 class="co-h" id="rec-title">Recommended for</h2>
+        <ul class="co-tags co-tags-rec" id="labels-who" aria-labelledby="rec-title"></ul>
+      </section>
       <section class="co-sec" id="sec-details" hidden><h2>Details</h2><dl class="co-det" id="details"></dl></section>
     </div>
   </div>
@@ -236,6 +260,7 @@
 
 <script src="itineraries-data.js"></script>
 <script src="selection.js"></script>
+<script src="demo-reviews.js"></script>
 <script>
   const ITEMS = WWI.items;
   const $ = (id) => document.getElementById(id);
@@ -249,8 +274,6 @@
   /* ---- 1. Hero ---- */
   document.title = main.name + ' | Worldwide Itineraries';
   $('hero-title').textContent = main.headline || main.name;
-  $('hero-place').textContent = main.place || main.destination;
-  $('hero-tagline').textContent = main.tagline || '';
   const ICONS = {
     clock: '<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
     pin: '<path d="M12 21s-6.5-5.6-6.5-11a6.5 6.5 0 0 1 13 0c0 5.4-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.3"/>',
@@ -269,13 +292,21 @@
   const el = (tag, cls, html) => { const n = document.createElement(tag); if (cls) n.className = cls; if (html != null) n.innerHTML = html; return n; };
   const esc = (s) => String(s).replace(/[&<>"]/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
 
-  /* Product classification pill + key attributes (only the ones this itinerary has data for). */
-  $('accent').style.setProperty('--accent', ((window.WWI_CATEGORIES || {})[main.category] || {}).accent || '');
+  /* Identity: colours come from this itinerary's theme (falls back to its category colour), set once as CSS variables. */
+  const theme = Object.assign({}, (window.WWI_CATEGORIES || {})[main.category] || {}, main.theme || {});
+  if (theme.color) {
+    const rs = document.documentElement.style;
+    rs.setProperty('--id', theme.color);
+    rs.setProperty('--id-ink', 'color-mix(in srgb, ' + theme.color + ' 72%, #0b2a27)');
+    rs.setProperty('--id-tint', 'color-mix(in srgb, ' + theme.color + ' 13%, #fff)');
+    if (theme.sand) rs.setProperty('--id-sand', theme.sand);
+  }
+  if (theme.label) { $('cat-chip').textContent = theme.label; $('cat-chip').hidden = false; }
   $('pill').innerHTML = icon('compass') + 'Self-guided';
   $('pill').title = 'A digital itinerary you follow yourself. There is no tour guide.';
-  [['clock', 'Duration', main.duration], ['pin', 'Location', main.location], ['compass', 'Tour type', 'Self-guided']].forEach(([ic, label, value]) => {
+  [['clock', 'Duration', main.duration], ['pin', 'Location', main.location]].forEach(([ic, label, value]) => {
     if (!value) return;
-    $('attrs').append(el('li', '', icon(ic) + '<div><small>' + label + '</small><span>' + esc(value) + '</span></div>'));
+    $('attrs').append(el('li', '', icon(ic) + '<span class="sr-only">' + label + ': </span><span>' + esc(value) + '</span>'));
   });
 
   /* Recommended for: tags that belong to this itinerary. */
@@ -284,23 +315,60 @@
 
   /* Price box. The rating only shows when real review data exists on the itinerary (main.reviews). */
   $('hero-price').textContent = euro(main.price);
-  const rv = main.reviews;
+  /* Real reviews (main.reviews) always win. demo-reviews.js is placeholder data that only exists on localhost or when
+     switched on with ?demo=reviews; it is labelled "Demo data" and is never shown to normal visitors. */
+  const demo = !main.reviews && window.WWI_DEMO_REVIEWS && window.WWI_DEMO_REVIEWS[main.id];
+  const rv = main.reviews || demo;
   if (rv && Number(rv.count) > 0 && Number(rv.rating) > 0) {
     $('rating').innerHTML = '<svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.2l2.7 5.6 6.1.8-4.5 4.3 1.1 6.1L12 17l-5.4 3 1.1-6.1L3.2 9.6l6.1-.8z"/></svg><strong>' + Number(rv.rating).toFixed(1) + '/5</strong> (' + Number(rv.count) + (Number(rv.count) === 1 ? ' review' : ' reviews') + ')';
+    if (demo) $('rating').append(el('span', 'co-demo', 'Demo data'));
     $('rating').hidden = false;
   }
   [['bolt', 'Instant digital access'], ['compass', 'Self-guided: no tour guide, go at your own pace']].forEach(([ic, tx]) => $('perks').append(el('li', '', icon(ic) + '<span>' + tx + '</span>')));
 
   /* Overview, Your guide includes, Details: all from the itinerary data. */
-  if ((main.overview || []).length) {
-    main.overview.forEach((p) => $('overview').append(el('p', '', esc(p))));
-    if ((main.route || []).length) { main.route.forEach((s) => $('route-list').append(el('li', '', esc(s)))); $('route').hidden = false; }
-    $('sec-overview').hidden = false;
+  const hasOverview = (main.overview || []).length || main.tagline;
+  if (main.tagline) $('overview').append(el('p', 'co-lead', esc(main.tagline)));
+  (main.overview || []).forEach((p) => $('overview').append(el('p', '', esc(p))));
+  const ROUTE_ICONS = {
+    dunes: '<path d="M3 17c3-5 6-5 9 0s6 0 9-5"/><path d="M3 21h18"/>',
+    volcano: '<path d="M3 20l6-12h6l6 12z"/><path d="M10 8l-1-3M14 8l1-3"/>',
+    boat: '<path d="M3 15h18l-3 4H6z"/><path d="M12 15V5l5 7"/>',
+    sun: '<circle cx="12" cy="13" r="4"/><path d="M12 4v2M4.5 8l1.5 1.5M19.5 8L18 9.5M3 20h18"/>',
+    drop: '<path d="M12 4s6 6.4 6 10.5a6 6 0 0 1-12 0C6 10.4 12 4 12 4z"/>'
+  };
+  if ((main.route || []).length) {
+    main.route.forEach((s) => {
+      const o = typeof s === 'string' ? { label: s } : s;
+      const svg = o.icon && ROUTE_ICONS[o.icon] ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ROUTE_ICONS[o.icon] + '</svg>' : '';
+      $('route-list').append(el('li', '', svg + esc(o.label)));
+    });
+    $('route').hidden = false;
   }
-  if ((main.includes || []).length) {
-    main.includes.forEach((x) => $('includes').append(el('li', '', icon('check') + '<span>' + esc(x) + '</span>')));
-    $('sec-includes').hidden = false;
+  const hasIncludes = (main.includes || []).length;
+  (main.includes || []).forEach((x) => $('includes').append(el('li', '', icon('check') + '<span>' + esc(x) + '</span>')));
+
+  /* Tabs (Overview / Your guide includes): one panel at a time, arrow keys move between tabs. */
+  const tabs = [['overview', hasOverview || (main.route || []).length], ['includes', hasIncludes]].filter((x) => x[1]).map((x) => x[0]);
+  ['overview', 'includes'].forEach((k) => { if (!tabs.includes(k)) { $('tab-' + k).hidden = true; $('panel-' + k).hidden = true; } });
+  if (tabs.length) $('sec-tabs').hidden = false;
+  function showTab(k, focus) {
+    tabs.forEach((n) => {
+      const on = n === k;
+      $('tab-' + n).setAttribute('aria-selected', String(on));
+      $('tab-' + n).tabIndex = on ? 0 : -1;
+      $('panel-' + n).hidden = !on;
+    });
+    if (focus) $('tab-' + k).focus();
   }
+  if (tabs.length) showTab(tabs[0]);
+  tabs.forEach((k, i) => {
+    $('tab-' + k).addEventListener('click', () => showTab(k));
+    $('tab-' + k).addEventListener('keydown', (e) => {
+      const to = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i - 1 + tabs.length) % tabs.length : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : -1;
+      if (to >= 0) { e.preventDefault(); showTab(tabs[to], true); }
+    });
+  });
   const rows = [
     ['clock', 'Duration', main.duration],
     ['route', 'Total distance', main.distance],
