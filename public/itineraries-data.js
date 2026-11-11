@@ -7,6 +7,7 @@
    distance, stops (number), transport, budget [lines], extra [{label, value}]: the Details section.
    overview: paragraphs for the Overview. route: tags for "On the route" (strings or { label, icon: 'dunes' | 'volcano' | 'boat' | 'sun' | 'drop' }). includes: what the customer receives ("Your guide includes").
    theme: { label, color, sand }: the visual identity of the itinerary page (category label, accents, icons, route tags). Independent per itinerary.
+   gallery: { folder, count }: photos shown under the title as img1.jpg ... imgN.jpg inside that folder (missing files are skipped; none = no gallery).
    audience: tags for "Recommended for". Different per itinerary; edit when you know better.
    reviews: { rating: 4.9, count: 24 } from REAL customer reviews only. Leave it out until there are reviews: the rating is then hidden.
    name: short display title (the destination is already shown on the page). The server keeps its own product names for Stripe.
@@ -28,6 +29,7 @@
       place: 'Fuerteventura · Canary Islands', headline: 'Explore the North',
       tagline: 'A day of dunes, volcanoes, fishing villages and ocean views.',
       theme: { label: 'Coast & Volcano', color: '#269F9D', sand: '#E7D9BF' },
+      gallery: { folder: 'images/itineraries/fuerteventura/explore-the-north/', count: 10 },
       location: 'Fuerteventura North', duration: '6 hours', distance: '≈ 50 km by car', stops: 5, transport: 'Car required',
       budget: ['Car rental, 1 day: €40', 'Fuel for the day: ≈ €20', 'Food and drinks: ≈ €25 per person'],
       extra: [{ label: 'Offline', value: 'Downloadable PDF that works without signal' }],
