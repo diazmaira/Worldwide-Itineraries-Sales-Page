@@ -65,10 +65,11 @@
   .co-sec { position: relative; margin-top: clamp(34px, 6vw, 56px); padding-top: clamp(20px, 3.5vw, 28px); border-top: 1px solid var(--line); }
   .co-sec:first-child { margin-top: 0; }
   .co-sec::before { content: ''; position: absolute; left: 0; top: -2px; width: 32px; height: 3px; border-radius: 2px; background: #C2613F; }
-  .co-kicker { margin: 0 0 8px; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .co-kicker { margin: 0 0 12px; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
   .co-kicker .n { color: #B4543A; }
   .co-sec h2 { font-size: clamp(1.45rem, 5.4vw, 2.05rem); line-height: 1.15; letter-spacing: -.01em; margin: 0 0 14px; }
   .co-sec h3 { font-size: clamp(1.1rem, 4vw, 1.3rem); line-height: 1.25; margin: 0 0 10px; }
+  .co-sec h2.co-kicker { margin: 0 0 12px; font-family: var(--body, inherit); font-size: .72rem; font-weight: 700; line-height: 1.3; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
   .co-sec h2.co-h { font-size: .72rem; line-height: 1.3; margin: 0 0 10px; }
   .co-sec p { margin: 0 0 10px; max-width: 62ch; font-size: .98rem; line-height: 1.65; color: var(--muted); }
   .co-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
@@ -97,18 +98,10 @@
   @media (min-width: 600px) { .co-row { grid-template-columns: 20px 13rem minmax(0, 1fr); } .co-row svg.ic { grid-row: auto; } .co-row dt { grid-column: 2; padding-top: 3px; } .co-row dd { grid-column: 3; margin: 0; } .co-bud { grid-column: 2 / -1; } }
   @media (pointer: coarse) { .co-info { width: 32px; height: 32px; } }
 
-  /* Tabs: text tabs with an underline, not buttons */
-  .co-tabs { display: flex; flex-wrap: wrap; gap: 4px clamp(18px, 4vw, 30px); border-bottom: 1px solid var(--line); margin-bottom: 18px; }
-  .co-tab { position: relative; padding: 4px 0 11px; border: 0; background: none; font-family: var(--display); font-size: clamp(1.15rem, 4.8vw, 1.9rem); font-weight: 700; letter-spacing: -.01em; line-height: 1.15; color: var(--muted); opacity: .75; cursor: pointer; text-align: left; }
-  .co-tab::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--id); transform: scaleX(0); transition: transform .2s ease; }
-  .co-tab[aria-selected="true"] { color: var(--forest); opacity: 1; }
-  .co-tab[aria-selected="true"]::after { transform: scaleX(1); }
-  .co-tab:hover { color: var(--forest); }
-  .co-tab:focus-visible, .co-panel:focus-visible { outline: 2px solid var(--id); outline-offset: 3px; border-radius: 4px; }
-  .co-panel { animation: co-fade .2s ease; }
-  .co-panel[hidden] { display: none; }
   @keyframes co-fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
-  .co-lead { color: var(--forest) !important; font-weight: 500; }
+  .co-sec p.co-headline { max-width: 28ch; margin: 0 0 12px; font-family: var(--display); font-size: clamp(1.3rem, 4.8vw, 1.85rem); font-weight: 700; line-height: 1.2; letter-spacing: -.01em; color: var(--forest); max-width: 28ch; }
+  .co-list.plain li { grid-template-columns: 10px minmax(0, 1fr); align-items: baseline; }
+  .co-list.plain li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--id); transform: translateY(-2px); }
   /* Price box */
   .co-buy { display: grid; gap: 14px; padding: 20px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm); }
   .co-price { font-family: var(--display); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--forest); }
@@ -183,7 +176,7 @@
     .co-bar .btn { flex: 1; max-width: 220px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1rem; padding-inline: 16px; }
     body { padding-bottom: 0; }
   }
-  @media (prefers-reduced-motion: reduce) { .co-panel { animation: none; } .co-tab::after { transition: none; } .co-bar { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .co-bar { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -235,24 +228,27 @@
       </div>
     </aside>
     <div class="co-main">
-      <section class="co-sec" id="sec-tabs" hidden>
-        <p class="co-kicker" id="kicker-tabs"></p>
-        <div class="co-tabs" role="tablist" aria-label="About this itinerary">
-          <button type="button" role="tab" class="co-tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
-          <button type="button" role="tab" class="co-tab" id="tab-includes" aria-controls="panel-includes" aria-selected="false" tabindex="-1">Your guide includes</button>
-        </div>
-        <div class="co-panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0"><div id="overview"></div></div>
-        <div class="co-panel" role="tabpanel" id="panel-includes" aria-labelledby="tab-includes" tabindex="0" hidden><ul class="co-list" id="includes"></ul></div>
+      <section class="co-sec" id="sec-overview" hidden>
+        <h2 class="co-kicker" id="kicker-overview"></h2>
+        <p class="co-headline" id="overview-headline" hidden></p>
+        <div id="overview"></div>
+      </section>
+      <section class="co-sec" id="sec-includes" hidden>
+        <h2 class="co-kicker" id="kicker-includes"></h2>
+        <p class="co-headline">Everything you need to explore.</p>
+        <ul class="co-list" id="includes"></ul>
       </section>
       <section class="co-sec" id="sec-route" hidden>
-        <p class="co-kicker" id="kicker-route"></p>
-        <h2>On the route</h2>
+        <h2 class="co-kicker" id="kicker-route"></h2>
         <ul class="co-tags co-tags-route" id="route-list"></ul>
       </section>
       <section class="co-sec" id="sec-details" hidden>
-        <p class="co-kicker" id="kicker-details"></p>
-        <h2>Practical information</h2>
+        <h2 class="co-kicker" id="kicker-details"></h2>
         <dl class="co-det" id="details"></dl>
+      </section>
+      <section class="co-sec" id="sec-before" hidden>
+        <h2 class="co-kicker" id="kicker-before"></h2>
+        <ul class="co-list plain" id="before-list"></ul>
       </section>
     </div>
   </div>
@@ -354,9 +350,10 @@
   [['bolt', 'Instant digital access'], ['compass', 'Self-guided: no tour guide, go at your own pace']].forEach(([ic, tx]) => $('perks').append(el('li', '', icon(ic) + '<span>' + tx + '</span>')));
 
   /* Overview, Your guide includes, Details: all from the itinerary data. */
-  const hasOverview = (main.overview || []).length || main.tagline;
-  if (main.tagline) $('overview').append(el('p', 'co-lead', esc(main.tagline)));
+  /* 01 Overview: the tagline is the headline, the description follows. */
+  if (main.tagline) { $('overview-headline').textContent = main.tagline; $('overview-headline').hidden = false; }
   (main.overview || []).forEach((p) => $('overview').append(el('p', '', esc(p))));
+  $('sec-overview').hidden = !(main.tagline || (main.overview || []).length);
   const ROUTE_ICONS = {
     dunes: '<path d="M3 17c3-5 6-5 9 0s6 0 9-5"/><path d="M3 21h18"/>',
     volcano: '<path d="M3 20l6-12h6l6 12z"/><path d="M10 8l-1-3M14 8l1-3"/>',
@@ -372,31 +369,11 @@
     });
     $('sec-route').hidden = false;
   }
-  const hasIncludes = (main.includes || []).length;
   (main.includes || []).forEach((x) => $('includes').append(el('li', '', icon('check') + '<span>' + esc(x) + '</span>')));
+  $('sec-includes').hidden = !(main.includes || []).length;
+  (main.beforeYouGo || []).forEach((x) => $('before-list').append(el('li', '', '<span>' + esc(x) + '</span>')));
+  $('sec-before').hidden = !(main.beforeYouGo || []).length;
 
-  /* Tabs (Overview / Your guide includes): one panel at a time, arrow keys move between tabs. */
-  const tabs = [['overview', hasOverview], ['includes', hasIncludes]].filter((x) => x[1]).map((x) => x[0]);
-  ['overview', 'includes'].forEach((k) => { if (!tabs.includes(k)) { $('tab-' + k).hidden = true; $('panel-' + k).hidden = true; } });
-  if (tabs.length) $('sec-tabs').hidden = false;
-  function showTab(k, focus) {
-    tabs.forEach((n) => {
-      const on = n === k;
-      $('tab-' + n).setAttribute('aria-selected', String(on));
-      $('tab-' + n).tabIndex = on ? 0 : -1;
-      $('panel-' + n).hidden = !on;
-    });
-    if (window.__setTabKicker) window.__setTabKicker(k);
-    if (focus) $('tab-' + k).focus();
-  }
-  if (tabs.length) showTab(tabs[0]);
-  tabs.forEach((k, i) => {
-    $('tab-' + k).addEventListener('click', () => showTab(k));
-    $('tab-' + k).addEventListener('keydown', (e) => {
-      const to = e.key === 'ArrowRight' ? (i + 1) % tabs.length : e.key === 'ArrowLeft' ? (i - 1 + tabs.length) % tabs.length : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : -1;
-      if (to >= 0) { e.preventDefault(); showTab(tabs[to], true); }
-    });
-  });
   const rows = [
     ['clock', 'Duration', main.duration],
     ['route', 'Total distance', main.distance],
@@ -427,15 +404,13 @@
   extras.forEach(([ic, label, value]) => { if (value) addRow(ic, label, esc(value)); });
   if ($('details').children.length) $('sec-details').hidden = false;
 
-  /* Numbered kickers follow the sections that actually exist: tabs first (01, 02), then On the route, then Practical information. */
+  /* Numbered labels (the one heading of each section) follow the sections that exist, in page order. */
   const pad = (n) => String(n).padStart(2, '0');
-  const TAB_NAMES = { overview: 'Overview', includes: 'Your guide includes' };
-  let num = tabs.length;
-  const kick = (id, n, name) => { $(id).innerHTML = '<span class="n">' + pad(n) + '</span> &mdash; ' + esc(name.toUpperCase()); };
-  if (!$('sec-route').hidden) kick('kicker-route', ++num, 'On the route');
-  if (!$('sec-details').hidden) kick('kicker-details', ++num, 'Practical information');
-  window.__setTabKicker = (k) => kick('kicker-tabs', tabs.indexOf(k) + 1, TAB_NAMES[k]);
-  if (tabs.length) window.__setTabKicker(tabs[0]);
+  let num = 0;
+  [['overview', 'Overview'], ['includes', "What's included"], ['route', 'On the route'], ['details', 'Practical information'], ['before', 'Before you go']].forEach(([k, name]) => {
+    if ($('sec-' + k).hidden) return;
+    $('kicker-' + k).innerHTML = '<span class="n">' + pad(++num) + '</span> &mdash; ' + esc(name.toUpperCase());
+  });
 
   /* The title always stays on one line: the CSS size is fluid, and if a longer title still does not fit
      the width it is reduced a little at a time until it does. */
