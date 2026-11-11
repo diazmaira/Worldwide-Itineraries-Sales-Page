@@ -33,9 +33,22 @@
   .co-attrs { margin-top: 18px; }
   .co-attrs small { display: block; font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
   .co-attrs span { display: block; font-size: .92rem; font-weight: 600; color: var(--forest); line-height: 1.25; }
-  .co-side { min-width: 0; }
-  .co-video-slot { margin-top: 24px; }
-  .co-video-slot:empty { display: none; }
+  /* Photo gallery */
+  .co-gallery { position: relative; width: min(100%, 680px); margin-top: 22px; }
+  .co-gallery[hidden] { display: none; }
+  .co-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 14px; background: var(--sage); -webkit-overflow-scrolling: touch; }
+  .co-track::-webkit-scrollbar { display: none; }
+  .co-track img { flex: 0 0 100%; width: 100%; aspect-ratio: 3 / 2; object-fit: cover; scroll-snap-align: center; scroll-snap-stop: always; }
+  .co-track:focus-visible { outline: 2px solid var(--id); outline-offset: 3px; }
+  .co-gcount { position: absolute; top: 10px; right: 10px; padding: 3px 9px; border-radius: 999px; background: rgba(14, 36, 33, .6); color: #fff; font-size: .72rem; font-weight: 600; }
+  .co-gnav { position: absolute; top: calc(50% - 20px); width: 36px; height: 36px; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .9); color: var(--forest); font-size: 1.4rem; line-height: 1; cursor: pointer; box-shadow: var(--shadow-sm); display: none; }
+  .co-gnav.prev { left: 10px; } .co-gnav.next { right: 10px; }
+  .co-gnav:disabled { opacity: 0; pointer-events: none; }
+  @media (hover: hover) and (pointer: fine) { .co-gnav { display: grid; place-items: center; } .co-gnav[hidden] { display: none; } }
+  .co-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+  .co-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--line); cursor: pointer; transition: background .2s, transform .2s; }
+  .co-dots button.on { background: var(--id); transform: scale(1.25); }
+  .co-rec { margin-top: 22px; }
   .co-rec[hidden] { display: none; }
   .co-h { margin: 0 0 10px; font-family: var(--body, inherit); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--forest); }
   .co-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
@@ -128,19 +141,6 @@
   .co-pay { width: 100%; margin-top: 16px; min-height: 46px; border: 0; cursor: pointer; font: inherit; font-weight: 600; font-size: .95rem; }
   .co-note { margin-top: 10px; font-size: .82rem; color: var(--muted); }
 
-  /* Promo video: a vertical 9:16 card right after the trip facts; plays muted when scrolled into view. */
-  .fv { position: relative; width: min(280px, 100%); aspect-ratio: 9 / 16; border-radius: 20px; overflow: hidden; background: var(--forest); box-shadow: 0 22px 54px rgba(23, 63, 58, .32); }
-  .fv iframe, .fv video, .fv img { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; object-fit: cover; pointer-events: none; }
-  .fv-hit { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; padding: 0; background: transparent; cursor: pointer; z-index: 1; }
-  .fv-x, .fv-big { position: absolute; top: 8px; z-index: 2; width: 32px; height: 32px; border: 0; border-radius: 50%; background: rgba(23, 63, 58, .62); color: #fff; font-size: 1.15rem; line-height: 1; cursor: pointer; display: grid; place-items: center; }
-  .fv-x { right: 8px; } .fv-big { left: 8px; }
-  .fv-x:hover, .fv-big:hover { background: rgba(23, 63, 58, .85); }
-  .fv-lb { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; background: rgba(14, 36, 33, .84); opacity: 0; transition: opacity .35s ease; }
-  .fv-lb.in { opacity: 1; }
-  .fv-stage { position: relative; height: min(86vh, 780px); aspect-ratio: 9 / 16; max-width: 94vw; border-radius: 20px; overflow: hidden; background: #000; box-shadow: 0 24px 64px rgba(0, 0, 0, .5); transform: scale(.94); transition: transform .4s cubic-bezier(.2, .8, .2, 1); }
-  .fv-lb.in .fv-stage { transform: none; }
-  .fv-stage iframe, .fv-stage video { position: absolute; inset: 0; width: 100%; height: 100%; border: 0; }
-  .fv-lb .fv-x { top: 14px; right: 14px; width: 40px; height: 40px; }
   .co-bar { display: none; }
   @media (max-width: 860px) {
       .co-hero { padding-top: 76px; }
@@ -153,10 +153,6 @@
     .co-det dd { grid-column: 2; }
   }
   @media (min-width: 900px) {
-    .co-hero .wrap.has-video { grid-template-columns: minmax(0, 1fr) 280px; align-items: start; }
-    .co-hero .wrap.has-video .co-side { grid-column: 2; grid-row: 1 / span 20; margin-top: 12px; }
-    .co-hero .wrap.has-video .co-video-slot { margin-top: 0; }
-    .co-hero .wrap.has-video > :not(.co-side) { grid-column: 1; }
     .co-layout { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; }
     .co-aside { grid-column: 2; grid-row: 1; position: sticky; top: 24px; }
     .co-main { grid-column: 1; grid-row: 1; }
@@ -169,7 +165,7 @@
     .co-bar .btn { flex: 1; max-width: 220px; border: 0; cursor: pointer; font: inherit; font-weight: 700; font-size: 1rem; padding-inline: 16px; }
     body { padding-bottom: 0; }
   }
-  @media (prefers-reduced-motion: reduce) { .co-panel { animation: none; } .co-tab::after { transition: none; } .co-bar, .fv, .fv-lb, .fv-stage { transition: none !important; } }
+  @media (prefers-reduced-motion: reduce) { .co-panel { animation: none; } .co-tab::after { transition: none; } .co-bar { transition: none !important; } }
 </style>
 </head>
 <body>
@@ -193,7 +189,17 @@
     <h1 id="hero-title"></h1>
     <span class="co-accent" id="accent" aria-hidden="true"></span>
     <ul class="co-attrs" id="attrs"></ul>
-    <div class="co-side"><div class="co-video-slot" id="video-slot"></div></div>
+    <div class="co-gallery" id="gallery" role="region" aria-roledescription="carousel" hidden>
+      <div class="co-track" id="g-track" tabindex="0"></div>
+      <button type="button" class="co-gnav prev" id="g-prev" aria-label="Previous photo">&#8249;</button>
+      <button type="button" class="co-gnav next" id="g-next" aria-label="Next photo">&#8250;</button>
+      <span class="co-gcount" id="g-count" aria-hidden="true"></span>
+      <div class="co-dots" id="g-dots"></div>
+    </div>
+    <div class="co-rec" id="rec" hidden>
+      <h2 class="co-h" id="rec-title">Recommended for</h2>
+      <ul class="co-tags co-tags-rec" id="labels-who" aria-labelledby="rec-title"></ul>
+    </div>
   </div>
 </section>
 
@@ -221,10 +227,6 @@
           <div class="co-route" id="route" hidden><h3 class="co-h">On the route</h3><ul class="co-tags co-tags-route" id="route-list"></ul></div>
         </div>
         <div class="co-panel" role="tabpanel" id="panel-includes" aria-labelledby="tab-includes" tabindex="0" hidden><ul class="co-list" id="includes"></ul></div>
-      </section>
-      <section class="co-sec co-rec" id="rec" hidden>
-        <h2 class="co-h" id="rec-title">Recommended for</h2>
-        <ul class="co-tags co-tags-rec" id="labels-who" aria-labelledby="rec-title"></ul>
       </section>
       <section class="co-sec" id="sec-details" hidden><h2>Details</h2><dl class="co-det" id="details"></dl></section>
     </div>
@@ -382,7 +384,6 @@
     $('details').append(el('div', '', icon(ic, 'ic') + '<dt>' + label + '</dt><dd>' + lines.map((l) => '<span>' + esc(l) + '</span>').join('') + '</dd>'));
   });
   if ($('details').children.length) $('sec-details').hidden = false;
-  if ((main.video || '').trim()) $('hero-wrap').classList.add('has-video');
 
   /* The title always stays on one line: the CSS size is fluid, and if a longer title still does not fit
      the width it is reduced a little at a time until it does. */
@@ -396,107 +397,56 @@
   window.addEventListener('resize', fitTitle);
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitTitle);
 
-  /* ---- 2. Video ---- */
-  /* Promo video: a vertical 9:16 card right after the trip facts. It plays muted, in a loop, while it is on
-     screen and pauses when it leaves. Tap it (or the expand button) for a large view with sound. */
-  function embed(u, muted, controls) {
-    let m;
-    if ((m = u.match(/(?:youtube\.com\/(?:watch\?v=|embed\/|shorts\/)|youtu\.be\/)([\w-]{11})/)))
-      return 'https://www.youtube-nocookie.com/embed/' + m[1] + '?autoplay=1&rel=0&playsinline=1&enablejsapi=1&loop=1&playlist=' + m[1] + '&controls=' + (controls ? 1 : 0) + (muted ? '&mute=1' : '');
-    if ((m = u.match(/vimeo\.com\/(?:video\/)?(\d+)/)))
-      return 'https://player.vimeo.com/video/' + m[1] + '?autoplay=1&dnt=1&loop=1&controls=' + (controls ? 1 : 0) + (muted ? '&muted=1' : '');
-    return null;
-  }
-  (function promoVideo() {
-    const url = (main.video || '').trim();
-    if (!url) return;                                    // no video for this itinerary yet: nothing is shown
-    const isMp4 = /\.mp4(\?|$)/i.test(url);
-    if (!isMp4 && !embed(url, true, false)) return;
-    const calm = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
-    const isYt = /youtu/i.test(url);
-    let card = null, player = null, lightbox = null, lastFocus = null, visible = false;
-
-    const btn = (cls, label, text) => {
-      const b = document.createElement('button');
-      b.type = 'button'; b.className = cls; b.textContent = text; b.setAttribute('aria-label', label);
-      return b;
-    };
-    function media(muted, controls) {
-      let m;
-      if (isMp4) {
-        m = document.createElement('video');
-        m.src = url; m.muted = muted; m.loop = true; m.playsInline = true; m.autoplay = true; m.controls = controls;
-      } else {
-        m = document.createElement('iframe');
-        m.src = embed(url, muted, controls); m.title = main.name + ' video';
-        m.allow = 'autoplay; encrypted-media; picture-in-picture; fullscreen';
-        m.allowFullscreen = true;
+  /* ---- 2. Photo gallery: swipe carousel (landscape photos), like an Instagram post ---- */
+  (function gallery() {
+    const g = main.gallery;
+    if (!g || !g.folder) return;
+    const track = $('g-track'), dots = $('g-dots'), box = $('gallery');
+    box.setAttribute('aria-label', 'Photos of ' + (main.headline || main.name));
+    let n = 0;
+    for (let i = 1; i <= (g.count || 0); i++) {
+      const img = new Image();
+      img.alt = (main.headline || main.name) + ', photo ' + i;
+      img.decoding = 'async'; img.draggable = false;
+      if (i > 1) img.loading = 'lazy';
+      img.addEventListener('error', () => { img.remove(); refresh(); });
+      img.src = g.folder + 'img' + i + '.jpg';
+      track.append(img);
+    }
+    const slides = () => Array.from(track.children);
+    const width = () => track.clientWidth || 1;
+    const index = () => Math.max(0, Math.min(slides().length - 1, Math.round(track.scrollLeft / width())));
+    const goTo = (i) => track.scrollTo({ left: i * width(), behavior: 'smooth' });
+    function refresh() {
+      n = slides().length;
+      box.hidden = n === 0;
+      dots.replaceChildren();
+      if (n < 2) { $('g-count').hidden = true; dots.hidden = true; $('g-prev').hidden = $('g-next').hidden = true; return; }
+      $('g-count').hidden = false; dots.hidden = false; $('g-prev').hidden = $('g-next').hidden = false;
+      for (let i = 0; i < n; i++) {
+        const d = document.createElement('button');
+        d.type = 'button'; d.setAttribute('aria-label', 'Go to photo ' + (i + 1));
+        d.addEventListener('click', () => goTo(i));
+        dots.append(d);
       }
-      return m;
+      update();
     }
-    function command(play) {                              // play or pause the small card
-      if (!player) return;
-      if (isMp4) { if (play) player.play().catch(() => {}); else player.pause(); return; }
-      const msg = isYt ? { event: 'command', func: play ? 'playVideo' : 'pauseVideo', args: [] } : { method: play ? 'play' : 'pause' };
-      try { player.contentWindow.postMessage(JSON.stringify(msg), '*'); } catch (e) { /* ignore */ }
+    function update() {
+      const i = index();
+      $('g-count').textContent = (i + 1) + ' / ' + n;
+      Array.from(dots.children).forEach((d, k) => d.classList.toggle('on', k === i));
+      $('g-prev').disabled = i === 0; $('g-next').disabled = i === n - 1;
     }
-
-    function openLightbox() {
-      if (lightbox) return;
-      command(false);
-      lastFocus = document.activeElement;
-      lightbox = document.createElement('div');
-      lightbox.className = 'fv-lb';
-      lightbox.setAttribute('role', 'dialog');
-      lightbox.setAttribute('aria-modal', 'true');
-      lightbox.setAttribute('aria-label', main.name + ' video');
-      const stage = document.createElement('div');
-      stage.className = 'fv-stage';
-      stage.append(media(false, true));                  // opened by a tap: plays with sound
-      const x = btn('fv-x', 'Close video', '×');
-      x.addEventListener('click', closeLightbox);
-      lightbox.append(stage, x);
-      lightbox.addEventListener('click', (e) => { if (e.target === lightbox) closeLightbox(); });
-      document.body.append(lightbox);
-      document.body.classList.add('wwi-lock');
-      requestAnimationFrame(() => lightbox && lightbox.classList.add('in'));
-      x.focus();
-    }
-    function closeLightbox() {
-      if (!lightbox) return;
-      lightbox.remove(); lightbox = null;
-      document.body.classList.remove('wwi-lock');
-      if (visible) command(true);
-      if (lastFocus && lastFocus.focus) lastFocus.focus();
-    }
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeLightbox(); });
-
-    card = document.createElement('div');
-    card.className = 'fv';
-    if (calm) {                                          // reduced motion: still picture, no autoplay
-      const img = document.createElement('img');
-      img.alt = ''; img.src = main.cover;
-      img.addEventListener('error', () => img.remove());
-      card.append(img);
-    }
-    const hit = btn('fv-hit', 'Play the video larger', '');
-    hit.addEventListener('click', openLightbox);
-    const big = btn('fv-big', 'Expand video', '⤢');
-    big.addEventListener('click', openLightbox);
-    card.append(hit, big);
-    $('video-slot').append(card);
-
-    if (!calm && 'IntersectionObserver' in window) {
-      new IntersectionObserver((es) => {
-        es.forEach((en) => {
-          visible = en.isIntersecting;
-          if (visible) {
-            if (!player) { player = media(true, false); card.prepend(player); }   // loaded when first seen
-            else if (!lightbox) command(true);
-          } else command(false);
-        });
-      }, { threshold: 0.5 }).observe(card);
-    }
+    let tick = 0;
+    track.addEventListener('scroll', () => { cancelAnimationFrame(tick); tick = requestAnimationFrame(update); }, { passive: true });
+    $('g-prev').addEventListener('click', () => goTo(index() - 1));
+    $('g-next').addEventListener('click', () => goTo(index() + 1));
+    track.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight') { e.preventDefault(); goTo(index() + 1); }
+      if (e.key === 'ArrowLeft') { e.preventDefault(); goTo(index() - 1); }
+    });
+    window.addEventListener('resize', () => track.scrollTo({ left: index() * width() }));
+    refresh();
   })();
 
   /* ---- Add itinerary: shared selection, the visitor stays on this page ---- */
