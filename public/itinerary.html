@@ -26,15 +26,16 @@
   .co-chip { padding: 5px 11px; border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--id-ink); background: var(--id-tint); }
   .co-chip[hidden] { display: none; }
   /* Signature detail: a short underline in the itinerary's accent colour. */
-  .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 12px; border-radius: 2px; background: var(--id); }
-  .co-attrs { display: flex; flex-wrap: wrap; gap: 14px clamp(20px, 4vw, 40px); margin: 22px 0 0; padding: 0; list-style: none; }
-  .co-attrs li { display: flex; align-items: center; gap: 10px; min-width: 0; }
-  .co-attrs svg, .co-det svg.ic { width: 22px; height: 22px; flex: none; color: var(--id); }
-  .co-attrs { margin-top: 18px; }
-  .co-attrs small { display: block; font-size: .64rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
-  .co-attrs span { display: block; font-size: .92rem; font-weight: 600; color: var(--forest); line-height: 1.25; }
+  .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 10px; border-radius: 2px; background: var(--id); }
+  /* Hero metadata: duration and location in one quiet row */
+  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 12px 0 0; padding: 0; list-style: none; font-size: .9rem; font-weight: 400; line-height: 1.2; color: var(--forest); }
+  .co-attrs li { display: inline-flex; align-items: center; gap: 7px; min-width: 0; white-space: nowrap; }
+  .co-attrs li + li::before { content: ''; width: 3px; height: 3px; margin: 0 12px; border-radius: 50%; background: var(--forest); opacity: .4; flex: none; }
+  .co-attrs svg { width: 18px; height: 18px; flex: none; color: var(--id); }
+  @media (max-width: 359px) { .co-attrs { flex-wrap: wrap; row-gap: 6px; } .co-attrs li { white-space: normal; } .co-attrs li + li::before { display: none; } .co-attrs li:first-child { margin-right: 16px; } }
+  .co-det svg.ic { width: 22px; height: 22px; flex: none; color: var(--id); }
   /* Photo gallery */
-  .co-gallery { position: relative; width: min(100%, 680px); margin-top: 22px; }
+  .co-gallery { position: relative; width: min(100%, 680px); margin-top: 18px; }
   .co-gallery[hidden] { display: none; }
   .co-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 14px; background: var(--sage); -webkit-overflow-scrolling: touch; }
   .co-track::-webkit-scrollbar { display: none; }
@@ -168,7 +169,6 @@
       .co-hero { padding-top: 76px; }
   }
   @media (max-width: 599px) {
-    .co-attrs { flex-direction: column; gap: 10px; }
   }
   @media (min-width: 900px) {
     .co-layout { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; }
