@@ -8,6 +8,7 @@
    overview: paragraphs for the Overview. route: tags for "On the route" (strings or { label, icon: 'dunes' | 'volcano' | 'boat' | 'sun' | 'drop' }). includes: what the customer receives ("Your guide includes").
    theme: { label, color, sand }: the visual identity of the itinerary page (category label, accents, icons, route tags). Independent per itinerary.
    gallery: { folder, count }: photos shown under the title as img1.jpg ... imgN.jpg inside that folder (missing files are skipped; none = no gallery).
+   beforeYouGo: [lines] shown in "Before you go" (taken from the guide's own packing/prep list).
    audience: tags for "Recommended for". Different per itinerary; edit when you know better.
    reviews: { rating: 4.9, count: 24 } from REAL customer reviews only. Leave it out until there are reviews: the rating is then hidden.
    name: short display title (the destination is already shown on the page). The server keeps its own product names for Stripe.
@@ -35,6 +36,7 @@
       extra: [{ label: 'Offline', value: 'Downloadable PDF that works without signal' }],
       route: [{ label: 'Sand Dunes', icon: 'dunes' }, { label: 'Volcano', icon: 'volcano' }, { label: 'Fishing Village', icon: 'boat' }, { label: 'Sunset', icon: 'sun' }, { label: 'Natural Pools', icon: 'drop' }],
       includes: ['Your digital self-guided itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a sketch map', 'What to do at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'],
+      beforeYouGo: ['Download Google Maps for offline use', 'Bring enough drinking water', 'Wear comfortable walking shoes', 'Bring swimwear and a towel', 'Bring a camera and spare batteries', 'Respect nature and stay on the marked paths'],
       overview: ['A full day through the north of the island, from golden dunes and volcanic landscapes to coastal viewpoints and a local lunch stop. Every stop comes with timing, parking and a Google Maps link.'] },
     { id: 'rural', destination: 'Fuerteventura', name: 'The Rural Heart', price: 8,
       category: 'rural',
@@ -46,6 +48,7 @@
       extra: [{ label: 'Best days', value: 'Tuesday to Saturday' }, { label: 'Offline', value: 'Downloadable PDF that works without signal' }],
       route: ['Villaverde', 'La Oliva', 'Tefía', 'Ecomuseo de La Alcogida', 'Puertito de los Molinos'],
       includes: ['Your digital itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a route map', 'What to see at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'],
+      beforeYouGo: ['Water and snacks', 'Sun hat and sunscreen', 'A light jacket for the wind', 'Cash for small shops', 'Phone charger for the car', 'Walking shoes for the cliffs'],
       overview: ["Leave the coast behind and drive through the villages, valleys and hills of the island's interior. Expect quiet viewpoints, traditional food and the slower side of Fuerteventura, away from the crowds."] },
     { id: 'windmills', destination: 'Fuerteventura', name: 'Spot the Windmills', price: 8,
       category: 'scenic',
