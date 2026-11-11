@@ -60,25 +60,47 @@
   /* Content + price box */
   .co-detail { padding-block: clamp(28px, 5vw, 52px) 0; background: var(--cream); }
   .co-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
-  .co-sec + .co-sec { margin-top: clamp(26px, 4vw, 38px); }
-  .co-sec h2 { font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.2; margin: 0 0 10px; }
+  /* Editorial sections: a thin divider with a short terracotta mark, a numbered kicker, then the title. No background changes. */
+  .co-sec { position: relative; margin-top: clamp(34px, 6vw, 56px); padding-top: clamp(20px, 3.5vw, 28px); border-top: 1px solid var(--line); }
+  .co-sec:first-child { margin-top: 0; }
+  .co-sec::before { content: ''; position: absolute; left: 0; top: -2px; width: 32px; height: 3px; border-radius: 2px; background: #C2613F; }
+  .co-kicker { margin: 0 0 8px; font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--muted); }
+  .co-kicker .n { color: #B4543A; }
+  .co-sec h2 { font-size: clamp(1.45rem, 5.4vw, 2.05rem); line-height: 1.15; letter-spacing: -.01em; margin: 0 0 14px; }
+  .co-sec h3 { font-size: clamp(1.1rem, 4vw, 1.3rem); line-height: 1.25; margin: 0 0 10px; }
   .co-sec h2.co-h { font-size: .72rem; line-height: 1.3; margin: 0 0 10px; }
   .co-sec p { margin: 0 0 10px; max-width: 62ch; font-size: .98rem; line-height: 1.65; color: var(--muted); }
-  .co-route { margin-top: 14px; }
   .co-list { margin: 0; padding: 0; list-style: none; display: grid; gap: 9px; }
   .co-list li { display: grid; grid-template-columns: 18px minmax(0, 1fr); gap: 10px; font-size: .95rem; line-height: 1.45; color: var(--forest); }
   .co-list svg { width: 18px; height: 18px; margin-top: 1px; color: var(--id); }
-  .co-det { margin: 0; display: grid; border-top: 1px solid var(--line); }
-  .co-det > div { display: grid; grid-template-columns: 22px 9.5rem minmax(0, 1fr); gap: 12px; align-items: start; padding: 11px 0; border-bottom: 1px solid var(--line); font-size: .93rem; }
-  .co-det dt { color: var(--muted); font-weight: 500; }
-  .co-det dd { margin: 0; font-weight: 600; color: var(--forest); }
-  .co-det dd span { display: block; }
-  .co-det dd span + span { margin-top: 2px; font-weight: 500; }
+  /* Practical information: icon, discreet label, prominent value; thin separators only */
+  .co-det { margin: 0; border-top: 1px solid var(--line); }
+  .co-row { display: grid; grid-template-columns: 20px minmax(0, 1fr); column-gap: 14px; padding: 13px 0; border-bottom: 1px solid var(--line); align-items: start; }
+  .co-row svg.ic { width: 20px; height: 20px; margin-top: 1px; color: var(--id); opacity: .8; grid-row: 1 / span 2; }
+  .co-row dt { grid-column: 2; font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+  .co-row dd { grid-column: 2; margin: 3px 0 0; font-size: 1.02rem; font-weight: 600; line-height: 1.35; color: var(--forest); overflow-wrap: anywhere; }
+  .co-bud-v { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .co-bud-v strong { font-family: var(--display); font-size: 1.5rem; font-weight: 800; line-height: 1; }
+  .co-bud-v small { font-size: .82rem; font-weight: 500; color: var(--muted); }
+  .co-info { width: 28px; height: 28px; flex: none; display: grid; place-items: center; border: 1.5px solid var(--id); border-radius: 50%; background: transparent; color: var(--id); font: inherit; font-size: .85rem; font-weight: 700; font-style: italic; font-family: Georgia, serif; line-height: 1; cursor: pointer; position: relative; }
+  .co-info { -webkit-tap-highlight-color: transparent; }
+  .co-info::after { content: ''; position: absolute; inset: -8px; }
+  .co-info[aria-expanded="true"] { background: var(--id); color: #fff; }
+  .co-info:focus-visible { outline: 2px solid var(--id); outline-offset: 2px; }
+  .co-bud { grid-column: 2; margin-top: 12px; padding: 14px 16px; border-radius: 12px; background: var(--id-sand); animation: co-fade .2s ease; }
+  .co-bud[hidden] { display: none; }
+  .co-bud h3 { margin: 0 0 8px; }
+  .co-bud ul { margin: 0 0 10px; padding-left: 18px; font-size: .9rem; line-height: 1.5; color: var(--forest); }
+  .co-bud p { margin: 0 0 6px; font-size: .86rem; line-height: 1.5; max-width: none; color: var(--muted); }
+  .co-bud p.tot { color: var(--forest); font-weight: 600; margin-bottom: 0; }
+  @media (min-width: 600px) { .co-row { grid-template-columns: 20px 13rem minmax(0, 1fr); } .co-row svg.ic { grid-row: auto; } .co-row dt { grid-column: 2; padding-top: 3px; } .co-row dd { grid-column: 3; margin: 0; } .co-bud { grid-column: 2 / -1; } }
+  @media (pointer: coarse) { .co-info { width: 32px; height: 32px; } }
+
   /* Tabs: text tabs with an underline, not buttons */
-  .co-tabs { display: flex; gap: clamp(18px, 5vw, 32px); border-bottom: 1px solid var(--line); margin-bottom: 18px; }
-  .co-tab { position: relative; padding: 10px 0 11px; border: 0; background: none; font: inherit; font-size: .95rem; font-weight: 600; color: var(--muted); cursor: pointer; }
+  .co-tabs { display: flex; flex-wrap: wrap; gap: 4px clamp(18px, 4vw, 30px); border-bottom: 1px solid var(--line); margin-bottom: 18px; }
+  .co-tab { position: relative; padding: 4px 0 11px; border: 0; background: none; font-family: var(--display); font-size: clamp(1.15rem, 4.8vw, 1.9rem); font-weight: 700; letter-spacing: -.01em; line-height: 1.15; color: var(--muted); opacity: .75; cursor: pointer; text-align: left; }
   .co-tab::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: 2px; background: var(--id); transform: scaleX(0); transition: transform .2s ease; }
-  .co-tab[aria-selected="true"] { color: var(--forest); }
+  .co-tab[aria-selected="true"] { color: var(--forest); opacity: 1; }
   .co-tab[aria-selected="true"]::after { transform: scaleX(1); }
   .co-tab:hover { color: var(--forest); }
   .co-tab:focus-visible, .co-panel:focus-visible { outline: 2px solid var(--id); outline-offset: 3px; border-radius: 4px; }
@@ -147,10 +169,6 @@
   }
   @media (max-width: 599px) {
     .co-attrs { flex-direction: column; gap: 10px; }
-    .co-det > div { grid-template-columns: 22px minmax(0, 1fr); row-gap: 1px; }
-    .co-det svg.ic { grid-row: 1 / span 2; }
-    .co-det dt { grid-column: 2; font-size: .78rem; }
-    .co-det dd { grid-column: 2; }
   }
   @media (min-width: 900px) {
     .co-layout { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; }
@@ -218,17 +236,24 @@
     </aside>
     <div class="co-main">
       <section class="co-sec" id="sec-tabs" hidden>
+        <p class="co-kicker" id="kicker-tabs"></p>
         <div class="co-tabs" role="tablist" aria-label="About this itinerary">
           <button type="button" role="tab" class="co-tab" id="tab-overview" aria-controls="panel-overview" aria-selected="true">Overview</button>
           <button type="button" role="tab" class="co-tab" id="tab-includes" aria-controls="panel-includes" aria-selected="false" tabindex="-1">Your guide includes</button>
         </div>
-        <div class="co-panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0">
-          <div id="overview"></div>
-          <div class="co-route" id="route" hidden><h3 class="co-h">On the route</h3><ul class="co-tags co-tags-route" id="route-list"></ul></div>
-        </div>
+        <div class="co-panel" role="tabpanel" id="panel-overview" aria-labelledby="tab-overview" tabindex="0"><div id="overview"></div></div>
         <div class="co-panel" role="tabpanel" id="panel-includes" aria-labelledby="tab-includes" tabindex="0" hidden><ul class="co-list" id="includes"></ul></div>
       </section>
-      <section class="co-sec" id="sec-details" hidden><h2>Details</h2><dl class="co-det" id="details"></dl></section>
+      <section class="co-sec" id="sec-route" hidden>
+        <p class="co-kicker" id="kicker-route"></p>
+        <h2>On the route</h2>
+        <ul class="co-tags co-tags-route" id="route-list"></ul>
+      </section>
+      <section class="co-sec" id="sec-details" hidden>
+        <p class="co-kicker" id="kicker-details"></p>
+        <h2>Practical information</h2>
+        <dl class="co-det" id="details"></dl>
+      </section>
     </div>
   </div>
 </section>
@@ -345,13 +370,13 @@
       const svg = o.icon && ROUTE_ICONS[o.icon] ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ROUTE_ICONS[o.icon] + '</svg>' : '';
       $('route-list').append(el('li', '', svg + esc(o.label)));
     });
-    $('route').hidden = false;
+    $('sec-route').hidden = false;
   }
   const hasIncludes = (main.includes || []).length;
   (main.includes || []).forEach((x) => $('includes').append(el('li', '', icon('check') + '<span>' + esc(x) + '</span>')));
 
   /* Tabs (Overview / Your guide includes): one panel at a time, arrow keys move between tabs. */
-  const tabs = [['overview', hasOverview || (main.route || []).length], ['includes', hasIncludes]].filter((x) => x[1]).map((x) => x[0]);
+  const tabs = [['overview', hasOverview], ['includes', hasIncludes]].filter((x) => x[1]).map((x) => x[0]);
   ['overview', 'includes'].forEach((k) => { if (!tabs.includes(k)) { $('tab-' + k).hidden = true; $('panel-' + k).hidden = true; } });
   if (tabs.length) $('sec-tabs').hidden = false;
   function showTab(k, focus) {
@@ -361,6 +386,7 @@
       $('tab-' + n).tabIndex = on ? 0 : -1;
       $('panel-' + n).hidden = !on;
     });
+    if (window.__setTabKicker) window.__setTabKicker(k);
     if (focus) $('tab-' + k).focus();
   }
   if (tabs.length) showTab(tabs[0]);
@@ -375,15 +401,41 @@
     ['clock', 'Duration', main.duration],
     ['route', 'Total distance', main.distance],
     ['flag', 'Stops', main.stops ? main.stops + (main.stops === 1 ? ' stop' : ' stops') : ''],
-    ['car', 'Transport', main.transport],
-    ['euro', 'Estimated additional budget', (main.budget || []).length ? main.budget : '']
-  ].concat((main.extra || []).map((x) => [x.label === 'Offline' ? 'download' : 'calendar', x.label, x.value]));
-  rows.forEach(([ic, label, value]) => {
-    if (!value || !value.length) return;
-    const lines = Array.isArray(value) ? value : [value];
-    $('details').append(el('div', '', icon(ic, 'ic') + '<dt>' + label + '</dt><dd>' + lines.map((l) => '<span>' + esc(l) + '</span>').join('') + '</dd>'));
-  });
+    ['car', 'Transport', main.transport]
+  ];
+  const extras = (main.extra || []).map((x) => [x.label === 'Offline' ? 'download' : 'calendar', x.label, x.value]);
+  const addRow = (ic, label, valueHtml, after) => $('details').append(el('div', 'co-row', icon(ic, 'ic') + '<dt>' + label + '</dt><dd>' + valueHtml + '</dd>' + (after || '')));
+  rows.forEach(([ic, label, value]) => { if (value) addRow(ic, label, esc(value)); });
+  /* Budget: one compact figure; the breakdown opens in an expandable panel (works by tap, not hover). */
+  const bd = main.budget;
+  if (bd && bd.amount) {
+    const list = (bd.breakdown || []).map((l) => '<li>' + esc(l) + '</li>').join('');
+    addRow('euro', bd.label || 'Estimated budget',
+      '<span class="co-bud-v"><strong>' + esc(bd.amount) + '</strong><small>' + esc(bd.unit || '') + '</small>' +
+      '<button type="button" class="co-info" id="bud-btn" aria-expanded="false" aria-controls="bud-panel" aria-label="Show budget breakdown">i</button></span>',
+      '<div class="co-bud" id="bud-panel" role="region" aria-label="Budget breakdown" hidden><h3>Budget breakdown</h3>' +
+      (list ? '<ul>' + list + '</ul>' : '') + (bd.note ? '<p>' + esc(bd.note) + '</p>' : '') + (bd.total ? '<p class="tot">' + esc(bd.total) + '</p>' : '') + '</div>');
+    const btn = $('bud-btn'), panel = $('bud-panel');
+    btn.addEventListener('click', () => {
+      const open = btn.getAttribute('aria-expanded') !== 'true';
+      btn.setAttribute('aria-expanded', String(open));
+      btn.setAttribute('aria-label', open ? 'Hide budget breakdown' : 'Show budget breakdown');
+      panel.hidden = !open;
+    });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { btn.click(); btn.focus(); } });
+  }
+  extras.forEach(([ic, label, value]) => { if (value) addRow(ic, label, esc(value)); });
   if ($('details').children.length) $('sec-details').hidden = false;
+
+  /* Numbered kickers follow the sections that actually exist: tabs first (01, 02), then On the route, then Practical information. */
+  const pad = (n) => String(n).padStart(2, '0');
+  const TAB_NAMES = { overview: 'Overview', includes: 'Your guide includes' };
+  let num = tabs.length;
+  const kick = (id, n, name) => { $(id).innerHTML = '<span class="n">' + pad(n) + '</span> &mdash; ' + esc(name.toUpperCase()); };
+  if (!$('sec-route').hidden) kick('kicker-route', ++num, 'On the route');
+  if (!$('sec-details').hidden) kick('kicker-details', ++num, 'Practical information');
+  window.__setTabKicker = (k) => kick('kicker-tabs', tabs.indexOf(k) + 1, TAB_NAMES[k]);
+  if (tabs.length) window.__setTabKicker(tabs[0]);
 
   /* The title always stays on one line: the CSS size is fluid, and if a longer title still does not fit
      the width it is reduced a little at a time until it does. */

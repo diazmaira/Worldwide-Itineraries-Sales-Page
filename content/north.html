@@ -102,6 +102,8 @@ img{max-width:100%}
 
 /* download */
 .dl-row{display:grid;gap:8px;justify-items:start}
+.dl-h{font-weight:700;font-size:1.05rem;margin:0}
+.dl-s{font-size:.9rem;color:var(--muted);margin:0 0 4px;max-width:36ch}
 .dl-line{display:flex;align-items:center;gap:10px;width:100%}
 .dl-line .btn{flex:1}
 .dl-info{width:40px;height:40px;flex:none;border-radius:50%;border:1.5px solid var(--line-strong);
@@ -427,7 +429,7 @@ footer .hand{font-size:1.05rem;font-weight:600;color:var(--muted)}
     <a class="btn ghost" href="#glance">See the map</a>
   </div>
   <div class="dl-row js-dl-row" hidden>
-    <div class="dl-line"><button class="btn dl js-dl" type="button" id="dl-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF for offline</button><button class="dl-info" type="button" id="dl-info" aria-expanded="false" aria-controls="dl-tip" aria-label="About the PDF">i</button></div>
+    <div class="dl-line"><button class="btn dl js-dl" type="button" id="dl-top"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF</button><button class="dl-info" type="button" id="dl-info" aria-expanded="false" aria-controls="dl-tip" aria-label="About the PDF">i</button></div>
     <p class="dl-tip" id="dl-tip" hidden>Save it before you set off. The PDF works without signal.</p>
     <span class="dl-status js-dl-status"></span>
   </div>
@@ -638,7 +640,9 @@ footer .hand{font-size:1.05rem;font-weight:600;color:var(--muted)}
     <p class="flagme">Add your review link, email and social accounts from the original guide here.</p>
   </div>
   <div class="dl-row js-dl-row" hidden style="padding-top:18px">
-    <button class="btn dl js-dl" type="button" id="dl-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF for offline</button>
+    <p class="dl-h">Your guide, ready to go.</p>
+    <p class="dl-s">Download your PDF and access your itinerary whenever you need it.</p>
+    <button class="btn dl js-dl" type="button" id="dl-end"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 3v12M7 10l5 5 5-5M4 20h16"/></svg>Download PDF</button>
     <span class="dl-status js-dl-status"></span>
   </div>
 </section>
