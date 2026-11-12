@@ -20,7 +20,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&family=Fraunces:ital,opsz,wght@0,9..144,600;0,9..144,700;1,9..144,400&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,700;12..96,800&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="theme.css">
 </head>
 <body>
@@ -375,6 +375,7 @@
 <script src="cta-bar.js" defer></script>
 <script src="itineraries-data.js"></script>
 <script src="selection.js"></script>
+<script src="demo-reviews.js"></script>
 <script>
 /* Homepage cards: stops and approximate driving distance come from the shared itinerary data (nothing is invented; missing values are simply not shown). */
 (function () {
@@ -382,7 +383,8 @@
   document.querySelectorAll('[data-meta]').forEach(function (n) {
     var it = items[n.getAttribute('data-meta')]; if (!it) return;
     var blocks = [];
-    if (it.reviews && it.reviews.rating && it.reviews.count) blocks.push('<span class="mi star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.200l2.700 5.600 6.100.8-4.500 4.300 1.100 6.100L12 17l-5.400 3 1.100-6.100L3.200 9.600l6.100-.8z"/></svg><b>' + it.reviews.rating + '</b> (' + it.reviews.count + ' reviews)</span>');
+    var rv = it.reviews || (window.WWI_DEMO_REVIEWS && window.WWI_DEMO_REVIEWS[it.id]);
+    if (rv && rv.rating && rv.count) blocks.push('<span class="mi star"><svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 3.200l2.700 5.600 6.100.8-4.500 4.300 1.100 6.100L12 17l-5.400 3 1.100-6.100L3.200 9.600l6.100-.8z"/></svg><b>' + rv.rating + '</b> (' + rv.count + ' reviews)</span>');
     var loc = [];
     if (it.stops) loc.push('<span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s-6.5-5.700-6.5-11a6.5 6.5 0 0 1 13 0c0 5.300-6.5 11-6.5 11z"/><circle cx="12" cy="10" r="2.300"/></svg>' + it.stops + (it.stops === 1 ? ' stop' : ' stops') + '</span>');
     if (it.distance) loc.push('<span class="mi"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M2 19 9 6l4 7 3-4.500L22 19z"/></svg>' + String(it.distance).replace(/\s+by car$/i, '') + '</span>');
