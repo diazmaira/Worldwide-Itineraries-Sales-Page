@@ -1,8 +1,8 @@
-Homepage itinerary card photos (one photo per card, shown at roughly 50% of the card width).
+Homepage itinerary card collages: one large photo (-1) and three small ones (-2, -3, -4) per itinerary.
+Landscape works best (the images are cropped to fill). Keep the file names to replace any photo.
 
-north.jpg      - real photo (crater and volcanic landscape), copied from explore-the-north/img3.jpg
-rural.jpg      - TEMPORARY crop of the whitewashed village street from cover-rural.jpg
-windmills.jpg  - TEMPORARY crop of the windmill from cover-rural.jpg
+north-1..4     real photos from the North gallery (crater, dunes, natural pools / lighthouse, El Cotillo)
+rural-1..4     crops of panels from cover-rural.jpg (village street, volcanic hill, cove) and fuerteventura.jpg (church tower)
+windmills-1..4 crops of the windmill in cover-rural.jpg (whole mill, sails, stone base, surrounding landscape)
 
-Replace rural.jpg and windmills.jpg with your own photographs using the same file names
-(landscape or portrait both work; the image is cropped to fill the card).
+Rural and Windmills are temporary: replace them with your own photographs.
