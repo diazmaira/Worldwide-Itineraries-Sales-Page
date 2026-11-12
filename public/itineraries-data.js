@@ -28,6 +28,7 @@
       blurb: 'A day of dunes, volcanoes, fishing villages and ocean views.',
       cover: 'images/cover-north.jpg', video: 'https://youtube.com/shorts/iV2MGGzLsSI', audience: ['Hiking lovers', 'Nature lovers', 'Families', 'Couples', 'Adventure seekers'],
       place: 'Fuerteventura · Canary Islands', headline: 'Explore the North',
+      subtitle: 'Coast, volcanoes & hidden corners',
       tagline: 'A day of dunes, volcanoes, fishing villages and ocean views.',
       theme: { label: 'Coast & Volcano', color: '#269F9D', sand: '#E7D9BF' },
       gallery: { folder: 'images/itineraries/fuerteventura/explore-the-north/', count: 10 },
