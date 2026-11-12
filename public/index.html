@@ -90,31 +90,37 @@
   <div class="wrap">
     <h2 class="section-title">Find Your Perfect Itinerary</h2>
     <p class="lead">Explore our itineraries and discover more of every destination, one stop at a time.</p>
-    <div class="grid-3">
-      <article class="card" data-item="north">
-        <div class="photo cover"><img src="images/cover-north.jpg" alt="The north of Fuerteventura" loading="lazy" width="1200" height="800" onerror="this.remove()"></div>
-        <div class="card-body">
-          <h3 class="title">Explore the North</h3>
-          <p class="duration">Duration: 4–5 hours</p>
-          <div class="buy"><span class="price">€8</span><a class="btn" href="itinerary.html?item=north">View Itinerary</a></div>
+    <div class="it-list">
+      <a class="it-card" href="itinerary.html?item=north" data-item="north" style="--acc:#359F9C">
+        <div class="it-photo"><img src="images/cards/north.jpg" alt="A volcanic crater in the north of Fuerteventura" loading="lazy" width="900" height="900" onerror="this.remove()"></div>
+        <div class="it-info">
+          <p class="it-cat">Dunes &amp; Volcano</p>
+          <h3 class="it-title">Explore the North</h3>
+          <p class="it-desc">Dunes, volcanoes and coastal discoveries.</p>
+          <p class="it-meta" data-meta="north" hidden></p>
+          <div class="it-foot"><span class="price">€8</span><span class="it-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-      </article>
-      <article class="card" data-item="rural">
-        <div class="photo cover c-tangerine"><img src="images/cover-rural.jpg" alt="The rural heart of Fuerteventura" loading="lazy" width="1200" height="800" onerror="this.remove()"></div>
-        <div class="card-body">
-          <h3 class="title">The Rural Heart</h3>
-          <p class="duration">Duration: 1 full day</p>
-          <div class="buy"><span class="price">€8</span><a class="btn" href="itinerary.html?item=rural">View Itinerary</a></div>
+      </a>
+      <a class="it-card" href="itinerary.html?item=rural" data-item="rural" style="--acc:#C97953">
+        <div class="it-photo"><img src="images/cards/rural.jpg" alt="A whitewashed village street in the interior of Fuerteventura" loading="lazy" width="900" height="900" onerror="this.remove()"></div>
+        <div class="it-info">
+          <p class="it-cat">Rural Villages</p>
+          <h3 class="it-title">The Rural Heart</h3>
+          <p class="it-desc">Traditional villages and local stories.</p>
+          <p class="it-meta" data-meta="rural" hidden></p>
+          <div class="it-foot"><span class="price">€8</span><span class="it-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-      </article>
-      <article class="card" data-item="windmills">
-        <div class="photo cover c-forest"><img src="images/cover-windmills.jpg" alt="Windmills of Fuerteventura" loading="lazy" width="1200" height="800" onerror="this.remove()"></div>
-        <div class="card-body">
-          <h3 class="title">Spot the Windmills</h3>
-          <p class="duration">Duration: to be confirmed</p>
-          <div class="buy"><span class="price">€8</span><a class="btn" href="itinerary.html?item=windmills">View Itinerary</a></div>
+      </a>
+      <a class="it-card" href="itinerary.html?item=windmills" data-item="windmills" style="--acc:#82905A">
+        <div class="it-photo"><img src="images/cards/windmills.jpg" alt="A traditional windmill in Fuerteventura" loading="lazy" width="900" height="900" onerror="this.remove()"></div>
+        <div class="it-info">
+          <p class="it-cat">Traditional Windmills</p>
+          <h3 class="it-title">Spot the Windmills</h3>
+          <p class="it-desc">Historic windmills and open island landscapes.</p>
+          <p class="it-meta" data-meta="windmills" hidden></p>
+          <div class="it-foot"><span class="price">€8</span><span class="it-arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
-      </article>
+      </a>
     </div>
   </div>
 </section>
@@ -357,5 +363,28 @@
 <script src="cta-bar.js" defer></script>
 <script src="itineraries-data.js"></script>
 <script src="selection.js"></script>
+<script>
+/* Homepage cards: stops and approximate driving distance come from the shared itinerary data (nothing is invented; missing values are simply not shown). */
+(function () {
+  var items = {}; (window.WWI_ITEMS || []).forEach(function (it) { items[it.id] = it; });
+  document.querySelectorAll('[data-meta]').forEach(function (n) {
+    var it = items[n.getAttribute('data-meta')]; if (!it) return;
+    var parts = [];
+    if (it.stops) parts.push(it.stops + (it.stops === 1 ? ' stop' : ' stops'));
+    if (it.distance) parts.push(String(it.distance).replace(/\s+by car$/i, ''));
+    if (parts.length) { n.textContent = parts.join(' \u00b7 '); n.hidden = false; }
+  });
+  /* Titles stay on one line: the CSS size follows the card width; this only shrinks further if a title still does not fit. */
+  function fit() {
+    document.querySelectorAll('.it-title').forEach(function (t) {
+      t.style.fontSize = '';
+      var fs = parseFloat(getComputedStyle(t).fontSize);
+      while (t.scrollWidth > t.clientWidth + 1 && fs > 11) { fs -= .5; t.style.fontSize = fs + 'px'; }
+    });
+  }
+  fit(); window.addEventListener('resize', fit);
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+})();
+</script>
 </body>
 </html>
