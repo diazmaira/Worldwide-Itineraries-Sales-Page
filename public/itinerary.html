@@ -15,6 +15,8 @@
 <style>
   /* Checkout page: built on the shared tokens in theme.css */
   .co-hero { padding: 92px 0 clamp(20px, 4vw, 36px); background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
+  /* Side gutters 30% narrower on this page (20px to 14px) so the content gets more width. */
+  .site-header .wrap, .logo-bar .wrap, .co-hero .wrap, .co-detail .wrap, .co-more .wrap, .co-order .wrap { width: min(1200px, 100% - 28px); }
   .co-hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 clamp(28px, 5vw, 64px); }
   /* Itinerary identity: set from the itinerary's theme (see itineraries-data.js). Defaults keep the brand green. */
   :root { --id: var(--forest); --id-ink: var(--forest); --id-tint: rgba(23, 63, 58, .08); --id-sand: var(--sand); }
@@ -28,11 +30,11 @@
   /* Signature detail: a short underline in the itinerary's accent colour. */
   .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 14px; border-radius: 2px; background: var(--id); }
   /* Hero metadata: duration and location in one quiet row */
-  .co-sub { margin: 14px 0 0; font-size: clamp(1rem, 4.2vw, 1.2rem); font-weight: 400; line-height: 1.4; color: var(--muted); }
-  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 16px 0 0; padding: 0; list-style: none; font-size: .9rem; font-weight: 400; line-height: 1.2; color: var(--forest); }
-  .co-attrs li { display: inline-flex; align-items: center; gap: 7px; min-width: 0; white-space: nowrap; }
-  .co-attrs li + li::before { content: ''; width: 1px; height: 18px; margin: 0 14px; background: var(--forest); opacity: .25; flex: none; }
-  .co-attrs svg { width: 18px; height: 18px; flex: none; color: var(--id); }
+  .co-sub { margin: 14px 0 0; font-size: clamp(.8rem, 3.36vw, .96rem); font-weight: 400; line-height: 1.4; color: var(--muted); }
+  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 16px 0 0; padding: 0; list-style: none; font-size: .72rem; font-weight: 400; line-height: 1.2; color: var(--forest); }
+  .co-attrs li { display: inline-flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
+  .co-attrs li + li::before { content: ''; width: 1px; height: 14px; margin: 0 12px; background: var(--forest); opacity: .25; flex: none; }
+  .co-attrs svg { width: 14.4px; height: 14.4px; flex: none; color: var(--id); }
   @media (max-width: 359px) { .co-attrs { flex-wrap: wrap; row-gap: 6px; } .co-attrs li { white-space: normal; } .co-attrs li + li::before { display: none; } .co-attrs li:first-child { margin-right: 16px; } }
   .co-det svg.ic { width: 22px; height: 22px; flex: none; color: var(--id); }
   /* Photo gallery */
@@ -56,11 +58,11 @@
   .co-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
   .co-tags-route li { display: inline-flex; align-items: center; gap: 6px; border-color: transparent; background: var(--id-tint); color: var(--id-ink); }
   .co-tags-route svg { width: 15px; height: 15px; }
-  .co-rec { padding: 14px 14px 16px; border-radius: 16px; background: var(--id-sand); }
-  .co-rec .co-h { color: var(--forest); font-size: .7rem; letter-spacing: .18em; margin-bottom: 10px; }
-  .co-tags-rec { gap: 8px; }
-  .co-tags-rec svg { width: 16px; height: 16px; flex: none; color: var(--id-ink); }
-  .co-tags.co-tags-rec li { display: inline-flex; align-items: center; gap: 7px; border: 1px solid color-mix(in srgb, var(--forest) 18%, transparent); background: rgba(255,255,255,.45); padding: 6px 12px 6px 10px; font-size: .8rem; font-weight: 500; color: var(--forest); }
+  .co-rec { padding: 11px 12px 12px; border-radius: 16px; background: var(--id-sand); }
+  .co-rec .co-h { color: var(--forest); font-size: .7rem; letter-spacing: .18em; margin-bottom: 8px; }
+  .co-tags-rec { gap: 6px; }
+  .co-tags-rec svg { width: 13px; height: 13px; flex: none; color: var(--id-ink); }
+  .co-tags.co-tags-rec li { display: inline-flex; align-items: center; gap: 5px; border: 1px solid color-mix(in srgb, var(--forest) 18%, transparent); background: rgba(255,255,255,.45); padding: 4px 9px 4px 7px; font-size: .72rem; font-weight: 500; color: var(--forest); }
   .co-tags li { border: 1px solid var(--sage); border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 600; color: var(--forest); white-space: nowrap; }
 
   /* Content + price box */
@@ -114,9 +116,9 @@
   .co-rating svg { width: 16px; height: 16px; color: #E0A526; }
   .co-rating strong { color: var(--forest); }
   .co-rating[hidden] { display: none; }
-  .co-perks { margin: 0; padding: 0 0 0 18px; border-left: 1px solid var(--line); list-style: none; display: grid; gap: 7px; font-size: .85rem; line-height: 1.35; color: var(--forest); }
+  .co-perks { margin: 0; padding: 0 0 0 18px; border-left: 1px solid var(--line); list-style: none; display: grid; gap: 6px; font-size: .8rem; line-height: 1.35; color: color-mix(in srgb, var(--forest) 62%, #fff); }
   .co-buy .co-rating { grid-column: 1 / -1; margin: 0; }
-  .co-perks li { display: flex; align-items: center; gap: 8px; }
+  .co-perks li { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .co-perks svg { width: 16px; height: 16px; flex: none; color: var(--id); }
   .co-demo { margin-left: 4px; padding: 1px 7px; border: 1px dashed var(--muted); border-radius: 999px; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   /* Add / Added: a reversible control. Not selected = solid green + plus; selected = outlined green + check. */
@@ -164,6 +166,7 @@
   .co-note { margin-top: 10px; font-size: .82rem; color: var(--muted); }
 
   .co-bar { display: none; }
+  @media (max-width: 379px) { .co-perks li { white-space: normal; } .co-perks { font-size: .76rem; } .co-tags.co-tags-rec li { padding: 3px 7px 3px 6px; font-size: .67rem; gap: 4px; } .co-tags-rec svg { width: 12px; height: 12px; } .co-tags-rec { gap: 5px; } }
   @media (max-width: 860px) {
       .co-hero { padding-top: 76px; }
   }
@@ -358,7 +361,7 @@
     if (demo) $('rating').append(el('span', 'co-demo', 'Demo data'));
     $('rating').hidden = false;
   }
-  [['bolt', 'Instant digital access'], ['compass', 'Self-guided: no tour guide, go at your own pace']].forEach(([ic, tx]) => $('perks').append(el('li', '', icon(ic) + '<span>' + tx + '</span>')));
+  [['bolt', 'Instant digital access'], ['compass', 'Self-guided: go at your own pace']].forEach(([ic, tx]) => $('perks').append(el('li', '', icon(ic) + '<span>' + tx + '</span>')));
 
   /* Overview, Your guide includes, Details: all from the itinerary data. */
   /* 01 Overview: the tagline is the intro statement, the description follows. */
