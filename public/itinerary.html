@@ -19,7 +19,7 @@
   /* Itinerary identity: set from the itinerary's theme (see itineraries-data.js). Defaults keep the brand green. */
   :root { --id: var(--forest); --id-ink: var(--forest); --id-tint: rgba(23, 63, 58, .08); --id-sand: var(--sand); }
   .co-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-  .co-hero h1 { font-size: clamp(1.5rem, 7.8vw, 2.9rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 14px; white-space: nowrap; overflow-x: clip; }
+  .co-hero h1 { font-size: clamp(1.7rem, 8.9vw, 3.4rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 18px; white-space: nowrap; overflow-x: clip; }
   /* Product classification: this is a digital, self-guided itinerary, not a tour with a guide. */
   .co-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px 4px 9px; border: 1px solid var(--forest); border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); }
   .co-pill svg { width: 14px; height: 14px; }
@@ -28,14 +28,15 @@
   /* Signature detail: a short underline in the itinerary's accent colour. */
   .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 10px; border-radius: 2px; background: var(--id); }
   /* Hero metadata: duration and location in one quiet row */
-  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 12px 0 0; padding: 0; list-style: none; font-size: .9rem; font-weight: 400; line-height: 1.2; color: var(--forest); }
+  .co-sub { margin: 10px 0 0; font-size: clamp(1rem, 4.2vw, 1.2rem); font-weight: 400; line-height: 1.4; color: var(--muted); }
+  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 16px 0 0; padding: 0; list-style: none; font-size: .9rem; font-weight: 400; line-height: 1.2; color: var(--forest); }
   .co-attrs li { display: inline-flex; align-items: center; gap: 7px; min-width: 0; white-space: nowrap; }
   .co-attrs li + li::before { content: ''; width: 3px; height: 3px; margin: 0 12px; border-radius: 50%; background: var(--forest); opacity: .4; flex: none; }
   .co-attrs svg { width: 18px; height: 18px; flex: none; color: var(--id); }
   @media (max-width: 359px) { .co-attrs { flex-wrap: wrap; row-gap: 6px; } .co-attrs li { white-space: normal; } .co-attrs li + li::before { display: none; } .co-attrs li:first-child { margin-right: 16px; } }
   .co-det svg.ic { width: 22px; height: 22px; flex: none; color: var(--id); }
   /* Photo gallery */
-  .co-gallery { position: relative; width: min(100%, 680px); margin-top: 18px; }
+  .co-gallery { position: relative; width: min(100%, 680px); margin-top: 26px; }
   .co-gallery[hidden] { display: none; }
   .co-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 14px; background: var(--sage); -webkit-overflow-scrolling: touch; }
   .co-track::-webkit-scrollbar { display: none; }
@@ -49,18 +50,21 @@
   .co-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
   .co-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--line); cursor: pointer; transition: background .2s, transform .2s; }
   .co-dots button.on { background: var(--id); transform: scale(1.25); }
-  .co-rec { margin-top: 22px; }
+  .co-rec { margin-top: 20px; }
   .co-rec[hidden] { display: none; }
   .co-h { margin: 0 0 10px; font-family: var(--body, inherit); font-size: .72rem; font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--forest); }
   .co-tags { display: flex; flex-wrap: wrap; gap: 6px; margin: 0; padding: 0; list-style: none; }
   .co-tags-route li { display: inline-flex; align-items: center; gap: 6px; border-color: transparent; background: var(--id-tint); color: var(--id-ink); }
   .co-tags-route svg { width: 15px; height: 15px; }
-  .co-tags-rec li { border-color: transparent; background: var(--id-sand); }
+  .co-rec .co-h { color: var(--muted); font-size: .68rem; margin-bottom: 8px; }
+  .co-tags-rec { gap: 6px 6px; }
+  .co-tags.co-tags-rec li { border-color: transparent; background: transparent; box-shadow: inset 0 0 0 1px var(--line); padding: 2px 10px; font-size: .74rem; font-weight: 500; color: var(--muted); }
   .co-tags li { border: 1px solid var(--sage); border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 600; color: var(--forest); white-space: nowrap; }
 
   /* Content + price box */
   .co-detail { padding-block: clamp(28px, 5vw, 52px) 0; background: var(--cream); }
-  .co-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 32px; align-items: start; }
+  .co-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 6vw, 52px); align-items: start; }
+  .co-layout > * { max-width: 760px; }
   /* Editorial sections: thin sand divider, a small terracotta number, one prominent title. No background changes. */
   /* One heading system for every section: a small terracotta number stacked over one prominent title. */
   .co-sec { margin-top: clamp(32px, 6vw, 52px); padding-top: clamp(22px, 4vw, 30px); border-top: 1px solid var(--sand); }
@@ -102,14 +106,16 @@
   .co-list.plain li { grid-template-columns: 10px minmax(0, 1fr); align-items: baseline; }
   .co-list.plain li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--id); transform: translateY(-2px); }
   /* Price box */
-  .co-buy { display: grid; gap: 14px; padding: 20px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm); }
+  .co-buy { display: grid; gap: 14px; padding: 20px 20px 18px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm); }
   .co-price { font-family: var(--display); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--forest); }
   .co-rating { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: .88rem; color: var(--muted); }
   .co-rating svg { width: 16px; height: 16px; color: #E0A526; }
   .co-rating strong { color: var(--forest); }
   .co-rating[hidden] { display: none; }
-  .co-perks { margin: 0; padding: 0; list-style: none; display: grid; gap: 7px; font-size: .85rem; color: var(--forest); }
+  .co-perks { margin: 0; padding: 0; list-style: none; display: grid; gap: 4px; font-size: .88rem; color: var(--muted); }
+  .co-buy .co-rating { margin-top: 6px; }
   .co-perks li { display: flex; align-items: center; gap: 8px; }
+  .co-perks li.plain { font-size: .88rem; }
   .co-perks svg { width: 16px; height: 16px; flex: none; color: var(--id); }
   .co-demo { margin-left: 4px; padding: 1px 7px; border: 1px dashed var(--muted); border-radius: 999px; font-size: .62rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--muted); }
   /* Add / Added: a reversible control. Not selected = solid green + plus; selected = outlined green + check. */
@@ -163,9 +169,8 @@
   @media (max-width: 599px) {
   }
   @media (min-width: 900px) {
-    .co-layout { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; }
-    .co-aside { grid-column: 2; grid-row: 1; position: sticky; top: 24px; }
-    .co-main { grid-column: 1; grid-row: 1; }
+    .co-buy { grid-template-columns: auto minmax(0, 1fr) auto; align-items: center; column-gap: 28px; padding: 18px 24px; }
+    .co-buy .co-sel { width: auto; min-width: 230px; }
   }
   @media (max-width: 767px) {
     .co-bar { display: flex; align-items: center; justify-content: space-between; gap: 14px; position: fixed; left: 0; right: 0; bottom: 0; z-index: 20; padding: 10px 16px calc(10px + env(safe-area-inset-bottom)); background: var(--cream); box-shadow: 0 -6px 18px rgba(23, 63, 58, .10); opacity: 0; visibility: hidden; transform: translateY(12px); transition: opacity .3s, transform .3s, visibility .3s; }
@@ -195,9 +200,9 @@
 <!-- 1. Selected itinerary -->
 <section class="co-hero" id="top">
   <div class="wrap" id="hero-wrap">
-    <div class="co-top"><span class="co-pill" id="pill"></span><span class="co-chip" id="cat-chip" hidden></span></div>
+    <div class="co-top"><span class="co-pill" id="pill"></span></div>
     <h1 id="hero-title"></h1>
-    <span class="co-accent" id="accent" aria-hidden="true"></span>
+    <p class="co-sub" id="hero-sub" hidden></p>
     <ul class="co-attrs" id="attrs"></ul>
     <div class="co-gallery" id="gallery" role="region" aria-roledescription="carousel" hidden>
       <div class="co-track" id="g-track" tabindex="0"></div>
@@ -327,7 +332,7 @@
     rs.setProperty('--id-tint', 'color-mix(in srgb, ' + theme.color + ' 13%, #fff)');
     if (theme.sand) rs.setProperty('--id-sand', theme.sand);
   }
-  if (theme.label) { $('cat-chip').textContent = theme.label; $('cat-chip').hidden = false; }
+  if (main.subtitle) { $('hero-sub').textContent = main.subtitle; $('hero-sub').hidden = false; }
   $('pill').innerHTML = icon('compass') + 'Self-guided';
   $('pill').title = 'A digital itinerary you follow yourself. There is no tour guide.';
   [['clock', 'Duration', main.duration], ['pin', 'Location', main.location]].forEach(([ic, label, value]) => {
@@ -350,7 +355,7 @@
     if (demo) $('rating').append(el('span', 'co-demo', 'Demo data'));
     $('rating').hidden = false;
   }
-  [['bolt', 'Instant digital access'], ['compass', 'Self-guided: no tour guide, go at your own pace']].forEach(([ic, tx]) => $('perks').append(el('li', '', icon(ic) + '<span>' + tx + '</span>')));
+  [['', 'One-time purchase'], ['', 'Instant digital access']].forEach(([ic, tx]) => $('perks').append(el('li', ic ? '' : 'plain', (ic ? icon(ic) : '') + '<span>' + tx + '</span>')));
 
   /* Overview, Your guide includes, Details: all from the itinerary data. */
   /* 01 Overview: the tagline is the intro statement, the description follows. */
