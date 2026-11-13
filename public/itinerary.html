@@ -137,8 +137,8 @@
   .co-more { margin-top: clamp(44px, 8vw, 72px); padding-block: clamp(30px, 6vw, 48px) calc(clamp(40px, 7vw, 60px) + var(--bar-h) + env(safe-area-inset-bottom)); background: var(--sand); border-top: 1px solid rgba(23, 63, 58, .12); }
   .co-more .wrap > * { max-width: 720px; }
   .co-more-label { margin: 0 0 8px; font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #9A7257; }
-  .co-more h2 { font-size: clamp(1.25rem, 4.6vw, 1.6rem); line-height: 1.2; }
-  .co-more .lead { margin-top: 6px; font-size: .95rem; color: var(--muted); }
+  .co-more h2 { font-size: clamp(1.35rem, 5vw, 1.75rem); line-height: 1.2; }
+  .co-more-label.co-next { margin: 8px 0 0; }
   .co-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 3vw, 18px); margin-top: 18px; align-items: stretch; }
   .co-card { --acc: #359F9C; background: var(--white); border-radius: 16px; border: 2px solid color-mix(in srgb, var(--acc) 85%, #fff); box-shadow: 0 4px 14px rgba(23, 63, 58, .09); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s, border-color .2s; }
   .co-card[data-id="north"] { --acc: #359F9C; }
@@ -153,7 +153,9 @@
   .co-card h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .co-card > a { display: block; }
   .co-card h3 { font-size: 1rem; line-height: 1.15; letter-spacing: -.01em; color: #19463E; }
-  .co-blurb { margin: 0; font-size: .78rem; line-height: 1.4; color: #3E5A52; display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden; min-height: calc(3 * 1.4em); }
+  .co-route { margin: 0; display: flex; flex-direction: column; gap: 3px; }
+  .co-route b { font-size: .56rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #9A7257; }
+  .co-route span { font-size: .78rem; line-height: 1.4; color: #3E5A52; min-height: 2.8em; }
   .co-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 8px; }
   .co-card .price { font-family: var(--display); font-weight: 800; font-size: 1.15rem; color: #19463E; }
   .co-card .co-sel { min-height: 34px; padding: 4px 12px; font-size: .8rem; gap: 5px; }
@@ -161,7 +163,7 @@
 
   .co-bar .btn:disabled { opacity: .45; cursor: default; box-shadow: none; }
 
-  @media (max-width: 379px) { .co-perks li { white-space: normal; } .co-perks { font-size: .76rem; } .co-tags.co-tags-rec li { padding: 3px 7px 3px 6px; font-size: .67rem; gap: 4px; } .co-tags-rec svg { width: 12px; height: 12px; } .co-tags-rec { gap: 5px; } }
+  @media (max-width: 379px) { .co-cat { white-space: normal; letter-spacing: .05em; padding: 4px 8px; line-height: 1.25; } .co-perks li { white-space: normal; } .co-perks { font-size: .76rem; } .co-tags.co-tags-rec li { padding: 3px 7px 3px 6px; font-size: .67rem; gap: 4px; } .co-tags-rec svg { width: 12px; height: 12px; } .co-tags-rec { gap: 5px; } }
   @media (max-width: 860px) {
       .co-hero { padding-top: 76px; }
   }
@@ -251,7 +253,7 @@
   <div class="wrap">
     <p class="co-more-label">Complete your adventure</p>
     <h2>Make it a bigger adventure</h2>
-    <p class="lead">Discover more of Fuerteventura. Add another self-guided itinerary to your order.</p>
+    <p class="co-more-label co-next">Choose your next route</p>
     <div class="co-grid" id="more-grid"></div>
   </div>
 </section>
@@ -518,8 +520,10 @@
     photoLink.href = href; photoLink.tabIndex = -1; photoLink.setAttribute('aria-hidden', 'true');
     photoLink.append(photo);
     const blurb = document.createElement('p');
-    blurb.className = 'co-blurb';
-    blurb.textContent = it.blurb || '';
+    blurb.className = 'co-route';
+    const rl = document.createElement('b'); rl.textContent = 'On the route';
+    const rt = document.createElement('span'); rt.textContent = (it.highlights || []).join(' \u00b7 ');
+    blurb.append(rl, rt);
     const foot = document.createElement('div');
     foot.className = 'co-card-foot';
     const price = document.createElement('span');
