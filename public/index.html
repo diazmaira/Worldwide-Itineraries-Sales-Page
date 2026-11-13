@@ -26,10 +26,10 @@
 <body>
 
 <!-- Header -->
-<header class="site-header">
+<header class="site-header site-header-static">
 </header>
 
-<div class="logo-bar"><div class="wrap">
+<div class="logo-bar logo-bar-solid"><div class="wrap">
   <a class="logo" href="index.html" aria-label="Fuerteventura Itineraries, home">
     <svg viewBox="0 0 52 44" width="52" height="44" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" aria-hidden="true"><circle cx="33" cy="13" r="8"/><path d="M2 30c8-10 14-10 20-4s14 6 28-6"/><path d="M2 40c8-10 14-10 20-4s14 6 28-6"/></svg>
     <span>Fuerteventura<br>Itineraries</span>
@@ -40,19 +40,24 @@
 
 <!-- Hero -->
 <section class="hero" data-cta-ref>
-  <picture><source media="(max-width: 767px)" srcset="/images/hero/hero-windmill.png"><img class="deco deco-windmill" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="540" height="546" alt="" aria-hidden="true"></picture>
-  <picture><source media="(max-width: 767px)" srcset="/images/hero/hero-lighthouse.png"><img class="deco deco-lighthouse" src="data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" width="560" height="426" alt="" aria-hidden="true"></picture>
+  <img class="hero-bg" src="/images/hero/hero-bg.jpg" alt="" fetchpriority="high">
   <div class="wrap">
-    <div>
-      <span class="tag">Self-guided itineraries</span>
-      <h1>Discover the <span class="mark">most special</span> places, at your own pace.</h1>
-      <p class="sub sub-desktop">Carefully planned self-guided itineraries to explore beautiful landscapes, discover interesting places and travel at your own pace.</p>
-      <p class="sub sub-mobile">Self-guided itineraries to explore stunning landscapes, hidden gems and travel at your own pace.</p>
-      <div class="actions">
-        <a class="btn" href="#itineraries">Get My Itineraries</a>
-      </div>
-    </div>
-    <div class="hero-collage"><img src="/images/worldwide-itineraries-hero-collage.png" alt="Travel collage: windmill, turquoise coastline, volcanic landscape, compass and a map with a dotted route" onerror="this.parentNode.remove()"></div>
+    <span class="tag">Self-guided itineraries</span>
+    <h1>Explore Fuerteventura.<br><span class="mark">Your way, your pace.</span></h1>
+    <ul class="hero-perks">
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="6" cy="18" r="2"/><circle cx="18" cy="6" r="2"/><path d="M8 18h6a3 3 0 0 0 0-6h-4a3 3 0 0 1 0-6h6"/></svg><span>Ready-to-go<br>itineraries</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 16h14v-4l-2-4H7l-2 4z"/><path d="M3 16h18v3H3z"/><circle cx="8" cy="16" r=".6"/><circle cx="16" cy="16" r=".6"/></svg><span>Explore<br>at your pace</span></li>
+      <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 6l6-2 6 2 6-2v14l-6 2-6-2-6 2z"/><path d="M9 4v14M15 6v14"/></svg><span>Real places<br>Local tips</span></li>
+    </ul>
+    <div class="actions"><a class="btn" href="#itineraries">Get My Itineraries <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a></div>
+  </div>
+</section>
+
+<section class="intro">
+  <div class="wrap">
+    <p>Discover the island through thoughtfully designed self-guided itineraries, bringing together breathtaking landscapes, hidden gems and local experiences.</p>
+    <p class="invite">Ready to discover Fuerteventura?</p>
+    <a class="scroll-down" href="#itineraries" aria-label="Scroll to the itineraries"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 5v14M6 13l6 6 6-6"/></svg></a>
   </div>
 </section>
 
