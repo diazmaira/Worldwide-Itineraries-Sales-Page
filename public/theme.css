@@ -292,7 +292,7 @@ body.wwi-lock { overflow: hidden; }
 .it-tags li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 7px; border-radius: 999px; background: color-mix(in srgb, var(--acc) 17%, #fff); color: color-mix(in srgb, var(--acc) 50%, #19463E); font-size: .72rem; font-weight: 500; line-height: 1.25; white-space: nowrap; }
 .it-tags svg { width: 14px; height: 14px; flex: none; color: var(--acc); }
 .it-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 12px; border-top: 1px solid color-mix(in srgb, var(--stone) 28%, transparent); }
-.it-meta { display: flex; align-items: center; flex-wrap: nowrap; gap: 0; min-width: 0; font-size: clamp(.6rem, 3.7cqi, .95rem); font-weight: 500; color: #4A5E57; }
+.it-meta { flex: 1; display: flex; align-items: center; flex-wrap: nowrap; gap: 0; min-width: 0; font-size: clamp(.6rem, 3.7cqi, .95rem); font-weight: 500; color: #4A5E57; }
 .it-meta .mi { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
 .it-meta .mi + .mi { padding-left: .9em; margin-left: .9em; border-left: 1px solid color-mix(in srgb, var(--stone) 45%, transparent); line-height: 1.2; }
 
@@ -314,3 +314,4 @@ body.wwi-lock { overflow: hidden; }
   .it-meta .mi + .mi { padding-left: .6em; margin-left: .6em; }
   .it-meta .mi { gap: 3px; }
 }
+@media (max-width: 379px) { .it-tags { gap: 5px; } .it-tags li { padding: 4px 8px 4px 6px; font-size: .7rem; gap: 4px; } }
