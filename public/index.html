@@ -382,8 +382,26 @@
       while (t.scrollWidth > t.clientWidth + 1 && fs > 11) { fs -= .5; t.style.fontSize = fs + 'px'; }
     });
   }
-  fit(); window.addEventListener('resize', fit);
-  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+  /* Info row (reviews | stops | distance): grows to fill the space up to the arrow button, always keeping a clear gap before it. */
+  function fitMeta() {
+    var all = document.querySelectorAll('.it-meta'), sizes = [];
+    all.forEach(function (m) {
+      var last = m.lastElementChild; if (!last) return;
+      m.style.fontSize = '';
+      var fs = parseFloat(getComputedStyle(m).fontSize), max = 15;
+      var room = function () { return m.clientWidth - 8 - (last.getBoundingClientRect().right - m.getBoundingClientRect().left); };
+      while (room() > 6 && fs < max) { fs += .25; m.style.fontSize = fs + 'px'; }
+      while (room() < 0 && fs > 8) { fs -= .25; m.style.fontSize = fs + 'px'; }
+      if (m.children.length > 1) sizes.push(fs);
+    });
+    /* One size for every card: the widest row (reviews | stops | distance) sets it. */
+    var u = Math.min.apply(null, sizes); if (!isFinite(u)) return;
+    all.forEach(function (m) { m.style.fontSize = u + 'px'; });
+  }
+  function fitAll() { fit(); fitMeta(); }
+  fitAll(); window.addEventListener('resize', fitAll);
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
 })();
 </script>
 </body>
