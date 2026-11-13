@@ -314,3 +314,4 @@ body.wwi-lock { overflow: hidden; }
   .it-meta .mi + .mi { padding-left: .6em; margin-left: .6em; }
   .it-meta .mi { gap: 3px; }
 }
+@media (max-width: 379px) { .it-tags { gap: 5px; } .it-tags li { padding: 4px 8px 4px 6px; font-size: .7rem; gap: 4px; } }
