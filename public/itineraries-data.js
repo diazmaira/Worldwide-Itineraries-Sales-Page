@@ -23,7 +23,7 @@
     scenic: { label: 'Scenic & Slow Travel', color: '#8954C8' }
   };
   w.WWI_ITEMS = [
-    { id: 'north', destination: 'Fuerteventura', name: 'Explore the North', price: 8,
+    { id: 'north', destination: 'Fuerteventura', highlights: ['Sand Dunes', 'Volcano', 'Fishing Village'], name: 'Explore the North', price: 8,
       category: 'ocean',
       blurb: 'A day of dunes, volcanoes, fishing villages and ocean views.',
       cover: 'images/cover-north.jpg', video: 'https://youtube.com/shorts/iV2MGGzLsSI', audience: ['Hiking lovers', 'Nature lovers', 'Families', 'Couples', 'Adventure seekers'],
@@ -39,7 +39,7 @@
       includes: ['Your digital self-guided itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a sketch map', 'What to do at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'],
       beforeYouGo: ['Download Google Maps for offline use', 'Bring enough drinking water', 'Wear comfortable walking shoes', 'Bring swimwear and a towel', 'Bring a camera and spare batteries', 'Respect nature and stay on the marked paths'],
       overview: ['A full day through the north of the island, from golden dunes and volcanic landscapes to coastal viewpoints and a local lunch stop. Every stop comes with timing, parking and a Google Maps link.'] },
-    { id: 'rural', destination: 'Fuerteventura', name: 'The Rural Heart', price: 8,
+    { id: 'rural', destination: 'Fuerteventura', highlights: ['Villaverde', 'La Oliva', 'Tefía'], name: 'The Rural Heart', price: 8,
       category: 'rural',
       blurb: "Leave the coast behind and drive through the villages, valleys and hills of the island's interior.",
       cover: 'images/cover-rural.jpg', video: '',
@@ -51,7 +51,7 @@
       includes: ['Your digital itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a route map', 'What to see at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'],
       beforeYouGo: ['Water and snacks', 'Sun hat and sunscreen', 'A light jacket for the wind', 'Cash for small shops', 'Phone charger for the car', 'Walking shoes for the cliffs'],
       overview: ["Leave the coast behind and drive through the villages, valleys and hills of the island's interior. Expect quiet viewpoints, traditional food and the slower side of Fuerteventura, away from the crowds."] },
-    { id: 'windmills', destination: 'Fuerteventura', name: 'Spot the Windmills', price: 8,
+    { id: 'windmills', destination: 'Fuerteventura', highlights: ['Traditional windmills', 'Photo stops', 'Small villages'], name: 'Spot the Windmills', price: 8,
       category: 'scenic',
       blurb: "Follow the traditional windmills that mark the island's landscape and learn the story behind them.",
       cover: 'images/cover-windmills.jpg', video: '',
