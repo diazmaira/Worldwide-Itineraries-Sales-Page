@@ -316,7 +316,13 @@ body.wwi-lock { overflow: hidden; }
 .it-arrow { flex: none; width: 50px; height: 50px; display: grid; place-items: center; border-radius: 50%; background: var(--acc); color: #fff; box-shadow: 0 4px 10px color-mix(in srgb, var(--acc) 38%, transparent); transition: transform .2s; }
 .it-arrow svg { width: 24px; height: 24px; }
 .it-card:hover .it-arrow { transform: translateX(3px); }
-@media (max-width: 899px) { .it-card { min-height: clamp(500px, 68svh, 760px); } }
+/* Phones/tablets: panoramic 16:9 main photo, three landscape 3:2 thumbnails, tighter spacing. Height follows the content (~55-60vh). */
+@media (max-width: 899px) {
+  .pc { flex: none; grid-template-rows: auto auto; padding-bottom: 0; }
+  .pc-main { aspect-ratio: 16 / 9; }
+  .pc-row > div { aspect-ratio: 3 / 2; }
+  .it-info { gap: 10px; padding-top: 12px; }
+}
 @media (min-width: 900px) {
   .it-list { max-width: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
   .pc { flex: none; aspect-ratio: 4 / 3.3; }
