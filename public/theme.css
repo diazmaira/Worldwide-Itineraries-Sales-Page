@@ -286,47 +286,51 @@ body.wwi-lock { overflow: hidden; }
 
 /* Homepage itinerary cards: small illustrated travel postcards. One shared structure (photo collage, info, landscape strip);
    the accent (--acc) drives the border, label, arrow and the illustration. */
-.it-list { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 520px; gap: 18px; margin: clamp(28px, 5vw, 44px) 0 0; }
-.it-card { --card-bg: #F7F0E4; --stone: #9A7257; --sand-il: #EBDCC0; display: flex; flex-direction: column; overflow: hidden; border-radius: 20px; background: var(--card-bg); border: 2px solid color-mix(in srgb, var(--acc) 88%, var(--card-bg)); box-shadow: 0 6px 18px rgba(23, 63, 58, .10); color: inherit; text-decoration: none; transition: transform .2s, box-shadow .2s; }
-.it-card:hover { transform: translateY(-2px); box-shadow: 0 12px 28px rgba(23, 63, 58, .16); }
+.it-list { display: grid; grid-template-columns: minmax(0, 1fr); max-width: 520px; gap: 22px; margin: clamp(28px, 5vw, 44px) 0 0; }
+/* Itinerary card: cream, no coloured border, soft shadow. On phones each card is ~68% of the viewport height. */
+.it-card { --card-bg: #FBF5EA; --stone: #9A7257; --ink: #19463E; position: relative; display: flex; flex-direction: column; overflow: hidden; border-radius: 26px; background: var(--card-bg); box-shadow: 0 8px 26px rgba(23, 63, 58, .12); color: inherit; text-decoration: none; transition: transform .2s, box-shadow .2s; }
+.it-card:hover { transform: translateY(-2px); box-shadow: 0 14px 32px rgba(23, 63, 58, .17); }
 .it-card:focus-visible { outline: 3px solid var(--acc); outline-offset: 3px; }
-/* Collage: one large photo (about 67%) over three small ones, straight 4px gaps, no overlap. */
-.pc { display: grid; grid-template-rows: 2fr 1fr; gap: 2px; padding: 2px 2px 0; aspect-ratio: 4 / 3.15; background: var(--card-bg); }
-.pc-main, .pc-row > div { position: relative; overflow: hidden; background: color-mix(in srgb, var(--acc) 22%, #fff); }
-.pc-main { border-radius: 16px 16px 4px 4px; }
-.pc-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 2px; min-height: 0; }
-.pc-row > div { border-radius: 0; }
+/* Collage: one large photo over three smaller ones; photos keep their proportions (cover crop only). */
+.pc { flex: 1 1 auto; min-height: 0; display: grid; grid-template-rows: 1.7fr 1fr; gap: 6px; padding: 12px 12px 0; }
+.pc-main, .pc-row > div { position: relative; overflow: hidden; border-radius: 14px; background: color-mix(in srgb, var(--acc) 22%, #fff); }
+.pc-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; min-height: 0; }
 .pc-main img, .pc-row img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.it-info { container-type: inline-size; display: flex; flex: 1; flex-direction: column; gap: 10px; min-width: 0; padding: 16px 18px 16px; }
-.it-sg { font-size: .62rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: var(--stone); white-space: nowrap; }
-.it-info h3.it-title { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.1rem, 8.4cqi, 1.9rem); line-height: 1.12; letter-spacing: -.01em; white-space: nowrap; color: #19463E; }
-.it-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 6px; }
-.it-tags li { display: inline-flex; align-items: center; gap: 5px; padding: 4px 10px 4px 7px; border-radius: 999px; background: color-mix(in srgb, var(--acc) 17%, #fff); color: color-mix(in srgb, var(--acc) 50%, #19463E); font-size: .72rem; font-weight: 500; line-height: 1.25; white-space: nowrap; }
-.it-tags svg { width: 14px; height: 14px; flex: none; color: var(--acc); }
-.it-bottom { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 12px; border-top: 1px solid color-mix(in srgb, var(--stone) 28%, transparent); }
-.it-meta { flex: 1; display: flex; align-items: center; flex-wrap: nowrap; gap: 0; min-width: 0; font-size: clamp(.6rem, 3.7cqi, .95rem); font-weight: 500; color: #4A5E57; }
-.it-meta .mi { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
-.it-meta .mi + .mi { padding-left: .9em; margin-left: .9em; border-left: 1px solid color-mix(in srgb, var(--stone) 45%, transparent); line-height: 1.2; }
-
-.it-meta .star svg { width: 1.1em; height: 1.1em; color: #E0A21B; flex: none; }
-.it-meta .star b { font-weight: 700; color: #19463E; }
-.it-meta .msep { display: none; }
-.it-arrow { flex: none; width: 44px; height: 44px; display: grid; place-items: center; border-radius: 50%; background: var(--acc); color: #fff; box-shadow: 0 3px 8px color-mix(in srgb, var(--acc) 40%, transparent); transition: transform .2s; }
-.it-arrow svg { width: 22px; height: 22px; }
+.it-info { container-type: inline-size; position: relative; isolation: isolate; display: flex; flex: none; flex-direction: column; gap: 12px; min-width: 0; padding: 16px 18px 18px; }
+.it-wave { position: absolute; z-index: -1; right: -6%; bottom: 44px; width: 112%; max-width: none; height: auto; pointer-events: none; user-select: none; }
+.it-info h3.it-title { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.3rem, 9.4cqi, 2.4rem); line-height: 1.1; letter-spacing: -.015em; white-space: nowrap; color: var(--ink); }
+/* Location attributes: one line, regular weight, thin separators, no pills. */
+.it-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: nowrap; justify-content: space-between; align-items: center; font-size: clamp(.6rem, 3.2cqi, .86rem); font-weight: 400; color: var(--ink); }
+.it-tags li { display: inline-flex; align-items: center; gap: .35em; padding: 0 .55em; white-space: nowrap; line-height: 1.2; }
+.it-tags li:first-child { padding-left: 0; }
+.it-tags li:last-child { padding-right: 0; }
+.it-tags li + li { border-left: 1px solid color-mix(in srgb, var(--ink) 22%, transparent); }
+.it-tags svg { width: 1.45em; height: 1.45em; flex: none; color: var(--ink); }
+.it-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 2px; }
+.it-meta { flex: 1; display: flex; align-items: center; flex-wrap: nowrap; min-width: 0; padding-top: 14px; border-top: 1px solid color-mix(in srgb, var(--stone) 30%, transparent); font-size: clamp(.6rem, 3.5cqi, .95rem); font-weight: 400; color: var(--ink); }
+.it-meta .mi { display: inline-flex; align-items: center; gap: .35em; white-space: nowrap; }
+.it-meta .mi + .mi { padding-left: .8em; margin-left: .8em; border-left: 1px solid color-mix(in srgb, var(--stone) 45%, transparent); line-height: 1.2; }
+.it-meta .mi svg { width: 1.25em; height: 1.25em; flex: none; color: var(--ink); }
+.it-meta .star svg { color: #E0A21B; }
+.it-meta .star b { font-weight: 700; }
+.it-arrow { flex: none; width: 50px; height: 50px; display: grid; place-items: center; border-radius: 50%; background: var(--acc); color: #fff; box-shadow: 0 4px 10px color-mix(in srgb, var(--acc) 38%, transparent); transition: transform .2s; }
+.it-arrow svg { width: 24px; height: 24px; }
 .it-card:hover .it-arrow { transform: translateX(3px); }
-/* Landscape strip inside the card (about 13% of its height), under the metadata. */
-@media (min-width: 900px) { .it-list { max-width: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; } }
+@media (max-width: 899px) { .it-card { min-height: clamp(500px, 68svh, 760px); } }
+@media (min-width: 900px) {
+  .it-list { max-width: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
+  .pc { flex: none; aspect-ratio: 4 / 3.3; }
+}
 @media (prefers-reduced-motion: reduce) { .it-card, .it-arrow { transition: none !important; } .it-card:hover { transform: none; } }
 @media (max-width: 379px) {
   .it-info { padding-inline: 14px; }
+  .it-tags { font-size: clamp(.54rem, 3cqi, .8rem); }
+  .it-tags li { padding: 0 .38em; gap: .25em; }
+  .it-tags svg { width: 1.15em; height: 1.15em; }
   .it-bottom { gap: 6px; }
-  .it-arrow { width: 36px; height: 36px; }
-  .it-arrow svg { width: 18px; height: 18px; }
-  .it-meta { font-size: .58rem; }
-  .it-meta .mi + .mi { padding-left: .6em; margin-left: .6em; }
-  .it-meta .mi { gap: 3px; }
+  .it-arrow { width: 42px; height: 42px; }
+  .it-arrow svg { width: 20px; height: 20px; }
 }
-@media (max-width: 379px) { .it-tags { gap: 5px; } .it-tags li { padding: 4px 8px 4px 6px; font-size: .7rem; gap: 4px; } }
 
 /* Phone hero: tighter top, compact content, more room for the photo (and the CTA sits low). */
 @media (max-width: 599px) {
