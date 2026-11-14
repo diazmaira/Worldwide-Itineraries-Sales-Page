@@ -87,12 +87,20 @@
   .hero { position: relative; overflow: clip; min-height: min(100svh, 880px); display: flex; background: linear-gradient(180deg, #0A58CF 0%, #0F6FDC 30%, #2D93E8 52%, #4BA8EE 100%); }
   .hero-bg { position: absolute; left: 0; right: 0; bottom: 0; width: 100%; height: 54%; object-fit: cover; object-position: 58% 60%; -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 34%); mask-image: linear-gradient(to bottom, transparent 0, #000 34%); }
   .hero::before { content: none; }
-  .hero-slides { position: absolute; inset: 0; z-index: 0; overflow: hidden; }
-  .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: 50% 70%; background-repeat: no-repeat; opacity: 0; transition: opacity .6s ease; will-change: opacity; }
+  .hero-slides { position: absolute; left: 0; right: 0; bottom: 0; height: 46%; z-index: 0; overflow: hidden; -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .55) 16%, #000 38%); mask-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .55) 16%, #000 38%); }
+  .hero-slide { position: absolute; inset: 0; background-size: cover; background-position: 50% 70%; background-repeat: no-repeat; opacity: 0; transition: opacity .7s ease; will-change: opacity; }
+  .hero.has-slides .hero-bg { display: none; }
   .hero-slide.on { opacity: 1; }
   /* Blue veil over the photos keeps the white text readable. */
   .hero.has-slides::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(180deg, rgba(8, 78, 190, .62) 0%, rgba(10, 92, 205, .34) 36%, rgba(10, 92, 205, 0) 64%); pointer-events: none; }
-  @media (min-width: 900px) { .hero-slide { background-position: 50% 60%; } }
+  @media (min-width: 900px) { .hero-slide { background-position: 50% 100%; } }
+  /* Phones and tablets: slightly shorter photo band, so the top ~58% stays clean brand-blue for the text. */
+  @media (max-width: 899px) {
+    .hero-slides { height: 42%; }
+    .hero-slide { background-position: 38% 100%; }
+    .hero.has-slides::before { background: linear-gradient(180deg, rgba(8, 78, 190, .35) 0%, rgba(8, 78, 190, 0) 55%); }
+  }
+  @media (min-width: 600px) and (max-width: 899px) { .hero-slides { height: 36%; } }
   @media (prefers-reduced-motion: reduce) { .hero-slide { transition: none; } }
   .hero .wrap { position: relative; z-index: 2; width: min(1100px, 100% - 24px); margin: 0 auto; display: flex; flex-direction: column; align-items: center; text-align: center; padding: clamp(92px, 18vw, 120px) 0 clamp(26px, 5vw, 48px); }
   .hero h1 { font-size: clamp(2.6rem, 11.6vw, 5rem); line-height: 1.02; margin-top: 16px; text-wrap: balance; color: #fff; text-shadow: 0 2px 14px rgba(5, 40, 110, .25); }
