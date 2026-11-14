@@ -111,6 +111,14 @@
   .hero-perks li + li { border-left: 1.5px solid rgba(255, 255, 255, .7); }
   .hero-perks svg { width: clamp(26px, 8vw, 36px); height: clamp(26px, 8vw, 36px); flex: none; }
   .hero .actions { margin-top: auto; padding-top: 28px; width: min(360px, 100%); }
+  /* Phones: tighter top (label right under the logo), same headline size, more room for the photo, CTA near the bottom edge. */
+  @media (max-width: 599px) {
+    .logo-bar-hero .wrap { height: 64px; }
+    .hero .wrap { padding-top: 66px; padding-bottom: max(16px, env(safe-area-inset-bottom)); }
+    .hero h1 { margin-top: 12px; }
+    .hero .actions { padding-top: 16px; }
+    .hero-slides { height: 56%; }
+  }
   .hero .actions .btn { width: 100%; min-height: 56px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.1rem; white-space: nowrap; }
   .hero .actions .btn svg { width: 20px; height: 20px; flex: none; }
   .intro { text-align: center; padding: clamp(36px, 7vw, 64px) 0 0; }
