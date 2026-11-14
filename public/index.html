@@ -412,7 +412,7 @@
 (function () {
   var hero = document.querySelector('.hero'), box = hero && hero.querySelector('.hero-slides');
   if (!box) return;
-  var layers = box.children, urls = [1, 2, 3, 4, 5].map(function (n) { return '/images/fuerteventura-hero/stop-' + n + '.png'; });
+  var layers = box.children, urls = [1, 2, 3, 4, 5].map(function (n) { return '/images/fuerteventura/hero/stop-' + n + '.jpg'; });
   var ok = [], idx = 0, top = 1, timer = null, started = false;
   var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
   function load(u) { return new Promise(function (res) { var i = new Image(); i.onload = function () { res(u); }; i.onerror = function () { res(null); }; i.src = u; }); }
