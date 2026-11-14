@@ -408,7 +408,7 @@
 })();
 </script>
 <script>
-/* Hero background slideshow: stop-1..5.png, one every 1.5 s with a 0.6 s crossfade. Missing files are skipped. */
+/* Hero background slideshow: stop-1..5.png, one every 2.5 s with a 0.7 s crossfade. Missing files are skipped. */
 (function () {
   var hero = document.querySelector('.hero'), box = hero && hero.querySelector('.hero-slides');
   if (!box) return;
@@ -423,10 +423,10 @@
     next.classList.add('on');
     hero.classList.add('has-slides');
     top ^= 1;
-    setTimeout(function () { prev.style.transition = 'none'; prev.classList.remove('on'); void prev.offsetWidth; prev.style.transition = ''; }, 650);
+    setTimeout(function () { prev.style.transition = 'none'; prev.classList.remove('on'); void prev.offsetWidth; prev.style.transition = ''; }, 750);
   }
   function tick() { idx = (idx + 1) % ok.length; show(ok[idx]); }
-  function start() { if (!timer && ok.length > 1 && !reduce && !document.hidden) timer = setInterval(tick, 1500); }
+  function start() { if (!timer && ok.length > 1 && !reduce && !document.hidden) timer = setInterval(tick, 2500); }
   function stop() { clearInterval(timer); timer = null; }
   load(urls[0]).then(function (u) { if (u) { ok.push(u); show(u); } });
   Promise.all(urls.map(load)).then(function (r) {
