@@ -38,6 +38,7 @@
 <!-- Hero -->
 <section class="hero" data-cta-ref>
   <img class="hero-bg" src="/images/hero/hero-bg.jpg" alt="" fetchpriority="high">
+  <div class="hero-slides" aria-hidden="true"><div class="hero-slide"></div><div class="hero-slide"></div></div>
   <div class="wrap">
     <span class="tag">Self-guided itineraries</span>
     <h1>Explore Fuerteventura.<br><span class="mark">Your way, your pace.</span></h1>
@@ -404,6 +405,39 @@
   fitAll(); window.addEventListener('resize', fitAll);
 
   if (document.fonts && document.fonts.ready) document.fonts.ready.then(fitAll);
+})();
+</script>
+<script>
+/* Hero background slideshow: stop-1..5.png, one every 1.5 s with a 0.6 s crossfade. Missing files are skipped. */
+(function () {
+  var hero = document.querySelector('.hero'), box = hero && hero.querySelector('.hero-slides');
+  if (!box) return;
+  var layers = box.children, urls = [1, 2, 3, 4, 5].map(function (n) { return '/images/fuerteventura-hero/stop-' + n + '.png'; });
+  var ok = [], idx = 0, top = 1, timer = null, started = false;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  function load(u) { return new Promise(function (res) { var i = new Image(); i.onload = function () { res(u); }; i.onerror = function () { res(null); }; i.src = u; }); }
+  function show(u) {
+    var next = layers[top ^ 1], prev = layers[top];
+    next.style.backgroundImage = 'url("' + u + '")';
+    next.style.zIndex = 2; prev.style.zIndex = 1;
+    next.classList.add('on');
+    hero.classList.add('has-slides');
+    top ^= 1;
+    setTimeout(function () { prev.style.transition = 'none'; prev.classList.remove('on'); void prev.offsetWidth; prev.style.transition = ''; }, 650);
+  }
+  function tick() { idx = (idx + 1) % ok.length; show(ok[idx]); }
+  function start() { if (!timer && ok.length > 1 && !reduce && !document.hidden) timer = setInterval(tick, 1500); }
+  function stop() { clearInterval(timer); timer = null; }
+  load(urls[0]).then(function (u) { if (u) { ok.push(u); show(u); } });
+  Promise.all(urls.map(load)).then(function (r) {
+    ok = r.filter(Boolean);
+    if (!ok.length) return;
+    if (!hero.classList.contains('has-slides')) show(ok[0]);
+    idx = Math.max(0, ok.indexOf(layers[top ^ 1].style.backgroundImage.replace(/^url\("|"\)$/g, '')));
+    start();
+  });
+  document.addEventListener('visibilitychange', function () { document.hidden ? stop() : start(); });
+  window.addEventListener('pagehide', stop);
 })();
 </script>
 </body>
