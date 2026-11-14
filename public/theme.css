@@ -327,3 +327,15 @@ body.wwi-lock { overflow: hidden; }
   .it-meta .mi { gap: 3px; }
 }
 @media (max-width: 379px) { .it-tags { gap: 5px; } .it-tags li { padding: 4px 8px 4px 6px; font-size: .7rem; gap: 4px; } }
+
+/* Phone hero: tighter top, compact content, more room for the photo (and the CTA sits low). */
+@media (max-width: 599px) {
+  .logo-bar-hero .wrap { height: 58px; }
+  .hero .wrap { padding-top: 54px; padding-bottom: 20px; }
+  .hero h1 { margin-top: 12px; }
+  .hero-perks { margin-top: 18px; }
+  .hero-perks svg { width: 26px; height: 26px; }
+  .hero .actions { padding-top: 14px; }
+  .hero-slides { height: 50%; -webkit-mask-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .6) 14%, #000 30%); mask-image: linear-gradient(to bottom, transparent 0, rgba(0, 0, 0, .6) 14%, #000 30%); }
+  .hero-slide { background-position: 34% 100%; }
+}
