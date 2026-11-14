@@ -41,9 +41,9 @@ test('checkout, success and resend-access stay noindex', () => {
 
 test('home page has share tags and the share image file exists', () => {
   const s = readFileSync('public/index.html', 'utf8');
-  assert.match(s, /property="og:image" content="https:\/\/[^"]+\/images\/share\.jpg"/);
+  assert.match(s, /property="og:image" content="https:\/\/[^"]+\/images\/share-fuerteventura\.jpg"/);
   assert.match(s, /name="twitter:card"/);
-  assert.ok(existsSync('public/images/share.jpg'));
+  assert.ok(existsSync('public/images/share-fuerteventura.jpg'));
 });
 
 test('the site address in sitemap, robots and share tags is the same everywhere', () => {

@@ -47,7 +47,7 @@
         var h = document.createElement('h' + m[1].length);
         h.textContent = m[2];
         box.appendChild(h);
-        if (m[1].length === 1) document.title = m[2] + ' | Worldwide Itineraries';
+        if (m[1].length === 1) document.title = m[2] + ' | Fuerteventura Itineraries';
         return;
       }
       var bullet = line.match(/^-\s+(.*)$/), num = line.match(/^\d+\.\s+(.*)$/);

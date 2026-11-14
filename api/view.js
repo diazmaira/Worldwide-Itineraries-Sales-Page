@@ -23,7 +23,7 @@ function send(res, status, html) {
 function shell(title, body) {
   return `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1"><meta name="robots" content="noindex">
-<title>${title} | Worldwide Itineraries</title>
+<title>${title} | Fuerteventura Itineraries</title>
 <style>
 body{margin:0;font-family:system-ui,"Segoe UI",sans-serif;line-height:1.6;color:#1F2427;background:#fff}
 main{max-width:560px;margin:0 auto;padding:64px 20px}
