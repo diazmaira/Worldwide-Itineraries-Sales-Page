@@ -154,7 +154,7 @@ export function buildWelcomeEmail({ name, itineraryNames, link, siteUrl, contact
 
             <p style="margin:18px 0 28px 0; font-family:Helvetica,Arial,sans-serif; font-size:15px; line-height:1.6; color:#3C5E61;">
               Warm regards,<br>
-              <strong style="color:#1F4E52;">The Worldwide Itineraries Team</strong>
+              <strong style="color:#1F4E52;">The Fuerteventura Itineraries Team</strong>
             </p>`;
 
   const html = frame({
@@ -182,7 +182,7 @@ export function buildWelcomeEmail({ name, itineraryNames, link, siteUrl, contact
     contactEmail ? `Questions? Reply to this email or write to ${contactEmail}.` : `Questions? ${siteUrl}/#contact`,
     '',
     'Warm regards,',
-    'The Worldwide Itineraries Team',
+    'The Fuerteventura Itineraries Team',
   ].join('\n');
 
   return { subject, html, text };
@@ -223,7 +223,7 @@ export function buildReviewEmail({ name, itineraryNames, reviewUrl, siteUrl }) {
 
             <p style="margin:18px 0 28px 0; font-family:Helvetica,Arial,sans-serif; font-size:15px; line-height:1.6; color:#3C5E61;">
               Warm regards,<br>
-              <strong style="color:#1F4E52;">The Worldwide Itineraries Team</strong>
+              <strong style="color:#1F4E52;">The Fuerteventura Itineraries Team</strong>
             </p>`;
 
   const html = frame({
@@ -244,7 +244,7 @@ export function buildReviewEmail({ name, itineraryNames, reviewUrl, siteUrl }) {
     'Thank you for being part of our journey!',
     '',
     'Warm regards,',
-    'The Worldwide Itineraries Team',
+    'The Fuerteventura Itineraries Team',
   ].join('\n');
 
   return { subject, html, text };
