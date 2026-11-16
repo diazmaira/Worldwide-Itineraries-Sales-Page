@@ -26,13 +26,13 @@
   .co-chip[hidden] { display: none; }
   /* Signature detail: a short underline in the itinerary's accent colour. */
   .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 10px; border-radius: 2px; background: var(--id); }
-  /* Hero metadata: duration and location in one quiet row */
-  .co-sub { margin: 10px 0 0; font-size: clamp(1rem, 4.2vw, 1.2rem); font-weight: 400; line-height: 1.4; color: var(--muted); }
-  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 10px 0 0; padding: 0; list-style: none; font-size: .72rem; font-weight: 400; line-height: 1.2; color: var(--forest); }
-  .co-attrs li { display: inline-flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
-  .co-attrs li + li::before { content: ''; width: 1px; height: 14px; margin: 0 12px; background: var(--forest); opacity: .25; flex: none; }
-  .co-attrs svg { width: 14.4px; height: 14.4px; flex: none; color: var(--id); }
-  @media (max-width: 359px) { .co-attrs { flex-wrap: wrap; row-gap: 6px; } .co-attrs li { white-space: normal; } .co-attrs li + li::before { display: none; } .co-attrs li:first-child { margin-right: 16px; } }
+  /* Hero metadata: duration and location across the full width (larger than the price box text) */
+  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 10px 0 0; padding: 0; list-style: none; font-size: clamp(.86rem, 3.9vw, .98rem); font-weight: 400; line-height: 1.2; color: var(--forest); }
+  .co-attrs { width: 100%; }
+  .co-attrs li { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px; min-width: 0; padding: 2px 0; white-space: nowrap; }
+  .co-attrs li + li { flex: 1 1 0; margin-left: 14px; padding-left: 14px; white-space: normal; line-height: 1.2; border-left: 1px solid rgba(23, 63, 58, .22); }
+  .co-attrs svg { width: 17px; height: 17px; flex: none; color: var(--id); }
+  @media (max-width: 359px) { .co-attrs li { white-space: normal; text-align: left; } }
   /* Photo gallery */
   .co-gallery { position: relative; width: min(100%, 680px); margin-top: 16px; }
   .co-gallery[hidden] { display: none; }
@@ -211,7 +211,6 @@
   <div class="wrap" id="hero-wrap">
     <h1 id="hero-title"></h1>
     <span class="co-accent" id="accent" aria-hidden="true"></span>
-    <p class="co-sub" id="hero-sub" hidden></p>
     <ul class="co-attrs" id="attrs"></ul>
     <div class="co-gallery" id="gallery" role="region" aria-roledescription="carousel" hidden>
       <div class="co-track" id="g-track" tabindex="0"></div>
@@ -324,7 +323,6 @@
     rs.setProperty('--id-tint', 'color-mix(in srgb, ' + theme.color + ' 13%, #fff)');
     if (theme.sand) rs.setProperty('--id-sand', theme.sand);
   }
-  if (main.subtitle) { $('hero-sub').textContent = main.subtitle; $('hero-sub').hidden = false; }
   [['clock', 'Duration', main.duration], ['pin', 'Location', main.location]].forEach(([ic, label, value]) => {
     if (!value) return;
     $('attrs').append(el('li', '', icon(ic) + '<span class="sr-only">' + label + ': </span><span>' + esc(value) + '</span>'));
@@ -368,7 +366,7 @@
   if ((main.route || []).length) {
     main.route.forEach((s) => {
       const o = typeof s === 'string' ? { label: s } : s;
-      const svg = o.icon && ROUTE_ICONS[o.icon] ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + ROUTE_ICONS[o.icon] + '</svg>' : '';
+      const svg = (o.svg || (o.icon && ROUTE_ICONS[o.icon])) ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + (o.svg || ROUTE_ICONS[o.icon]) + '</svg>' : '';
       $('route-list').append(el('li', '', svg + esc(o.label)));
     });
     $('sec-route').hidden = false;

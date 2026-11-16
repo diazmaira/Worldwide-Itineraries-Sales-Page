@@ -15,6 +15,8 @@
    category: a key of WWI_CATEGORIES below (the single place where category labels and colours live), used by the cards and the order rows. blurb: one-line description for those cards.
    video: paste a YouTube, Vimeo or .mp4 link to show the promo video; '' shows the placeholder. */
 (function (w) {
+  /* The same "What's included" list is shown on every itinerary page. */
+  const INCLUDES = ['Your digital self-guided itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a sketch map', 'What to do at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'];
   /* Category colour system. Brand green is reserved for the Add / Added buttons; these colours only identify itineraries. */
   w.WWI_CATEGORIES = {
     ocean:  { label: 'Ocean & Coast',        color: '#1976D2' },
@@ -35,8 +37,8 @@
       location: 'Fuerteventura North', duration: '6 hours', distance: '≈ 50 km by car', stops: 5, transport: 'Car required',
       budget: { title: 'Estimated budget', rows: [['Car rental', '€40'], ['Fuel', '€20'], ['Food & drinks (optional)', '€25/person']], withFood: '€110', popNote: 'Approximate costs. Food and drinks are optional.', label: 'Estimated transport budget', amount: '€60', unit: 'For 2 people · 1 day', breakdown: ['Car rental (1 day): approximately €40', 'Fuel for the day: approximately €20', 'Food and drinks: approximately €25 per person, optional, at one of our recommended places'], note: 'The estimated €60 transport budget covers car rental and fuel for two people. Food and drinks are not included.', total: 'Estimated total including food for two people: approximately €110.' },
       extra: [{ label: 'Offline', value: 'Downloadable PDF that works without signal' }],
-      route: [{ label: 'Sand Dunes', icon: 'dunes' }, { label: 'Volcano', icon: 'volcano' }, { label: 'Fishing Village', icon: 'boat' }, { label: 'Lighthouse', icon: 'lighthouse' }, { label: 'Sunset', icon: 'sun' }, { label: 'Natural Pools', icon: 'drop' }],
-      includes: ['Your digital self-guided itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a sketch map', 'What to do at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'],
+      route: [{ label: 'Dunes', svg: '<path d="M3 17c3-6 6-8 9-4s6 1 9-4"/><path d="M3 21h18"/>' }, { label: 'Volcano', svg: '<path d="M3 20 9 7h6l6 13z"/><path d="M9 7l1.5 2h3L15 7"/>' }, { label: 'Lagoons', svg: '<path d="M12 3s6 6.5 6 11a6 6 0 0 1-12 0c0-4.5 6-11 6-11z"/>' }, { label: 'Fishing Village', svg: '<path d="M12 4a2 2 0 1 0 0 .01"/><path d="M12 8v13M8 12h8M5 15c0 3 3 6 7 6s7-3 7-6"/>' }, { label: 'Sunset', svg: '<path d="M3 18h18"/><path d="M7 18a5 5 0 0 1 10 0"/><path d="M12 7v3M5 11l2 2M19 11l-2 2"/>' }, { label: 'Lighthouse', icon: 'lighthouse' }],
+      includes: INCLUDES,
       beforeYouGo: ['Download Google Maps for offline use', 'Bring enough drinking water', 'Wear comfortable walking shoes', 'Bring swimwear and a towel', 'Bring a camera and spare batteries', 'Respect nature and stay on the marked paths'],
       overview: ['A full day through the north of the island, from golden dunes and volcanic landscapes to coastal viewpoints and a local lunch stop. Every stop comes with timing, parking and a Google Maps link.'] },
     { id: 'rural', destination: 'Fuerteventura', highlights: ['Villaverde', 'La Oliva', 'Tefía'], name: 'The Rural Heart', price: 8,
@@ -47,8 +49,9 @@
       location: 'Interior of Fuerteventura', duration: '1 full day', distance: '≈ 60 km by car', stops: 5, transport: 'Car required',
       budget: { title: 'Estimated budget', rows: [['Car rental', '€40'], ['Fuel', '€20'], ['Ecomuseo de La Alcogida tickets', '€5/person']], popNote: 'Approximate costs. Food and drinks are not included.', label: 'Estimated budget', amount: '€70', unit: 'For 2 people · 1 day', breakdown: ['Car rental (1 day): approximately €40', 'Fuel for the day: approximately €20', 'Ecomuseo de La Alcogida tickets: €5 per person (€10)'], note: 'The estimated €70 covers car rental, fuel and tickets for two people. Food and drinks are not included.' },
       extra: [{ label: 'Best days', value: 'Tuesday to Saturday' }, { label: 'Offline', value: 'Downloadable PDF that works without signal' }],
-      route: ['Villaverde', 'La Oliva', 'Tefía', 'Ecomuseo de La Alcogida', 'Puertito de los Molinos'],
-      includes: ['Your digital itinerary, delivered by email with a private link (valid for 30 days)', 'A selected route with 5 stops and suggested timings', 'Stop locations with Google Maps links and a route map', 'What to see at each stop, with local tips', 'A read-aloud option for each stop', 'Practical tips and an estimated budget', 'A PDF you can save for offline use'],
+      route: [{ label: 'Architecture', svg: '<path d="M4 20V10l8-6 8 6v10"/><path d="M9 20v-5a3 3 0 0 1 6 0v5"/><path d="M3 20h18"/>' }, { label: 'Heritage', svg: '<path d="M7 21v-6M7 15c-3 0-4-3-4-5 2 0 4 1 4 5zM7 15c3 0 4-3 4-5-2 0-4 1-4 5z"/><path d="M17 21v-8M17 13c-3 0-5-3-5-6 3 0 5 2 5 6zM17 13c3 0 5-3 5-6-3 0-5 2-5 6z"/>' }, { label: 'Villages', svg: '<path d="M3 20h18"/><path d="M4.5 20v-8l5-4 5 4v8"/><path d="M16 20v-6h3.5v6"/>' }, { label: 'Landscapes', svg: '<path d="M2 19 9 6l4 7 3-4.5L22 19z"/>' }],
+      gallery: { folder: 'images/itineraries/fuerteventura/the-rural-heart/', count: 10 },
+      includes: INCLUDES,
       beforeYouGo: ['Water and snacks', 'Sun hat and sunscreen', 'A light jacket for the wind', 'Cash for small shops', 'Phone charger for the car', 'Walking shoes for the cliffs'],
       overview: ["Leave the coast behind and drive through the villages, valleys and hills of the island's interior. Expect quiet viewpoints, traditional food and the slower side of Fuerteventura, away from the crowds."] },
     { id: 'windmills', destination: 'Fuerteventura', highlights: ['Traditional windmills', 'Photo stops', 'Small villages'], name: 'Spot the Windmills', price: 8,
@@ -57,7 +60,9 @@
       cover: 'images/cover-windmills.jpg', video: '',
       place: 'Fuerteventura · Canary Islands', theme: { label: 'Scenic & Slow Travel', color: '#C9962B', sand: '#EBDDB8' }, audience: ['Photography lovers', 'Couples', 'Independent travellers'],
       location: 'Fuerteventura', transport: 'Car required',
-      includes: ['Your digital itinerary, delivered by email with a private link (valid for 30 days)'],
+      gallery: { folder: 'images/itineraries/fuerteventura/spot-the-windmills/', count: 10 },
+      route: [{ label: 'Windmills', svg: '<path d="M9 21 10.5 11h3L15 21z"/><path d="M12 11 5 5M12 11l7-6M12 11l-6 4M12 11l6 4"/>' }, { label: 'Countryside', svg: '<path d="M2 18c4-5 8-5 11-1s6 2 9-2"/><path d="M3 21h18"/><circle cx="17" cy="7" r="2.5"/>' }, { label: 'Villages', svg: '<path d="M3 20h18"/><path d="M4.5 20v-8l5-4 5 4v8"/><path d="M16 20v-6h3.5v6"/>' }, { label: 'Landscapes', svg: '<path d="M2 19 9 6l4 7 3-4.5L22 19z"/>' }],
+      includes: INCLUDES,
       overview: ["Follow the traditional windmills that mark the island's landscape and learn the story behind them. A relaxed driving day that mixes photo stops, small villages and local flavours."] }
   ];
 })(typeof window !== 'undefined' ? window : globalThis);
