@@ -180,10 +180,10 @@
   .about .closing { margin-top: 22px; font-family: var(--display); font-weight: 700; font-size: clamp(1.4rem, 2.8vw, 2rem); letter-spacing: -0.02em; line-height: 1.15; }
 
   /* ===== FAQ ===== */
-  .faq-list { margin-top: 28px; max-width: 900px; }
-  .faq-list details { background: var(--white); border-radius: 18px; box-shadow: var(--shadow-sm); padding: 18px 22px; margin-top: 14px; }
-  .faq-list summary { font-family: var(--display); font-weight: 700; font-size: 1.2rem; cursor: pointer; }
-  .faq-list p { margin-top: 10px; max-width: 720px; color: var(--muted); }
+  .faq-list { margin-top: 24px; max-width: 810px; }
+  .faq-list details { background: var(--white); border-radius: 18px; box-shadow: var(--shadow-sm); padding: 16px 20px; margin-top: 12px; }
+  .faq-list summary { font-family: var(--display); font-weight: 400; font-size: 1.08rem; cursor: pointer; }
+  .faq-list p { margin-top: 9px; max-width: 650px; font-size: .9em; color: var(--muted); }
 
   /* ===== Contact ===== */
   .contact { background: var(--sand); }
@@ -299,8 +299,8 @@ body.wwi-lock { overflow: hidden; }
 .pc-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1px; min-height: 0; }
 .pc-row > div { aspect-ratio: 1 / 1; }
 .pc-main img, .pc-row img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
-.it-info { container-type: inline-size; position: relative; isolation: isolate; display: flex; flex: none; flex-direction: column; gap: 20px; min-width: 0; padding: 26px 20px 24px; }
-.it-wave { position: absolute; z-index: -1; right: -4%; bottom: -16px; width: 108%; max-width: none; height: auto; pointer-events: none; user-select: none; }
+.it-info { container-type: inline-size; position: relative; isolation: isolate; display: flex; flex: none; flex-direction: column; gap: 12px; min-width: 0; padding: 22px 20px 0; }
+.it-wave { position: absolute; z-index: -1; left: 0; bottom: 0; width: 100%; max-width: none; height: 86px; object-fit: cover; object-position: 70% 100%; pointer-events: none; user-select: none; }
 .it-info h3.it-title { margin: 0; font-family: var(--display); font-weight: 700; font-size: clamp(1.3rem, 9.4cqi, 2.4rem); line-height: 1.1; letter-spacing: -.015em; white-space: nowrap; color: var(--ink); }
 /* Location attributes: one line, regular weight, thin separators, no pills. */
 .it-tags { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: nowrap; justify-content: space-between; align-items: center; font-size: clamp(.6rem, 3.2cqi, .86rem); font-weight: 400; color: var(--ink); }
@@ -309,8 +309,8 @@ body.wwi-lock { overflow: hidden; }
 .it-tags li:last-child { padding-right: 0; }
 .it-tags li + li { border-left: 1px solid color-mix(in srgb, var(--ink) 22%, transparent); }
 .it-tags svg { width: 1.45em; height: 1.45em; flex: none; color: var(--ink); }
-.it-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 2px; }
-.it-meta { flex: 1; display: flex; align-items: center; flex-wrap: nowrap; min-width: 0; padding-top: 18px; border-top: 1px solid color-mix(in srgb, var(--stone) 30%, transparent); font-size: clamp(.6rem, 3.5cqi, .95rem); font-weight: 400; color: var(--ink); }
+.it-bottom { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 6px; padding-bottom: 18px; }
+.it-meta { flex: 1; display: flex; align-items: center; flex-wrap: nowrap; min-width: 0; padding-top: 0; font-size: clamp(.6rem, 3.5cqi, .95rem); font-weight: 400; color: var(--ink); }
 .it-meta .mi { display: inline-flex; align-items: center; gap: .35em; white-space: nowrap; }
 .it-meta .mi + .mi { padding-left: .8em; margin-left: .8em; border-left: 1px solid color-mix(in srgb, var(--stone) 45%, transparent); line-height: 1.2; }
 .it-meta .mi svg { width: 1.25em; height: 1.25em; flex: none; color: var(--ink); }
@@ -321,7 +321,7 @@ body.wwi-lock { overflow: hidden; }
 .it-card:hover .it-arrow { transform: translateX(3px); }
 /* Phones/tablets: tighter spacing under the collage. */
 @media (max-width: 899px) {
-  .it-info { gap: 18px; padding-top: 24px; }
+  .it-info { gap: 10px; padding-top: 20px; }
 }
 @media (min-width: 900px) {
   .it-list { max-width: none; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 22px; }
