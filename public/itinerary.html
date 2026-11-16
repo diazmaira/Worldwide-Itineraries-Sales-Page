@@ -21,23 +21,20 @@
   /* Itinerary identity: set from the itinerary's theme (see itineraries-data.js). Defaults keep the brand green. */
   :root { --id: var(--forest); --id-ink: var(--forest); --id-tint: rgba(23, 63, 58, .08); --id-sand: var(--sand); }
   .co-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-  .co-hero h1 { font-size: clamp(1.7rem, 8.9vw, 3.4rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 18px; white-space: nowrap; overflow-x: clip; }
-  /* Product classification: this is a digital, self-guided itinerary, not a tour with a guide. */
-  .co-pill { display: inline-flex; align-items: center; gap: 6px; padding: 4px 11px 4px 9px; border: 1px solid var(--forest); border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--forest); }
-  .co-pill svg { width: 14px; height: 14px; }
+  .co-hero h1 { font-size: clamp(1.7rem, 8.9vw, 3.4rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 0; white-space: nowrap; overflow-x: clip; }
   .co-chip { padding: 5px 11px; border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--id-ink); background: var(--id-tint); }
   .co-chip[hidden] { display: none; }
   /* Signature detail: a short underline in the itinerary's accent colour. */
-  .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 14px; border-radius: 2px; background: var(--id); }
+  .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 10px; border-radius: 2px; background: var(--id); }
   /* Hero metadata: duration and location in one quiet row */
-  .co-sub { margin: 14px 0 0; font-size: clamp(1rem, 4.2vw, 1.2rem); font-weight: 400; line-height: 1.4; color: var(--muted); }
-  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 16px 0 0; padding: 0; list-style: none; font-size: .72rem; font-weight: 400; line-height: 1.2; color: var(--forest); }
+  .co-sub { margin: 10px 0 0; font-size: clamp(1rem, 4.2vw, 1.2rem); font-weight: 400; line-height: 1.4; color: var(--muted); }
+  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 10px 0 0; padding: 0; list-style: none; font-size: .72rem; font-weight: 400; line-height: 1.2; color: var(--forest); }
   .co-attrs li { display: inline-flex; align-items: center; gap: 6px; min-width: 0; white-space: nowrap; }
   .co-attrs li + li::before { content: ''; width: 1px; height: 14px; margin: 0 12px; background: var(--forest); opacity: .25; flex: none; }
   .co-attrs svg { width: 14.4px; height: 14.4px; flex: none; color: var(--id); }
   @media (max-width: 359px) { .co-attrs { flex-wrap: wrap; row-gap: 6px; } .co-attrs li { white-space: normal; } .co-attrs li + li::before { display: none; } .co-attrs li:first-child { margin-right: 16px; } }
   /* Photo gallery */
-  .co-gallery { position: relative; width: min(100%, 680px); margin-top: 26px; }
+  .co-gallery { position: relative; width: min(100%, 680px); margin-top: 16px; }
   .co-gallery[hidden] { display: none; }
   .co-track { display: flex; overflow-x: auto; scroll-snap-type: x mandatory; scrollbar-width: none; border-radius: 14px; background: var(--sage); -webkit-overflow-scrolling: touch; }
   .co-track::-webkit-scrollbar { display: none; }
@@ -48,7 +45,7 @@
   .co-gnav.prev { left: 10px; } .co-gnav.next { right: 10px; }
   .co-gnav:disabled { opacity: 0; pointer-events: none; }
   @media (hover: hover) and (pointer: fine) { .co-gnav { display: grid; place-items: center; } .co-gnav[hidden] { display: none; } }
-  .co-dots { display: flex; justify-content: center; gap: 6px; margin-top: 10px; }
+  .co-dots { display: flex; justify-content: center; gap: 6px; margin-top: 8px; }
   .co-dots button { width: 7px; height: 7px; padding: 0; border: 0; border-radius: 50%; background: var(--line); cursor: pointer; transition: background .2s, transform .2s; }
   .co-dots button.on { background: var(--id); transform: scale(1.25); }
   .co-rec { margin-top: 22px; }
@@ -102,12 +99,29 @@
   .co-info::after { content: ''; position: absolute; inset: -8px; }
   .co-info[aria-expanded="true"] { background: var(--id); color: #fff; }
   .co-info:focus-visible { outline: 2px solid var(--id); outline-offset: 2px; }
-  .co-bud { grid-column: 2; margin-top: 10px; padding: 14px 16px; border-radius: 12px; background: var(--id-sand); animation: co-fade .2s ease; }
-  .co-bud[hidden] { display: none; }
-  .co-bud h3 { margin: 0 0 8px; }
-  .co-bud ul { margin: 0 0 10px; padding-left: 18px; font-size: .885rem; line-height: 1.5; color: var(--forest); }
-  .co-bud p { margin: 0 0 6px; font-size: .84rem; line-height: 1.5; max-width: none; color: var(--muted); }
-  .co-bud p.tot { color: var(--forest); font-weight: 600; margin-bottom: 0; }
+  .co-sec .co-perfect .co-h { margin: 0 0 8px; font-size: .68rem; font-weight: 500; letter-spacing: .1em; color: var(--muted); }
+  .co-pop { position: fixed; z-index: 70; box-sizing: border-box; width: 320px; max-width: calc(100vw - 24px); padding: 16px 18px 14px; border-radius: 14px; background: var(--id-sand); color: var(--forest); box-shadow: 0 12px 34px rgba(14, 36, 33, .22); animation: co-fade .18s ease; }
+  .co-pop[hidden], .co-scrim[hidden] { display: none; }
+  .co-pop-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .co-pop h3 { margin: 0; font-size: 1.15rem; line-height: 1.2; }
+  .co-pop p { margin: 0; max-width: none; }
+  .co-pop-sub { margin-top: 2px !important; font-size: .82rem; color: var(--muted); }
+  .co-pop-x { width: 32px; height: 32px; margin: -6px -8px 0 0; flex: none; display: grid; place-items: center; border: 0; border-radius: 50%; background: rgba(255, 255, 255, .55); color: var(--forest); font-size: 1.3rem; line-height: 1; cursor: pointer; }
+  .co-pop-x:focus-visible { outline: 2px solid var(--id); outline-offset: 2px; }
+  .co-pop-rows { margin: 10px 0 0; padding: 0; list-style: none; font-size: .88rem; }
+  .co-pop-rows li { display: flex; justify-content: space-between; gap: 14px; padding: 7px 0; border-top: 1px solid color-mix(in srgb, var(--forest) 14%, transparent); }
+  .co-pop-rows li.th { border-top: 0; padding: 0 0 5px; font-size: .66rem; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; color: var(--muted); }
+  .co-pop-rows b { font-weight: 600; text-align: right; white-space: nowrap; }
+  .co-pop-tot { margin-top: 2px; padding-top: 6px; border-top: 1.5px solid color-mix(in srgb, var(--forest) 30%, transparent); }
+  .co-pop-tot p { display: flex; justify-content: space-between; gap: 14px; padding: 4px 0; font-size: .9rem; font-weight: 600; }
+  .co-pop-tot b { font-family: var(--display); font-size: 1.05rem; font-weight: 800; white-space: nowrap; }
+  .co-pop-note { margin-top: 8px !important; font-size: .76rem; color: var(--muted); }
+  .co-scrim { position: fixed; z-index: 65; inset: 0 0 calc(var(--bar-h) + env(safe-area-inset-bottom)) 0; background: rgba(14, 36, 33, .38); animation: co-fade .18s ease; }
+  @media (max-width: 699px) {
+    /* Bottom sheet that rests on top of the sticky pay bar, so the bar stays visible and usable. */
+    .co-pop { left: 0 !important; right: 0; top: auto !important; bottom: calc(var(--bar-h) + env(safe-area-inset-bottom)); width: auto; max-width: none; border-radius: 20px 20px 0 0; padding: 18px 18px 16px; animation: co-sheet .22s ease; }
+  }
+  @keyframes co-sheet { from { transform: translateY(24px); opacity: 0; } to { transform: none; opacity: 1; } }
   @media (pointer: coarse) { .co-info { width: 32px; height: 32px; } }
 
   @keyframes co-fade { from { opacity: 0; transform: translateY(4px); } to { opacity: 1; transform: none; } }
@@ -193,7 +207,6 @@
 <!-- 1. Selected itinerary -->
 <section class="co-hero" id="top">
   <div class="wrap" id="hero-wrap">
-    <div class="co-top"><span class="co-pill" id="pill"></span></div>
     <h1 id="hero-title"></h1>
     <span class="co-accent" id="accent" aria-hidden="true"></span>
     <p class="co-sub" id="hero-sub" hidden></p>
@@ -204,10 +217,6 @@
       <button type="button" class="co-gnav next" id="g-next" aria-label="Next photo">&#8250;</button>
       <span class="co-gcount" id="g-count" aria-hidden="true"></span>
       <div class="co-dots" id="g-dots"></div>
-    </div>
-    <div class="co-rec" id="rec" hidden>
-      <h2 class="co-h" id="rec-title">Recommended for</h2>
-      <ul class="co-tags co-tags-rec" id="labels-who" aria-labelledby="rec-title"></ul>
     </div>
   </div>
 </section>
@@ -309,8 +318,6 @@
     if (theme.sand) rs.setProperty('--id-sand', theme.sand);
   }
   if (main.subtitle) { $('hero-sub').textContent = main.subtitle; $('hero-sub').hidden = false; }
-  $('pill').innerHTML = icon('compass') + 'Self-guided';
-  $('pill').title = 'A digital itinerary you follow yourself. There is no tour guide.';
   [['clock', 'Duration', main.duration], ['pin', 'Location', main.location]].forEach(([ic, label, value]) => {
     if (!value) return;
     $('attrs').append(el('li', '', icon(ic) + '<span class="sr-only">' + label + ': </span><span>' + esc(value) + '</span>'));
@@ -324,8 +331,7 @@
     'couples': '<path d="M12 20s-7.5-4.6-7.5-10A4.3 4.3 0 0 1 12 7.2 4.3 4.3 0 0 1 19.5 10c0 5.4-7.5 10-7.5 10z"/>',
     'adventure seekers': '<path d="M3 19l6.500-11 4 6.500L16 11l5 8z"/>'
   };
-  (main.audience || []).forEach((a) => $('labels-who').append(el('li', '', (AUD[a.toLowerCase()] ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + AUD[a.toLowerCase()] + '</svg>' : '') + esc(a))));
-  $('rec').hidden = !(main.audience || []).length;
+  const audLis = (main.audience || []).map((a) => el('li', '', (AUD[a.toLowerCase()] ? '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">' + AUD[a.toLowerCase()] + '</svg>' : '') + esc(a)));
 
   /* Price box. The rating only shows when real review data exists on the itinerary (main.reviews). */
   $('hero-price').textContent = euro(main.price);
@@ -371,31 +377,55 @@
   const item = (ic, label, valueHtml, cls, after) => '<div class="co-item">' + icon(ic, 'ic') + '<dt>' + label + '</dt><dd' + (cls ? ' class="' + cls + '"' : '') + '>' + valueHtml + '</dd>' + (after || '') + '</div>';
   const group = (html, cls) => { if (html) $('details').append(el('dl', cls, html)); };
   group(rows.filter((r) => r[2]).map(([ic, label, value]) => item(ic, label, esc(value))).join(''), 'co-glance');
-  /* Budget: one compact line (amount, people, days); the breakdown opens in an expandable panel (works by tap, not hover). */
+  /* Budget: compact (amount, people, days) + info button. The breakdown opens in a bottom sheet (phones) or a small popover (desktop). */
   const bd = main.budget;
-  let panel = null;
   if (bd && bd.amount) {
-    const list = (bd.breakdown || []).map((l) => '<li>' + esc(l) + '</li>').join('');
     const unit = String(bd.unit || '').replace(/^For\s+/i, '');
-    group(item('euro', 'Budget',
+    group(item('euro', bd.title || 'Estimated transport cost',
       '<span class="co-bud-v"><strong>' + esc(bd.amount) + '</strong>' + (unit ? '<small>&middot; ' + esc(unit) + '</small>' : '') +
-      '<button type="button" class="co-info" id="bud-btn" aria-expanded="false" aria-controls="bud-panel" aria-label="Show budget breakdown">i</button></span>', '',
-      '<div class="co-bud" id="bud-panel" role="region" aria-label="Budget breakdown" hidden><h3>Budget breakdown</h3>' +
-      (list ? '<ul>' + list + '</ul>' : '') + (bd.note ? '<p>' + esc(bd.note) + '</p>' : '') + (bd.total ? '<p class="tot">' + esc(bd.total) + '</p>' : '') + '</div>'), 'co-sep');
-    const btn = $('bud-btn'); panel = $('bud-panel');
-    btn.addEventListener('click', () => {
-      const open = btn.getAttribute('aria-expanded') !== 'true';
+      '<button type="button" class="co-info" id="bud-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="bud-pop" aria-label="Show estimated costs">i</button></span>'), 'co-sep');
+    const rowsHtml = (bd.rows || []).map((r) => '<li><span>' + esc(r[0]) + '</span><b>' + esc(r[1]) + '</b></li>').join('');
+    const pop = el('div', 'co-pop', '<div class="co-pop-head"><div><h3 id="bud-title">Estimated Costs</h3>' + (unit ? '<p class="co-pop-sub">For ' + esc(unit) + '</p>' : '') + '</div>' +
+      '<button type="button" class="co-pop-x" id="bud-x" aria-label="Close">&times;</button></div>' +
+      (rowsHtml ? '<ul class="co-pop-rows"><li class="th"><span>Expense</span><b>Estimated cost</b></li>' + rowsHtml + '</ul>' : '') +
+      '<div class="co-pop-tot"><p><span>Estimated transport total</span><b>' + esc(bd.amount) + '</b></p>' + (bd.withFood ? '<p><span>Estimated total with food for two</span><b>' + esc(bd.withFood) + '</b></p>' : '') + '</div>' +
+      '<p class="co-pop-note">' + esc(bd.popNote || 'Approximate costs.') + '</p>');
+    pop.id = 'bud-pop'; pop.setAttribute('role', 'dialog'); pop.setAttribute('aria-modal', 'false'); pop.setAttribute('aria-labelledby', 'bud-title'); pop.hidden = true;
+    const scrim = el('div', 'co-scrim'); scrim.hidden = true;
+    document.body.append(scrim, pop);
+    const btn = $('bud-btn'), phone = window.matchMedia('(max-width: 699px)');
+    const place = () => {
+      if (phone.matches) { const bh = innerHeight - document.querySelector('.co-bar').getBoundingClientRect().top; pop.style.left = pop.style.top = ''; pop.style.bottom = scrim.style.bottom = bh + 'px'; return; }
+      pop.style.bottom = '';
+      const r = btn.getBoundingClientRect(), w = pop.offsetWidth, h = pop.offsetHeight;
+      let left = Math.min(Math.max(12, r.left + r.width / 2 - w / 2), innerWidth - w - 12);
+      let top = r.bottom + 10; if (top + h > innerHeight - 12) top = Math.max(12, r.top - h - 10);
+      pop.style.left = left + 'px'; pop.style.top = top + 'px';
+    };
+    const setOpen = (open) => {
+      pop.hidden = !open; scrim.hidden = !open || !phone.matches;
       btn.setAttribute('aria-expanded', String(open));
-      btn.setAttribute('aria-label', open ? 'Hide budget breakdown' : 'Show budget breakdown');
-      panel.hidden = !open;
-    });
-    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !panel.hidden) { btn.click(); btn.focus(); } });
+      if (open) { place(); $('bud-x').focus({ preventScroll: true }); } else btn.focus({ preventScroll: true });
+    };
+    btn.addEventListener('click', () => setOpen(pop.hidden));
+    $('bud-x').addEventListener('click', () => setOpen(false));
+    scrim.addEventListener('click', () => setOpen(false));
+    document.addEventListener('click', (e) => { if (!pop.hidden && !pop.contains(e.target) && !btn.contains(e.target)) setOpen(false); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape' && !pop.hidden) setOpen(false); });
+    window.addEventListener('scroll', () => { if (!pop.hidden && !phone.matches) place(); }, { passive: true });
+    window.addEventListener('resize', () => { if (!pop.hidden) { scrim.hidden = !phone.matches; place(); } });
   }
   (main.extra || []).forEach((x) => {
     if (!x.value) return;
     if (x.label === 'Offline') group(item('download', 'Offline-ready PDF', 'Works without an internet connection', 'soft'), 'co-sep');
     else group(item('calendar', esc(x.label), esc(x.value)), 'co-sep');
   });
+  /* Perfect for: small chips inside At a glance (no separate section). */
+  if (audLis.length) {
+    const wrap = el('div', 'co-sep co-perfect', '<p class="co-h" id="perfect-title">Perfect for</p>');
+    const ul = el('ul', 'co-tags co-tags-rec'); ul.setAttribute('aria-labelledby', 'perfect-title');
+    audLis.forEach((li) => ul.append(li)); wrap.append(ul); $('details').append(wrap);
+  }
   if ($('details').children.length) $('sec-details').hidden = false;
 
   /* Section numbers follow the sections that exist, in page order. Titles are fixed so every itinerary reads the same. */
