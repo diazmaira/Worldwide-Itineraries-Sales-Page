@@ -86,6 +86,33 @@
 
   function catColor(it) { var c = (w.WWI_CATEGORIES || {})[it && it.category]; return c ? c.color : ''; }
 
+  var X_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>';
+  var LOCK_ICON = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="5" y="11" width="14" height="9" rx="2"/><path d="M8 11V8a4 4 0 0 1 8 0v3"/></svg>';
+  store.xIcon = X_ICON; store.lockIcon = LOCK_ICON;
+
+  /* The one itinerary row used by the My itineraries panel and by Review & Checkout. */
+  store.itemEl = function (id, onRemove) {
+    var it = byId[id];
+    var li = el('li', 'wwi-item');
+    li.style.setProperty('--acc', (it.theme && it.theme.color) || catColor(it) || '');
+    var th = el('div', 'wwi-thumb');
+    var img = document.createElement('img');
+    img.alt = ''; img.loading = 'lazy';
+    var tried = false;
+    img.addEventListener('error', function () { if (!tried && it.cover) { tried = true; img.src = it.cover; } else { img.remove(); } });
+    img.src = 'images/fuerteventura/' + id + '/card-1.jpg';
+    th.append(img);
+    var name = el('span', 'wwi-txt', it.name);
+    var price = el('span', 'wwi-price', store.euro(it.price));
+    var rm = el('button', 'wwi-rm');
+    rm.type = 'button';
+    rm.innerHTML = X_ICON;
+    rm.setAttribute('aria-label', 'Remove ' + it.name);
+    rm.addEventListener('click', function () { onRemove(id); });
+    li.append(th, name, price, rm);
+    return li;
+  };
+
   function init() {
     document.querySelectorAll('[data-item]').forEach(function (n) { var it = byId[n.getAttribute('data-item')]; if (it) n.style.setProperty('--cat', catColor(it)); });
     var header = document.querySelector('.site-header');
@@ -107,9 +134,10 @@
     drawer.hidden = true;
 
     var head = el('div', 'wwi-head');
-    var title = el('h2', null, 'Your selected itineraries');
+    var title = el('h2', null, 'My itineraries');
     title.id = 'wwi-title';
-    var close = el('button', 'wwi-close', '×');
+    var close = el('button', 'wwi-close');
+    close.innerHTML = X_ICON;
     close.type = 'button';
     close.setAttribute('aria-label', 'Close');
     head.append(title, close);
@@ -128,7 +156,10 @@
     totalRow.append(totalLabel, totalVal);
     var go = el('a', 'btn wwi-go', 'Continue to checkout');
     go.href = 'checkout.html';
-    foot.append(totalRow, go);
+    var secure = el('p', 'wwi-secure');
+    secure.innerHTML = LOCK_ICON;
+    secure.append('Secure payment with Stripe');
+    foot.append(totalRow, go, secure);
 
     drawer.append(head, list, empty, foot);
     document.body.append(overlay, drawer);
@@ -139,27 +170,9 @@
       counter.textContent = 'My itineraries (' + ids.length + ')';
       counter.setAttribute('aria-label', 'My itineraries, ' + ids.length + ' selected');
       list.replaceChildren();
-      ids.forEach(function (id) {
-        var it = byId[id];
-        var li = el('li');
-        li.style.setProperty('--cat', catColor(it));
-        var th = el('div', 'wwi-thumb');
-        var img = document.createElement('img');
-        img.alt = ''; img.loading = 'lazy';
-        img.addEventListener('error', function () { img.remove(); });
-        img.src = it.cover;
-        th.append(img);
-        var txt = el('div', 'wwi-txt');
-        txt.append(el('strong', null, it.name), el('span', null, store.euro(it.price)));
-        var rm = el('button', 'wwi-rm', '×');
-        rm.type = 'button';
-        rm.setAttribute('aria-label', 'Remove ' + it.name);
-        rm.addEventListener('click', function () { store.remove(id); });
-        li.append(th, txt, rm);
-        list.append(li);
-      });
+      ids.forEach(function (id) { list.append(store.itemEl(id, function (x) { store.remove(x); })); });
       var has = ids.length > 0;
-      list.hidden = !has; empty.hidden = has; totalRow.hidden = !has; go.hidden = !has;
+      list.hidden = !has; empty.hidden = has; totalRow.hidden = !has; go.hidden = !has; secure.hidden = !has;
       totalVal.textContent = store.euro(store.total(ids));
     }
 
