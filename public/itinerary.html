@@ -127,11 +127,11 @@
   .co-list.plain li { grid-template-columns: 10px minmax(0, 1fr); align-items: baseline; }
   .co-list.plain li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--id); transform: translateY(-2px); }
   /* Price box */
-  /* Price block shares the hero's background (sand band that continues the photo area). */
-  .co-aside { position: relative; isolation: isolate; padding: 6px 0 26px; }
+  /* White price card on the hero's sand band (the band continues the photo area behind it). */
+  .co-aside { position: relative; isolation: isolate; padding: 4px 0 22px; }
   .co-aside::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--sand); border-radius: 0 0 26px 26px; }
   .co-detail { overflow-x: clip; }
-  .co-buy { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px 18px; padding: 4px 6px 0; background: transparent; }
+  .co-buy { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px 18px; padding: 18px 20px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm); }
   .co-price { font-family: var(--display); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--forest); }
   .co-rating { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: .88rem; color: var(--muted); }
   .co-rating svg { width: 16px; height: 16px; color: #E0A526; }
