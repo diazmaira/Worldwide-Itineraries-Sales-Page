@@ -70,7 +70,7 @@
   /* Editorial sections: thin sand divider, a small terracotta number, one prominent title. No background changes. */
   /* One heading system for every section: a small terracotta number stacked over one prominent title. */
   .co-sec { margin-top: clamp(32px, 6vw, 52px); padding-top: clamp(22px, 4vw, 30px); border-top: 1px solid var(--sand); }
-  .co-num { display: block; margin: 0 0 4px; font-size: .95rem; font-weight: 600; letter-spacing: .06em; line-height: 1; color: #B4543A; }
+  .co-num { display: block; margin: 0 0 4px; font-size: .95rem; font-weight: 600; letter-spacing: .06em; line-height: 1; color: var(--id); }
   .co-sec h2.co-title { margin: 0 0 16px; font-size: clamp(1.5625rem, 1.2rem + .7vw, 1.9rem); line-height: 1.1; letter-spacing: -.015em; color: var(--forest); }
   .co-sec:first-child { margin-top: 0; }
   .co-sec h2:not(.co-title) { font-size: clamp(1.45rem, 5.4vw, 2.05rem); line-height: 1.15; letter-spacing: -.01em; margin: 0 0 14px; }
@@ -165,7 +165,6 @@
   .co-card .photo { aspect-ratio: 16 / 10; background: var(--sage); overflow: hidden; margin: 2px 2px 0; border-radius: 13px 13px 4px 4px; }
   .co-card .photo img { width: 100%; height: 100%; object-fit: cover; }
   .co-card-body { padding: 10px 12px 12px; display: flex; flex-direction: column; gap: 6px; flex: 1; }
-  .co-cat { align-self: flex-start; margin: 0; max-width: 100%; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 4px 9px; border-radius: 999px; font-size: .58rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; line-height: 1.2; color: var(--acc); background: color-mix(in srgb, var(--acc) 16%, #fff); }
   .co-card a { color: inherit; text-decoration: none; }
   .co-card h3 a:hover { text-decoration: underline; text-underline-offset: 3px; }
   .co-card > a { display: block; }
@@ -180,7 +179,7 @@
 
   .co-bar .btn:disabled { opacity: .45; cursor: default; box-shadow: none; }
 
-  @media (max-width: 379px) { .co-cat { white-space: normal; letter-spacing: .05em; padding: 4px 8px; line-height: 1.25; } .co-perks li { white-space: normal; } .co-perks { font-size: .76rem; } .co-tags.co-tags-rec li { padding: 3px 7px 3px 6px; font-size: .67rem; gap: 4px; } .co-tags-rec svg { width: 12px; height: 12px; } .co-tags-rec { gap: 5px; } }
+  @media (max-width: 379px) { .co-perks li { white-space: normal; } .co-perks { font-size: .76rem; } .co-tags.co-tags-rec li { padding: 3px 7px 3px 6px; font-size: .67rem; gap: 4px; } .co-tags-rec svg { width: 12px; height: 12px; } .co-tags-rec { gap: 5px; } }
   @media (max-width: 860px) {
       .co-hero { padding-top: 76px; }
   }
@@ -248,7 +247,7 @@
       </section>
       <section class="co-sec" id="sec-route" hidden>
         <span class="co-num" id="num-route" aria-hidden="true"></span>
-        <h2 class="co-title">On the route</h2>
+        <h2 class="co-title">What you’ll see</h2>
         <ul class="co-tags co-tags-route" id="route-list"></ul>
       </section>
       <section class="co-sec" id="sec-details" hidden>
@@ -258,7 +257,7 @@
       </section>
       <section class="co-sec" id="sec-perfect" hidden>
         <span class="co-num" id="num-perfect" aria-hidden="true"></span>
-        <h2 class="co-title">Perfect for</h2>
+        <h2 class="co-title">Recommended for</h2>
         <ul class="co-tags co-tags-route" id="perfect-list"></ul>
       </section>
     </div>
@@ -363,7 +362,8 @@
     volcano: '<path d="M3 20l6-12h6l6 12z"/><path d="M10 8l-1-3M14 8l1-3"/>',
     boat: '<path d="M3 15h18l-3 4H6z"/><path d="M12 15V5l5 7"/>',
     sun: '<circle cx="12" cy="13" r="4"/><path d="M12 4v2M4.5 8l1.5 1.5M19.5 8L18 9.5M3 20h18"/>',
-    drop: '<path d="M12 4s6 6.4 6 10.5a6 6 0 0 1-12 0C6 10.4 12 4 12 4z"/>'
+    drop: '<path d="M12 4s6 6.4 6 10.5a6 6 0 0 1-12 0C6 10.4 12 4 12 4z"/>',
+    lighthouse: '<path d="M9.5 21l1.2-12h2.6l1.2 12z"/><path d="M10.7 9L12 5l1.3 4"/><path d="M12 2.5V4M7 6l1.5 1M17 6l-1.5 1"/><path d="M8 21h8"/>'
   };
   if ((main.route || []).length) {
     main.route.forEach((s) => {
@@ -389,7 +389,7 @@
   const bd = main.budget;
   if (bd && bd.amount) {
     const unit = String(bd.unit || '').replace(/^For\s+/i, '');
-    group(item('euro', bd.title || 'Estimated transport cost',
+    group(item('euro', bd.title || 'Estimated budget',
       '<span class="co-bud-v"><strong>' + esc(bd.amount) + '</strong>' + (unit ? '<small>&middot; ' + esc(unit) + '</small>' : '') +
       '<button type="button" class="co-info" id="bud-btn" aria-haspopup="dialog" aria-expanded="false" aria-controls="bud-pop" aria-label="Show estimated costs">i</button></span>'), 'co-sep');
     const rowsHtml = (bd.rows || []).map((r) => '<li><span>' + esc(r[0]) + '</span><b>' + esc(r[1]) + '</b></li>').join('');
@@ -428,7 +428,7 @@
     if (x.label === 'Offline') group(item('download', 'Offline-ready PDF', 'Works without an internet connection', 'soft'), 'co-sep');
     else group(item('calendar', esc(x.label), esc(x.value)), 'co-sep');
   });
-  /* 05 Perfect for: same tag design as On the route. */
+  /* 05 Recommended for: same tag design as What you’ll see. */
   if (audLis.length) {
     audLis.forEach((li) => $('perfect-list').append(li));
     $('sec-perfect').hidden = false;
@@ -545,9 +545,6 @@
     photo.append(img);
     const body = document.createElement('div');
     body.className = 'co-card-body';
-    const cat = document.createElement('p');
-    cat.className = 'co-cat';
-    cat.textContent = catOf(it).label; cat.title = cat.textContent;
     const h3 = document.createElement('h3');
     const href = 'itinerary.html?item=' + encodeURIComponent(it.id);
     const link = document.createElement('a');
@@ -558,8 +555,8 @@
     photoLink.append(photo);
     const blurb = document.createElement('p');
     blurb.className = 'co-route';
-    const rl = document.createElement('b'); rl.textContent = 'On the route';
-    const rt = document.createElement('span'); rt.textContent = (it.highlights || []).join(' \u00b7 ');
+    const rl = document.createElement('b'); rl.textContent = 'What you’ll see';
+    const rt = document.createElement('span'); rt.textContent = ((it.route && it.route.length ? it.route.map((r) => (typeof r === 'string' ? r : r.label)) : it.highlights) || []).join(' \u00b7 ');
     blurb.append(rl, rt);
     const foot = document.createElement('div');
     foot.className = 'co-card-foot';
@@ -571,7 +568,7 @@
     btn.className = 'co-sel';
     btn.addEventListener('click', () => toggleItinerary(it.id));
     foot.append(price, btn);
-    body.append(cat, h3, blurb, foot);
+    body.append(h3, blurb, foot);
     card.append(photoLink, body);
     grid.append(card);
   });
