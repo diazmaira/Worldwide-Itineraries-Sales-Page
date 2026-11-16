@@ -239,15 +239,15 @@
         <h2 class="co-title">Overview</h2>
         <div id="overview"></div>
       </section>
-      <section class="co-sec" id="sec-includes" hidden>
-        <span class="co-num" id="num-includes" aria-hidden="true"></span>
-        <h2 class="co-title">What&rsquo;s included</h2>
-        <ul class="co-list" id="includes"></ul>
-      </section>
       <section class="co-sec" id="sec-route" hidden>
         <span class="co-num" id="num-route" aria-hidden="true"></span>
         <h2 class="co-title">What you’ll see</h2>
         <ul class="co-tags co-tags-route" id="route-list"></ul>
+      </section>
+      <section class="co-sec" id="sec-includes" hidden>
+        <span class="co-num" id="num-includes" aria-hidden="true"></span>
+        <h2 class="co-title">What&rsquo;s included</h2>
+        <ul class="co-list" id="includes"></ul>
       </section>
       <section class="co-sec" id="sec-details" hidden>
         <span class="co-num" id="num-details" aria-hidden="true"></span>
@@ -436,7 +436,7 @@
   /* Section numbers follow the sections that exist, in page order. Titles are fixed so every itinerary reads the same. */
   const pad = (n) => String(n).padStart(2, '0');
   let num = 0;
-  ['overview', 'includes', 'route', 'details', 'perfect'].forEach((k) => {
+  ['overview', 'route', 'includes', 'details', 'perfect'].forEach((k) => {
     if (!$('sec-' + k).hidden) $('num-' + k).textContent = pad(++num);
   });
 
