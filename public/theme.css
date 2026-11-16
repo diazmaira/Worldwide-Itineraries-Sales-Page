@@ -113,10 +113,11 @@
   .hero .actions { margin-top: auto; padding-top: 28px; width: min(360px, 100%); }
   .hero .actions .btn { width: 100%; min-height: 56px; display: inline-flex; align-items: center; justify-content: center; gap: 10px; font-size: 1.1rem; white-space: nowrap; }
   .hero .actions .btn svg { width: 20px; height: 20px; flex: none; }
-  .intro { text-align: center; padding: clamp(36px, 7vw, 64px) 0 0; }
-  .intro p { margin: 0 auto; max-width: 560px; font-size: clamp(1rem, 3.8vw, 1.15rem); line-height: 1.6; color: var(--muted); }
-  .intro .invite { margin-top: 28px; font-size: .95rem; font-weight: 600; letter-spacing: .01em; color: #9A7257; }
-  .scroll-down { display: inline-grid; place-items: center; width: 40px; height: 40px; margin-top: 8px; border-radius: 50%; color: #9A7257; border: 1.5px solid color-mix(in srgb, #9A7257 45%, transparent); animation: nudge 2.4s ease-in-out infinite; }
+  .intro { text-align: center; min-height: 40svh; display: flex; align-items: center; padding: clamp(40px, 8vw, 64px) 0 clamp(44px, 8vw, 64px); }
+  .intro .wrap { display: flex; flex-direction: column; align-items: center; }
+  .intro p { margin: 0 auto; max-width: 560px; text-wrap: balance; font-size: clamp(1rem, 3.8vw, 1.15rem); line-height: 1.6; color: var(--muted); }
+  .intro .invite { margin-top: 24px; font-size: 1.05rem; font-weight: 600; letter-spacing: .01em; color: #9A7257; }
+  .scroll-down { display: inline-grid; place-items: center; width: 44px; height: 44px; margin-top: 28px; border-radius: 50%; color: #9A7257; border: 1.5px solid color-mix(in srgb, #9A7257 45%, transparent); animation: nudge 2.4s ease-in-out infinite; }
   .scroll-down svg { width: 18px; height: 18px; }
   .scroll-down:hover { color: var(--forest); border-color: var(--forest); }
   @keyframes nudge { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(4px); } }
