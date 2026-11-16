@@ -14,7 +14,7 @@
 <link rel="stylesheet" href="theme.css">
 <style>
   /* Checkout page: built on the shared tokens in theme.css */
-  .co-hero { padding: 92px 0 clamp(20px, 4vw, 36px); background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
+  .co-hero { padding: 92px 0 14px; background: linear-gradient(180deg, var(--cream) 0%, var(--sand) 100%); }
   /* Side gutters 30% narrower on this page (20px to 14px) so the content gets more width. */
   .site-header .wrap, .logo-bar .wrap, .co-hero .wrap, .co-detail .wrap, .co-more .wrap { width: min(1200px, 100% - 28px); }
   .co-hero .wrap { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0 clamp(28px, 5vw, 64px); }
@@ -64,7 +64,7 @@
   .co-tags li { border: 1px solid var(--sage); border-radius: 999px; padding: 3px 11px; font-size: .78rem; font-weight: 600; color: var(--forest); white-space: nowrap; }
 
   /* Content + price box */
-  .co-detail { padding-block: clamp(28px, 5vw, 52px) 0; background: var(--cream); }
+  .co-detail { padding-block: 0 0; background: var(--cream); }
   .co-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 6vw, 52px); align-items: start; }
   .co-layout > * { max-width: 760px; }
   /* Editorial sections: thin sand divider, a small terracotta number, one prominent title. No background changes. */
@@ -99,7 +99,6 @@
   .co-info::after { content: ''; position: absolute; inset: -8px; }
   .co-info[aria-expanded="true"] { background: var(--id); color: #fff; }
   .co-info:focus-visible { outline: 2px solid var(--id); outline-offset: 2px; }
-  .co-sec .co-perfect .co-h { margin: 0 0 8px; font-size: .68rem; font-weight: 500; letter-spacing: .1em; color: var(--muted); }
   .co-pop { position: fixed; z-index: 70; box-sizing: border-box; width: 320px; max-width: calc(100vw - 24px); padding: 16px 18px 14px; border-radius: 14px; background: var(--id-sand); color: var(--forest); box-shadow: 0 12px 34px rgba(14, 36, 33, .22); animation: co-fade .18s ease; }
   .co-pop[hidden], .co-scrim[hidden] { display: none; }
   .co-pop-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
@@ -128,7 +127,11 @@
   .co-list.plain li { grid-template-columns: 10px minmax(0, 1fr); align-items: baseline; }
   .co-list.plain li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--id); transform: translateY(-2px); }
   /* Price box */
-  .co-buy { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px 18px; padding: 18px 20px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm); }
+  /* Price block shares the hero's background (sand band that continues the photo area). */
+  .co-aside { position: relative; isolation: isolate; padding: 6px 0 26px; }
+  .co-aside::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--sand); border-radius: 0 0 26px 26px; }
+  .co-detail { overflow-x: clip; }
+  .co-buy { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px 18px; padding: 4px 6px 0; background: transparent; }
   .co-price { font-family: var(--display); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--forest); }
   .co-rating { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: .88rem; color: var(--muted); }
   .co-rating svg { width: 16px; height: 16px; color: #E0A526; }
@@ -252,6 +255,11 @@
         <span class="co-num" id="num-details" aria-hidden="true"></span>
         <h2 class="co-title">At a glance</h2>
         <div class="co-det" id="details"></div>
+      </section>
+      <section class="co-sec" id="sec-perfect" hidden>
+        <span class="co-num" id="num-perfect" aria-hidden="true"></span>
+        <h2 class="co-title">Perfect for</h2>
+        <ul class="co-tags co-tags-route" id="perfect-list"></ul>
       </section>
     </div>
   </div>
@@ -420,18 +428,17 @@
     if (x.label === 'Offline') group(item('download', 'Offline-ready PDF', 'Works without an internet connection', 'soft'), 'co-sep');
     else group(item('calendar', esc(x.label), esc(x.value)), 'co-sep');
   });
-  /* Perfect for: small chips inside At a glance (no separate section). */
+  /* 05 Perfect for: same tag design as On the route. */
   if (audLis.length) {
-    const wrap = el('div', 'co-sep co-perfect', '<p class="co-h" id="perfect-title">Perfect for</p>');
-    const ul = el('ul', 'co-tags co-tags-rec'); ul.setAttribute('aria-labelledby', 'perfect-title');
-    audLis.forEach((li) => ul.append(li)); wrap.append(ul); $('details').append(wrap);
+    audLis.forEach((li) => $('perfect-list').append(li));
+    $('sec-perfect').hidden = false;
   }
   if ($('details').children.length) $('sec-details').hidden = false;
 
   /* Section numbers follow the sections that exist, in page order. Titles are fixed so every itinerary reads the same. */
   const pad = (n) => String(n).padStart(2, '0');
   let num = 0;
-  ['overview', 'includes', 'route', 'details'].forEach((k) => {
+  ['overview', 'includes', 'route', 'details', 'perfect'].forEach((k) => {
     if (!$('sec-' + k).hidden) $('num-' + k).textContent = pad(++num);
   });
 
