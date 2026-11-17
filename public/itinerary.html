@@ -21,17 +21,15 @@
   /* Itinerary identity: set from the itinerary's theme (see itineraries-data.js). Defaults keep the brand green. */
   :root { --id: var(--forest); --id-ink: var(--forest); --id-tint: rgba(23, 63, 58, .08); --id-sand: var(--sand); }
   .co-top { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
-  .co-hero h1 { font-size: clamp(1.7rem, 8.9vw, 3.4rem); line-height: 1.06; letter-spacing: -.02em; margin-top: 0; white-space: nowrap; overflow-x: clip; }
+  .co-hero h1 { font-size: clamp(1.5rem, 7.6vw, 3rem); font-weight: 700; line-height: 1.08; letter-spacing: -.02em; margin-top: 0; white-space: nowrap; overflow-x: clip; }
   .co-chip { padding: 5px 11px; border-radius: 6px; font-size: .68rem; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; color: var(--id-ink); background: var(--id-tint); }
   .co-chip[hidden] { display: none; }
-  /* Signature detail: a short underline in the itinerary's accent colour. */
-  .co-accent { justify-self: start; display: block; width: 44px; height: 3px; margin-top: 10px; border-radius: 2px; background: var(--id); }
   /* Hero metadata: duration and location across the full width (larger than the price box text) */
-  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 10px 0 0; padding: 0; list-style: none; font-size: clamp(.86rem, 3.9vw, .98rem); font-weight: 400; line-height: 1.2; color: var(--forest); }
+  .co-attrs { display: flex; flex-wrap: nowrap; align-items: center; gap: 0; margin: 8px 0 0; padding: 0; list-style: none; font-size: clamp(.86rem, 3.9vw, .98rem); font-weight: 400; line-height: 1.2; color: var(--forest); }
   .co-attrs { width: 100%; }
   .co-attrs li { flex: 0 0 auto; display: inline-flex; align-items: center; gap: 7px; min-width: 0; padding: 2px 0; white-space: nowrap; }
   .co-attrs li + li { flex: 1 1 0; margin-left: 14px; padding-left: 14px; white-space: normal; line-height: 1.2; border-left: 1px solid rgba(23, 63, 58, .22); }
-  .co-attrs svg { width: 17px; height: 17px; flex: none; color: var(--id); }
+  .co-attrs svg { width: 16px; height: 16px; flex: none; color: var(--id); }
   @media (max-width: 359px) { .co-attrs li { white-space: normal; text-align: left; } }
   /* Photo gallery */
   .co-gallery { position: relative; width: min(100%, 680px); margin-top: 16px; }
@@ -65,13 +63,14 @@
 
   /* Content + price box */
   .co-detail { padding-block: 0 0; background: var(--cream); }
-  .co-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: clamp(36px, 6vw, 52px); align-items: start; }
+  .co-layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 0; align-items: start; }
   .co-layout > * { max-width: 760px; }
   /* Editorial sections: thin sand divider, a small terracotta number, one prominent title. No background changes. */
   /* One heading system for every section: a small terracotta number stacked over one prominent title. */
   .co-sec { margin-top: clamp(32px, 6vw, 52px); padding-top: clamp(22px, 4vw, 30px); border-top: 1px solid var(--sand); }
-  .co-num { display: block; margin: 0 0 4px; font-size: .95rem; font-weight: 600; letter-spacing: .06em; line-height: 1; color: var(--id); }
-  .co-sec h2.co-title { margin: 0 0 16px; font-size: clamp(1.5625rem, 1.2rem + .7vw, 1.9rem); line-height: 1.1; letter-spacing: -.015em; color: var(--forest); }
+  #sec-overview { margin-top: 0; padding-top: clamp(26px, 5vw, 38px); border-top: 0; }
+  .co-num { display: block; margin: 0 0 6px; font-size: .95rem; font-weight: 600; letter-spacing: .06em; line-height: 1; color: var(--id); }
+  .co-sec h2.co-title { margin: 0 0 12px; font-size: clamp(1.5625rem, 1.2rem + .7vw, 1.9rem); line-height: 1.1; letter-spacing: -.015em; color: var(--forest); }
   .co-sec:first-child { margin-top: 0; }
   .co-sec h2:not(.co-title) { font-size: clamp(1.45rem, 5.4vw, 2.05rem); line-height: 1.15; letter-spacing: -.01em; margin: 0 0 14px; }
   .co-sec h3 { font-size: clamp(1.1rem, 4vw, 1.3rem); line-height: 1.25; margin: 0 0 10px; }
@@ -128,16 +127,18 @@
   .co-list.plain li::before { content: ''; width: 5px; height: 5px; border-radius: 50%; background: var(--id); transform: translateY(-2px); }
   /* Price box */
   /* White price card on the hero's sand band (the band continues the photo area behind it). */
-  .co-aside { position: relative; isolation: isolate; padding: 4px 0 22px; }
-  .co-aside::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--sand); border-radius: 0 0 26px 26px; }
+  .co-aside { position: relative; isolation: isolate; padding: 4px 0 calc(var(--wave-h) * .95 + 8px); }
+  .co-aside::before { content: ''; position: absolute; z-index: -1; top: 0; bottom: 0; left: 50%; width: 100vw; transform: translateX(-50%); background: var(--sand); }
+  /* One soft dune-like wave joins the sand band to the cream Overview (no gaps, drawn in the Overview colour). */
+  .co-aside::after { content: ''; position: absolute; z-index: -1; bottom: -1px; left: 50%; width: 100vw; height: var(--wave-h); transform: translateX(-50%); pointer-events: none; background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23F7F1E7' d='M0 38C200 6 460 4 720 30S1160 72 1440 22V80H0Z'/%3E%3C/svg%3E") center bottom / 100% 100% no-repeat; }
   .co-detail { overflow-x: clip; }
-  .co-buy { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 16px 18px; padding: 18px 20px; background: var(--white); border-radius: 16px; box-shadow: var(--shadow-sm); }
-  .co-price { font-family: var(--display); font-weight: 800; font-size: 2.2rem; line-height: 1; color: var(--forest); }
+  .co-buy { display: grid; grid-template-columns: auto minmax(0, 1fr); align-items: center; gap: 12px 16px; padding: 14px 16px; background: var(--white); border-radius: var(--radius-sm); box-shadow: 0 2px 10px rgba(23, 63, 58, .08); }
+  .co-price { font-family: var(--display); font-weight: 800; font-size: 1.9rem; line-height: 1; color: var(--forest); }
   .co-rating { display: flex; align-items: center; gap: 6px; margin-top: 8px; font-size: .88rem; color: var(--muted); }
   .co-rating svg { width: 16px; height: 16px; color: #E0A526; }
   .co-rating strong { color: var(--forest); }
   .co-rating[hidden] { display: none; }
-  .co-perks { margin: 0; padding: 0 0 0 18px; border-left: 1px solid var(--line); list-style: none; display: grid; gap: 6px; font-size: .8rem; line-height: 1.35; color: color-mix(in srgb, var(--forest) 62%, #fff); }
+  .co-perks { margin: 0; padding: 0 0 0 16px; border-left: 1px solid var(--line); list-style: none; display: grid; gap: 4px; font-size: .8rem; line-height: 1.35; color: color-mix(in srgb, var(--forest) 62%, #fff); }
   .co-buy .co-rating { grid-column: 1 / -1; margin: 0; }
   .co-perks li { display: flex; align-items: center; gap: 8px; white-space: nowrap; }
   .co-perks svg { width: 16px; height: 16px; flex: none; color: var(--id); }
@@ -147,7 +148,7 @@
   .sr-only { position: absolute; width: 1px; height: 1px; margin: -1px; padding: 0; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
   .co-sel svg { width: 1.05em; height: 1.05em; flex: none; }
   .co-sel.is-on { background: transparent; color: var(--forest); }
-  .co-buy .co-sel { grid-column: 1 / -1; width: 100%; min-height: 48px; }
+  .co-buy .co-sel { grid-column: 1 / -1; width: 100%; min-height: 44px; }
 
   /* Optional cross-sell: warm sand band with compact versions of the Home cards (same accent tokens, pill, serif-free type, 2px accent border, price style). */
   :root { --bar-h: 68px; }
@@ -210,8 +211,8 @@
 <!-- 1. Selected itinerary -->
 <section class="co-hero" id="top">
   <div class="wrap" id="hero-wrap">
+    <p class="eyebrow">DISCOVER FUERTEVENTURA</p>
     <h1 id="hero-title"></h1>
-    <span class="co-accent" id="accent" aria-hidden="true"></span>
     <ul class="co-attrs" id="attrs"></ul>
     <div class="co-gallery" id="gallery" role="region" aria-roledescription="carousel" hidden>
       <div class="co-track" id="g-track" tabindex="0"></div>
