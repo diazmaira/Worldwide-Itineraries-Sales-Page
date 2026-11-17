@@ -145,20 +145,13 @@
   .price { font-family: var(--display); font-weight: 700; font-size: 2.2rem; }
 
   /* ===== Why ===== */
-  .why-head { display: grid; grid-template-columns: 6fr 5fr; gap: 64px; align-items: end; }
   .grid-4 { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 24px; margin-top: 64px; }
-  .point { border-radius: 20px; padding: 26px; background: var(--white); box-shadow: var(--shadow); }
-  .point h3 { font-size: 1.45rem; margin-top: 16px; }
-  .point p { margin-top: 8px; font-size: 1rem; color: var(--muted); }
-  .point.t { background: var(--sage); } .point.b { background: var(--ocean); }
-  .point.t p, .point.b p { color: var(--forest); }
-  .point.t .ico, .point.b .ico { background: var(--white); }
 
   /* ===== How it works ===== */
-  .how { background: var(--cream); padding-block: clamp(40px, 6vw, 72px); }
+  .how, .behind { background: var(--cream); padding-block: clamp(40px, 6vw, 72px); }
   .hw-kicker { margin: 0 0 8px; font-size: .78rem; font-weight: 600; letter-spacing: .16em; color: var(--terracotta); }
-  .how .section-title { font-size: clamp(1.9rem, 4.6vw, 2.8rem); }
-  .how .lead { margin-top: 8px; font-size: 1.02rem; }
+  .how .section-title, .behind .section-title { font-size: clamp(1.9rem, 4.6vw, 2.8rem); }
+  .how .lead, .behind .lead { margin-top: 8px; font-size: 1.02rem; }
   .hw-list { display: grid; grid-auto-rows: 1fr; gap: 14px; margin-top: 26px; max-width: 860px; }
   .hw-card { --acc: var(--terracotta); position: relative; display: grid; grid-template-columns: 56fr 44fr; min-height: 148px; overflow: hidden; background: var(--white); border-radius: 22px; box-shadow: 0 6px 20px rgba(23, 63, 58, .09); }
   .hw-card::before { content: ''; position: absolute; z-index: 2; left: 0; top: 18px; bottom: 18px; width: 4px; border-radius: 0 4px 4px 0; background: var(--acc); }
@@ -182,6 +175,25 @@
     .hw-step { font-size: .66rem; }
     .hw-desc { font-size: .8rem; }
     .hw-img::before { width: 28px; }
+  }
+
+  /* ===== Behind every itinerary ===== */
+  .bi-wrap { display: grid; grid-template-columns: 1fr; gap: 0; }
+  .bi-photo { position: relative; margin: 0; aspect-ratio: 16 / 10; overflow: hidden; border-radius: 22px 22px 0 0; background: var(--sand); }
+  .bi-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
+  .bi-wave { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 34px; fill: var(--cream); }
+  .bi-body { padding-top: 4px; }
+  .bi-list { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 14px; }
+  .bi-row { display: flex; align-items: flex-start; gap: 14px; }
+  .bi-ico { flex: none; width: 40px; height: 40px; display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--acc) 18%, #fff); color: var(--forest); }
+  .bi-t { --acc: var(--terracotta); } .bi-s { --acc: #82A892; } .bi-b { --acc: #359F9C; }
+  .bi-row h3 { font-size: 1.08rem; line-height: 1.2; }
+  .bi-row p { margin: 3px 0 0; font-size: .9rem; line-height: 1.4; color: var(--muted); }
+  @media (min-width: 861px) {
+    .bi-wrap { grid-template-columns: 6fr 5fr; gap: 48px; align-items: center; }
+    .bi-photo { aspect-ratio: 4 / 3; border-radius: 26px; }
+    .bi-wave { display: none; }
+    .bi-body { padding-top: 0; }
   }
 
   /* ===== Inspiration page ===== */
@@ -238,7 +250,7 @@
     .foot-grid { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 860px) {
-    .why-head, .about .wrap, .contact .wrap { grid-template-columns: 1fr; gap: 32px; }
+    .about .wrap, .contact .wrap { grid-template-columns: 1fr; gap: 32px; }
     .grid-2, .grid-3, .grid-4, .inspo { grid-template-columns: 1fr; }
     .row { grid-template-columns: 1fr; }
     .about .photo { max-width: 420px; }
