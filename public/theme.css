@@ -190,10 +190,9 @@
 
   /* ===== Behind every itinerary ===== */
   .bi-wrap { display: grid; grid-template-columns: 1fr; gap: 0; }
-  .bi-photo { position: relative; margin: 0; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius) var(--radius) 0 0; background: var(--sand); }
+  .bi-photo { position: relative; margin: 0; aspect-ratio: 16 / 10; overflow: hidden; border-radius: var(--radius); background: var(--sand); }
   .bi-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center; }
-  .bi-wave { position: absolute; left: 0; right: 0; bottom: -1px; width: 100%; height: 34px; fill: var(--cream); }
-  .bi-body { padding-top: 4px; }
+  .bi-body { padding-top: 22px; }
   .bi-list { list-style: none; margin: 20px 0 0; padding: 0; display: grid; gap: 14px; }
   .bi-row { display: flex; align-items: flex-start; gap: 14px; }
   .bi-ico { flex: none; width: var(--ico-size); height: var(--ico-size); display: grid; place-items: center; border-radius: 50%; background: color-mix(in srgb, var(--acc) 18%, #fff); color: var(--forest); }
@@ -203,8 +202,7 @@
   @media (min-width: 861px) {
     .bi-wrap { grid-template-columns: 6fr 5fr; gap: 48px; align-items: center; }
     .bi-photo { aspect-ratio: 4 / 3; border-radius: var(--radius); }
-    .bi-wave { display: none; }
-    .bi-body { padding-top: 0; }
+      .bi-body { padding-top: 0; }
   }
 
   /* ===== Inspiration page ===== */
