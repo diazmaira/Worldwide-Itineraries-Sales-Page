@@ -158,9 +158,10 @@
   .co-more-label.co-next { margin: 8px 0 0; }
   .co-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: clamp(10px, 3vw, 18px); margin-top: 18px; align-items: stretch; }
   .co-card { --acc: #359F9C; background: var(--white); border-radius: 16px; border: 2px solid color-mix(in srgb, var(--acc) 85%, #fff); box-shadow: 0 4px 14px rgba(23, 63, 58, .09); overflow: hidden; display: flex; flex-direction: column; transition: box-shadow .2s, border-color .2s; }
-  .co-card[data-id="north"] { --acc: #359F9C; }
-  .co-card[data-id="rural"] { --acc: #C97953; }
-  .co-card[data-id="windmills"] { --acc: #82905A; }
+  /* --acc is set per card from the itinerary's own page theme (same colour as its page when opened). */
+  .co-card[data-id="north"] { --acc: #269F9D; }
+  .co-card[data-id="rural"] { --acc: #C2613F; }
+  .co-card[data-id="windmills"] { --acc: #C9962B; }
   .co-card:has(.co-sel.is-on) { box-shadow: 0 0 0 2px var(--acc), 0 6px 16px rgba(23, 63, 58, .14); }
   .co-card .photo { aspect-ratio: 16 / 10; background: var(--sage); overflow: hidden; margin: 2px 2px 0; border-radius: 13px 13px 4px 4px; }
   .co-card .photo img { width: 100%; height: 100%; object-fit: cover; }
@@ -170,7 +171,7 @@
   .co-card > a { display: block; }
   .co-card h3 { font-size: 1rem; line-height: 1.15; letter-spacing: -.01em; color: #19463E; }
   .co-route { margin: 0; display: flex; flex-direction: column; gap: 3px; }
-  .co-route b { font-size: .56rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: #9A7257; }
+  .co-route b { font-size: .56rem; font-weight: 600; letter-spacing: .14em; text-transform: uppercase; color: color-mix(in srgb, var(--acc) 78%, #0b2a27); }
   .co-route span { font-size: .78rem; line-height: 1.4; color: #3E5A52; min-height: 2.8em; }
   .co-card-foot { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: auto; padding-top: 8px; }
   .co-card .price { font-family: var(--display); font-weight: 800; font-size: 1.15rem; color: #19463E; }
@@ -533,6 +534,7 @@
     const card = document.createElement('article');
     card.className = 'co-card';
     card.dataset.id = it.id;
+    if (it.theme && it.theme.color) card.style.setProperty('--acc', it.theme.color);
     card.style.setProperty('--cat', catOf(it).color);
     const photo = document.createElement('div');
     photo.className = 'photo';
