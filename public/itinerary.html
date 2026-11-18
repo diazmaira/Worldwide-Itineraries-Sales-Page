@@ -152,7 +152,8 @@
 
   /* Optional cross-sell: warm sand band with compact versions of the Home cards (same accent tokens, pill, serif-free type, 2px accent border, price style). */
   :root { --bar-h: 68px; }
-  .co-more { margin-top: clamp(44px, 8vw, 72px); padding-block: clamp(30px, 6vw, 48px) calc(clamp(40px, 7vw, 60px) + var(--bar-h) + env(safe-area-inset-bottom)); background: var(--sand); border-top: 1px solid rgba(23, 63, 58, .12); }
+  .co-more { margin-top: clamp(44px, 8vw, 72px); padding-block: clamp(30px, 6vw, 48px) calc(clamp(40px, 7vw, 60px) + var(--bar-h) + env(safe-area-inset-bottom)); position: relative; background: var(--sand); }
+  .co-more::before { content: ''; position: absolute; left: 0; right: 0; top: calc(1px - var(--wave-h)); height: var(--wave-h); pointer-events: none; background: var(--sand); -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 40C240 6 480 8 720 38S1160 74 1440 34V80H0Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 40C240 6 480 8 720 38S1160 74 1440 34V80H0Z'/%3E%3C/svg%3E") center / 100% 100% no-repeat; }
   .co-more .wrap > * { max-width: 720px; }
   .co-more-label { margin: 0 0 8px; font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase; color: #9A7257; }
   .co-more h2 { font-size: clamp(1.35rem, 5vw, 1.75rem); line-height: 1.2; }

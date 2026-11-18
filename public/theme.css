@@ -178,15 +178,25 @@
     .hw-img::before { width: 28px; }
   }
 
-  /* ===== Background rhythm + dune-like section transitions =====
-     cream -> soft sand -> sand. The wave is drawn at the bottom of a section, in the colour of the NEXT section,
-     so adjacent backgrounds flow into each other. Three different shapes, only where the tone changes. */
-  #faq { background: var(--sand-soft); }
-  .itineraries, .how, #faq { position: relative; padding-bottom: calc(var(--section-y) + var(--wave-h) * .4); }
-  .itineraries::after, .how::after, #faq::after { content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: var(--wave-h); pointer-events: none; background-size: 100% 100%; background-repeat: no-repeat; }
-  .itineraries::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23F7F1E7' d='M0 52C220 18 420 12 640 38S1040 80 1240 46S1400 22 1440 30V80H0Z'/%3E%3C/svg%3E"); }
-  .how::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23F1E7D6' d='M0 30C160 58 360 70 600 50S980 6 1180 30S1380 62 1440 48V80H0Z'/%3E%3C/svg%3E"); }
-  #faq::after { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath fill='%23E9D8C2' d='M0 44C260 74 520 66 760 36S1180 4 1440 40V80H0Z'/%3E%3C/svg%3E"); }
+  /* ===== Background rhythm + wave between every section =====
+     Backgrounds alternate: hero photo -> sand -> cream -> soft sand -> cream (FAQ) -> sand -> footer.
+     Each section ends with a soft wave painted in the colour of the NEXT section (--next), via a mask so one
+     rule serves every colour. Three shapes alternate so it never feels repeated. */
+  .how { background: var(--sand-soft); }
+  #faq { background: var(--cream); }
+  .hero { --next: var(--sand); --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 52C220 18 420 12 640 38S1040 80 1240 46S1400 22 1440 30V80H0Z'/%3E%3C/svg%3E"); }
+  .itineraries { --next: var(--cream); --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 30C160 58 360 70 600 50S980 6 1180 30S1380 62 1440 48V80H0Z'/%3E%3C/svg%3E"); }
+  .behind { --next: var(--sand-soft); --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 44C260 74 520 66 760 36S1180 4 1440 40V80H0Z'/%3E%3C/svg%3E"); }
+  .how { --next: var(--cream); --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 52C220 18 420 12 640 38S1040 80 1240 46S1400 22 1440 30V80H0Z'/%3E%3C/svg%3E"); }
+  .about { --next: var(--cream); --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 30C160 58 360 70 600 50S980 6 1180 30S1380 62 1440 48V80H0Z'/%3E%3C/svg%3E"); }
+  #faq { --next: var(--sand); --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 44C260 74 520 66 760 36S1180 4 1440 40V80H0Z'/%3E%3C/svg%3E"); }
+  .contact { --next: var(--forest); --wave: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1440 80' preserveAspectRatio='none'%3E%3Cpath d='M0 52C220 18 420 12 640 38S1040 80 1240 46S1400 22 1440 30V80H0Z'/%3E%3C/svg%3E"); }
+  .itineraries, .behind, .how, .about, #faq, .contact { position: relative; padding-bottom: calc(var(--section-y) + var(--wave-h) * .4); }
+  .hero::after, .itineraries::after, .behind::after, .how::after, .about::after, #faq::after, .contact::after {
+    content: ''; position: absolute; left: 0; right: 0; bottom: -1px; height: var(--wave-h); z-index: 1; pointer-events: none;
+    background: var(--next);
+    -webkit-mask: var(--wave) center / 100% 100% no-repeat; mask: var(--wave) center / 100% 100% no-repeat; }
+  .hero .wrap { padding-bottom: calc(20px + var(--wave-h) * .5); }
 
   /* ===== Behind every itinerary ===== */
   .bi-wrap { display: grid; grid-template-columns: 1fr; gap: 0; }
@@ -384,7 +394,17 @@ body.wwi-lock { overflow: hidden; }
 .it-card:hover .it-arrow { transform: translateX(3px); }
 /* Phones/tablets: tighter spacing under the collage. */
 @media (max-width: 899px) {
-  .it-info { gap: 10px; padding-top: 20px; }
+  .it-info { gap: 6px; padding-top: 14px; }
+  /* Category labels: 14.5px, regular, icons 16px; wrap into balanced rows instead of squeezing onto one line. */
+  .it-tags { flex-wrap: wrap; justify-content: flex-start; gap: 8px 18px; font-size: .905rem; line-height: 1.25; }
+  .it-tags li, .it-tags li:first-child, .it-tags li:last-child { padding: 0; gap: 7px; white-space: nowrap; border-left: 0; }
+  .it-tags svg { width: 16px; height: 16px; }
+  /* Bottom row sits on the wave: tighter item spacing, slightly smaller arrow. */
+  .it-bottom { margin-top: 10px; padding-bottom: 16px; gap: 8px; }
+  .it-meta .mi + .mi { padding-left: .6em; margin-left: .6em; }
+  .it-arrow { width: 44px; height: 44px; }
+  .it-arrow svg { width: 21px; height: 21px; }
+  .it-wave { height: 76px; opacity: .92; }
   /* Cards use almost the full width on phones/tablets (8px page margin instead of 20px). */
   .it-list { margin-inline: -12px; }
 }
@@ -394,9 +414,7 @@ body.wwi-lock { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .it-card, .it-arrow { transition: none !important; } .it-card:hover { transform: none; } }
 @media (max-width: 379px) {
   .it-info { padding-inline: 14px; }
-  .it-tags { font-size: clamp(.54rem, 3cqi, .8rem); }
-  .it-tags li { padding: 0 .38em; gap: .25em; }
-  .it-tags svg { width: 1.15em; height: 1.15em; }
+  .it-tags { font-size: .875rem; column-gap: 14px; }
   .it-bottom { gap: 6px; }
   .it-arrow { width: 42px; height: 42px; }
   .it-arrow svg { width: 20px; height: 20px; }
