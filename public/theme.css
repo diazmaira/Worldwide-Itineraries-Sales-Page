@@ -384,7 +384,17 @@ body.wwi-lock { overflow: hidden; }
 .it-card:hover .it-arrow { transform: translateX(3px); }
 /* Phones/tablets: tighter spacing under the collage. */
 @media (max-width: 899px) {
-  .it-info { gap: 10px; padding-top: 20px; }
+  .it-info { gap: 6px; padding-top: 14px; }
+  /* Category labels: 14.5px, regular, icons 16px; wrap into balanced rows instead of squeezing onto one line. */
+  .it-tags { flex-wrap: wrap; justify-content: flex-start; gap: 8px 18px; font-size: .905rem; line-height: 1.25; }
+  .it-tags li, .it-tags li:first-child, .it-tags li:last-child { padding: 0; gap: 7px; white-space: nowrap; border-left: 0; }
+  .it-tags svg { width: 16px; height: 16px; }
+  /* Bottom row sits on the wave: tighter item spacing, slightly smaller arrow. */
+  .it-bottom { margin-top: 10px; padding-bottom: 16px; gap: 8px; }
+  .it-meta .mi + .mi { padding-left: .6em; margin-left: .6em; }
+  .it-arrow { width: 44px; height: 44px; }
+  .it-arrow svg { width: 21px; height: 21px; }
+  .it-wave { height: 76px; opacity: .92; }
   /* Cards use almost the full width on phones/tablets (8px page margin instead of 20px). */
   .it-list { margin-inline: -12px; }
 }
@@ -394,9 +404,7 @@ body.wwi-lock { overflow: hidden; }
 @media (prefers-reduced-motion: reduce) { .it-card, .it-arrow { transition: none !important; } .it-card:hover { transform: none; } }
 @media (max-width: 379px) {
   .it-info { padding-inline: 14px; }
-  .it-tags { font-size: clamp(.54rem, 3cqi, .8rem); }
-  .it-tags li { padding: 0 .38em; gap: .25em; }
-  .it-tags svg { width: 1.15em; height: 1.15em; }
+  .it-tags { font-size: .875rem; column-gap: 14px; }
   .it-bottom { gap: 6px; }
   .it-arrow { width: 42px; height: 42px; }
   .it-arrow svg { width: 20px; height: 20px; }
