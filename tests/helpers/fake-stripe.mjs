@@ -9,6 +9,8 @@ export default class Stripe {
         return JSON.parse(Buffer.from(raw).toString('utf8'));
       },
     };
+    this.promotionCodes = { list: async (params) => globalThis.__stripe.promoList(params) };
+    this.coupons = { retrieve: async (id) => globalThis.__stripe.couponRetrieve(id) };
     this.checkout = {
       sessions: {
         create: async (params) => globalThis.__stripe.create(params),

@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { isPaid } from './_discount.js';
 import { PRODUCTS } from './_products.js';
 import { readConsent } from './_consent.js';
 import { sendAccessEmail, scheduleReviewEmail } from './_email.js';
@@ -69,7 +70,7 @@ export default async function handler(req, res) {
   if (DELIVER_ON.has(event.type)) {
     const session = event.data.object;
 
-    if (session.payment_status === 'paid') {
+    if (isPaid(session)) {
       const items = (session.metadata?.items || '')
         .split(',')
         .filter((id) => Object.hasOwn(PRODUCTS, id));

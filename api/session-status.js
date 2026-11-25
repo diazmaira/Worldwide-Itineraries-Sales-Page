@@ -1,4 +1,5 @@
 import Stripe from 'stripe';
+import { isPaid } from './_discount.js';
 import { makeLimiter, clientIp } from './_mail.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
@@ -21,7 +22,7 @@ export default async function handler(req, res) {
   }
   try {
     const session = await stripe.checkout.sessions.retrieve(id);
-    return res.status(200).json({ paid: session.payment_status === 'paid' });
+    return res.status(200).json({ paid: isPaid(session) });
   } catch (err) {
     console.error('session-status failed:', err.message);
     return res.status(200).json({ paid: false });
