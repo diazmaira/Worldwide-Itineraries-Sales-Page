@@ -7,7 +7,7 @@ Last updated: 5 November 2026
 In compliance with applicable Spanish legislation, including Law 34/2002 on Information Society Services and Electronic Commerce (LSSI-CE), the following information identifies the owner of this website:
 
 - Website: Worldwide Itineraries
-- Website URL: https://worldwide-itineraries.vercel.app/
+- Website URL: https://fuerteventura-itineraries.com/
 - Business owner: [Full legal name]
 - Trading name: Worldwide Itineraries
 - Tax identification number (NIF/NIE): [Tax ID]

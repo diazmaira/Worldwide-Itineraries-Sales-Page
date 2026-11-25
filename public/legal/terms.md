@@ -6,7 +6,7 @@ Welcome to Worldwide Itineraries.
 
 These Terms and Conditions govern the purchase and use of digital travel itineraries and related products available through:
 
-https://worldwide-itineraries.vercel.app/
+https://fuerteventura-itineraries.com/
 
 By purchasing a product through our website, you agree to these Terms and Conditions.
 
