@@ -28,6 +28,17 @@
   .co-sums .sub { color: var(--muted); font-weight: 500; }
   .co-sums .tot { font-weight: 600; }
   .co-sums .tot strong { font-family: var(--display); font-size: 2rem; font-weight: 800; }
+  .co-code { margin: 16px 0 0; }
+  .co-code summary { cursor: pointer; font-size: .9rem; font-weight: 600; color: var(--forest); text-decoration: underline; text-underline-offset: 2px; list-style: none; }
+  .co-code summary::-webkit-details-marker { display: none; }
+  .co-code-row { display: flex; gap: 8px; margin-top: 10px; }
+  .co-code-row input { flex: 1; min-width: 0; min-height: 44px; padding: 0 12px; font: inherit; font-size: 1rem; text-transform: uppercase; border: 1.5px solid var(--forest); border-radius: 10px; background: var(--white); color: var(--forest); }
+  .co-code-row button { flex: none; min-height: 44px; padding: 0 18px; font: inherit; font-weight: 600; color: var(--forest); background: transparent; border: 1.5px solid var(--forest); border-radius: 10px; cursor: pointer; }
+  .co-code-row button:disabled { opacity: .5; cursor: default; }
+  .co-code-msg { margin: 8px 0 0; font-size: .85rem; min-height: 1.2em; }
+  .co-code-msg.ok { color: #2F6B4F; } .co-code-msg.bad { color: #B3402A; }
+  .co-sums .disc { display: flex; justify-content: space-between; margin: 0 0 6px; font-size: .95rem; color: #2F6B4F; }
+  .co-sums .disc[hidden] { display: none; }
   .co-consent { margin: 20px 0 0; padding: 0; border: 0; display: grid; gap: 12px; }
   .co-check { font-weight: 400; display: grid; grid-template-columns: 20px 1fr; gap: 10px; align-items: start; font-size: .85rem; line-height: 1.45; color: var(--ink, inherit); cursor: pointer; }
   .co-check input[type=checkbox] { appearance: none; -webkit-appearance: none; box-sizing: border-box; width: 18px; height: 18px; min-height: 0; padding: 0; align-self: start; margin: 1px 0 0; border: 1.5px solid var(--forest); border-radius: 4px; background: var(--white); display: grid; place-content: center; cursor: pointer; }
@@ -68,8 +79,17 @@
       <p class="co-notice" id="notice" role="status" hidden></p>
       <ul class="co-items" id="items" aria-live="polite"></ul>
       <div class="co-sums">
+        <p class="disc" id="disc-row" hidden><span id="disc-label"></span><strong id="disc-amt"></strong></p>
         <p class="tot"><span id="total-label">Total</span><strong id="total"></strong></p>
       </div>
+      <details class="co-code" id="code-box">
+        <summary>Have a discount code?</summary>
+        <div class="co-code-row">
+          <input type="text" id="code" maxlength="40" autocomplete="off" autocapitalize="characters" spellcheck="false" aria-label="Discount code" placeholder="Enter code">
+          <button type="button" id="code-apply">Apply</button>
+        </div>
+        <p class="co-code-msg" id="code-msg" role="status"></p>
+      </details>
       <fieldset class="co-consent">
         <legend class="sr-only">Before you pay</legend>
         <label class="co-check"><input type="checkbox" id="consent-terms"><span>I agree to the <a href="terms.html" target="_blank" rel="noopener">Terms &amp; Conditions</a> and acknowledge the <a href="privacy.html" target="_blank" rel="noopener">Privacy Policy</a>.</span></label>
@@ -127,7 +147,54 @@
     ids.forEach((id) => list.append(WWI.itemEl(id, (x) => { $('error').textContent = ''; WWI.remove(x); })));
     updatePay();
     $('total').textContent = euro(WWI.total(ids));
+    refreshCode();
   }
+
+  /* Discount code. The server checks it with Stripe and returns the amount to display; Stripe applies the
+     real discount at payment. If the selection changes, an applied code is checked again. */
+  const codeInput = $('code'), codeBtn = $('code-apply'), codeMsg = $('code-msg');
+  let appliedCode = '', lastKey = '';
+  const eur = (cents) => '\u20ac' + (cents % 100 ? (cents / 100).toFixed(2) : String(cents / 100));
+  function showCode(ok, text) { codeMsg.textContent = text || ''; codeMsg.className = 'co-code-msg' + (text ? (ok ? ' ok' : ' bad') : ''); }
+  function clearCode() { appliedCode = ''; $('disc-row').hidden = true; $('total').textContent = euro(WWI.total(WWI.get())); }
+  async function checkCode(code) {
+    const res = await fetch('/api/check-code', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ code, items: WWI.get() }) });
+    if (res.status === 429) throw new Error('rate');
+    return res.json();
+  }
+  async function applyCode() {
+    const code = codeInput.value.trim();
+    if (!code) return;
+    codeBtn.disabled = true; showCode(true, 'Checking\u2026');
+    try {
+      const d = await checkCode(code);
+      if (!d.valid) { clearCode(); showCode(false, 'This code is not valid.'); return; }
+      appliedCode = code; lastKey = WWI.get().join(',');
+      $('disc-label').textContent = 'Discount \u00b7 ' + d.label;
+      $('disc-amt').textContent = '\u2212' + eur(d.discount);
+      $('disc-row').hidden = false;
+      $('total').textContent = eur(d.total);
+      showCode(true, 'Code applied.');
+    } catch (e) {
+      showCode(false, e.message === 'rate' ? 'Too many attempts. Please wait a few minutes.' : 'We could not check the code. Please try again.');
+    } finally { codeBtn.disabled = false; }
+  }
+  async function refreshCode() {
+    if (!appliedCode) return;
+    const key = WWI.get().join(',');
+    if (key === lastKey) return;
+    lastKey = key;
+    try {
+      const d = await checkCode(appliedCode);
+      if (!d.valid) { clearCode(); showCode(false, 'This code is no longer valid.'); return; }
+      $('disc-label').textContent = 'Discount \u00b7 ' + d.label;
+      $('disc-amt').textContent = '\u2212' + eur(d.discount);
+      $('total').textContent = eur(d.total);
+    } catch (e) { /* keep what is shown; the payment page shows the final price */ }
+  }
+  codeBtn.addEventListener('click', applyCode);
+  codeInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') { e.preventDefault(); applyCode(); } });
+  codeInput.addEventListener('input', () => { if (appliedCode && codeInput.value.trim() !== appliedCode) { clearCode(); showCode(true, ''); } });
 
   /* Payment: unchanged. Only the item ids are sent; the server looks up the real prices and
      returns a Stripe Checkout URL. The selection is NOT cleared here: it is cleared on success.html
@@ -151,9 +218,10 @@
       const res = await fetch('/api/create-checkout-session', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ items: ids, consent: { terms: cTerms.checked, digital: cDigital.checked } })
+        body: JSON.stringify({ items: ids, code: appliedCode || undefined, consent: { terms: cTerms.checked, digital: cDigital.checked } })
       });
       const data = await res.json();
+      if (data.code === 'invalid_code') { clearCode(); showCode(false, 'This code is no longer valid.'); paying = false; pay.textContent = 'Pay securely'; updatePay(); return; }
       if (!res.ok || !data.url) throw new Error('No checkout URL');
       window.location.href = data.url;
     } catch (err) {

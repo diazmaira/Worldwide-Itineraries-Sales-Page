@@ -2,6 +2,7 @@ import Stripe from 'stripe';
 import { PRODUCTS, CURRENCY } from './_products.js';
 import { hasConsent, consentMetadata } from './_consent.js';
 import { makeLimiter, clientIp } from './_mail.js';
+import { findPromo } from './_discount.js';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY);
 
@@ -35,6 +36,15 @@ export default async function handler(req, res) {
     }
     const consent = consentMetadata();
 
+    // Optional discount code (created in Stripe). Checked again here; the browser is never trusted.
+    let discounts;
+    const codeText = String(req.body?.code ?? '').trim();
+    if (codeText) {
+      const promo = await findPromo(stripe, codeText);
+      if (!promo) return res.status(400).json({ error: 'Invalid code', code: 'invalid_code' });
+      discounts = [{ promotion_code: promo.id }];
+    }
+
     const siteUrl = (process.env.SITE_URL || `https://${req.headers.host}`).replace(/\/$/, '');
 
     const session = await stripe.checkout.sessions.create({
@@ -49,7 +59,8 @@ export default async function handler(req, res) {
       })),
       // The webhook reads this to know which itineraries to deliver.
       // It also carries the consent record (timestamp and policy versions); the Session ID is the record's key.
-      metadata: { items: ids.join(','), ...consent },
+      ...(discounts ? { discounts } : {}),
+      metadata: { items: ids.join(','), ...consent, ...(discounts ? { promo_code: codeText.toUpperCase() } : {}) },
       payment_intent_data: { metadata: consent },
       success_url: `${siteUrl}/success.html?session_id={CHECKOUT_SESSION_ID}`,
       cancel_url: `${siteUrl}/checkout.html`,
