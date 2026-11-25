@@ -14,3 +14,9 @@ In content/rural.html write only the file name, for example:
 
 Limits: a browser upload accepts files up to 25 MB each.
 Reminder: files in this folder are public if someone knows the exact address.
+
+CURRENT FILES (audio guide)
+The itinerary page is content/rural.html. It reads from this folder:
+  welcome.mp3, villaverde.mp3, la-oliva.mp3, tefia.mp3, ecomuseo.mp3, los-molinos.mp3   voice audios
+  photo-*.jpg, img-*.jpg, header.jpg                                                     photos
+To replace one, upload a file with the SAME name here.
